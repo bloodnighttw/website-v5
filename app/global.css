@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+	--color-primary: theme("colors.zinc.50");
+	--color-secondary: theme("colors.zinc.200");
+	--color-bprimary: theme("colors.zinc.950");
+	--color-bsecondary: theme("colors.zinc.900");
+	--color-dot: theme("colors.zinc.700");
+
+	--size-width-max: 96rem;
+}
+
+@layer base {
+	body {
+		@apply bg-bprimary text-primary;
+	}
+}
+
+@utility part {
+	@apply p-4;
+
+	& > * {
+		@apply mx-auto max-w-[var(--size-width-max)];
+	}
+}
+
+@utility bg-dotted {
+	background-image: radial-gradient(
+		circle,
+		var(--color-dot) 0.075rem,
+		transparent 0
+	);
+	background-size: 20px 20px;
+	background-position: center;
+}
+
+@utility bg-image {
+	@apply relative z-0 overflow-hidden backdrop-blur-md;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image: url("./img.png");
+		background-size: auto;
+		background-position: center;
+
+		filter: blur(4px);
+		z-index: -1;
+		/* Expand the pseudo-element slightly to avoid visible edges */
+		margin: -5px;
+		/* Scale up slightly to counteract the margin */
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to right,
+			--alpha(var(--color-bprimary) / 100%) 48rem,
+			--alpha(var(--color-bprimary) / 40%)
+		);
+		z-index: -1;
+	}
+}
+
+@utility navbar {
+	@apply part bg-bprimary/50 backdrop-blur border-b border-dot border-dotted sticky top-0 z-10;
+}
