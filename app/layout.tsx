@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./global.css";
 import { Theme } from "@radix-ui/themes";
 import Avatar from "@/compoments/avatar";
+import React from "react";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -33,13 +34,13 @@ export default function RootLayout({
 					{children}
 
 					<footer className="part  border-t border-dot border-dotted">
-						<div className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+						<div className="w-full flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
 							<span className="mr-auto">
 								© {new Date().getFullYear()} bloodnighttw. All
 								rights reserved.
 							</span>
 
-							<span className="">
+							<span>
 								❤️ Made with Tailwind CSS, Next.js and MkBlog.
 							</span>
 						</div>

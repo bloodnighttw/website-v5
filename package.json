@@ -9,10 +9,15 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@mkblog/core": "^1.1.0",
+		"@mkblog/toc": "^1.1.0",
 		"@radix-ui/themes": "^3.2.1",
+		"@types/mdast": "^4.0.4",
 		"next": "15.2.1",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"remark-gfm": "^4.0.1",
+		"unist-util-select": "^5.1.0"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
