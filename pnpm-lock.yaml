@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@mkblog/core':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@mkblog/toc':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@radix-ui/themes':
         specifier: ^3.2.1
         version: 3.2.1(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -257,11 +257,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@mkblog/core@1.1.0':
-    resolution: {integrity: sha512-X6fILl1U6bKByP1wDJLojBspmmrLRvH3WDVSEWC5EdlEZFYtOY/lM5Fajkf0KTTwJakMFpFy2ehYvsLY96aUEg==}
+  '@mkblog/core@1.1.1':
+    resolution: {integrity: sha512-hCq74krQz6u+8598Scb7DtWOcB802yVk6ZOH/rk9YES/osuMNhdW3Hj5LlIsw81krIC3Lt3EljQ13WkFZyzawQ==}
 
-  '@mkblog/toc@1.1.0':
-    resolution: {integrity: sha512-C4i5SVlLPSHxu4xkNkaHZ/DiUw5ibZk2Qd0u9XPnAG9Z/IES43HTUkQr1TkJ4CZBCrQU4qHHvhOAX3SszTANIw==}
+  '@mkblog/toc@1.1.1':
+    resolution: {integrity: sha512-qWYouhWfKjoc6SgztSLTMd6X0bxMHjPKIV0Sfuu1mkaXAln9v4TQAV+g7loYqX/cm+LVpUGx6hpPRsTzz6d/bg==}
 
   '@next/env@15.2.1':
     resolution: {integrity: sha512-JmY0qvnPuS2NCWOz2bbby3Pe0VzdAQ7XpEB6uLIHmtXNfAsAO0KLQLkuAoc42Bxbo3/jMC3dcn9cdf+piCcG2Q==}
@@ -2847,7 +2847,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@mkblog/core@1.1.0':
+  '@mkblog/core@1.1.1':
     dependencies:
       fast-glob: 3.3.3
       rehype-stringify: 10.0.1
@@ -2861,9 +2861,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mkblog/toc@1.1.0':
+  '@mkblog/toc@1.1.1':
     dependencies:
-      '@mkblog/core': 1.1.0
+      '@mkblog/core': 1.1.1
       hastscript: 9.0.1
       rehype-slug: 6.0.0
       unist-util-select: 5.1.0

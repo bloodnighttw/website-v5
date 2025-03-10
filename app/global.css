@@ -2,9 +2,9 @@
 
 @theme {
 	--color-primary: theme("colors.zinc.50");
-	--color-secondary: theme("colors.zinc.200");
+	--color-secondary: theme("colors.zinc.300");
 	--color-bprimary: theme("colors.zinc.950");
-	--color-bsecondary: theme("colors.zinc.900");
+	--color-bsecondary: theme("colors.zinc.800");
 	--color-dot: theme("colors.zinc.700");
 
 	--size-width-max: 96rem;

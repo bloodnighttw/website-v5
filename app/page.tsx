@@ -1,6 +1,32 @@
 import Avatar from "@/compoments/avatar";
+import contents from "@/utils/post";
+import Card from "@/compoments/Card/Card";
+import CardCollection from "@/compoments/Card/CardCollection";
+import { CardTitle } from "@/compoments/Card/CardTitle";
+import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+	const posts = contents.posts;
+
+	const metadataWithPreview: {
+		title: string;
+		preview: string;
+		date: Date
+	}[] = []
+
+	for (const post of posts) {
+		const metadata = await post.metadata();
+		const preview = await post.previewImage() ?? "";
+		metadataWithPreview.push({
+			...metadata,
+			preview
+		})
+	}
+
+	metadataWithPreview.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+
 	return (
 		<>
 			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b border-dotted grid duration-1000">
@@ -14,7 +40,7 @@ export default function Home() {
 						</p>
 						<p>21 y/o, Developer, Gamer</p>
 						<p className="mt-4 text-lg">
-							224歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生24歲，是個學生4歲，是個學生
+							Just a guy who loves to code and play games. I'm currently working on a few projects and learning new things.
 						</p>
 					</div>
 					<Avatar
@@ -25,9 +51,18 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="part border-b border-dot border-dotted *:not-first:mt-2">
-				<h2>Blog post</h2>
-				<p>123</p>
+			<div className="part border-b border-dot border-dotted *:not-first:mt-4">
+				<h2>Blog Posts</h2>
+
+				<CardTitle title="Recent Posts" />
+				<CardCollection>
+					{metadataWithPreview.slice(0,4).map((post, index)=> {
+						return <Card key={index}>
+							<Image src={post.preview} alt="preview" className="w-full h-36 object-cover" width={500} height={500}/>
+							<h4>{post.title}</h4>
+						</Card>
+					})}
+				</CardCollection>
 			</div>
 
 			<div className="part border-b border-dot border-dotted">

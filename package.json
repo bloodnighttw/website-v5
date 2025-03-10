@@ -9,8 +9,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mkblog/core": "^1.1.0",
-		"@mkblog/toc": "^1.1.0",
+		"@mkblog/core": "^1.1.1",
+		"@mkblog/toc": "^1.1.1",
 		"@radix-ui/themes": "^3.2.1",
 		"@types/mdast": "^4.0.4",
 		"next": "15.2.1",
