@@ -3,7 +3,13 @@ import contents from "@/utils/post";
 import Card from "@/compoments/Card/Card";
 import CardCollection from "@/compoments/Card/CardCollection";
 import { CardTitle } from "@/compoments/Card/CardTitle";
+import Linux from "@/app/assets/linux.svg"
+import Java from  "@/app/assets/java.svg"
+import React from "@/app/assets/react.svg"
+import TypeScript from "@/app/assets/typescript.svg"
 import Image from "next/image";
+
+
 
 export default async function Home() {
 
@@ -39,8 +45,16 @@ export default async function Home() {
 							{"I'm bloodnighttw."}
 						</p>
 						<p>21 y/o, Developer, Gamer</p>
-						<p className="mt-4 text-lg">
-							Just a guy who loves to code and play games. I'm currently working on a few projects and learning new things.
+						<p className="introduction mt-4">
+							I'm a developer who familiar with
+							<Image src={TypeScript} alt="typescript"/>
+							TypeScript,
+							<Image src={React} alt="react.js"/>
+							React, and
+							<Image src={Java} alt="java"/>
+							Java, and also a
+							<Image src={Linux} alt="linux"/>
+							linux lover.
 						</p>
 					</div>
 					<Avatar

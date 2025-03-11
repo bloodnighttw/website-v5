@@ -95,3 +95,12 @@
 @utility navbar {
 	@apply part bg-bprimary/50 backdrop-blur border-b border-dot border-dotted sticky top-0 z-10;
 }
+
+@utility introduction {
+
+    @apply text-xl;
+
+    img {
+        @apply inline-grid size-6 mx-1;
+    }
+}
