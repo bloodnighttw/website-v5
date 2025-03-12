@@ -9,6 +9,7 @@ import React from "@/app/assets/react.svg"
 import TypeScript from "@/app/assets/typescript.svg"
 import { Discord, Github, Mail, Telegram, Threads, Twitter } from "@/app/assets/svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -61,29 +62,29 @@ export default async function Home() {
 						</p>
 						<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
 
-							<a href="https://github.com/bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link href="https://github.com/bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
 								{Github}
-							</a>
+							</Link>
 
-							<a href="https://threads.net/@bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link href="https://threads.net/@bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
 								{Threads}
-							</a>
+							</Link>
 
-							<a href="https://x.com/bloodnighttw" className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200">
+							<Link href="https://x.com/bloodnighttw" className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200">
 								{Twitter}
-							</a>
+							</Link>
 
-							<a href="https://discord.com/users/406274365857202196" className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200">
+							<Link href="https://discord.com/users/406274365857202196" className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200">
 								{Discord}
-							</a>
+							</Link>
 
-							<a href="mailto:bbeenn1227@gmail.com" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link href="mailto:bbeenn1227@gmail.com" className="*:fill-secondary *:hover:fill-primary *:duration-200">
 								{Mail}
-							</a>
+							</Link>
 
-							<a href="https://t.me/bntw0123" className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200">
+							<Link href="https://t.me/bntw0123" className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200">
 								{Telegram}
-							</a>
+							</Link>
 
 						</div>
 					</div>
