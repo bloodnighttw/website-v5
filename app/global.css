@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
 	--color-primary: theme("colors.zinc.50");
@@ -40,6 +41,11 @@
     h6 {
         @apply text-xl;
     }
+
+    article {
+        @apply prose prose-zinc prose-invert;
+    }
+
 }
 
 
@@ -61,36 +67,14 @@
 	background-position: center;
 }
 
-@utility bg-image {
-	@apply relative z-0 overflow-hidden backdrop-blur-md;
+@utility bg-image{
 
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background-image: url("./img.png");
-		background-size: auto;
-		background-position: center;
+    @apply bg-cover bg-center bg-no-repeat;
+    mask-image: linear-gradient(to right, --alpha(var(--color-bprimary)/0) 50%, --alpha(var(--color-bprimary)/50%) 70%, --alpha(var(--color-bprimary)/100%) 100%);
+    mask-size: 100%;
 
-		filter: blur(4px);
-		z-index: -1;
-		/* Expand the pseudo-element slightly to avoid visible edges */
-		margin: -5px;
-		/* Scale up slightly to counteract the margin */
-	}
-
-	&::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
-			to right,
-			--alpha(var(--color-bprimary) / 100%) 48rem,
-			--alpha(var(--color-bprimary) / 40%)
-		);
-		z-index: -1;
-	}
 }
+
 
 @utility navbar {
 	@apply part bg-bprimary/50 backdrop-blur border-b border-dot border-dotted sticky top-0 z-10;
