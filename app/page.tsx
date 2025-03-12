@@ -17,15 +17,18 @@ export default async function Home() {
 	const metadataWithPreview: {
 		title: string;
 		preview: string;
-		date: Date
+		date: Date,
+		slug: string
 	}[] = []
 
 	for (const post of posts) {
 		const metadata = await post.metadata();
+		const slug = post.slug;
 		const preview = await post.previewImage() ?? "";
 		metadataWithPreview.push({
 			...metadata,
-			preview
+			preview,
+			slug
 		})
 	}
 
@@ -99,7 +102,8 @@ export default async function Home() {
 				<CardTitle title="Recent Posts" />
 				<CardCollection>
 					{metadataWithPreview.slice(0,4).map((post, index)=> {
-						return <Card key={index}>
+						// @ts-ignore
+						return <Card key={index} href={"/blog/" + post.slug}>
 							<Image src={post.preview} alt="preview" className="w-full h-36 object-cover" width={500} height={500}/>
 							<h4>{post.title}</h4>
 						</Card>
