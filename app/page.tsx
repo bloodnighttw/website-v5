@@ -62,27 +62,51 @@ export default async function Home() {
 						</p>
 						<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
 
-							<Link href="https://github.com/bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link
+								href="https://github.com/bloodnighttw"
+								className="*:fill-secondary *:hover:fill-primary *:duration-200"
+								aria-label="Github"
+							>
 								{Github}
 							</Link>
 
-							<Link href="https://threads.net/@bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link
+								href="https://threads.net/@bloodnighttw"
+								className="*:fill-secondary *:hover:fill-primary *:duration-200"
+								aria-label="Threads"
+							>
 								{Threads}
 							</Link>
 
-							<Link href="https://x.com/bloodnighttw" className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200">
+							<Link
+								href="https://x.com/bloodnighttw"
+								className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200"
+								aria-label="Twitter"
+							>
 								{Twitter}
 							</Link>
 
-							<Link href="https://discord.com/users/406274365857202196" className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200">
+							<Link
+								href="https://discord.com/users/406274365857202196"
+								className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200"
+								aria-label="Discord"
+							>
 								{Discord}
 							</Link>
 
-							<Link href="mailto:bbeenn1227@gmail.com" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+							<Link
+								href="mailto:bbeenn1227@gmail.com"
+								className="*:fill-secondary *:hover:fill-primary *:duration-200"
+								aria-label="Email"
+							>
 								{Mail}
 							</Link>
 
-							<Link href="https://t.me/bntw0123" className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200">
+							<Link
+								href="https://t.me/bntw0123"
+								className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200"
+								aria-label="Telegram"
+							>
 								{Telegram}
 							</Link>
 
@@ -106,7 +130,7 @@ export default async function Home() {
 						// @ts-ignore
 						return <Card key={index} href={"/blog/" + post.slug}>
 							<Image src={post.preview} alt="preview" className="w-full h-36 object-cover" width={500} height={500}/>
-							<h4>{post.title}</h4>
+							<p className="text-2xl font-bold">{post.title}</p>
 						</Card>
 					})}
 				</CardCollection>
