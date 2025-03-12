@@ -3,6 +3,7 @@ import "./global.css";
 import { Theme } from "@radix-ui/themes";
 import Avatar from "@/compoments/avatar";
 import React from "react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -20,14 +21,22 @@ export default function RootLayout({
 				<Theme>
 					<nav className="navbar">
 						<div className="flex space-x-4 justify-center text-xl *:my-auto">
-							<Avatar
-								src="https://avatars.githubusercontent.com/u/44264182?s=460&u=b59e580f37ab7e6a3979ab8a6df1f12ba6588069&v=4"
-								size={32}
-								className="h-8 w-8 my-auto"
-							/>
 
-							<div className="font-bold">bloodnighttw</div>
+							<Link href="/">
+								<Avatar
+									src="https://avatars.githubusercontent.com/u/44264182?s=460&u=b59e580f37ab7e6a3979ab8a6df1f12ba6588069&v=4"
+									size={32}
+									className="h-8 w-8 my-auto"
+								/>
+							</Link>
+
+							<Link href="/">
+								<div className="font-bold">bloodnighttw</div>
+							</Link>
 							<div className="mr-auto"></div>
+							<div>
+								wtf
+							</div>
 						</div>
 					</nav>
 
