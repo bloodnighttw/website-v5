@@ -7,9 +7,8 @@ import Linux from "@/app/assets/linux.svg"
 import Java from  "@/app/assets/java.svg"
 import React from "@/app/assets/react.svg"
 import TypeScript from "@/app/assets/typescript.svg"
+import { Discord, Github, Mail, Telegram, Threads, Twitter } from "@/app/assets/svg";
 import Image from "next/image";
-
-
 
 export default async function Home() {
 
@@ -44,9 +43,10 @@ export default async function Home() {
 						<p className="text-4xl lg:text-6xl font-bold">
 							{"I'm bloodnighttw."}
 						</p>
-						<p>21 y/o, Developer, Gamer</p>
+						<p className="font-mono">21 y/o • Developer • Gamer</p>
 						<p className="introduction mt-4">
-							I'm a developer who familiar with
+							I'm a developer who loves to create things.
+							Familiar with
 							<Image src={TypeScript} alt="typescript"/>
 							TypeScript,
 							<Image src={React} alt="react.js"/>
@@ -56,7 +56,35 @@ export default async function Home() {
 							<Image src={Linux} alt="linux"/>
 							linux lover.
 						</p>
+						<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
+
+							<a href="https://github.com/bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+								{Github}
+							</a>
+
+							<a href="https://threads.net/@bloodnighttw" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+								{Threads}
+							</a>
+
+							<a href="https://x.com/bloodnighttw" className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200">
+								{Twitter}
+							</a>
+
+							<a href="https://discord.com/users/406274365857202196" className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200">
+								{Discord}
+							</a>
+
+							<a href="mailto:bbeenn1227@gmail.com" className="*:fill-secondary *:hover:fill-primary *:duration-200">
+								{Mail}
+							</a>
+
+							<a href="https://t.me/bntw0123" className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200">
+								{Telegram}
+							</a>
+
+						</div>
 					</div>
+
 					<Avatar
 						src="https://avatars.githubusercontent.com/u/44264182?s=460&u=b59e580f37ab7e6a3979ab8a6df1f12ba6588069&v=4"
 						size={240}
