@@ -1,5 +1,16 @@
 import contents from "@/utils/post"
 
+export async function generateStaticParams() {
+	return contents.posts.map(({slug})=> {
+		return {
+			slug: slug,
+		}
+	})
+}
+
+export const dynamicParams = false;
+
+
 export default async function Blog(
 	{ params }: {
 	params: Promise<{ slug: string }>
