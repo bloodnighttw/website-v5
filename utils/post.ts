@@ -5,7 +5,7 @@ import previewImage from "@/utils/previewImage";
 
 const schema = {
 	title: z.string(),
-	category: z.array(z.string()).default([]),
+	categories: z.array(z.string()).default([]),
 	date: z.string().pipe(z.coerce.date()),
 	draft: z.boolean().optional()
 }
