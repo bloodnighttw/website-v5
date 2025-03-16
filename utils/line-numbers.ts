@@ -1,4 +1,4 @@
-import type { Element, ElementContent, Root, RootContent } from "hast";
+import type { Element, ElementContent } from "hast";
 import type { Plugin } from "unified";
 import { selectAll } from "unist-util-select";
 
