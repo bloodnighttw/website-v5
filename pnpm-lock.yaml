@@ -23,9 +23,6 @@ importers:
       '@wooorm/starry-night':
         specifier: ^3.6.0
         version: 3.6.0
-      dark:
-        specifier: link:@wooorm/starry-night/style/dark
-        version: link:@wooorm/starry-night/style/dark
       next:
         specifier: 15.2.1
         version: 15.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
