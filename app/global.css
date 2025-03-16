@@ -46,6 +46,10 @@
         @apply prose prose-zinc prose-invert;
     }
 
+    pre{
+        @apply bg-bsecondary;
+    }
+
 }
 
 
