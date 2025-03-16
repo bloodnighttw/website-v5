@@ -43,11 +43,7 @@
     }
 
     article {
-        @apply prose prose-zinc prose-invert;
-    }
-
-    pre{
-        @apply bg-bsecondary;
+        @apply prose prose-zinc prose-invert prose-pre:bg-bsecondary;
     }
 
 }
