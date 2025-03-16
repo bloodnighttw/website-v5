@@ -2,7 +2,8 @@ import { defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
 import previewImage from "@/utils/previewImage";
-import { console } from "inspector";
+import rehypeStarryNight from 'rehype-starry-night'
+import rehypeLineNumbers from "./line-numbers";
 
 const schema = {
 	title: z.string(),
@@ -11,15 +12,12 @@ const schema = {
 	draft: z.boolean().optional(),
 };
 
-const _zobject = z.object(schema);
-
-export type PostMetadata = z.infer<typeof _zobject>;
-
 const contents = await defineContent({
 	include: "./posts/**/*.md", // glob pattern
 	schema,
 	mkBlogPlugins: [tocPlugin, previewImage],
 	remarkPlugins: [remarkGfm],
+	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 });
 
 export default contents;

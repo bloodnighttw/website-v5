@@ -1,4 +1,5 @@
 import contents from "@/utils/post"
+import "./codeblock.css"
 
 export async function generateStaticParams() {
 	return contents.posts.map(({slug})=> {

@@ -88,3 +88,10 @@
         @apply inline-grid size-6 mx-1;
     }
 }
+
+@utility line {
+    &::before {
+        @apply text-primary/50 inline-block select-none w-8 text-right pr-4;
+        content: attr(data-line-number);
+    }
+}

@@ -77,7 +77,7 @@ my-vue-app/
 1. 修改 ``src/main/java`` -> ``src/main/backend`` 
 2. 進入 ``gradle.build.kts`` （我用kotlin dsl） 新增這個東西，來修改java的位置。
 
-```kts
+```kotlin
 ...
 sourceSets {
     main {
@@ -95,7 +95,7 @@ sourceSets {
 3. 把``src/``底下的所有東西匯入到 ``src/main/frontend/``。
 4. 把其餘資料匯入到 project root （包含`package.json`與其他設定檔）。
 5. 進入 ``vite.config.ts``修改root，並修改 build的output path
-    ```json lines
+    ```
     {
     ...
       root: 'src/main/frontend',
