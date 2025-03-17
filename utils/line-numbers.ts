@@ -84,8 +84,13 @@ const rehypeLineNumbers: Plugin<[], Element> = () => {
 		.forEach((node) => {
 			// node must be an element
 			const element = node as Element;
-			if (element.tagName === "code") {
-				starryNightGutter(element);
+			if (element.tagName === "pre") {
+				for(const child of element.children) {
+					const childElement = child as Element;
+					if (childElement.tagName === "code") {
+						starryNightGutter(childElement);
+					}
+				}
 			}
 		});
 };
