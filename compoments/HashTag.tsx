@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 
-export default function HashTag({className, children}: {className?: string, children: React.ReactNode}) {
-	return <div className={`hashtag ${className}`}>
-		{children}
-	</div>
+export default function HashTag({className, tags}: {className?: string, tags: string}) {
+	return <Link className={`hashtag ${className}`} href={"/tags/"+tags}>
+		{tags}
+	</Link>
 }

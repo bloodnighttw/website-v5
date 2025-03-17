@@ -33,12 +33,10 @@ export default async function Blog(
 					<h1 className="text-6xl w-full m-4">
 						{metadata.title}
 					</h1>
-					<div className="w-full text-xl flex gap-4 font-mono">
+					<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto">
 						{
 							metadata.categories.map((category: string, index: number) => (
-								<HashTag key={index} className="">
-									{category}
-								</HashTag>
+								<HashTag key={index} tags={category} />
 							))
 						}
 					</div>

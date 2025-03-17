@@ -58,7 +58,7 @@ export default async function Tags(
 
 	return <>
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
-			<HashTag className="text-center text-5xl text-bold">hash</HashTag>
+			<HashTag className="text-center text-5xl text-bold" tags={tags} />
 		</div>
 
 		<div className="part">
