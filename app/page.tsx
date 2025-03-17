@@ -38,7 +38,7 @@ export default async function Home() {
 
 	return (
 		<>
-			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b border-dotted grid duration-1000">
+			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b grid duration-1000">
 				<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
 					<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
 						<p className="text-center text-xl lg:text-start">
@@ -121,7 +121,7 @@ export default async function Home() {
 				</div>
 			</div>
 
-			<div className="part border-b border-dot border-dotted *:not-first:mt-4">
+			<div className="part border-b border-dot *:not-first:mt-4">
 				<h2>Blog Posts</h2>
 
 				<CardTitle title="Recent Posts" />
@@ -136,7 +136,7 @@ export default async function Home() {
 				</CardCollection>
 			</div>
 
-			<div className="part border-b border-dot border-dotted">
+			<div className="part border-b border-dot">
 				<h2>My Project.</h2>
 			</div>
 		</>

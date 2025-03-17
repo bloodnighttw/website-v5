@@ -42,7 +42,7 @@ export default function RootLayout({
 
 					{children}
 
-					<footer className="part  border-t border-dot border-dotted">
+					<footer className="part  border-t border-dot">
 						<div className="w-full flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
 							<span className="mr-auto">
 								© {new Date().getFullYear()} bloodnighttw. All
