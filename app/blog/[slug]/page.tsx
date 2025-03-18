@@ -27,9 +27,11 @@ export default async function Blog(
 
 	return (
 		<>
-			<div className="border-b border-dot bg-dotted -z-2">
-				<img className="absolute z-[-1] w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200" src={preview} alt="preview image"/>
-				<div className="part min-h-48 flex flex-col justify-center font-sans shadow-none">
+			<div className="relative border-b border-dot">
+				<div className="bg-dotted w-full absolute inset-0 -z-1"/>
+				<img className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1" src={preview} alt="preview image"/>
+
+				<div className="part min-h-48 flex flex-col justify-center font-sans z-100">
 					<h1 className="text-6xl w-full m-4">
 						{metadata.title}
 					</h1>
