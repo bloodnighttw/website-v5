@@ -47,9 +47,6 @@ export default async function Blog(
 			<main className="part mt-0 z-[100] bg-bprimary">
 				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
 			</main>
-			<div className="test">
-				test
-			</div>
 		</>
 	);
 }
