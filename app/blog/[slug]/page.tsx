@@ -31,7 +31,7 @@ export default async function Blog(
 				<div className="bg-dotted w-full absolute inset-0 -z-1"/>
 				<img className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1" src={preview} alt="preview image"/>
 
-				<div className="part min-h-48 flex flex-col justify-center font-sans z-100">
+				<div className="part min-h-48 flex flex-col items-center justify-center font-sans">
 					<h1 className="text-6xl w-full m-4">
 						{metadata.title}
 					</h1>
@@ -45,7 +45,7 @@ export default async function Blog(
 				</div>
 			</div>
 			<main className="part mt-0 z-[100] bg-bprimary">
-				<article dangerouslySetInnerHTML={{__html: html}} className="article"></article>
+				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
 			</main>
 		</>
 	);
