@@ -1,3 +1,5 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 /* This is a theme distributed by `starry-night`.
  * It’s based on what GitHub uses on their site.
  * See <https://github.com/wooorm/starry-night> for more info. */
@@ -152,4 +154,50 @@
 .pl-corl {
     text-decoration: underline;
     color: var(--color-prettylights-syntax-constant-other-reference-link);
+}
+
+@utility bg-image{
+    @apply bg-cover bg-center bg-no-repeat;
+    mask-image: linear-gradient(to right, --alpha(var(--color-bprimary)/0) 50%, --alpha(var(--color-bprimary)/50%) 70%, --alpha(var(--color-bprimary)/100%) 100%);
+    mask-size: 100%;
+}
+
+@layer components {
+    article {
+        @apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
+
+        code{
+            @apply bg-zinc-800 p-1 rounded mx-1;
+        }
+
+        code::before, code::after {
+            content: none;
+        }
+
+        pre > code {
+            @apply bg-zinc-900/0 mx-0 p-0;
+        }
+
+        a {
+
+            @apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;
+
+            &::before {
+                @apply inline-block h-[1.25em] mr-1 align-text-bottom;
+                content: url("../../assets/link.svg");
+            }
+
+            &::after {
+                @apply duration-200 left-0 bottom-0 w-0 absolute hover:w-full h-0.25;
+                content: "";
+                background-color: theme("colors.blue.500");
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
+
+        }
+
+    }
 }

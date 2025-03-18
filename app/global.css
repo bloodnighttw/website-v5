@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 @theme {
 	--color-primary: theme("colors.zinc.50");
@@ -42,10 +41,6 @@
         @apply text-xl;
     }
 
-    article {
-        @apply prose prose-zinc prose-invert prose-pre:bg-bsecondary first:mt-4;
-    }
-
 }
 
 
@@ -66,15 +61,6 @@
 	background-size: 20px 20px;
 	background-position: center;
 }
-
-@utility bg-image{
-
-    @apply bg-cover bg-center bg-no-repeat;
-    mask-image: linear-gradient(to right, --alpha(var(--color-bprimary)/0) 50%, --alpha(var(--color-bprimary)/50%) 70%, --alpha(var(--color-bprimary)/100%) 100%);
-    mask-size: 100%;
-
-}
-
 
 @utility navbar {
 	@apply part bg-bprimary/50 backdrop-blur border-b border-dot sticky top-0 z-10;
