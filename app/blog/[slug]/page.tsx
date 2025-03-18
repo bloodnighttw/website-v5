@@ -1,6 +1,7 @@
 import contents from "@/utils/post"
 import "./codeblock.css"
 import HashTag from "@/compoments/HashTag";
+import Comments from "./comments";
 
 export async function generateStaticParams() {
 	return contents.posts.map(({slug})=> {
@@ -44,9 +45,13 @@ export default async function Blog(
 					</div>
 				</div>
 			</div>
-			<main className="part mt-0 z-[100] bg-bprimary">
+			<main className="part mt-0 z-[100] bg-bprimary border-b border-dot">
 				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
 			</main>
+			<div className="part bg-dotted">
+
+					<Comments/>
+			</div>
 		</>
 	);
 }

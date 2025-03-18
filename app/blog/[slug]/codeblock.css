@@ -205,3 +205,55 @@
 
     }
 }
+
+.giscus {
+    --color-primary: #1f2937; /* Dark background */
+    --color-secondary: #f9fafb; /* Light text */
+    --color-accent: #3b82f6; /* Accent color */
+    --color-muted: #6b7280; /* Muted text */
+    --color-border: #d1d5db; /* Border color */
+    --color-background: #111827; /* Background color */
+    --color-link: #3b82f6; /* Link color */
+    --color-link-hover: #2563eb; /* Link hover color */
+    --color-button: #3b82f6; /* Button color */
+    --color-button-hover: #2563eb; /* Button hover color */
+    --color-input-background: #1f2937; /* Input background */
+    --color-input-border: #374151; /* Input border */
+    --color-input-text: #f9fafb; /* Input text */
+}
+
+.giscus .giscus-frame {
+    background-color: var(--color-background);
+    color: var(--color-secondary);
+}
+
+.giscus .giscus-header {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.giscus .giscus-title {
+    color: var(--color-primary);
+}
+
+.giscus .giscus-link {
+    color: var(--color-link);
+}
+
+.giscus .giscus-link:hover {
+    color: var(--color-link-hover);
+}
+
+.giscus .giscus-button {
+    background-color: var(--color-button);
+    color: var(--color-secondary);
+}
+
+.giscus .giscus-button:hover {
+    background-color: var(--color-button-hover);
+}
+
+.giscus .giscus-input {
+    background-color: var(--color-input-background);
+    border: 1px solid var(--color-input-border);
+    color: var(--color-input-text);
+}
