@@ -166,6 +166,10 @@
     article {
         @apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
 
+        & :target {
+            scroll-margin-top: 5rem;
+        }
+
         code{
             @apply bg-zinc-800 p-1 rounded mx-1;
         }
