@@ -1,6 +1,7 @@
 import contents from "@/utils/post";
 import CardCollection from "@/compoments/Card/CardCollection";
 import Card from "@/compoments/Card/Card";
+import HashTag from "@/compoments/HashTag";
 
 export default async function BlogPosts(){
 
@@ -25,22 +26,23 @@ export default async function BlogPosts(){
 		})
 	}
 
-	return <div className="part *:not-first:mt-4">
-		<div>
-			# Blog Posts
+	return <>
+		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
+			<p className="text-4xl">Recent Posts</p>
 		</div>
-
-		<CardCollection >
-			{metadataWithPreview.map((post, index)=> {
-				return <Card
-					key={index}
-					// @ts-ignore
-					href={"/blog/" + post.slug}
-					preview={post.preview}
-					title={post.title}
-				/>
-			})}
-		</CardCollection>
-	</div>
+		<div className="part *:not-first:mt-4">
+			<CardCollection >
+				{metadataWithPreview.map((post, index)=> {
+					return <Card
+						key={index}
+						// @ts-ignore
+						href={"/blog/" + post.slug}
+						preview={post.preview}
+						title={post.title}
+					/>
+				})}
+			</CardCollection>
+		</div>
+	</>
 
 }
