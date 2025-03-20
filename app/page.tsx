@@ -127,11 +127,13 @@ export default async function Home() {
 				<CardTitle title="Recent Posts" />
 				<CardCollection>
 					{metadataWithPreview.slice(0,4).map((post, index)=> {
-						// @ts-ignore
-						return <Card key={index} href={"/blog/" + post.slug}>
-							<Image src={post.preview} alt="preview" className="w-full h-36 object-cover" width={500} height={500}/>
-							<p className="text-2xl font-bold">{post.title}</p>
-						</Card>
+						return <Card
+							key={index}
+							// @ts-ignore
+							href={"/blog/" + post.slug}
+							preview={post.preview}
+							title={post.title}
+						/>
 					})}
 				</CardCollection>
 			</div>

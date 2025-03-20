@@ -67,10 +67,12 @@ export default async function Tags(
 				{
 					metadataWithPreview.map( (it, index) => (
 						// @ts-ignore type can be url here
-						<Card href={"/blog/"+it.slug} key={index}>
-							<img src={it.preview} alt={it.title} className="w-full h-36 object-cover"/>
-							<p className="text-2xl font-bold">{it.title}</p>
-						</Card>
+						<Card
+							// @ts-ignore type can be url here
+							href={"/blog/"+it.slug} key={index}
+							preview={it.preview}
+							title={it.title}
+						/>
 					))
 				}
 			</CardCollection>
