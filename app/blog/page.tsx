@@ -1,35 +1,37 @@
 import contents from "@/utils/post";
 import CardCollection from "@/compoments/Card/CardCollection";
 import Card from "@/compoments/Card/Card";
-import Image from "next/image";
 
 export default async function BlogPosts(){
 
 	const {posts} = contents;
-	const meatadatas: {
+
+	const metadataWithPreview: {
 		title: string;
 		preview: string;
-		slugs: string;
-	}[] = [];
+		date: Date,
+		slug: string
+	}[] = []
 
-	for (let i = 0; i < posts.length; i++) {
-		const metadata = await posts[i].metadata();
-		const preview = await posts[i].previewImage();
-		const slug = posts[i].slug;
+	for (const post of posts) {
+		const metadata = await post.metadata();
 
-		meatadatas.push({
-			title: metadata.title,
-			preview: preview ?? "",
-			slugs: slug
+		const slug = post.slug;
+		const preview = await post.previewImage() ?? "";
+		metadataWithPreview.push({
+			...metadata,
+			preview,
+			slug
 		})
-
 	}
 
-	return <div className="part">
+	return <div className="part *:not-first:mt-4">
+		<div>
+			# Blog Posts
+		</div>
 
 		<CardCollection >
-			{meatadatas.map((post, index)=> {
-				// @ts-ignore
+			{metadataWithPreview.map((post, index)=> {
 				return <Card
 					key={index}
 					// @ts-ignore
