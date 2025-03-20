@@ -19,7 +19,8 @@ export default async function Home() {
 		title: string;
 		preview: string;
 		date: Date,
-		slug: string
+		slug: string,
+		categories: string[]
 	}[] = []
 
 	for (const post of posts) {
@@ -124,9 +125,23 @@ export default async function Home() {
 			<div className="part border-b border-dot *:not-first:mt-4">
 				<h2>Blog Posts</h2>
 
-				<CardTitle title="Recent Posts" />
+				<CardTitle title="Recent Posts" url={"/blog"}/>
 				<CardCollection>
 					{metadataWithPreview.slice(0,4).map((post, index)=> {
+						return <Card
+							key={index}
+							// @ts-ignore
+							href={"/blog/" + post.slug}
+							preview={post.preview}
+							title={post.title}
+						/>
+					})}
+				</CardCollection>
+				<CardTitle title="About linux" url={"/tags/linux"}/>
+				<CardCollection>
+					{metadataWithPreview.filter((it) => it
+						.categories.includes("linux"))
+						.map((post, index)=> {
 						return <Card
 							key={index}
 							// @ts-ignore
