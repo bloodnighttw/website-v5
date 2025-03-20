@@ -49,8 +49,7 @@ export default async function Blog(
 				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
 			</main>
 			<div className="part bg-dotted">
-
-					<Comments/>
+				<Comments/>
 			</div>
 		</>
 	);
