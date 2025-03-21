@@ -1,0 +1,28 @@
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy to Cloudflare Pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          version: 9.7.0
+      - name: 'Install Node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'pnpm'
+      - name: Build
+        run: pnpm install && pnpm pages:build
+      - name: Publish
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: website-v5 # e.g. 'my-project'
+          directory: YOUR_DIRECTORY_OF_STATIC_ASSETS # e.g. 'dist'
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
