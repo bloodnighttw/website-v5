@@ -6,7 +6,10 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"pages:build": "npx @cloudflare/next-on-pages",
+		"preview": "npm run pages:build && wrangler pages dev",
+		"deploy": "npm run pages:build && wrangler pages deploy"
 	},
 	"dependencies": {
 		"@giscus/react": "^3.1.0",
@@ -23,6 +26,7 @@
 		"unist-util-select": "^5.1.0"
 	},
 	"devDependencies": {
+		"@cloudflare/next-on-pages": "^1.13.10",
 		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "^4",
 		"@tailwindcss/typography": "^0.5.16",
@@ -36,7 +40,8 @@
 		"prettier": "^3.5.3",
 		"tailwindcss": "^4",
 		"typescript": "^5",
-		"unified": "^11.0.5"
+		"unified": "^11.0.5",
+		"wrangler": "^4.3.0"
 	},
 	"packageManager": "pnpm@10.2.0+sha512.0d27364e0139c6aadeed65ada153135e0ca96c8da42123bd50047f961339dc7a758fc2e944b428f52be570d1bd3372455c1c65fa2e7aa0bfbf931190f9552001"
 }
