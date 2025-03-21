@@ -1,4 +1,4 @@
-import { defineContent, zod as z } from "@mkblog/core";
+import {  defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
 import previewImage from "@/utils/previewImage";
