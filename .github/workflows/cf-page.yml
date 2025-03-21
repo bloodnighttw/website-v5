@@ -19,10 +19,9 @@ jobs:
       - name: Build
         run: pnpm install && pnpm pages:build
       - name: Publish
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
+          command: pages deploy
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: website-v5 # e.g. 'my-project'
-          directory:  ".vercel/output/static"# e.g. 'dist'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
