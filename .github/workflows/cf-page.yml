@@ -20,6 +20,7 @@ jobs:
         run: pnpm install && pnpm pages:build
       - name: Deploy preview to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
+        if: github.ref != 'refs/heads/main'
         with:
           command: pages deploy
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -27,6 +28,7 @@ jobs:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy production to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
+        if: github.ref == 'refs/heads/main'
         with:
           command: pages deploy --branch=production
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
