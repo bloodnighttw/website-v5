@@ -1,6 +1,7 @@
 "use client";
 
 import Giscus from "@giscus/react";
+import { BASE_URL } from "@/utils/constant";
 
 export default function Comments(){
 
@@ -10,7 +11,7 @@ export default function Comments(){
 			repoId="R_kgDOOK1SwQ"
 			mapping="pathname"
 			categoryId="DIC_kwDOOK1Swc4CoMm7"
-			theme="http://localhost:3000/giscus.css"
+			theme={`${BASE_URL}/giscus.css`}
 			reactionsEnabled="0"
 			inputPosition="top"/>
 	</div>
