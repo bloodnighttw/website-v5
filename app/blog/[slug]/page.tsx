@@ -2,6 +2,7 @@ import contents from "@/utils/post"
 import "./codeblock.css"
 import HashTag from "@/compoments/HashTag";
 import Comments from "./comments";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
 	return contents.posts.map(({slug})=> {
@@ -13,6 +14,43 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
+export async function generateMetadata({params} : {params: {slug: string}}): Promise<Metadata> {
+	const post = contents.posts.find((it) => it.slug === params.slug);
+	const metadata = await post?.metadata() ?? {title: "404"};
+	const description = await post?.previewDescription();
+	const preview = await post?.previewImage();
+	return {
+		title: metadata.title,
+		description,
+		openGraph: {
+			title: metadata.title,
+			description,
+			type: "article",
+			images: preview
+				? [
+					{
+						url: preview,
+						alt: metadata.title,
+					},
+				]
+				: [],
+		},
+		twitter: {
+			title: metadata.title,
+			description,
+			site: "@bloodnighttw",
+			card: "summary_large_image",
+			images: preview
+				? [
+					{
+						url: preview,
+						alt: metadata.title,
+					},
+				]
+				: [],
+		},
+	}
+}
 
 export default async function Blog(
 	{ params }: {

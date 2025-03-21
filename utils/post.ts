@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import previewImage from "@/utils/previewImage";
 import rehypeStarryNight from 'rehype-starry-night'
 import rehypeLineNumbers from "./line-numbers";
+import previewDescription from "@/utils/previewDescription";
 
 const schema = {
 	title: z.string(),
@@ -19,7 +20,7 @@ export type Post = z.infer<typeof temp>;
 const contents = await defineContent({
 	include: "./posts/**/*.md", // glob pattern
 	schema,
-	mkBlogPlugins: [tocPlugin, previewImage],
+	mkBlogPlugins: [tocPlugin, previewImage, previewDescription],
 	remarkPlugins: [remarkGfm],
 	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 });
