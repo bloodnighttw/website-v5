@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
-import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
 
-
-const nextConfig: NextConfig = {
+const config: NextConfig = {
 	/* config options here */
 	images: {
+		minimumCacheTTL: 2678400,
 		remotePatterns: [
 			{
 				protocol: "https",
@@ -22,8 +21,14 @@ const nextConfig: NextConfig = {
 	},
 };
 
-if (process.env.NODE_ENV === 'development') {
-	await setupDevPlatform();
+const nextConfigPromise = async () => {
+
+	if (process.env.NODE_ENV === "development") {
+		const { setupDevPlatform } = await import("@cloudflare/next-on-pages/next-dev");
+		await setupDevPlatform();
+	}
+
+	return config;
 }
 
-export default nextConfig;
+export default nextConfigPromise;

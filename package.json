@@ -42,8 +42,5 @@
 		"typescript": "^5",
 		"unified": "^11.0.5",
 		"wrangler": "^4.3.0"
-	},
-    "engines": {
-        "node": "18.19.0"
-    }
+	}
 }
