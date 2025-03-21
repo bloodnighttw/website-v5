@@ -14,8 +14,10 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({params} : {params: {slug: string}}): Promise<Metadata> {
-	const post = contents.posts.find((it) => it.slug === params.slug);
+export async function generateMetadata({params} : {params: Promise<{slug: string}>}): Promise<Metadata> {
+
+	const {slug} = await params;
+	const post = contents.posts.find((it) => it.slug === slug);
 	const metadata = await post?.metadata() ?? {title: "404"};
 	const description = await post?.previewDescription();
 	const preview = await post?.previewImage();

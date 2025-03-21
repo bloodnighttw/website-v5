@@ -1,5 +1,5 @@
 import Avatar from "@/compoments/avatar";
-import contents from "@/utils/post";
+import { getContentsInfo } from "@/utils/post";
 import Card from "@/compoments/Card/Card";
 import CardCollection from "@/compoments/Card/CardCollection";
 import { CardTitle } from "@/compoments/Card/CardTitle";
@@ -13,29 +13,8 @@ import Link from "next/link";
 
 export default async function Home() {
 
-	const posts = contents.posts;
-
-	const metadataWithPreview: {
-		title: string;
-		preview: string;
-		date: Date,
-		slug: string,
-		categories: string[]
-	}[] = []
-
-	for (const post of posts) {
-		const metadata = await post.metadata();
-		const slug = post.slug;
-		const preview = await post.previewImage() ?? "";
-		metadataWithPreview.push({
-			...metadata,
-			preview,
-			slug
-		})
-	}
-
-	metadataWithPreview.sort((a, b) => b.date.getTime() - a.date.getTime());
-
+	const metas = await getContentsInfo();
+	metas.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	return (
 		<>
@@ -127,7 +106,7 @@ export default async function Home() {
 
 				<CardTitle title="Recent Posts" url={"/blog"}/>
 				<CardCollection>
-					{metadataWithPreview.slice(0,4).map((post, index)=> {
+					{metas.slice(0,4).map((post, index)=> {
 						return <Card
 							key={index}
 							// @ts-ignore
@@ -139,7 +118,7 @@ export default async function Home() {
 				</CardCollection>
 				<CardTitle title="About linux" url={"/tags/linux"}/>
 				<CardCollection>
-					{metadataWithPreview.filter((it) => it
+					{metas.filter((it) => it
 						.categories.includes("linux"))
 						.map((post, index)=> {
 						return <Card
