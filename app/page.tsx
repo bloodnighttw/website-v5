@@ -132,9 +132,9 @@ export default async function Home() {
 				</CardCollection>
 			</div>
 
-			<div className="part border-b border-dot">
-				<h2>My Project.</h2>
-			</div>
+			{/*<div className="part border-b border-dot">*/}
+			{/*	<h2>My Project.</h2>*/}
+			{/*</div>*/}
 		</>
 	);
 }
