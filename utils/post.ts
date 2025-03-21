@@ -1,4 +1,4 @@
-import { defineContent, zod as z } from "@mkblog/core";
+import { Content, defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
 import previewImage from "@/utils/previewImage";
@@ -12,6 +12,10 @@ const schema = {
 	draft: z.boolean().optional(),
 };
 
+const temp = z.object(schema);
+
+export type Post = z.infer<typeof temp>;
+
 const contents = await defineContent({
 	include: "./posts/**/*.md", // glob pattern
 	schema,
@@ -20,4 +24,29 @@ const contents = await defineContent({
 	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 });
 
+interface Info extends Post{
+	slug: string;
+	preview: string;
+}
+
+export async function getContentsInfo(): Promise<Info[]> {
+
+	const {posts} = contents;
+
+	const metaPromise = posts.map( async (post) => {
+		const metadata = await post.metadata();
+		const slug = post.slug;
+		const preview = await post.previewImage() ?? "";
+		return {
+			...metadata,
+			preview,
+			slug,
+		}
+	})
+
+	return Promise.all(metaPromise);
+}
+
+
 export default contents;
+

@@ -1,30 +1,10 @@
-import contents from "@/utils/post";
 import CardCollection from "@/compoments/Card/CardCollection";
 import Card from "@/compoments/Card/Card";
-import HashTag from "@/compoments/HashTag";
+import { getContentsInfo } from "@/utils/post";
 
 export default async function BlogPosts(){
 
-	const {posts} = contents;
-
-	const metadataWithPreview: {
-		title: string;
-		preview: string;
-		date: Date,
-		slug: string
-	}[] = []
-
-	for (const post of posts) {
-		const metadata = await post.metadata();
-
-		const slug = post.slug;
-		const preview = await post.previewImage() ?? "";
-		metadataWithPreview.push({
-			...metadata,
-			preview,
-			slug
-		})
-	}
+	const metadataWithPreview = await getContentsInfo();
 
 	return <>
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">

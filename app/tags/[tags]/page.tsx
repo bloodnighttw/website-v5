@@ -1,5 +1,5 @@
 import CardCollection from "@/compoments/Card/CardCollection";
-import contents from "@/utils/post";
+import contents, { getContentsInfo } from "@/utils/post";
 import Card from "@/compoments/Card/Card";
 import HashTag from "@/compoments/HashTag";
 
@@ -30,31 +30,8 @@ export default async function Tags(
 ) {
 
 	const { tags } = await params;
-	const { posts } = contents;
 
-	const metadataWithPreview: {
-		title: string;
-		preview: string;
-		date: Date,
-		slug: string
-	}[] = []
-
-	for (const post of posts) {
-		const metadata = await post.metadata();
-
-		if(!metadata.categories.includes(tags)) {
-			continue;
-		}
-
-		const slug = post.slug;
-		const preview = await post.previewImage() ?? "";
-		metadataWithPreview.push({
-			...metadata,
-			preview,
-			slug
-		})
-	}
-
+	const metadataWithPreview = await getContentsInfo();
 
 	return <>
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
