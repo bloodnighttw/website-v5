@@ -15,7 +15,6 @@ export default async function BlogPosts(){
 				{metadataWithPreview.map((post, index)=> {
 					return <Card
 						key={index}
-						// @ts-ignore
 						href={"/blog/" + post.slug}
 						preview={post.preview}
 						title={post.title}

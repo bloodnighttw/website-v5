@@ -109,7 +109,6 @@ export default async function Home() {
 					{metas.slice(0,4).map((post, index)=> {
 						return <Card
 							key={index}
-							// @ts-ignore
 							href={"/blog/" + post.slug}
 							preview={post.preview}
 							title={post.title}

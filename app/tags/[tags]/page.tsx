@@ -32,6 +32,7 @@ export default async function Tags(
 	const { tags } = await params;
 
 	const metadataWithPreview = await getContentsInfo();
+	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
 
 	return <>
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
@@ -42,10 +43,8 @@ export default async function Tags(
 
 			<CardCollection>
 				{
-					metadataWithPreview.map( (it, index) => (
-						// @ts-ignore type can be url here
+					tagsContent.map( (it, index) => (
 						<Card
-							// @ts-ignore type can be url here
 							href={"/blog/"+it.slug} key={index}
 							preview={it.preview}
 							title={it.title}
