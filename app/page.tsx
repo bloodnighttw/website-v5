@@ -94,7 +94,7 @@ export default async function Home() {
 					</div>
 
 					<Avatar
-						src="https://avatars.githubusercontent.com/u/442641824"
+						src="https://avatars.githubusercontent.com/u/44264182"
 						size={240}
 						className="h-40 w-40 lg:h-60 lg:w-60 m-auto lg:mx-0"
 					/>

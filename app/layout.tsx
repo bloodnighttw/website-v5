@@ -24,7 +24,7 @@ export default function RootLayout({
 
 							<Link href="/">
 								<Avatar
-									src="https://avatars.githubusercontent.com/u/442641824"
+									src="https://avatars.githubusercontent.com/u/44264182"
 									size={32}
 									className="h-8 w-8 my-auto"
 								/>
