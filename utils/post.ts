@@ -1,4 +1,4 @@
-import {  defineContent, zod as z } from "@mkblog/core";
+import { defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
 import previewImage from "@/utils/previewImage";
@@ -11,6 +11,7 @@ const schema = {
 	categories: z.array(z.string()).default([]),
 	date: z.string().pipe(z.coerce.date()),
 	draft: z.boolean().optional(),
+	pin: z.boolean().default(false),
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

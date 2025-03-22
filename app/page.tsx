@@ -14,7 +14,8 @@ import Link from "next/link";
 export default async function Home() {
 
 	const metas = await getContentsInfo();
-	metas.sort((a, b) => b.date.getTime() - a.date.getTime());
+	const sortedByTime = metas.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
+	const sortedByPin = sortedByTime.filter( it => it.pin )
 
 	return (
 		<>
@@ -104,6 +105,22 @@ export default async function Home() {
 			<div className="part border-b border-dot *:not-first:mt-4">
 				<h2>Blog Posts</h2>
 
+				{
+					sortedByPin.length > 0 &&
+					<CardTitle title="Pinned Posts"/>
+				}
+
+				{
+					sortedByPin.map((post, index)=> {
+						return <Card
+							key={index}
+							href={"/blog/" + post.slug}
+							preview={post.preview}
+							title={post.title}
+						/>
+					})
+				}
+
 				<CardTitle title="Recent Posts" url={"/blog"}/>
 				<CardCollection>
 					{metas.slice(0,4).map((post, index)=> {
@@ -117,7 +134,7 @@ export default async function Home() {
 				</CardCollection>
 				<CardTitle title="About linux" url={"/tags/linux"}/>
 				<CardCollection>
-					{metas.filter((it) => it
+					{sortedByTime.filter((it) => it
 						.categories.includes("linux"))
 						.map((post, index)=> {
 						return <Card
