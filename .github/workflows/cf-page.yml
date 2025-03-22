@@ -22,7 +22,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         if: github.ref != 'refs/heads/main'
         with:
-          command: pages deploy
+          command: pages deploy --branch=preview
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -30,7 +30,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         if: github.ref == 'refs/heads/main'
         with:
-          command: pages deploy --branch=production
+          command: pages deploy
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
