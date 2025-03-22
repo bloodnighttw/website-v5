@@ -12,10 +12,6 @@ const config: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "r2.bntw.dev",
-			},
-			{
-				protocol: "https",
-				hostname: "i.imgur.com",
 			}
 		],
 	},
