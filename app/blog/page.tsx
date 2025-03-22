@@ -5,6 +5,7 @@ import { getContentsInfo } from "@/utils/post";
 export default async function BlogPosts(){
 
 	const metadataWithPreview = await getContentsInfo();
+	metadataWithPreview.sort((a,b) => b.date.getTime() - a.date.getTime());
 
 	return <>
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
