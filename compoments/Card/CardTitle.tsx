@@ -6,7 +6,7 @@ export function CardTitle({ title, url }: { title: string, url?: string }) {
 			<p className="text-secondary mr-auto text-2xl">{title}</p>
 			{
 				url &&
-				<Link className="text-secondary hover:underline" href={url ?? "/"}>See More</Link>
+				<Link className="text-secondary hover:underline" href={url ?? "/"}>more</Link>
 			}
 		</div>
 	)
