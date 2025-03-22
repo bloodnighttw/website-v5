@@ -13,6 +13,7 @@ const schema = {
 	draft: z.boolean().optional(),
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const temp = z.object(schema);
 
 export type Post = z.infer<typeof temp>;
