@@ -62,9 +62,10 @@ export default async function Blog(
 	const { slug } = await params;
 
 	const content = contents.posts.find((it) => it.slug === slug) ;
-	const metadata = await content?.metadata()!;
+	if(!content) return <div>404</div>;
+	const metadata = await content?.metadata();
 	const preview = await content?.previewImage();
-	const html = await content?.html()!;
+	const html = await content?.html();
 
 	return (
 		<>

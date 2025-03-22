@@ -29,7 +29,7 @@ export default async function Home() {
 						</p>
 						<p className="font-mono">21 y/o • Developer • Gamer</p>
 						<p className="introduction mt-4">
-							I'm a developer who loves to create things.
+							{"I'm a developer who loves to create things."}
 							Familiar with
 							<Image src={TypeScript} alt="typescript"/>
 							TypeScript,
@@ -122,7 +122,6 @@ export default async function Home() {
 						.map((post, index)=> {
 						return <Card
 							key={index}
-							// @ts-ignore
 							href={"/blog/" + post.slug}
 							preview={post.preview}
 							title={post.title}
