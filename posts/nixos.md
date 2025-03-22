@@ -21,7 +21,7 @@ categories:
 2. Rollback
     1. NixOs會記錄以前的設定，如果不小心搞崩系統了，可以輕鬆地在grub選擇之前的版本。
 3. Reproducible
-    1. Nix提供flake，可以輕鬆鎖定版本，安裝套件時，不太用擔心Ａ電腦跑得起來B電腦卻不行，聲明一次，成功build一次，基本上都能一直成功build。
+    1. Nix提供flake，可以輕鬆鎖定版本，安裝套件時，不太用擔心A電腦跑得起來B電腦卻不行，聲明一次，成功build一次，基本上都能一直成功build。
 4. Home Manager
     1. 我可以直接用`home-manager`來管理我的home目錄，而不用使用其他工具，而且home manager還提供一堆好用的東西。
 
