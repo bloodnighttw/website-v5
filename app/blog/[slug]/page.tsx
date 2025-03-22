@@ -1,23 +1,24 @@
-import contents from "@/utils/post"
+import contents, { Post } from "@/utils/post";
 import "./codeblock.css"
 import HashTag from "@/compoments/HashTag";
 import Comments from "./comments";
 import { Metadata } from "next";
+import { Content } from "@mkblog/core";
 
 export async function generateStaticParams() {
-	return contents.posts.map(({slug})=> {
+	return contents.posts.map((post)=> {
 		return {
-			slug: slug,
+			slug: post.slug,
+			post
 		}
 	})
 }
 
 export const dynamicParams = false;
 
-export async function generateMetadata({params} : {params: Promise<{slug: string}>}): Promise<Metadata> {
+export async function generateMetadata({params} : {params: Promise<{slug: string, post:Content<Post>}>}): Promise<Metadata> {
 
-	const {slug} = await params;
-	const post = contents.posts.find((it) => it.slug === slug);
+	const { post } = await params;
 	const metadata = await post?.metadata() ?? {title: "404"};
 	const description = await post?.previewDescription();
 	const preview = await post?.previewImage();
