@@ -102,3 +102,31 @@
     }
 
 }
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@utility mask-lg {
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 90%);
+}
+
+@utility scrolling {
+
+    @apply flex flex-row overflow-hidden sm:mask-lg;
+
+    & > * {
+        @apply flex flex-row gap-8 pr-8;
+        animation: scroll 15s linear infinite;
+    }
+
+    & > div > * {
+        @apply h-8 w-8
+    }
+
+}
