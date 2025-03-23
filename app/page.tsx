@@ -123,7 +123,7 @@ export default async function Home() {
 
 				<CardTitle title="Recent Posts" url={"/blog"}/>
 				<CardCollection>
-					{metas.slice(0,4).map((post, index)=> {
+					{sortedByTime.slice(0,4).map((post, index)=> {
 						return <Card
 							key={index}
 							href={"/blog/" + post.slug}
