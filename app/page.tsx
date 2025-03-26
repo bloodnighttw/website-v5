@@ -11,32 +11,17 @@ import { Discord, Github, Mail, Telegram, Threads, Twitter} from "@/app/assets/s
 import Image from "next/image";
 import Link from "next/link";
 import ScrollContainer from "@/compoments/Project/ScrollContainer";
-
-const svgUrl = {
-	"react": "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
-	"typescript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-	"java": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
-	"linux": "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg",
-	"python": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
-	"html": "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
-	"css": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
-	"javascript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
-	"nodejs": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
-	"nextjs": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg",
-	"tailwindcss": "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg",
-	"git": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
-	"mysql": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg",
-	"kotlin": "https://raw.githubusercontent.com/devicons/devicon/master/icons/kotlin/kotlin-original.svg",
-	"php": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
-}
-
-
+import { getProjectInfo } from "@/utils/project";
+import Display from "@/compoments/Project/Display";
+import { svgUrl } from "@/utils/constant";
 
 export default async function Home() {
 
 	const metas = await getContentsInfo();
 	const sortedByTime = metas.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
 	const sortedByPin = sortedByTime.filter( it => it.pin )
+
+	const project = await getProjectInfo();
 
 	return (
 		<>
@@ -179,8 +164,18 @@ export default async function Home() {
 								</div>
 							})
 						}
-
 					</ScrollContainer>
+				</div>
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:items-center mt-6">
+					{project.map((project)=> {
+						return <Display
+							key={project.name}
+							name={project.name}
+							description={project.description}
+							link={project.link}
+							stack={project.stack}
+						/>
+					})}
 				</div>
 
 			</div>
