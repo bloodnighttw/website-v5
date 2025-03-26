@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 
 	return project.map((post) => {
 		return {
-			slug: post.slug,
+			name: post.slug,
 		}
 	})
 
