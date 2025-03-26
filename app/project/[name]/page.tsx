@@ -27,7 +27,6 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 	const projectInfo = posts.find((it) => it.slug === name)!;
 	const meta = await projectInfo.metadata();
 	const html = await projectInfo.html();
-	// @ts-expect-error ignore
 	const svgs: string[] = meta.stack.filter( st => st in svgUrl).map( st => svgUrl[st]);
 
 	return <div className="part *:mt-4">

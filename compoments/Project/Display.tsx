@@ -33,8 +33,7 @@ export default function Display(props: Props){
 				props.stack
 					.filter(it => it in svgUrl)
 					.map((stack)=> {
-						// @ts-expect-error aksdjla
-						return <Image key={stack} src={(svgUrl)[stack] as string} alt={stack} width={24} height={24}/>
+						return <Image key={stack} src={svgUrl[stack]} alt={stack} width={24} height={24}/>
 					})
 			}
 		</div>

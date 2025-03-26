@@ -1,6 +1,10 @@
 export const BASE_URL = "https://bntw.dev";
 
-export const svgUrl = {
+interface SVGUrl {
+	[key: string]: string;
+}
+
+export const svgUrl: SVGUrl = {
 	"react": "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
 	"typescript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
 	"java": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
