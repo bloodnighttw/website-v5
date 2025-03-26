@@ -39,13 +39,14 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 			<div className="ml-auto"></div>
 			{svgs.map(svg => (<Image src={svg} alt="icon" width={24} height={24} key={svg}/>))}
 		</div>
-		<div className="w-full rounded bg-bsecondary/50">
+
+		{ meta.demo && <div className="w-full rounded bg-bsecondary/50">
 			<div className="flex items-center gap-2 p-2">
 				<Image src={linkSvg} alt={"link"} width={24} height={24}/>
-				<p>{meta.link}</p>
+				<p>{meta.demo}</p>
 			</div>
 			<iframe src={meta.demo} className="rounded-b w-full h-[65vh] sm:h-[50vh] bg-bsecondary"/>
-		</div>
+		</div> }
 		<article dangerouslySetInnerHTML={{__html:html}}/>
 	</div>
 
