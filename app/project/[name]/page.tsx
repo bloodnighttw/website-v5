@@ -1,4 +1,4 @@
-import Project, { getProjectInfo } from "@/utils/project";
+import Project, { getProjectInfo } from "@/utils/contents/project";
 import { svgUrl } from "@/utils/constant";
 import Image from "next/image";
 import { Github } from "@/app/assets/svg";

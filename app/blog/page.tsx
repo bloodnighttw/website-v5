@@ -1,6 +1,6 @@
 import CardCollection from "@/compoments/Card/CardCollection";
 import Card from "@/compoments/Card/Card";
-import { getContentsInfo } from "@/utils/post";
+import { getContentsInfo } from "@/utils/contents/post";
 
 export default async function BlogPosts(){
 

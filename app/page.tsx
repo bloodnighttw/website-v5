@@ -1,5 +1,5 @@
 import Avatar from "@/compoments/avatar";
-import { getContentsInfo } from "@/utils/post";
+import { getContentsInfo } from "@/utils/contents/post";
 import Card from "@/compoments/Card/Card";
 import CardCollection from "@/compoments/Card/CardCollection";
 import { CardTitle } from "@/compoments/Card/CardTitle";
@@ -11,7 +11,7 @@ import { Discord, Github, Mail, Telegram, Threads, Twitter} from "@/app/assets/s
 import Image from "next/image";
 import Link from "next/link";
 import ScrollContainer from "@/compoments/Project/ScrollContainer";
-import { getProjectInfo } from "@/utils/project";
+import { getProjectInfo } from "@/utils/contents/project";
 import Display from "@/compoments/Project/Display";
 import { svgUrl } from "@/utils/constant";
 

@@ -1,7 +1,7 @@
-import contents from "@/utils/post";
+import contents from "@/utils/contents/post";
 import "@/app/markdown.css"
 import HashTag from "@/compoments/HashTag";
-import Comments from "./comments";
+import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {

@@ -1,10 +1,10 @@
 import { defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
-import previewImage from "@/utils/previewImage";
+import previewImage from "@/utils/mkblog-plujgin/previewImage";
 import rehypeStarryNight from 'rehype-starry-night'
-import rehypeLineNumbers from "./line-numbers";
-import previewDescription from "@/utils/previewDescription";
+import rehypeLineNumbers from "@/utils/remark-plugin/line-numbers";
+import previewDescription from "@/utils/mkblog-plujgin/previewDescription";
 
 const schema = {
 	title: z.string(),
