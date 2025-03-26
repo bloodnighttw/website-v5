@@ -8,6 +8,12 @@ export default function cloudflareLoader(
 	if (process.env.NODE_ENV === "development") {
 		return src;
 	}
+
+	// if it is svg, return as it is
+	if (src.endsWith(".svg")) {
+		return src;
+	}
+
 	const params = [`width=${width}`];
 	if (quality) {
 		params.push(`quality=${quality}`);
