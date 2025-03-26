@@ -28,13 +28,13 @@ export default async function Home() {
 			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b grid duration-1000">
 				<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
 					<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
-						<p className="text-center text-xl lg:text-start">
-							👋 hi!
-						</p>
+						<div className="text-center text-xl lg:text-start">
+							{"👋 hi!"}
+						</div>
 						<p className="text-4xl lg:text-6xl font-bold">
 							{"I'm bloodnighttw."}
 						</p>
-						<p className="font-mono">21 y/o • Developer • Gamer</p>
+						<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
 						<p className="introduction mt-4">
 							{"I'm a developer who loves to create things."}
 							Familiar with
@@ -108,7 +108,9 @@ export default async function Home() {
 				</div>
 			</div>
 
-			<div className="part border-b border-dot *:not-first:mt-4">
+			<div className="part border-b border-dot *:not-first:mt-4 gradient-background">
+				<span></span>
+				<span></span>
 				<h2>Blog Posts</h2>
 
 				{
