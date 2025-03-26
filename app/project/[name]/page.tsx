@@ -17,6 +17,8 @@ export async function generateStaticParams() {
 
 }
 
+export const dynamicParams = false;
+
 export default async function Page({params}: {params: Promise<{name: string}>}) {
 
 	const {posts} = Project;
