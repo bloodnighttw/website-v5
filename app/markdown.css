@@ -188,7 +188,7 @@
 
             &::before {
                 @apply inline-block h-[1.25em] mr-1 align-text-bottom;
-                content: url("../../assets/link.svg");
+                content: url("./assets/link.svg");
             }
 
             &::after {

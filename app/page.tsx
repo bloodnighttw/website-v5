@@ -4,12 +4,16 @@ import Card from "@/compoments/Card/Card";
 import CardCollection from "@/compoments/Card/CardCollection";
 import { CardTitle } from "@/compoments/Card/CardTitle";
 import Linux from "@/app/assets/linux.svg"
-import Java from  "@/app/assets/java.svg"
 import React from "@/app/assets/react.svg"
+import Java from "@/app/assets/java.svg"
 import TypeScript from "@/app/assets/typescript.svg"
-import { Discord, Github, Mail, Telegram, Threads, Twitter } from "@/app/assets/svg";
+import { Discord, Github, Mail, Telegram, Threads, Twitter} from "@/app/assets/svg";
 import Image from "next/image";
 import Link from "next/link";
+import ScrollContainer from "@/compoments/Project/ScrollContainer";
+import { getProjectInfo } from "@/utils/project";
+import Display from "@/compoments/Project/Display";
+import { svgUrl } from "@/utils/constant";
 
 export default async function Home() {
 
@@ -17,18 +21,20 @@ export default async function Home() {
 	const sortedByTime = metas.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
 	const sortedByPin = sortedByTime.filter( it => it.pin )
 
+	const project = await getProjectInfo();
+
 	return (
 		<>
 			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b grid duration-1000">
 				<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
 					<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
-						<p className="text-center text-xl lg:text-start">
-							👋 hi!
-						</p>
+						<div className="text-center text-xl lg:text-start">
+							{"👋 hi!"}
+						</div>
 						<p className="text-4xl lg:text-6xl font-bold">
 							{"I'm bloodnighttw."}
 						</p>
-						<p className="font-mono">21 y/o • Developer • Gamer</p>
+						<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
 						<p className="introduction mt-4">
 							{"I'm a developer who loves to create things."}
 							Familiar with
@@ -102,7 +108,9 @@ export default async function Home() {
 				</div>
 			</div>
 
-			<div className="part border-b border-dot *:not-first:mt-4">
+			<div className="part border-b border-dot *:not-first:mt-4 gradient-background">
+				<span></span>
+				<span></span>
 				<h2>Blog Posts</h2>
 
 				{
@@ -147,9 +155,32 @@ export default async function Home() {
 				</CardCollection>
 			</div>
 
-			{/*<div className="part border-b border-dot">*/}
-			{/*	<h2>My Project.</h2>*/}
-			{/*</div>*/}
+			<div className="part border-b border-dot">
+				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+					<h2>My Project.</h2>
+					<ScrollContainer className="sm:ml-auto">
+						{
+							Object.values(svgUrl).map((it, index) => {
+								return <div key={index}>
+									<Image src={it} height={48} width={48} alt={"it"}/>
+								</div>
+							})
+						}
+					</ScrollContainer>
+				</div>
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:items-center mt-6">
+					{project.map((project)=> {
+						return <Display
+							key={project.name}
+							name={project.name}
+							description={project.description}
+							link={project.link}
+							stack={project.stack}
+						/>
+					})}
+				</div>
+
+			</div>
 		</>
 	);
 }

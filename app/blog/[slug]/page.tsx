@@ -1,5 +1,5 @@
 import contents from "@/utils/post";
-import "./codeblock.css"
+import "@/app/markdown.css"
 import HashTag from "@/compoments/HashTag";
 import Comments from "./comments";
 import { Metadata } from "next";

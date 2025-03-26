@@ -102,3 +102,52 @@
     }
 
 }
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@utility mask-lg {
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 90%);
+}
+
+@utility scrolling {
+
+    @apply flex flex-row overflow-hidden sm:mask-lg;
+
+    & > * {
+        @apply flex flex-row gap-8 pr-8;
+        animation: scroll 15s linear infinite;
+    }
+
+    & > div > * {
+        @apply h-8 w-8
+    }
+
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 255px }
+}
+
+@keyframes blink {
+    50% { border-color: transparent }
+}
+
+@utility typewriter {
+    @apply inline-block overflow-hidden border-r border-r-primary align-middle;
+    white-space: nowrap;
+    animation: typing 2.5s steps(40, end) forwards,
+            blink 1s step-end infinite;
+}
+
+.gradient-background {
+    background: linear-gradient(120deg,var(--color-bprimary),var(--color-bsecondary),var(--color-bprimary));
+    background-size: 300% 300%;
+}

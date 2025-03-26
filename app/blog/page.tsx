@@ -11,7 +11,7 @@ export default async function BlogPosts(){
 		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
 			<p className="text-4xl">Recent Posts</p>
 		</div>
-		<div className="part *:not-first:mt-4">
+		<div className="part *:not-first:mt-4 gradient-background">
 			<CardCollection >
 				{metadataWithPreview.map((post, index)=> {
 					return <Card
