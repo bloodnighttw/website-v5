@@ -1,4 +1,4 @@
-import contents, { Post } from "@/utils/post";
+import contents from "@/utils/post";
 import "@/app/markdown.css"
 import HashTag from "@/compoments/HashTag";
 import Comments from "./comments";
