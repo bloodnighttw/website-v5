@@ -7,6 +7,7 @@ const schema = {
 	// all lowercase
 	stack: z.array(z.string()).default([])
 		.transform((str)=> str.map((it)=> it.toLowerCase())),
+	demo: z.string().optional(),
 }
 
 const contents = await defineContent({
