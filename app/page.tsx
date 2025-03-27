@@ -16,6 +16,7 @@ import Display from "@/compoments/Project/Display";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { Stacks } from "@/compoments/Project/Stack";
+import Chapter from "@/compoments/Text/Chapter";
 
 export default async function Home() {
 
@@ -113,8 +114,9 @@ export default async function Home() {
 				</Part>
 			</SecondaryPanel>
 
-			<Part className="gradient-background *:mt-4 py-4 border-b border-dot">
-				<p className="text-4xl font-bold">Blog Posts</p>
+			<Part className="gradient-background border-b border-dot">
+
+				<Chapter>My blog</Chapter>
 
 				{
 					sortedByPin.length > 0 &&
@@ -160,8 +162,8 @@ export default async function Home() {
 
 			<Part>
 				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-					<h2 className="text-4xl font-bold">My Project.</h2>
-					<Scrolling className="sm:ml-auto">
+					<Chapter>My Project</Chapter>
+					<Scrolling>
 						<Stacks/>
 					</Scrolling>
 				</div>
