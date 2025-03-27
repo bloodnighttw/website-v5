@@ -54,7 +54,6 @@ export default async function Home() {
 					</>
 				}
 
-
 				<CardTitle title="Recent Posts" url={"/blog"} />
 				<CardCollection>
 					<ArticleCards infos={sortedByTime.slice(0, 4)} />
@@ -77,7 +76,6 @@ export default async function Home() {
 				<ProjectCollection>
 					{projectsCards}
 				</ProjectCollection>
-
 			</Part>
 		</>
 	);

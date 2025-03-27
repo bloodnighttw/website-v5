@@ -10,7 +10,7 @@ interface Props {
 export default function ArticleCard(props:Props) {
 
 	return (
-		<Link href={props.info.slug}
+		<Link href={"/blog/"+props.info.slug}
 			className="rounded basis-auto overflow-hidden border-[0.1px] border-bsecondary w-full *:not-first:mt-4 *:not-first:p-4 hover:scale-110 duration-200 bg-bprimary hover:z-[100]">
 			<div className="relative h-36">
 				{/* fill={true} will make component into absolute */}
