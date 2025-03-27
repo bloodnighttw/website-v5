@@ -1,8 +1,8 @@
 import Avatar from "@/compoments/avatar";
 import { getContentsInfo } from "@/utils/contents/post";
-import Card from "@/compoments/Card/Card";
-import CardCollection from "@/compoments/Card/CardCollection";
-import { CardTitle } from "@/compoments/Card/CardTitle";
+import Card from "@/compoments/Blog/ArticleCard";
+import CardCollection from "@/compoments/Blog/ArticleCollection";
+import CardTitle from "@/compoments/Blog/ArticleTitle";
 import Linux from "@/app/assets/linux.svg"
 import React from "@/app/assets/react.svg"
 import Java from "@/app/assets/java.svg"
@@ -113,10 +113,8 @@ export default async function Home() {
 				</Part>
 			</SecondaryPanel>
 
-			<Part className="gradient-background *:mt-4 py-4">
-				<span></span>
-				<span></span>
-				<h2>Blog Posts</h2>
+			<Part className="gradient-background *:mt-4 py-4 border-b border-dot">
+				<p className="text-4xl font-bold">Blog Posts</p>
 
 				{
 					sortedByPin.length > 0 &&
@@ -162,13 +160,11 @@ export default async function Home() {
 
 			<Part>
 				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-					<h2>My Project.</h2>
+					<h2 className="text-4xl font-bold">My Project.</h2>
 					<Scrolling className="sm:ml-auto">
 						{
-							Object.values(svgUrl).map((it, index) => {
-								return <div key={index}>
-									<Image src={it} height={48} width={48} alt={"it"}/>
-								</div>
+							Object.values(svgUrl).map((it) => {
+								return <Image src={it} height={48} width={48} alt={it} key={it}/>
 							})
 						}
 					</Scrolling>

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import cn from "@/utils/cn";
 
 interface Props {
-	children: ReactNode;
+	children?: ReactNode;
 	className?: string;
 }
 

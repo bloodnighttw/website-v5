@@ -4,6 +4,7 @@ import HashTag from "@/compoments/HashTag";
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";
+import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 
 export async function generateStaticParams() {
 	return contents.posts.map((post)=> {
@@ -72,13 +73,13 @@ export default async function Blog(
 	return (
 		<>
 			<div className="relative border-b border-dot">
-				<div className="bg-dotted w-full absolute inset-0 -z-1"/>
+				<SecondaryPanel className="h-full w-full absolute inset-0 -z-1"/>
 				<img className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1" src={preview} alt="preview image"/>
 
 				<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
-					<h1 className="text-6xl w-full m-4">
+					<p className="text-6xl w-full m-4">
 						{metadata.title}
-					</h1>
+					</p>
 					<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto">
 						{
 							metadata.categories.map((category: string, index: number) => (
@@ -89,7 +90,7 @@ export default async function Blog(
 				</Part>
 			</div>
 			<Part className="z-[100] bg-bprimary border-b border-dot">
-				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
+				<article dangerouslySetInnerHTML={{__html: html}}/>
 			</Part>
 			<Part className="bg-dotted">
 				<Comments/>

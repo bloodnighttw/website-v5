@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import cn from "@/utils/cn";
 
 interface Props {
 	children: ReactNode;
@@ -7,10 +8,11 @@ interface Props {
 
 
 export default function Scrolling(props: Props) {
-	// 評價數據
+
+	const className = cn("overflow-hidden scrolling sm:w-96", props.className);
 
 	return (
-		<div className={"overflow-hidden scrolling sm:w-96 "+props.className}>
+		<div className={className}>
 			<div>{props.children}</div>
 			<div>{props.children}</div>
 		</div>
