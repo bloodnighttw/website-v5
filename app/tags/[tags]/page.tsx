@@ -1,7 +1,8 @@
 import CardCollection from "@/compoments/Card/CardCollection";
-import contents, { getContentsInfo } from "@/utils/post";
+import contents, { getContentsInfo } from "@/utils/contents/post";
 import Card from "@/compoments/Card/Card";
 import HashTag from "@/compoments/HashTag";
+import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 
 export async function generateStaticParams() {
 	const {posts} = contents;
@@ -35,9 +36,9 @@ export default async function Tags(
 	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
 
 	return <>
-		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
+		<SecondaryPanel>
 			<HashTag className="text-center text-5xl text-bold" tags={tags} />
-		</div>
+		</SecondaryPanel>
 
 		<div className="part">
 
