@@ -27,7 +27,7 @@ const contents = await defineContent({
 	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 });
 
-interface Info extends Post{
+export interface Info extends Post{
 	slug: string;
 	preview: string;
 }

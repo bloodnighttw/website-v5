@@ -1,6 +1,6 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
 import contents, { getContentsInfo } from "@/utils/contents/post";
-import Card from "@/compoments/Blog/ArticleCard";
+import ArticleCard, { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import HashTag from "@/compoments/HashTag";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
@@ -36,14 +36,6 @@ export default async function Tags(
 	const metadataWithPreview = await getContentsInfo();
 	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
 
-	const Cards = tagsContent.map( (it) => (
-		<Card
-			href={"/blog/"+it.slug} key={it.slug}
-			preview={it.preview}
-			title={it.title}
-		/>
-	))
-
 	return <>
 		<SecondaryPanel>
 			<HashTag className="text-center text-5xl text-bold" tags={tags} />
@@ -51,7 +43,7 @@ export default async function Tags(
 
 		<Part>
 			<CardCollection>
-				{Cards}
+				<ArticleCards infos={tagsContent}/>
 			</CardCollection>
 		</Part>
 

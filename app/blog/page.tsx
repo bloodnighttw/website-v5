@@ -1,5 +1,5 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
-import Card from "@/compoments/Blog/ArticleCard";
+import ArticleCard, { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import { getContentsInfo } from "@/utils/contents/post";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
@@ -15,14 +15,7 @@ export default async function BlogPosts(){
 		</SecondaryPanel>
 		<Part className="*:not-first:mt-4 gradient-background">
 			<CardCollection>
-				{metadataWithPreview.map((post, index)=> (
-					<Card
-						key={index}
-						href={"/blog/" + post.slug}
-						preview={post.preview}
-						title={post.title}
-					/>
-				))}
+				<ArticleCards infos={metadataWithPreview}/>
 			</CardCollection>
 		</Part>
 	</>
