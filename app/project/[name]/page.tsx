@@ -5,6 +5,7 @@ import { Github } from "@/app/assets/svg";
 import Link from "next/link";
 import linkSvg from "@/app/assets/link.svg";
 import Part from "@/compoments/Part";
+import Stack from "@/compoments/Project/Stack";
 
 export async function generateStaticParams() {
 
@@ -37,7 +38,7 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 			</Link>
 			<p className="text-2xl">{meta.name}</p>
 			<div className="ml-auto"></div>
-			{svgs.map(svg => (<Image src={svg} alt="icon" width={24} height={24} key={svg}/>))}
+			{svgs.map(svg => (<Stack it={svg} key={svg}/>))}
 		</div>
 
 		{ meta.demo && <div className="w-full rounded bg-bsecondary/50">

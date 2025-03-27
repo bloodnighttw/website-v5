@@ -13,9 +13,9 @@ import Link from "next/link";
 import Scrolling from "@/compoments/Project/Scrolling";
 import { getProjectInfo } from "@/utils/contents/project";
 import Display from "@/compoments/Project/Display";
-import { svgUrl } from "@/utils/constant";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
+import { Stacks } from "@/compoments/Project/Stack";
 
 export default async function Home() {
 
@@ -162,11 +162,7 @@ export default async function Home() {
 				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
 					<h2 className="text-4xl font-bold">My Project.</h2>
 					<Scrolling className="sm:ml-auto">
-						{
-							Object.values(svgUrl).map((it) => {
-								return <Image src={it} height={48} width={48} alt={it} key={it}/>
-							})
-						}
+						<Stacks/>
 					</Scrolling>
 				</div>
 				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:items-center mt-6">
