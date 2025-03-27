@@ -36,23 +36,22 @@ export default async function Tags(
 	const metadataWithPreview = await getContentsInfo();
 	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
 
+	const Cards = tagsContent.map( (it) => (
+		<Card
+			href={"/blog/"+it.slug} key={it.slug}
+			preview={it.preview}
+			title={it.title}
+		/>
+	))
+
 	return <>
 		<SecondaryPanel>
 			<HashTag className="text-center text-5xl text-bold" tags={tags} />
 		</SecondaryPanel>
 
 		<Part>
-
 			<CardCollection>
-				{
-					tagsContent.map( (it, index) => (
-						<Card
-							href={"/blog/"+it.slug} key={index}
-							preview={it.preview}
-							title={it.title}
-						/>
-					))
-				}
+				{Cards}
 			</CardCollection>
 		</Part>
 
