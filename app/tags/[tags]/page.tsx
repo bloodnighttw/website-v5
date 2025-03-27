@@ -3,6 +3,7 @@ import contents, { getContentsInfo } from "@/utils/contents/post";
 import Card from "@/compoments/Card/Card";
 import HashTag from "@/compoments/HashTag";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Part from "@/compoments/Part";
 
 export async function generateStaticParams() {
 	const {posts} = contents;
@@ -40,7 +41,7 @@ export default async function Tags(
 			<HashTag className="text-center text-5xl text-bold" tags={tags} />
 		</SecondaryPanel>
 
-		<div className="part">
+		<Part>
 
 			<CardCollection>
 				{
@@ -53,7 +54,7 @@ export default async function Tags(
 					))
 				}
 			</CardCollection>
-		</div>
+		</Part>
 
 	</>
 }

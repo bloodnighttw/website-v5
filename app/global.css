@@ -45,8 +45,6 @@
 
 
 @utility part {
-	@apply p-4;
-
 	& > * {
 		@apply mx-auto max-w-[var(--size-width-max)];
 	}
@@ -62,9 +60,6 @@
 	background-position: center;
 }
 
-@utility navbar {
-	@apply part bg-bprimary/50 backdrop-blur border-b border-dot sticky top-0 z-10;
-}
 
 @utility introduction {
 

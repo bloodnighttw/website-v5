@@ -3,6 +3,7 @@ import "@/app/markdown.css"
 import HashTag from "@/compoments/HashTag";
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
+import Part from "@/compoments/Part";
 
 export async function generateStaticParams() {
 	return contents.posts.map((post)=> {
@@ -74,7 +75,7 @@ export default async function Blog(
 				<div className="bg-dotted w-full absolute inset-0 -z-1"/>
 				<img className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1" src={preview} alt="preview image"/>
 
-				<div className="part min-h-48 flex flex-col items-center justify-center font-sans">
+				<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
 					<h1 className="text-6xl w-full m-4">
 						{metadata.title}
 					</h1>
@@ -85,14 +86,14 @@ export default async function Blog(
 							))
 						}
 					</div>
-				</div>
+				</Part>
 			</div>
-			<main className="part mt-0 z-[100] bg-bprimary border-b border-dot">
+			<Part className="z-[100] bg-bprimary border-b border-dot">
 				<article dangerouslySetInnerHTML={{__html: html}} className="article"/>
-			</main>
-			<div className="part bg-dotted">
+			</Part>
+			<Part className="bg-dotted">
 				<Comments/>
-			</div>
+			</Part>
 		</>
 	);
 }

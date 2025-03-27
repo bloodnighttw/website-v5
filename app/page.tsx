@@ -14,6 +14,8 @@ import ScrollContainer from "@/compoments/Project/ScrollContainer";
 import { getProjectInfo } from "@/utils/contents/project";
 import Display from "@/compoments/Project/Display";
 import { svgUrl } from "@/utils/constant";
+import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Part from "@/compoments/Part";
 
 export default async function Home() {
 
@@ -25,90 +27,93 @@ export default async function Home() {
 
 	return (
 		<>
-			<div className="part bg-dotted min-h-[75vh] lg:min-h-[50vh] border-dot border-b grid duration-1000">
-				<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
-					<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
-						<div className="text-center text-xl lg:text-start">
-							{"👋 hi!"}
+			<SecondaryPanel className="min-h-[75vh] lg:min-h-[50vh]">
+				{/* Since we wrapped it in SecondaryPanel, we won't need padding because SecondaryPanel will do this for us */}
+				<Part className="p-0 mx-4">
+					<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
+						<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
+							<div className="text-center text-xl lg:text-start">
+								{"👋 hi!"}
+							</div>
+							<p className="text-4xl lg:text-6xl font-bold">
+								{"I'm bloodnighttw."}
+							</p>
+							<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
+							<p className="introduction mt-4">
+								{"I'm a developer who loves to create things."}
+								Familiar with
+								<Image src={TypeScript} alt="typescript"/>
+								TypeScript,
+								<Image src={React} alt="react.js"/>
+								React, and
+								<Image src={Java} alt="java"/>
+								Java, and also a
+								<Image src={Linux} alt="linux"/>
+								linux lover.
+							</p>
+							<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
+
+								<Link
+									href="https://github.com/bloodnighttw"
+									className="*:fill-secondary *:hover:fill-primary *:duration-200"
+									aria-label="Github"
+								>
+									{Github}
+								</Link>
+
+								<Link
+									href="https://threads.net/@bloodnighttw"
+									className="*:fill-secondary *:hover:fill-primary *:duration-200"
+									aria-label="Threads"
+								>
+									{Threads}
+								</Link>
+
+								<Link
+									href="https://x.com/bloodnighttw"
+									className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200"
+									aria-label="Twitter"
+								>
+									{Twitter}
+								</Link>
+
+								<Link
+									href="https://discord.com/users/406274365857202196"
+									className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200"
+									aria-label="Discord"
+								>
+									{Discord}
+								</Link>
+
+								<Link
+									href="mailto:bbeenn1227@gmail.com"
+									className="*:fill-secondary *:hover:fill-primary *:duration-200"
+									aria-label="Email"
+								>
+									{Mail}
+								</Link>
+
+								<Link
+									href="https://t.me/bntw0123"
+									className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200"
+									aria-label="Telegram"
+								>
+									{Telegram}
+								</Link>
+
+							</div>
 						</div>
-						<p className="text-4xl lg:text-6xl font-bold">
-							{"I'm bloodnighttw."}
-						</p>
-						<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
-						<p className="introduction mt-4">
-							{"I'm a developer who loves to create things."}
-							Familiar with
-							<Image src={TypeScript} alt="typescript"/>
-							TypeScript,
-							<Image src={React} alt="react.js"/>
-							React, and
-							<Image src={Java} alt="java"/>
-							Java, and also a
-							<Image src={Linux} alt="linux"/>
-							linux lover.
-						</p>
-						<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
 
-							<Link
-								href="https://github.com/bloodnighttw"
-								className="*:fill-secondary *:hover:fill-primary *:duration-200"
-								aria-label="Github"
-							>
-								{Github}
-							</Link>
-
-							<Link
-								href="https://threads.net/@bloodnighttw"
-								className="*:fill-secondary *:hover:fill-primary *:duration-200"
-								aria-label="Threads"
-							>
-								{Threads}
-							</Link>
-
-							<Link
-								href="https://x.com/bloodnighttw"
-								className="*:fill-secondary *:hover:fill-[#1da1f2] *:duration-200"
-								aria-label="Twitter"
-							>
-								{Twitter}
-							</Link>
-
-							<Link
-								href="https://discord.com/users/406274365857202196"
-								className="*:fill-secondary *:hover:fill-[#7289da] *:duration-200"
-								aria-label="Discord"
-							>
-								{Discord}
-							</Link>
-
-							<Link
-								href="mailto:bbeenn1227@gmail.com"
-								className="*:fill-secondary *:hover:fill-primary *:duration-200"
-								aria-label="Email"
-							>
-								{Mail}
-							</Link>
-
-							<Link
-								href="https://t.me/bntw0123"
-								className="*:fill-secondary *:hover:fill-[#24A1DE] *:duration-200"
-								aria-label="Telegram"
-							>
-								{Telegram}
-							</Link>
-
-						</div>
+						<Avatar
+							src="https://avatars.githubusercontent.com/u/44264182"
+							size={240}
+							className="h-40 w-40 lg:h-60 lg:w-60 m-auto lg:mx-0"
+						/>
 					</div>
+				</Part>
+			</SecondaryPanel>
 
-					<Avatar
-						src="https://avatars.githubusercontent.com/u/44264182"
-						size={240}
-						className="h-40 w-40 lg:h-60 lg:w-60 m-auto lg:mx-0"
-					/>
-				</div>
-			</div>
-
-			<div className="part border-b border-dot *:not-first:mt-4 gradient-background">
+			<Part className="gradient-background *:mt-4 py-4">
 				<span></span>
 				<span></span>
 				<h2>Blog Posts</h2>
@@ -153,9 +158,9 @@ export default async function Home() {
 						/>
 					})}
 				</CardCollection>
-			</div>
+			</Part>
 
-			<div className="part border-b border-dot">
+			<Part>
 				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
 					<h2>My Project.</h2>
 					<ScrollContainer className="sm:ml-auto">
@@ -180,7 +185,7 @@ export default async function Home() {
 					})}
 				</div>
 
-			</div>
+			</Part>
 		</>
 	);
 }

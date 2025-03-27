@@ -2,6 +2,7 @@ import CardCollection from "@/compoments/Card/CardCollection";
 import Card from "@/compoments/Card/Card";
 import { getContentsInfo } from "@/utils/contents/post";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Part from "@/compoments/Part";
 
 export default async function BlogPosts(){
 
@@ -12,7 +13,7 @@ export default async function BlogPosts(){
 		<SecondaryPanel>
 			<p className="text-4xl">Recent Posts</p>
 		</SecondaryPanel>
-		<div className="part *:not-first:mt-4 gradient-background">
+		<Part className="*:not-first:mt-4 gradient-background">
 			<CardCollection >
 				{metadataWithPreview.map((post, index)=> {
 					return <Card
@@ -23,7 +24,7 @@ export default async function BlogPosts(){
 					/>
 				})}
 			</CardCollection>
-		</div>
+		</Part>
 	</>
 
 }
