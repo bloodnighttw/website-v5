@@ -1,12 +1,12 @@
-
+import { ReactNode } from "react";
 
 interface Props {
-	children: React.ReactNode;
+	children: ReactNode;
 	className?: string;
 }
 
 
-export default function ScrollContainer(props: Props) {
+export default function Scrolling(props: Props) {
 	// 評價數據
 
 	return (

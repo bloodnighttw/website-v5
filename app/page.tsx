@@ -10,7 +10,7 @@ import TypeScript from "@/app/assets/typescript.svg"
 import { Discord, Github, Mail, Telegram, Threads, Twitter} from "@/app/assets/svg";
 import Image from "next/image";
 import Link from "next/link";
-import ScrollContainer from "@/compoments/Project/ScrollContainer";
+import Scrolling from "@/compoments/Project/Scrolling";
 import { getProjectInfo } from "@/utils/contents/project";
 import Display from "@/compoments/Project/Display";
 import { svgUrl } from "@/utils/constant";
@@ -163,7 +163,7 @@ export default async function Home() {
 			<Part>
 				<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
 					<h2>My Project.</h2>
-					<ScrollContainer className="sm:ml-auto">
+					<Scrolling className="sm:ml-auto">
 						{
 							Object.values(svgUrl).map((it, index) => {
 								return <div key={index}>
@@ -171,7 +171,7 @@ export default async function Home() {
 								</div>
 							})
 						}
-					</ScrollContainer>
+					</Scrolling>
 				</div>
 				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:items-center mt-6">
 					{project.map((project)=> {
