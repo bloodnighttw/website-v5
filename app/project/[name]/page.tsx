@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Github } from "@/app/assets/svg";
 import Link from "next/link";
 import linkSvg from "@/app/assets/link.svg";
+import Part from "@/compoments/Part";
+import { Stacks } from "@/compoments/Project/Stack";
 
 export async function generateStaticParams() {
 
@@ -29,14 +31,14 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 	const html = await projectInfo.html();
 	const svgs: string[] = meta.stack.filter( st => st in svgUrl).map( st => svgUrl[st]);
 
-	return <div className="part *:mt-4">
+	return <Part className="*:not-first:mt-4">
 		<div className="flex bg-bsecondary/80 rounded items-center gap-4 p-4">
 			<Link href={meta.link}>
 				{Github}
 			</Link>
 			<p className="text-2xl">{meta.name}</p>
 			<div className="ml-auto"></div>
-			{svgs.map(svg => (<Image src={svg} alt="icon" width={24} height={24} key={svg}/>))}
+			<Stacks svgs={svgs}/>
 		</div>
 
 		{ meta.demo && <div className="w-full rounded bg-bsecondary/50">
@@ -47,6 +49,6 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 			<iframe src={meta.demo} className="rounded-b w-full h-[65vh] sm:h-[50vh] bg-bsecondary"/>
 		</div> }
 		<article dangerouslySetInnerHTML={{__html:html}}/>
-	</div>
+	</Part>
 
 }

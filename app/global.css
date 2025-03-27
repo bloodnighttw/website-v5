@@ -16,37 +16,7 @@
 	}
 }
 
-@layer components {
-    h1 {
-        @apply text-5xl font-bold;
-    }
-
-    h2 {
-        @apply text-4xl font-bold;
-    }
-
-    h3 {
-        @apply text-3xl font-bold;
-    }
-
-    h4 {
-        @apply text-3xl;
-    }
-
-    h5 {
-        @apply text-2xl;
-    }
-
-    h6 {
-        @apply text-xl;
-    }
-
-}
-
-
 @utility part {
-	@apply p-4;
-
 	& > * {
 		@apply mx-auto max-w-[var(--size-width-max)];
 	}
@@ -62,9 +32,6 @@
 	background-position: center;
 }
 
-@utility navbar {
-	@apply part bg-bprimary/50 backdrop-blur border-b border-dot sticky top-0 z-10;
-}
 
 @utility introduction {
 
@@ -116,19 +83,8 @@
     mask-image: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 90%);
 }
 
-@utility scrolling {
-
-    @apply flex flex-row overflow-hidden sm:mask-lg;
-
-    & > * {
-        @apply flex flex-row gap-8 pr-8;
-        animation: scroll 15s linear infinite;
-    }
-
-    & > div > * {
-        @apply h-8 w-8
-    }
-
+@utility animation-scrolling {
+    animation: scroll 5s linear infinite;
 }
 
 @keyframes typing {

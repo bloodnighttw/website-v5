@@ -1,6 +1,8 @@
-import CardCollection from "@/compoments/Card/CardCollection";
-import Card from "@/compoments/Card/Card";
+import CardCollection from "@/compoments/Blog/ArticleCollection";
+import Card from "@/compoments/Blog/ArticleCard";
 import { getContentsInfo } from "@/utils/contents/post";
+import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Part from "@/compoments/Part";
 
 export default async function BlogPosts(){
 
@@ -8,21 +10,21 @@ export default async function BlogPosts(){
 	metadataWithPreview.sort((a,b) => b.date.getTime() - a.date.getTime());
 
 	return <>
-		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
+		<SecondaryPanel>
 			<p className="text-4xl">Recent Posts</p>
-		</div>
-		<div className="part *:not-first:mt-4 gradient-background">
-			<CardCollection >
-				{metadataWithPreview.map((post, index)=> {
-					return <Card
+		</SecondaryPanel>
+		<Part className="*:not-first:mt-4 gradient-background">
+			<CardCollection>
+				{metadataWithPreview.map((post, index)=> (
+					<Card
 						key={index}
 						href={"/blog/" + post.slug}
 						preview={post.preview}
 						title={post.title}
 					/>
-				})}
+				))}
 			</CardCollection>
-		</div>
+		</Part>
 	</>
 
 }

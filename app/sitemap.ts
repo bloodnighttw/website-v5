@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getContentsInfo } from "@/utils/post";
+import { getContentsInfo } from "@/utils/contents/post";
 import { BASE_URL } from "@/utils/constant";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

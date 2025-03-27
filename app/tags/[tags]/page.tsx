@@ -1,7 +1,9 @@
-import CardCollection from "@/compoments/Card/CardCollection";
-import contents, { getContentsInfo } from "@/utils/post";
-import Card from "@/compoments/Card/Card";
+import CardCollection from "@/compoments/Blog/ArticleCollection";
+import contents, { getContentsInfo } from "@/utils/contents/post";
+import Card from "@/compoments/Blog/ArticleCard";
 import HashTag from "@/compoments/HashTag";
+import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Part from "@/compoments/Part";
 
 export async function generateStaticParams() {
 	const {posts} = contents;
@@ -34,25 +36,24 @@ export default async function Tags(
 	const metadataWithPreview = await getContentsInfo();
 	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
 
+	const Cards = tagsContent.map( (it) => (
+		<Card
+			href={"/blog/"+it.slug} key={it.slug}
+			preview={it.preview}
+			title={it.title}
+		/>
+	))
+
 	return <>
-		<div className="h-36 part bg-dotted flex items-center justify-center border-b border-dot">
+		<SecondaryPanel>
 			<HashTag className="text-center text-5xl text-bold" tags={tags} />
-		</div>
+		</SecondaryPanel>
 
-		<div className="part">
-
+		<Part>
 			<CardCollection>
-				{
-					tagsContent.map( (it, index) => (
-						<Card
-							href={"/blog/"+it.slug} key={index}
-							preview={it.preview}
-							title={it.title}
-						/>
-					))
-				}
+				{Cards}
 			</CardCollection>
-		</div>
+		</Part>
 
 	</>
 }
