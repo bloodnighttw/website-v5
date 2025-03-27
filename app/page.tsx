@@ -33,11 +33,9 @@ export default async function Home() {
 
 	return (
 		<>
-			<SecondaryPanel className="min-h-[75vh] lg:min-h-[50vh]">
+			<SecondaryPanel className="min-h-[75vh] lg:min-h-[50vh] h-auto p-4">
 				{/* Since we wrapped it in SecondaryPanel, we won't need padding because SecondaryPanel will do this for us */}
-				<Part className="p-0 mx-4">
-					<Introducing />
-				</Part>
+				<Introducing />
 			</SecondaryPanel>
 
 			<Part className="gradient-background border-b border-dot">
