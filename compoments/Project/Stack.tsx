@@ -15,9 +15,11 @@ export default function Stack({it, className}: {it: string, className?: string})
 	</div>
 }
 
-export function Stacks(){
+export function Stacks({svgs}: {svgs?: string[]}){
 
-	return Object.values(svgUrl).map((it) => {
+	const temp = svgs ?? Object.values(svgUrl);
+
+	return temp.map((it) => {
 		return <Stack it={it} key={it}/>
 	})
 }
