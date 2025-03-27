@@ -25,7 +25,7 @@ export default function Avatar(props: Props) {
 			className={cln}
 			width={props.size}
 			height={props.size}
-			loading="eager"
+			loading="lazy"
 		/>
 	);
 }
