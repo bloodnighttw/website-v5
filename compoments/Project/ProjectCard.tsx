@@ -11,7 +11,7 @@ interface Props{
 }
 
 
-export default function Display(props: Props){
+export default function ProjectCard(props: Props){
 
 	const isGithub = props.link.startsWith("https://github.com/");
 

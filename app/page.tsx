@@ -5,13 +5,14 @@ import CardTitle from "@/compoments/Blog/ArticleTitle";
 import React from "@/app/assets/react.svg";
 import Scrolling from "@/compoments/Project/Scrolling";
 import { getProjectInfo } from "@/utils/contents/project";
-import Display from "@/compoments/Project/Display";
+import ProjectCard from "@/compoments/Project/ProjectCard";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { Stacks } from "@/compoments/Project/Stack";
 import Chapter from "@/compoments/Text/Chapter";
 import Introducing from "@/compoments/Home/Introducing";
-import ProjectChapter from "@/compoments/Home/ProjectChapter";
+import ProjectChapter from "@/compoments/Project/ProjectChapter";
+import ProjectCollection from "@/compoments/Project/ProjectCollection";
 
 export default async function Home() {
 
@@ -20,6 +21,15 @@ export default async function Home() {
 	const sortedByPin = sortedByTime.filter(it => it.pin);
 
 	const project = await getProjectInfo();
+	const projectsCards = project.map((project) => {
+		return <ProjectCard
+			key={project.name}
+			name={project.name}
+			description={project.description}
+			link={project.link}
+			stack={project.stack}
+		/>;
+	})
 
 	return (
 		<>
@@ -64,17 +74,9 @@ export default async function Home() {
 						<Stacks />
 					</Scrolling>
 				</ProjectChapter>
-				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:items-center mt-6">
-					{project.map((project) => {
-						return <Display
-							key={project.name}
-							name={project.name}
-							description={project.description}
-							link={project.link}
-							stack={project.stack}
-						/>;
-					})}
-				</div>
+				<ProjectCollection>
+					{projectsCards}
+				</ProjectCollection>
 
 			</Part>
 		</>
