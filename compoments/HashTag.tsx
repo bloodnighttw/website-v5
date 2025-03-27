@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import clsx from "clsx";
+import cn from "@/utils/cn";
 
 interface Props {
 	className?: string;
@@ -9,7 +9,7 @@ interface Props {
 
 export default function HashTag({className, tags}: Props) {
 
-	const classNameMix = clsx(
+	const classNameMix = cn(
 		"hashtag",
 		className
 	)
