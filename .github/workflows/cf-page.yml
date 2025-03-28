@@ -17,7 +17,7 @@ jobs:
           node-version: '18.x'
           cache: 'pnpm'
       - name: Build
-        run: pnpm install && pnpm pages:build
+        run: pnpm install --frozen-lockfile && pnpm pages:build
       - name: Deploy preview to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         if: github.ref != 'refs/heads/main'
