@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<meta http-equiv="Delegate-CH" content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"/>
+			</head>
 			<body className={`$antialiased`}>
 				<NavPanel>
 					<Link href="/">
