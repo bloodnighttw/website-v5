@@ -14,10 +14,10 @@ export default function cloudflareLoader(
 		return src;
 	}
 
-	const params = [`width=${width}`];
+	const params = [`width=${width}`, "format=auto"];
 	if (quality) {
 		params.push(`quality=${quality}`);
 	}
 	const paramsString = params.join(",");
-	return `/cdn-cgi/image/format=auto/${paramsString}/${normalizeSrc(src)}`;
+	return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
 }
