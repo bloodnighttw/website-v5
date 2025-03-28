@@ -17,16 +17,16 @@ export default function Introducing(){
 				{"I'm bloodnighttw."}
 			</p>
 			<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
-			<p className="text-xl *:inline-grid *:mx-1">
+			<p className="text-xl *:inline mt-2  *:mx-1 items-end">
 				{"I'm a developer who loves to create things."}
 				Familiar with
-				<Image src={TypeScript} alt="typescript" width={24}/>
+				<Image src={TypeScript} alt="typescript" width={24} priority={true}/>
 				TypeScript,
-				<Image src={React} alt="react.js" width={24}/>
+				<Image src={React} alt="react.js" width={24} priority={true}/>
 				React, and
-				<Image src={Java} alt="java" width={24}/>
+				<Image src={Java} alt="java" width={24} priority={true}/>
 				Java, and also a
-				<Image src={Linux} alt="linux" width={24} className="inline"/>
+				<Image src={Linux} alt="linux" width={24} priority={true}/>
 				linux lover.
 			</p>
 			<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
