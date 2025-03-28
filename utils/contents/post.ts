@@ -1,3 +1,5 @@
+/* This file is from fuma-nama/fumadocs, with MIT Licence */
+
 import { defineContent, zod as z } from "@mkblog/core";
 import tocPlugin from "@mkblog/toc";
 import remarkGfm from "remark-gfm";
@@ -5,6 +7,7 @@ import previewImage from "@/utils/mkblog-plujgin/previewImage";
 import rehypeStarryNight from 'rehype-starry-night'
 import rehypeLineNumbers from "@/utils/remark-plugin/line-numbers";
 import previewDescription from "@/utils/mkblog-plujgin/previewDescription";
+import { remarkImage } from "@/utils/remark-plugin/remarkNextImage";
 
 const schema = {
 	title: z.string(),
@@ -24,7 +27,7 @@ const contents = await defineContent({
 	schema,
 	mkBlogPlugins: [tocPlugin, previewImage, previewDescription],
 	remarkPlugins: [remarkGfm],
-	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
+	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers, remarkImage],
 });
 
 export interface Info extends Post{
