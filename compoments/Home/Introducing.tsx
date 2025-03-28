@@ -20,13 +20,13 @@ export default function Introducing(){
 			<p className="text-xl *:inline mt-2 *:mx-1">
 				I'm a developer who loves to create things.
 				Familiar with
-				<Image src={TypeScript} alt="typescript" width={24} priority={true}/>
+				<Image src={TypeScript} alt="typescript" width={24} height={24} loading="lazy"/>
 				TypeScript,
-				<Image src={React} alt="react.js" width={24} priority={true}/>
+				<Image src={React} alt="react.js" width={24} height={24} loading={"lazy"}/>
 				React, and
-				<Image src={Java} alt="java" width={24} priority={true}/>
+				<Image src={Java} alt="java" width={24} height={24} loading="lazy"/>
 				Java, and also a
-				<Image src={Linux} alt="linux" width={24} priority={true}/>
+				<Image src={Linux} alt="linux" width={24} height={24} loading="lazy"/>
 				linux lover.
 			</p>
 			<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
