@@ -3,9 +3,6 @@ import type { NextConfig } from "next";
 const config: NextConfig = {
 	/* config options here */
 	images: {
-		loader: "custom",
-		loaderFile: "./utils/image-loader.ts",
-		minimumCacheTTL: 2678400,
 		remotePatterns: [
 			{
 				protocol: "https",
