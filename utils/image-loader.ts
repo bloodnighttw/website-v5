@@ -9,11 +9,6 @@ export default function cloudflareLoader(
 		return src;
 	}
 
-	// if it is svg, return as it is
-	if (src.endsWith(".svg")) {
-		return src;
-	}
-
 	const params = [`width=${width}`, "format=auto"];
 	if (quality) {
 		params.push(`quality=${quality}`);
