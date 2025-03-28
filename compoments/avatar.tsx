@@ -14,7 +14,7 @@ interface Props {
 export default function Avatar(props: Props) {
 
 	const cln = cn(
-		"rounded-full overflow-hidden",
+		"rounded-full",
 		props.className
 	)
 
@@ -25,7 +25,8 @@ export default function Avatar(props: Props) {
 			className={cln}
 			width={props.size}
 			height={props.size}
-			loading="lazy"
+			loading="eager"
+			priority={true}
 		/>
 	);
 }
