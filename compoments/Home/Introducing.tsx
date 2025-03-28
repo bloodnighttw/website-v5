@@ -86,6 +86,7 @@ export default function Introducing(){
 			src="https://avatars.githubusercontent.com/u/44264182"
 			size={160}
 			className="size-40 lg:size-60"
+			priority={true}
 		/>
 	</div>
 }

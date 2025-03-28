@@ -9,6 +9,7 @@ interface Props {
 	alt?: string;
 	size: Size;
 	onClick?: () => void;
+	priority?: boolean;
 }
 
 export default function Avatar(props: Props) {
@@ -26,7 +27,7 @@ export default function Avatar(props: Props) {
 			width={props.size}
 			height={props.size}
 			loading="eager"
-			priority={true}
+			priority={props.priority}
 		/>
 	);
 }
