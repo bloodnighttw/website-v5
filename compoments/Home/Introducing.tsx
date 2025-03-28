@@ -84,7 +84,8 @@ export default function Introducing(){
 
 		<Avatar
 			src="https://avatars.githubusercontent.com/u/44264182"
-			size={240}
+			size={160}
+			className="size-40 lg:size-60"
 		/>
 	</div>
 }
