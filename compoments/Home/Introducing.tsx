@@ -8,7 +8,7 @@ import { Discord, Github, Mail, Telegram, Threads, Twitter } from "@/app/assets/
 import Avatar from "@/compoments/avatar";
 
 export default function Introducing(){
-	return <div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center">
+	return <div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center items-center lg:items-stretch">
 		<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
 			<div className="text-center text-xl lg:text-start">
 				{"👋 hi!"}
@@ -84,8 +84,7 @@ export default function Introducing(){
 
 		<Avatar
 			src="https://avatars.githubusercontent.com/u/44264182"
-			size={160}
-			className="mx-auto lg:mx-0 lg:size-60"
+			size={240}
 		/>
 	</div>
 }
