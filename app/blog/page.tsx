@@ -1,5 +1,5 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
-import ArticleCard, { ArticleCards } from "@/compoments/Blog/ArticleCard";
+import { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import { getContentsInfo } from "@/utils/contents/post";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";

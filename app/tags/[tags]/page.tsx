@@ -1,6 +1,6 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
 import contents, { getContentsInfo } from "@/utils/contents/post";
-import ArticleCard, { ArticleCards } from "@/compoments/Blog/ArticleCard";
+import { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import HashTag from "@/compoments/HashTag";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
