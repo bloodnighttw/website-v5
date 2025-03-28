@@ -1,6 +1,10 @@
+import { svgUrl } from "@/utils/constant";
+
 const normalizeSrc = (src: string) => {
 	return src.startsWith("/") ? src.slice(1) : src;
 };
+
+const svgLink = new Set(Object.values(svgUrl));
 
 export default function cloudflareLoader(
 	{ src, width, quality, }: { src: string; width: number; quality?: number }
@@ -9,8 +13,9 @@ export default function cloudflareLoader(
 		return src;
 	}
 
-	const stackIconSvg = "https://raw.githubusercontent.com/devicons/devicon/master/icons/"
-	if(src.startsWith(stackIconSvg)){
+	// set
+
+	if (svgLink.has(src)) {
 		return src;
 	}
 
