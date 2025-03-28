@@ -9,6 +9,11 @@ export default function cloudflareLoader(
 		return src;
 	}
 
+	const stackIconSvg = "https://raw.githubusercontent.com/devicons/devicon/master/icons/"
+	if(src.startsWith(stackIconSvg)){
+		return src;
+	}
+
 	const params = [`width=${width}`, "format=auto"];
 	if (quality) {
 		params.push(`quality=${quality}`);
