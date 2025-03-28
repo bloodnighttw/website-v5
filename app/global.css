@@ -34,12 +34,7 @@
 
 
 @utility introduction {
-
     @apply text-xl;
-
-    img {
-        @apply inline-grid size-6 mx-1;
-    }
 }
 
 @utility line {

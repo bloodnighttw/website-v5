@@ -17,7 +17,7 @@ export default function Introducing(){
 				{"I'm bloodnighttw."}
 			</p>
 			<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
-			<p className="introduction mt-4">
+			<p className="introduction">
 				{"I'm a developer who loves to create things."}
 				Familiar with
 				<Image src={TypeScript} alt="typescript"/>
