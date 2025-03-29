@@ -79,7 +79,8 @@
 }
 
 @utility animation-scrolling {
-    animation: scroll 5s linear infinite;
+    --scrolling-time: 15s;
+    animation: scroll var(--scrolling-time) linear infinite;
 }
 
 @keyframes typing {
