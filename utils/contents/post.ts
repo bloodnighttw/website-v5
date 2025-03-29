@@ -5,6 +5,7 @@ import previewImage from "@/utils/mkblog-plujgin/previewImage";
 import rehypeStarryNight from 'rehype-starry-night'
 import rehypeLineNumbers from "@/utils/remark-plugin/line-numbers";
 import previewDescription from "@/utils/mkblog-plujgin/previewDescription";
+import { nextImagePlugin } from "@/utils/mkblog-plujgin/nextImage";
 
 const schema = {
 	title: z.string(),
@@ -22,7 +23,7 @@ export type Post = z.infer<typeof temp>;
 const contents = await defineContent({
 	include: "./posts/**/*.md", // glob pattern
 	schema,
-	mkBlogPlugins: [tocPlugin, previewImage, previewDescription],
+	mkBlogPlugins: [tocPlugin, previewImage, previewDescription,nextImagePlugin],
 	remarkPlugins: [remarkGfm],
 	rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 });

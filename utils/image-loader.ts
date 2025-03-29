@@ -7,7 +7,7 @@ const normalizeSrc = (src: string) => {
 const svgLink = new Set(Object.values(svgUrl));
 
 export default function cloudflareLoader(
-	{ src, width, quality, }: { src: string; width: number; quality?: number }
+	{ src, width, quality, }: { src: string; width?: number; quality?: number }
 ) {
 	if (process.env.NODE_ENV === "development") {
 		return src;
@@ -19,7 +19,9 @@ export default function cloudflareLoader(
 		return src;
 	}
 
-	const params = [`width=${width}`, "format=auto"];
+	const widthArgs = width ?? "auto";
+
+	const params = [`width=${widthArgs}`, "format=auto"];
 	if (quality) {
 		params.push(`quality=${quality}`);
 	}
