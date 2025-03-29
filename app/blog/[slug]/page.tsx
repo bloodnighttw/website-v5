@@ -68,7 +68,7 @@ export default async function Blog(
 	if(!content) return <div>404</div>;
 	const metadata = await content?.metadata();
 	const preview = await content?.previewImage();
-	const html = await content?.html();
+	const MD = await content?.react();
 
 	return (
 		<>
@@ -90,7 +90,9 @@ export default async function Blog(
 				</Part>
 			</div>
 			<Part className="z-[100] bg-bprimary border-b border-dot">
-				<article dangerouslySetInnerHTML={{__html: html}}/>
+				<article>
+					{MD}
+				</article>
 			</Part>
 			<Part className="bg-dotted">
 				<Comments/>
