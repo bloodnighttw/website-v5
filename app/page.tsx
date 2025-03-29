@@ -1,4 +1,3 @@
-import React from "@/app/assets/react.svg";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Introducing from "@/compoments/Home/Introducing";
 import BlogSection from "@/compoments/Home/BlogSection";

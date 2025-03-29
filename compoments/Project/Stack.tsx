@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "@/app/assets/react.svg";
 import { svgUrl } from "@/utils/constant";
 import cn from "@/utils/cn";
 

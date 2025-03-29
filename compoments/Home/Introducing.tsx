@@ -1,11 +1,8 @@
 import Image from "next/image";
-import TypeScript from "@/app/assets/typescript.svg";
-import React from "@/app/assets/react.svg";
-import Java from "@/app/assets/java.svg";
-import Linux from "@/app/assets/linux.svg";
 import Link from "next/link";
 import { Discord, Github, Mail, Telegram, Threads, Twitter } from "@/app/assets/svg";
 import Avatar from "@/compoments/avatar";
+import { svgUrl } from "@/utils/constant";
 
 export default function Introducing(){
 	return <div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center items-center lg:items-stretch">
@@ -20,13 +17,13 @@ export default function Introducing(){
 			<p className="text-xl *:inline mt-2 *:mx-1">
 				I'm a developer who loves to create things.
 				Familiar with
-				<Image src={TypeScript} alt="typescript" width={24} height={24} loading="lazy"/>
+				<Image src={svgUrl["typescript"]} alt="typescript" width={24} height={24} loading="lazy"/>
 				TypeScript,
-				<Image src={React} alt="react.js" width={24} height={24} loading={"lazy"}/>
+				<Image src={svgUrl["react"]} alt="react.js" width={24} height={24} loading={"lazy"}/>
 				React, and
-				<Image src={Java} alt="java" width={24} height={24} loading="lazy"/>
+				<Image src={svgUrl["java"]} alt="java" width={24} height={24} loading="lazy"/>
 				Java, and also a
-				<Image src={Linux} alt="linux" width={24} height={24} loading="lazy"/>
+				<Image src={svgUrl["linux"]} alt="linux" width={24} height={24} loading="lazy"/>
 				linux lover.
 			</p>
 			<div className="flex gap-6 lg:gap-8 mt-6 justify-center lg:justify-start">
