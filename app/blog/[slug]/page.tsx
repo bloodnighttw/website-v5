@@ -1,11 +1,9 @@
 import contents from "@/utils/contents/post";
 import "@/app/markdown.css"
-import HashTag from "@/compoments/HashTag";
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Image from "next/image";
+import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
 
 export async function generateStaticParams() {
 	return contents.posts.map((post)=> {
@@ -73,29 +71,10 @@ export default async function Blog(
 
 	return (
 		<>
-			<div className="relative border-b border-dot">
-				<SecondaryPanel className="h-full w-full absolute inset-0 -z-1"/>
-				<Image
-					className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1"
-					src={preview ?? ""}
-					fill={true}
-					alt="preview image"
-					priority={true}
-				/>
-
-				<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
-					<p className="text-6xl w-full m-4">
-						{metadata.title}
-					</p>
-					<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto">
-						{
-							metadata.categories.map((category: string, index: number) => (
-								<HashTag key={index} tags={category} />
-							))
-						}
-					</div>
-				</Part>
-			</div>
+			<ArticleSecondaryPanel
+				preview={preview}
+				metadata={metadata}
+			/>
 			<Part className="z-[100] bg-bprimary border-b border-dot">
 				<article>
 					{MD}

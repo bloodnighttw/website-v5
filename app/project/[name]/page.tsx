@@ -31,7 +31,7 @@ export default async function Page({params}: {params: Promise<{name: string}>}) 
 	const html = await projectInfo.html();
 	const svgs: string[] = meta.stack.filter( st => st in svgUrl).map( st => svgUrl[st]);
 
-	return <Part className="*:not-first:mt-4">
+	return <Part>
 		<div className="flex bg-bsecondary/80 rounded items-center gap-4 p-4">
 			<Link href={meta.link}>
 				{Github}
