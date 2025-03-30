@@ -16,6 +16,8 @@ const nextImageTransform = {
 		return createElement(Image, {
 			...props as {src:string},
 			loading: "eager",
+			width: (process.env.NODE_ENV === "development") ? 500 : undefined,
+			height: (process.env.NODE_ENV === "development") ? 500 : undefined,
 			alt: props.alt ?? "image from bntw.dev",
 		});
 	},

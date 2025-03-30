@@ -5,6 +5,7 @@ import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import Image from "next/image";
 
 export async function generateStaticParams() {
 	return contents.posts.map((post)=> {
@@ -74,7 +75,13 @@ export default async function Blog(
 		<>
 			<div className="relative border-b border-dot">
 				<SecondaryPanel className="h-full w-full absolute inset-0 -z-1"/>
-				<img className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1" src={preview} alt="preview image"/>
+				<Image
+					className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1"
+					src={preview ?? ""}
+					fill={true}
+					alt="preview image"
+					priority={true}
+				/>
 
 				<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
 					<p className="text-6xl w-full m-4">
