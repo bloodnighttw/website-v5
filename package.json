@@ -29,6 +29,8 @@
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.10",
+		"@content-collections/cli": "^0.1.6",
+		"@content-collections/core": "^0.8.2",
 		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "^4",
 		"@tailwindcss/typography": "^0.5.16",
@@ -37,6 +39,7 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"concurrently": "^9.1.2",
 		"eslint": "^9",
 		"eslint-config-next": "15.2.1",
 		"eslint-config-prettier": "^10.1.1",
