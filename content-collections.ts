@@ -4,15 +4,14 @@ import rehypeStarryNight from "rehype-starry-night";
 import rehypeLineNumbers from "@/utils/remark-plugin/line-numbers";
 import remarkGfm from "remark-gfm";
 import { Image } from "mdast";
-import remarkRehype from "remark-rehype";
 import { compileMDX } from "@content-collections/mdx";
 
-import remarkParse from "remark-parse";
 import remarkMdx from "remark-mdx";
 import { select } from "unist-util-select";
+import remarkParse from "remark-parse";
 
 const remarkPlug: Pluggable[] = [remarkGfm];
-const rehypePlug: Pluggable[] = [remarkRehype, rehypeStarryNight, rehypeLineNumbers];
+const rehypePlug: Pluggable[] = [rehypeStarryNight, rehypeLineNumbers];
 
 
 const getFirstImage = (content: string, mdx:boolean = true): string | null => {
