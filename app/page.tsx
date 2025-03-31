@@ -1,7 +1,7 @@
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Introducing from "@/compoments/Home/Introducing";
 import BlogSection from "@/compoments/Home/BlogSection";
-// import ProjectSection from "@/compoments/Home/ProjectSection";
+import ProjectSection from "@/compoments/Home/ProjectSection";
 
 export default async function Home() {
     return (
@@ -11,7 +11,7 @@ export default async function Home() {
             </SecondaryPanel>
 
             <BlogSection />
-            {/*<ProjectSection />*/}
+            <ProjectSection />
         </>
     );
 }

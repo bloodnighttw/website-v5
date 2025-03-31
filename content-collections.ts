@@ -61,7 +61,34 @@ const posts = defineCollection({
 	},
 });
 
+const projects = defineCollection({
+	name: "project",
+	directory: "projects",
+	include: ["**/*.md", "**/*.mdx"],
+	schema: (z) => ({
+		name: z.string(),
+		description: z.string(),
+		link: z.string(),
+		stack: z.array(z.string()).default([])
+			.transform((strs)=> strs.map((it)=> it.toLowerCase())),
+		demo: z.string().optional(),
+	}),
+	transform: async (doc, context) => {
+		const { content, ...others } = doc;
+
+		const mdx = await compileMDX(context,doc,{
+			rehypePlugins: rehypePlug,
+			remarkPlugins: remarkPlug,
+		});
+
+		return {
+			...others,
+			mdx,
+		};
+	}
+});
+
 export default defineConfig({
 	// @ts-ignore this should be fine
-	collections: [posts],
+	collections: [posts, projects],
 });
