@@ -13,9 +13,6 @@
 	},
 	"dependencies": {
 		"@giscus/react": "^3.1.0",
-		"@mkblog/core": "^1.1.1",
-		"@mkblog/toc": "^1.1.1",
-		"@radix-ui/themes": "^3.2.1",
 		"@types/mdast": "^4.0.4",
 		"@wooorm/starry-night": "^3.6.0",
 		"clsx": "^2.1.1",
