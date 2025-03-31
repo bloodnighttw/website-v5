@@ -12,13 +12,13 @@ export async function generateStaticParams() {
 
 	return allProjects.map((post) => {
 		return {
-			name: post.slug,
+			name: post.name,
 		}
 	})
 
 }
 
-// export const dynamicParams = false;
+export const dynamicParams = false;
 
 export default async function Page({params}: {params: Promise<{name: string}>}) {
 
