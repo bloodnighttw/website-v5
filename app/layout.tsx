@@ -51,7 +51,7 @@ export default function RootLayout({
 						</span>
 
 						<span>
-							❤️ Made with Tailwind CSS, Next.js and MkBlog.
+							❤️ Made with Tailwind CSS, Next.js.
 						</span>
 					</div>
 				</Footer>
