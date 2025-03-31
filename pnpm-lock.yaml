@@ -60,6 +60,9 @@ importers:
       '@content-collections/core':
         specifier: ^0.8.2
         version: 0.8.2(typescript@5.8.2)
+      '@content-collections/next':
+        specifier: ^0.2.6
+        version: 0.2.6(@content-collections/core@0.8.2(typescript@5.8.2))(next@15.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.0
@@ -246,6 +249,12 @@ packages:
     resolution: {integrity: sha512-AyEcS2MmcOXSYt6vNmJsAiu6EBYjtNiwYGUVUmpG3llm8Gt8uiNrhIhlHyv3cuk+N8KJ2PWemLcMqtQJ+sW3bA==}
     peerDependencies:
       '@content-collections/core': 0.x
+
+  '@content-collections/next@0.2.6':
+    resolution: {integrity: sha512-gbVgtnXD7Qad95ENjL99LvrXoBtRTL8N0aZc5gz5NIK/yKBlpTZI6/CKVQMmROtGrqLOwcBdWlGUIzZPwpUBVA==}
+    peerDependencies:
+      '@content-collections/core': 0.x
+      next: ^12 || ^13 || ^14 || ^15
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -4801,6 +4810,12 @@ snapshots:
   '@content-collections/integrations@0.2.1(@content-collections/core@0.8.2(typescript@5.8.2))':
     dependencies:
       '@content-collections/core': 0.8.2(typescript@5.8.2)
+
+  '@content-collections/next@0.2.6(@content-collections/core@0.8.2(typescript@5.8.2))(next@15.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      '@content-collections/core': 0.8.2(typescript@5.8.2)
+      '@content-collections/integrations': 0.2.1(@content-collections/core@0.8.2(typescript@5.8.2))
+      next: 15.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
