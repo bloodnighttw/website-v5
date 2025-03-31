@@ -1,13 +1,12 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
 import { ArticleCards } from "@/compoments/Blog/ArticleCard";
-import { getContentsInfo } from "@/utils/contents/post";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
+import { allPosts } from "content-collections";
 
 export default async function BlogPosts(){
 
-	const metadataWithPreview = await getContentsInfo();
-	metadataWithPreview.sort((a,b) => b.date.getTime() - a.date.getTime());
+	const metadataWithPreview = allPosts.sort((a,b) => b.date.getTime() - a.date.getTime());
 
 	return <>
 		<SecondaryPanel>

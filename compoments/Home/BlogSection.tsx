@@ -1,13 +1,12 @@
-import { getContentsInfo } from "@/utils/contents/post";
 import { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import CardCollection from "@/compoments/Blog/ArticleCollection";
 import CardTitle from "@/compoments/Blog/ArticleTitle";
 import Part from "@/compoments/Part";
 import Chapter from "@/compoments/Text/Chapter";
+import {allPosts} from "content-collections";
 
 export default async function BlogSection() {
-    const metas = await getContentsInfo();
-    const sortedByTime = metas.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
+    const sortedByTime = allPosts.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
     const sortedByPin = sortedByTime.filter(it => it.pin);
 
     return (
