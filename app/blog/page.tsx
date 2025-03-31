@@ -13,7 +13,7 @@ export default async function BlogPosts(){
 		<SecondaryPanel>
 			<p className="text-4xl">Recent Posts</p>
 		</SecondaryPanel>
-		<Part className="*:not-first:mt-4 gradient-background">
+		<Part className="gradient-background">
 			<CardCollection>
 				<ArticleCards infos={metadataWithPreview}/>
 			</CardCollection>
