@@ -25,6 +25,26 @@ const getFirstImage = (content: string, mdx:boolean = true): string | null => {
 	return imageNode ? imageNode.url : null;
 };
 
+
+// TODO: fetch the preview content from the texts
+const getPreviewMessage = (content: string): string => {
+	const tree = unified()
+		.use(remarkParse)
+		.use(remarkGfm)
+		.parse(content);
+
+
+	const text = tree.children
+		.filter((node) => node.type === "text")
+		.map((node) => (node as any).value)
+		.join(" ")
+		.replace(/(\r\n|\n|\r)/gm, " ")
+		.replace(/ +(?= )/g, "")
+		.slice(0, 200);
+	return text;
+
+}
+
 const posts = defineCollection({
 	name: "posts",
 	directory: "posts",
@@ -46,6 +66,7 @@ const posts = defineCollection({
 
 		// handle mdx file
 		const firstImage = getFirstImage(content);
+		const previewText = getPreviewMessage(content);
 		const mdx = await compileMDX(context,doc,{
 			rehypePlugins: rehypePlug,
 			remarkPlugins: remarkPlug,
@@ -54,6 +75,7 @@ const posts = defineCollection({
 		return {
 			slug,
 			...others,
+			description: previewText,
 			mdx,
 			preview: firstImage,
 		};

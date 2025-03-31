@@ -20,10 +20,11 @@ export async function generateMetadata({params} : {params: Promise<{slug: string
 
 	const { slug } = await params;
 	const post = allPosts.find((it) => it.slug === slug)!;
+	const description = post.description;
 
 	return {
 		title: post.title,
-		description: "",
+		description,
 		openGraph: {
 			title: post.title,
 			description: "",
@@ -39,7 +40,7 @@ export async function generateMetadata({params} : {params: Promise<{slug: string
 		},
 		twitter: {
 			title: post.title,
-			description: "",
+			description,
 			site: "@bloodnighttw",
 			card: "summary_large_image",
 			images: post.preview
