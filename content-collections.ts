@@ -1,7 +1,8 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
+
 import { Pluggable, unified } from "unified";
 import rehypeStarryNight from "rehype-starry-night";
-import rehypeLineNumbers from "@/utils/remark-plugin/line-numbers";
+import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkGfm from "remark-gfm";
 import { Image } from "mdast";
 import { compileMDX } from "@content-collections/mdx";
@@ -9,8 +10,9 @@ import { compileMDX } from "@content-collections/mdx";
 import remarkMdx from "remark-mdx";
 import { select } from "unist-util-select";
 import remarkParse from "remark-parse";
+import { remarkNextImage } from "@/utils/remark-plugin/next-tImage";
 
-const remarkPlug: Pluggable[] = [remarkGfm];
+const remarkPlug: Pluggable[] = [remarkGfm, remarkNextImage];
 const rehypePlug: Pluggable[] = [rehypeStarryNight, rehypeLineNumbers];
 
 

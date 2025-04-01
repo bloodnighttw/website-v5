@@ -20,6 +20,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      mdast-util-mdxjs-esm:
+        specifier: ^2.0.1
+        version: 2.0.1
       next:
         specifier: 15.2.1
         version: 15.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -44,6 +47,9 @@ importers:
       unist-util-select:
         specifier: ^5.1.0
         version: 5.1.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@cloudflare/next-on-pages':
         specifier: ^1.13.10

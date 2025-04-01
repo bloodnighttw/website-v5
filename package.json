@@ -16,6 +16,7 @@
 		"@types/mdast": "^4.0.4",
 		"@wooorm/starry-night": "^3.6.0",
 		"clsx": "^2.1.1",
+		"mdast-util-mdxjs-esm": "^2.0.1",
 		"next": "15.2.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -23,7 +24,8 @@
 		"rehype-stringify": "^10.0.1",
 		"remark-gfm": "^4.0.1",
 		"tailwind-merge": "^3.0.2",
-		"unist-util-select": "^5.1.0"
+		"unist-util-select": "^5.1.0",
+		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.10",
@@ -50,6 +52,5 @@
 		"typescript": "^5",
 		"unified": "^11.0.5",
 		"wrangler": "^4.3.0"
-	},
-	"packageManager": "pnpm@10.2.0+sha512.0d27364e0139c6aadeed65ada153135e0ca96c8da42123bd50047f961339dc7a758fc2e944b428f52be570d1bd3372455c1c65fa2e7aa0bfbf931190f9552001"
+	}
 }
