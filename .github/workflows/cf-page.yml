@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '18.x'
       - name: Corepack
-        run: corepack enable
+        run: corepack enable && corepack prepare
       - name: Build
         run: pnpm install && pnpm pages:build
       - name: Deploy preview to Cloudflare Pages
