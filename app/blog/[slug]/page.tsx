@@ -1,12 +1,13 @@
-import contents from "@/utils/contents/post";
 import "@/app/markdown.css"
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";
 import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
+import { allPosts } from "content-collections";
+import { MDXContent } from "@content-collections/mdx/react";
 
 export async function generateStaticParams() {
-	return contents.posts.map((post)=> {
+	return allPosts.map((post)=> {
 		return {
 			slug: post.slug,
 		}
@@ -18,37 +19,35 @@ export const dynamicParams = false;
 export async function generateMetadata({params} : {params: Promise<{slug: string}>}): Promise<Metadata> {
 
 	const { slug } = await params;
-	const post = contents.posts.find((it) => it.slug === slug);
+	const post = allPosts.find((it) => it.slug === slug)!;
+	const description = post.description;
 
-	const metadata = await post?.metadata() ?? {title: "404"};
-	const description = await post?.previewDescription();
-	const preview = await post?.previewImage();
 	return {
-		title: metadata.title,
+		title: post.title,
 		description,
 		openGraph: {
-			title: metadata.title,
-			description,
+			title: post.title,
+			description: "",
 			type: "article",
-			images: preview
+			images: post.preview
 				? [
 					{
-						url: preview,
-						alt: metadata.title,
+						url: post.preview,
+						alt: post.title,
 					},
 				]
 				: [],
 		},
 		twitter: {
-			title: metadata.title,
+			title: post.title,
 			description,
 			site: "@bloodnighttw",
 			card: "summary_large_image",
-			images: preview
+			images: post.preview
 				? [
 					{
-						url: preview,
-						alt: metadata.title,
+						url: post.preview,
+						alt: post.title,
 					},
 				]
 				: [],
@@ -63,21 +62,17 @@ export default async function Blog(
 
 	const { slug } = await params;
 
-	const content = contents.posts.find((it) => it.slug === slug) ;
+	const content = allPosts.find((it) => it.slug === slug) ;
 	if(!content) return <div>404</div>;
-	const metadata = await content?.metadata();
-	const preview = await content?.previewImage();
-	const MD = await content?.react();
 
 	return (
 		<>
 			<ArticleSecondaryPanel
-				preview={preview}
-				metadata={metadata}
+				content={content}
 			/>
 			<Part className="z-[100] bg-bprimary border-b border-dot">
 				<article>
-					{MD}
+					<MDXContent code={content.mdx}/>
 				</article>
 			</Part>
 			<Part className="bg-dotted">

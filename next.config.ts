@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withContentCollections } from "@content-collections/next";
 
 const config: NextConfig = {
 	/* config options here */
@@ -26,7 +27,7 @@ const nextConfigPromise = async () => {
 		await setupDevPlatform();
 	}
 
-	return config;
+	return withContentCollections(config);
 }
 
 export default nextConfigPromise;

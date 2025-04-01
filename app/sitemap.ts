@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getContentsInfo } from "@/utils/contents/post";
 import { BASE_URL } from "@/utils/constant";
+import { allPosts } from "content-collections";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const staticPages: MetadataRoute.Sitemap = [
@@ -18,9 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		},
 	];
 
-	const posts = await getContentsInfo();
 
-	const postsSitemap: MetadataRoute.Sitemap = posts.map((post) => {
+	const postsSitemap: MetadataRoute.Sitemap = allPosts.map((post) => {
 		return {
 			url: `${BASE_URL}/blog/${post.slug}`,
 			lastModified: post.date,

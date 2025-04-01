@@ -1,4 +1,3 @@
-import { getProjectInfo } from "@/utils/contents/project";
 import ProjectCard from "@/compoments/Project/ProjectCard";
 import Part from "@/compoments/Part";
 import { Stacks } from "@/compoments/Project/Stack";
@@ -6,10 +5,10 @@ import Chapter from "@/compoments/Text/Chapter";
 import ProjectChapter from "@/compoments/Project/ProjectChapter";
 import ProjectCollection from "@/compoments/Project/ProjectCollection";
 import Scrolling from "@/compoments/Project/Scrolling";
+import { allProjects } from "content-collections";
 
 export default async function ProjectSection() {
-    const project = await getProjectInfo();
-    const projectsCards = project.map((project) => {
+    const projectsCards = allProjects.map((project) => {
         return <ProjectCard
             key={project.name}
             name={project.name}

@@ -47,8 +47,8 @@ categories:
 
 那在研究一段時間後，我發現很多系統的markdown支援，都是依賴這幾個套件。
 1. `unified.js`  ast轉換工具，下面這兩個工具部分功能可以依賴這套件。
-2. `remark.js`   用於解析markdown語法的相關套件  (ast <--> markdown)
-3. `rehype.js `  用於解析html語法的相關套件      (ast <--> html)
+2. `remark.js`   用於解析markdown語法的相關套件 {"(ast <--> markdown)"}
+3. `rehype.js `  用於解析html語法的相關套件 {"ast <--> html"}
 
 我的做法是，我先用`remark.js`把markdown轉換成ast，然後透過這個ast去產生預覽內容。
 

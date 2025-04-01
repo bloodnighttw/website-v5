@@ -1,18 +1,18 @@
 import CardCollection from "@/compoments/Blog/ArticleCollection";
-import contents, { getContentsInfo } from "@/utils/contents/post";
 import { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import HashTag from "@/compoments/HashTag";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
+import { allPosts } from "content-collections";
 
 export async function generateStaticParams() {
-	const {posts} = contents;
+
+	const posts = allPosts.slice();
 
 	const set = new Set<string>();
 
-	const allMeta = await Promise.all(posts.map(it => it.metadata()));
 
-	allMeta.forEach( ({categories}) => categories.forEach(category => {
+	posts.forEach( ({categories}) => categories.forEach(category => {
 		set.add(category);
 	}))
 
@@ -33,8 +33,7 @@ export default async function Tags(
 
 	const { tags } = await params;
 
-	const metadataWithPreview = await getContentsInfo();
-	const tagsContent = metadataWithPreview.filter(it => it.categories.includes(tags));
+	const tagsContent = allPosts.filter(it => it.categories.includes(tags));
 
 	return <>
 		<SecondaryPanel>
