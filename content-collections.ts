@@ -41,7 +41,7 @@ const getPreviewMessage = (content: string): string => {
 
 const posts = defineCollection({
 	name: "posts",
-	directory: "posts",
+	directory: "contents/posts",
 	include: ["**/*.md", "**/*.mdx"],
 	schema: (z) => ({
 		title: z.string(),
@@ -77,7 +77,7 @@ const posts = defineCollection({
 
 const projects = defineCollection({
 	name: "project",
-	directory: "projects",
+	directory: "contents/projects",
 	include: ["**/*.md", "**/*.mdx"],
 	schema: (z) => ({
 		name: z.string(),
