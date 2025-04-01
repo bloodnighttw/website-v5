@@ -5,7 +5,6 @@ import rehypeStarryNight from "rehype-starry-night";
 import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkGfm from "remark-gfm";
 import { Image } from "mdast";
-import { compileMDX } from "@content-collections/mdx";
 
 import remarkMdx from "remark-mdx";
 import { select } from "unist-util-select";
@@ -87,14 +86,8 @@ const projects = defineCollection({
 	transform: async (doc, context) => {
 		const { content, ...others } = doc;
 
-		const mdx = await compileMDX(context, doc, {
-			rehypePlugins: rehypePlug,
-			remarkPlugins: remarkPlug,
-		});
-
 		return {
 			...others,
-			mdx,
 		};
 	},
 });
