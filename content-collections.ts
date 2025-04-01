@@ -15,8 +15,7 @@ import { remarkNextImage } from "@/utils/remark-plugin/next-tImage";
 const remarkPlug: Pluggable[] = [remarkGfm, remarkNextImage];
 const rehypePlug: Pluggable[] = [rehypeStarryNight, rehypeLineNumbers];
 
-
-const getFirstImage = (content: string, mdx:boolean = true): string | null => {
+const getFirstImage = (content: string, mdx: boolean = true): string | null => {
 	const tree = unified()
 		.use(remarkParse)
 		.use(mdx ? [remarkMdx] : [])
@@ -27,25 +26,18 @@ const getFirstImage = (content: string, mdx:boolean = true): string | null => {
 	return imageNode ? imageNode.url : null;
 };
 
-
 // TODO: fetch the preview content from the texts
 const getPreviewMessage = (content: string): string => {
-	const tree = unified()
-		.use(remarkParse)
-		.use(remarkGfm)
-		.parse(content);
+	const tree = unified().use(remarkParse).use(remarkGfm).parse(content);
 
-
-	const text = tree.children
+	return tree.children
 		.filter((node) => node.type === "text")
 		.map((node) => (node as any).value)
 		.join(" ")
 		.replace(/(\r\n|\n|\r)/gm, " ")
 		.replace(/ +(?= )/g, "")
 		.slice(0, 200);
-	return text;
-
-}
+};
 
 const posts = defineCollection({
 	name: "posts",
@@ -59,17 +51,16 @@ const posts = defineCollection({
 		pin: z.boolean().default(false),
 	}),
 	transform: async (doc, context) => {
-
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
 		// the same file name in different directory now.
-		const slug = others._meta.fileName;
+		const slug = others._meta.path;
 
 		// handle mdx file
 		const firstImage = getFirstImage(content);
 		const previewText = getPreviewMessage(content);
-		const mdx = await compileMDX(context,doc,{
+		const mdx = await compileMDX(context, doc, {
 			rehypePlugins: rehypePlug,
 			remarkPlugins: remarkPlug,
 		});
@@ -92,14 +83,16 @@ const projects = defineCollection({
 		name: z.string(),
 		description: z.string(),
 		link: z.string(),
-		stack: z.array(z.string()).default([])
-			.transform((strs)=> strs.map((it)=> it.toLowerCase())),
+		stack: z
+			.array(z.string())
+			.default([])
+			.transform((strs) => strs.map((it) => it.toLowerCase())),
 		demo: z.string().optional(),
 	}),
 	transform: async (doc, context) => {
 		const { content, ...others } = doc;
 
-		const mdx = await compileMDX(context,doc,{
+		const mdx = await compileMDX(context, doc, {
 			rehypePlugins: rehypePlug,
 			remarkPlugins: remarkPlug,
 		});
@@ -108,7 +101,7 @@ const projects = defineCollection({
 			...others,
 			mdx,
 		};
-	}
+	},
 });
 
 export default defineConfig({
