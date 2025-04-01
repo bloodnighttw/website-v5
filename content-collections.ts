@@ -42,7 +42,7 @@ const getPreviewMessage = (content: string): string => {
 const posts = defineCollection({
 	name: "posts",
 	directory: "contents/posts",
-	include: ["**/*.md", "**/*.mdx"],
+	include: ["**/*.mdx"],
 	schema: (z) => ({
 		title: z.string(),
 		categories: z.array(z.string()).default([]),
@@ -55,21 +55,16 @@ const posts = defineCollection({
 
 		// this is might be changed since we don't need to consider
 		// the same file name in different directory now.
-		const slug = others._meta.path;
+		const slug = others._meta.path.replace("/","-");
 
 		// handle mdx file
 		const firstImage = getFirstImage(content);
 		const previewText = getPreviewMessage(content);
-		const mdx = await compileMDX(context, doc, {
-			rehypePlugins: rehypePlug,
-			remarkPlugins: remarkPlug,
-		});
 
 		return {
 			slug,
 			...others,
 			description: previewText,
-			mdx,
 			preview: firstImage,
 		};
 	},

@@ -1,10 +1,11 @@
+import "server-only";
+
 import "@/app/markdown.css"
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";
 import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
 import { allPosts } from "content-collections";
-import { MDXContent } from "@content-collections/mdx/react";
 
 export async function generateStaticParams() {
 	return allPosts.map((post)=> {
@@ -64,6 +65,7 @@ export default async function Blog(
 
 	const content = allPosts.find((it) => it.slug === slug) ;
 	if(!content) return <div>404</div>;
+	const { default: Content } = await import(`@/contents/posts/${content.slug}.mdx`);
 
 	return (
 		<>
@@ -72,7 +74,7 @@ export default async function Blog(
 			/>
 			<Part className="z-[100] bg-bprimary border-b border-dot">
 				<article>
-					<MDXContent code={content.mdx}/>
+					<Content/>
 				</article>
 			</Part>
 			<Part className="bg-dotted">
