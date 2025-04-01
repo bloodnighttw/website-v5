@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 import { withContentCollections } from "@content-collections/next";
+import createMDX from "@next/mdx";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+
+const withMDX = createMDX({
+	options: {
+		remarkPlugins: [remarkFrontmatter,remarkMdxFrontmatter],
+		rehypePlugins: [],
+	},
+});
 
 const config: NextConfig = {
+	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	/* config options here */
 	images: {
 		loader: "custom",
@@ -27,7 +38,7 @@ const nextConfigPromise = async () => {
 		await setupDevPlatform();
 	}
 
-	return withContentCollections(config);
+	return await withContentCollections(withMDX(config));
 }
 
 export default nextConfigPromise;
