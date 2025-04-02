@@ -1,0 +1,40 @@
+---
+title: 我改用了MDX寫文章了
+date: 2025-04-02
+categories:
+- mdx
+- blog
+---
+
+import Code from "../../compoments/MDX/Code";
+import PlayGround from "../../compoments/MDX/PlayGround";
+import OUO from "../codes/ouo"
+
+這四天以來，我一直在嘗試改採用mdx，目前看起來已趨於穩定了，所以來簡單說說我做了啥？
+
+# MDX是什麼
+MDX是一個讓你可以在markdown中使用component的格式，官方提供一些套件可以用來轉換成對應框架的程式，這樣就可以在markdown中寫一些酷東西了，例如
+在這邊我就直接搞一個react的經典程式Counter
+
+<PlayGround>
+	<OUO/>
+</PlayGround>
+
+然後程式在這：
+
+<Code filepath="./ouo.tsx"/>
+
+# 我是如何達成的
+
+剛開始我改採用了content-collections這個套件，進行內容的管理，包含MDX的專換程式，都是使用這個套件帶來的東西（當然這套件上游還是mdxjs）
+，其實整體來說也是蠻好用的，簡單地把幾個plugin改完後，就可以動了。
+
+這部分可以參考[這個連結](https://www.content-collections.dev/docs/content/mdx)
+
+但是我遇到一個問題，mdx沒辦法使用import去使用其他地方的套件，這點我找了很久，最後決定只讓content collection去記錄metadata，mdx的部分則是使用
+nextjs官方的mdx套件，接著在做 dynamic import，來使用這些頁面。
+
+[你可以參考這個篇章](https://nextjs.org/docs/app/building-your-application/configuring/mdx#using-dynamic-imports)來查看我是如何
+實現這功能的
+
+另外就是，我網站的source code都是公開的，[歡迎參考](https://github.com/bloodnighttw/website-v5)

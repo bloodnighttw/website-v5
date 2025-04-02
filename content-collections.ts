@@ -57,7 +57,7 @@ const posts = defineCollection({
 		const slug = others._meta.path.replace("/","-");
 
 		// handle mdx file
-		const firstImage = getFirstImage(content);
+		const firstImage = getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
 		const previewText = getPreviewMessage(content);
 
 		return {
