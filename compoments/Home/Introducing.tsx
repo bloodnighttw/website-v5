@@ -15,7 +15,7 @@ export default function Introducing(){
 			</p>
 			<span className="font-mono typewriter">21 y/o • Developer • Gamer </span>
 			<p className="text-xl *:inline mt-2 *:mx-1">
-				I'm a developer who loves to create things.
+				{"I'm a developer who loves to create things."}
 				Familiar with
 				<Image src={svgUrl["typescript"]} alt="typescript" width={24} height={24} loading="lazy"/>
 				TypeScript,

@@ -1,18 +1,12 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 
-import { Pluggable, unified } from "unified";
-import rehypeStarryNight from "rehype-starry-night";
-import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
+import { unified } from "unified";
 import remarkGfm from "remark-gfm";
 import { Image } from "mdast";
 
 import remarkMdx from "remark-mdx";
 import { select } from "unist-util-select";
 import remarkParse from "remark-parse";
-import { remarkNextImage } from "@/utils/remark-plugin/next-tImage";
-
-const remarkPlug: Pluggable[] = [remarkGfm, remarkNextImage];
-const rehypePlug: Pluggable[] = [rehypeStarryNight, rehypeLineNumbers];
 
 const getFirstImage = (content: string, mdx: boolean = true): string | null => {
 	const tree = unified()
@@ -31,7 +25,7 @@ const getPreviewMessage = (content: string): string => {
 
 	return tree.children
 		.filter((node) => node.type === "text")
-		.map((node) => (node as any).value)
+		.map((node) => node.value)
 		.join(" ")
 		.replace(/(\r\n|\n|\r)/gm, " ")
 		.replace(/ +(?= )/g, "")
@@ -49,7 +43,7 @@ const posts = defineCollection({
 		draft: z.boolean().optional(),
 		pin: z.boolean().default(false),
 	}),
-	transform: async (doc, context) => {
+	transform: async (doc ) => {
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
@@ -83,16 +77,14 @@ const projects = defineCollection({
 			.transform((strs) => strs.map((it) => it.toLowerCase())),
 		demo: z.string().optional(),
 	}),
-	transform: async (doc, context) => {
-		const { content, ...others } = doc;
+	transform: async (doc ) => {
 
 		return {
-			...others,
+			...doc,
 		};
 	},
 });
 
 export default defineConfig({
-	// @ts-ignore this should be fine
 	collections: [posts, projects],
 });

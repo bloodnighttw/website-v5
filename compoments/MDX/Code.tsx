@@ -3,7 +3,7 @@ import "server-only";
 import { readFileSync } from "fs";
 import path from "node:path";
 import {all, createStarryNight} from '@wooorm/starry-night'
-import lineNumbers, { starryNightGutter } from "@/utils/rehype-plugin/line-numbers";
+import { starryNightGutter } from "@/utils/rehype-plugin/line-numbers";
 import { unified } from "unified";
 import rehypeStringify from "rehype-stringify";
 
@@ -28,7 +28,7 @@ export default async function Code(props: Props) {
 	const tree = starryNight.highlight(rawText, scope!)
 
 	// apply line number
-	// @ts-ignore it work.
+	// @ts-expect-error it works
 	starryNightGutter(tree);
 
 	const html = unified()

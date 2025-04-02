@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 
-export default function a(){
+export default function OUO(){
 
 	const [state, setState] = useState(0);
 
