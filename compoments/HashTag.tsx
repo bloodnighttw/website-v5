@@ -7,14 +7,12 @@ interface Props {
 	tags: string;
 }
 
-export default function HashTag({className, tags}: Props) {
+export default function HashTag({ className, tags }: Props) {
+	const classNameMix = cn("hashtag", className);
 
-	const classNameMix = cn(
-		"hashtag",
-		className
-	)
-
-	return <Link className={classNameMix} href={"/tags/"+tags}>
-		{tags}
-	</Link>
+	return (
+		<Link className={classNameMix} href={"/tags/" + tags}>
+			{tags}
+		</Link>
+	);
 }

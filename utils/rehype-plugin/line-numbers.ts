@@ -19,7 +19,10 @@ export function starryNightGutter(tree: Element): void {
 
 			while (match) {
 				// Nodes in this line.
-				const line = tree.children.slice(start, index) as ElementContent[];
+				const line = tree.children.slice(
+					start,
+					index,
+				) as ElementContent[];
 
 				// Prepend text from a partial matched earlier text.
 				if (startTextRemainder) {
@@ -31,7 +34,7 @@ export function starryNightGutter(tree: Element): void {
 				if (match.index > textStart) {
 					line.push({
 						type: "text",
-						value: child.value.slice(textStart, match.index)
+						value: child.value.slice(textStart, match.index),
 					});
 				}
 
@@ -39,7 +42,7 @@ export function starryNightGutter(tree: Element): void {
 				lineNumber += 1;
 				replacement.push(createLine(line, lineNumber), {
 					type: "text",
-					value: match[0]
+					value: match[0],
 				});
 
 				start = index + 1;
@@ -74,18 +77,18 @@ function createLine(children: ElementContent[], line: number): Element {
 		type: "element",
 		tagName: "span",
 		properties: { className: "line", dataLineNumber: line },
-		children
+		children,
 	};
 }
 
 // Rehype plugin wrapper
 const rehypeLineNumbers: Plugin<[], Element> = () => {
-	return (tree: Element) => selectAll("element", tree)
-		.forEach((node) => {
+	return (tree: Element) =>
+		selectAll("element", tree).forEach((node) => {
 			// node must be an element
 			const element = node as Element;
 			if (element.tagName === "pre") {
-				for(const child of element.children) {
+				for (const child of element.children) {
 					const childElement = child as Element;
 					if (childElement.tagName === "code") {
 						starryNightGutter(childElement);

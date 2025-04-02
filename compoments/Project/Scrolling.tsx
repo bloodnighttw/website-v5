@@ -6,14 +6,12 @@ interface Props {
 	className?: string;
 }
 
-
 export default function Scrolling(props: Props) {
-
 	const className = cn(
 		"overflow-hidden scrolling sm:w-96 flex flex-row overflow-hidden sm:mask-lg sm:ml-auto",
 		"*:flex *:flex-row *:gap-8 *:pr-8",
 		"*:animation-scrolling",
-		props.className
+		props.className,
 	);
 
 	return (
@@ -22,4 +20,4 @@ export default function Scrolling(props: Props) {
 			<div>{props.children}</div>
 		</div>
 	);
-};
+}

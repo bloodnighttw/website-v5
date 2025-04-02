@@ -4,63 +4,63 @@
  * It’s based on what GitHub uses on their site.
  * See <https://github.com/wooorm/starry-night> for more info. */
 :root {
-    --color-prettylights-syntax-comment: #9198a1;
-    --color-prettylights-syntax-constant: #79c0ff;
-    --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-    --color-prettylights-syntax-entity: #d2a8ff;
-    --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
-    --color-prettylights-syntax-entity-tag: #7ee787;
-    --color-prettylights-syntax-keyword: #ff7b72;
-    --color-prettylights-syntax-string: #a5d6ff;
-    --color-prettylights-syntax-variable: #ffa657;
-    --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
-    --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
-    --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
-    --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
-    --color-prettylights-syntax-carriage-return-text: #f0f6fc;
-    --color-prettylights-syntax-carriage-return-bg: #b62324;
-    --color-prettylights-syntax-string-regexp: #7ee787;
-    --color-prettylights-syntax-markup-list: #f2cc60;
-    --color-prettylights-syntax-markup-heading: #1f6feb;
-    --color-prettylights-syntax-markup-italic: #f0f6fc;
-    --color-prettylights-syntax-markup-bold: #f0f6fc;
-    --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
-    --color-prettylights-syntax-markup-deleted-bg: #67060c;
-    --color-prettylights-syntax-markup-inserted-text: #aff5b4;
-    --color-prettylights-syntax-markup-inserted-bg: #033a16;
-    --color-prettylights-syntax-markup-changed-text: #ffdfb6;
-    --color-prettylights-syntax-markup-changed-bg: #5a1e02;
-    --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
-    --color-prettylights-syntax-markup-ignored-bg: #1158c7;
-    --color-prettylights-syntax-meta-diff-range: #d2a8ff;
-    --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+	--color-prettylights-syntax-comment: #9198a1;
+	--color-prettylights-syntax-constant: #79c0ff;
+	--color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+	--color-prettylights-syntax-entity: #d2a8ff;
+	--color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+	--color-prettylights-syntax-entity-tag: #7ee787;
+	--color-prettylights-syntax-keyword: #ff7b72;
+	--color-prettylights-syntax-string: #a5d6ff;
+	--color-prettylights-syntax-variable: #ffa657;
+	--color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+	--color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+	--color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+	--color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+	--color-prettylights-syntax-carriage-return-text: #f0f6fc;
+	--color-prettylights-syntax-carriage-return-bg: #b62324;
+	--color-prettylights-syntax-string-regexp: #7ee787;
+	--color-prettylights-syntax-markup-list: #f2cc60;
+	--color-prettylights-syntax-markup-heading: #1f6feb;
+	--color-prettylights-syntax-markup-italic: #f0f6fc;
+	--color-prettylights-syntax-markup-bold: #f0f6fc;
+	--color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+	--color-prettylights-syntax-markup-deleted-bg: #67060c;
+	--color-prettylights-syntax-markup-inserted-text: #aff5b4;
+	--color-prettylights-syntax-markup-inserted-bg: #033a16;
+	--color-prettylights-syntax-markup-changed-text: #ffdfb6;
+	--color-prettylights-syntax-markup-changed-bg: #5a1e02;
+	--color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+	--color-prettylights-syntax-markup-ignored-bg: #1158c7;
+	--color-prettylights-syntax-meta-diff-range: #d2a8ff;
+	--color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
 }
 
 .pl-c {
-    color: var(--color-prettylights-syntax-comment);
+	color: var(--color-prettylights-syntax-comment);
 }
 
 .pl-c1,
 .pl-s .pl-v {
-    color: var(--color-prettylights-syntax-constant);
+	color: var(--color-prettylights-syntax-constant);
 }
 
 .pl-e,
 .pl-en {
-    color: var(--color-prettylights-syntax-entity);
+	color: var(--color-prettylights-syntax-entity);
 }
 
 .pl-smi,
 .pl-s .pl-s1 {
-    color: var(--color-prettylights-syntax-storage-modifier-import);
+	color: var(--color-prettylights-syntax-storage-modifier-import);
 }
 
 .pl-ent {
-    color: var(--color-prettylights-syntax-entity-tag);
+	color: var(--color-prettylights-syntax-entity-tag);
 }
 
 .pl-k {
-    color: var(--color-prettylights-syntax-keyword);
+	color: var(--color-prettylights-syntax-keyword);
 }
 
 .pl-s,
@@ -70,190 +70,193 @@
 .pl-sr .pl-cce,
 .pl-sr .pl-sre,
 .pl-sr .pl-sra {
-    color: var(--color-prettylights-syntax-string);
+	color: var(--color-prettylights-syntax-string);
 }
 
 .pl-v,
 .pl-smw {
-    color: var(--color-prettylights-syntax-variable);
+	color: var(--color-prettylights-syntax-variable);
 }
 
 .pl-bu {
-    color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+	color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
 }
 
 .pl-ii {
-    color: var(--color-prettylights-syntax-invalid-illegal-text);
-    background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+	color: var(--color-prettylights-syntax-invalid-illegal-text);
+	background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
 }
 
 .pl-c2 {
-    color: var(--color-prettylights-syntax-carriage-return-text);
-    background-color: var(--color-prettylights-syntax-carriage-return-bg);
+	color: var(--color-prettylights-syntax-carriage-return-text);
+	background-color: var(--color-prettylights-syntax-carriage-return-bg);
 }
 
 .pl-sr .pl-cce {
-    font-weight: bold;
-    color: var(--color-prettylights-syntax-string-regexp);
+	font-weight: bold;
+	color: var(--color-prettylights-syntax-string-regexp);
 }
 
 .pl-ml {
-    color: var(--color-prettylights-syntax-markup-list);
+	color: var(--color-prettylights-syntax-markup-list);
 }
 
 .pl-mh,
 .pl-mh .pl-en,
 .pl-ms {
-    font-weight: bold;
-    color: var(--color-prettylights-syntax-markup-heading);
+	font-weight: bold;
+	color: var(--color-prettylights-syntax-markup-heading);
 }
 
 .pl-mi {
-    font-style: italic;
-    color: var(--color-prettylights-syntax-markup-italic);
+	font-style: italic;
+	color: var(--color-prettylights-syntax-markup-italic);
 }
 
 .pl-mb {
-    font-weight: bold;
-    color: var(--color-prettylights-syntax-markup-bold);
+	font-weight: bold;
+	color: var(--color-prettylights-syntax-markup-bold);
 }
 
 .pl-md {
-    color: var(--color-prettylights-syntax-markup-deleted-text);
-    background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+	color: var(--color-prettylights-syntax-markup-deleted-text);
+	background-color: var(--color-prettylights-syntax-markup-deleted-bg);
 }
 
 .pl-mi1 {
-    color: var(--color-prettylights-syntax-markup-inserted-text);
-    background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+	color: var(--color-prettylights-syntax-markup-inserted-text);
+	background-color: var(--color-prettylights-syntax-markup-inserted-bg);
 }
 
 .pl-mc {
-    color: var(--color-prettylights-syntax-markup-changed-text);
-    background-color: var(--color-prettylights-syntax-markup-changed-bg);
+	color: var(--color-prettylights-syntax-markup-changed-text);
+	background-color: var(--color-prettylights-syntax-markup-changed-bg);
 }
 
 .pl-mi2 {
-    color: var(--color-prettylights-syntax-markup-ignored-text);
-    background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+	color: var(--color-prettylights-syntax-markup-ignored-text);
+	background-color: var(--color-prettylights-syntax-markup-ignored-bg);
 }
 
 .pl-mdr {
-    font-weight: bold;
-    color: var(--color-prettylights-syntax-meta-diff-range);
+	font-weight: bold;
+	color: var(--color-prettylights-syntax-meta-diff-range);
 }
 
 .pl-ba {
-    color: var(--color-prettylights-syntax-brackethighlighter-angle);
+	color: var(--color-prettylights-syntax-brackethighlighter-angle);
 }
 
 .pl-sg {
-    color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+	color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
 }
 
 .pl-corl {
-    text-decoration: underline;
-    color: var(--color-prettylights-syntax-constant-other-reference-link);
+	text-decoration: underline;
+	color: var(--color-prettylights-syntax-constant-other-reference-link);
 }
 
-@utility bg-image{
-    @apply bg-cover bg-center bg-no-repeat;
-    mask-image: linear-gradient(to right, --alpha(var(--color-bprimary)/0) 50%, --alpha(var(--color-bprimary)/50%) 70%, --alpha(var(--color-bprimary)/100%) 100%);
-    mask-size: 100%;
+@utility bg-image {
+	@apply bg-cover bg-center bg-no-repeat;
+	mask-image: linear-gradient(
+		to right,
+		--alpha(var(--color-bprimary) / 0) 50%,
+		--alpha(var(--color-bprimary) / 50%) 70%,
+		--alpha(var(--color-bprimary) / 100%) 100%
+	);
+	mask-size: 100%;
 }
 
 @layer components {
-    article {
-        @apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
+	article {
+		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
 
-        & :target {
-            scroll-margin-top: 5rem;
-        }
+		& :target {
+			scroll-margin-top: 5rem;
+		}
 
-        code{
-            @apply bg-zinc-800 p-1 rounded mx-1;
-        }
+		code {
+			@apply bg-zinc-800 p-1 rounded mx-1;
+		}
 
-        code::before, code::after {
-            content: none;
-        }
+		code::before,
+		code::after {
+			content: none;
+		}
 
-        pre > code {
-            @apply bg-zinc-900/0 mx-0 p-0;
-        }
+		pre > code {
+			@apply bg-zinc-900/0 mx-0 p-0;
+		}
 
-        a {
+		a {
+			@apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;
 
-            @apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;
+			&::before {
+				@apply inline-block h-[1.25em] mr-1 align-text-bottom;
+				content: url("./assets/link.svg");
+			}
 
-            &::before {
-                @apply inline-block h-[1.25em] mr-1 align-text-bottom;
-                content: url("./assets/link.svg");
-            }
+			&::after {
+				@apply duration-200 left-0 bottom-0 w-0 absolute hover:w-full h-0.25;
+				content: "";
+				background-color: theme("colors.blue.500");
+			}
 
-            &::after {
-                @apply duration-200 left-0 bottom-0 w-0 absolute hover:w-full h-0.25;
-                content: "";
-                background-color: theme("colors.blue.500");
-            }
-
-            &:hover::after {
-                width: 100%;
-            }
-
-        }
-
-    }
+			&:hover::after {
+				width: 100%;
+			}
+		}
+	}
 }
 
 .giscus {
-    --color-primary: #1f2937; /* Dark background */
-    --color-secondary: #f9fafb; /* Light text */
-    --color-accent: #3b82f6; /* Accent color */
-    --color-muted: #6b7280; /* Muted text */
-    --color-border: #d1d5db; /* Border color */
-    --color-background: #111827; /* Background color */
-    --color-link: #3b82f6; /* Link color */
-    --color-link-hover: #2563eb; /* Link hover color */
-    --color-button: #3b82f6; /* Button color */
-    --color-button-hover: #2563eb; /* Button hover color */
-    --color-input-background: #1f2937; /* Input background */
-    --color-input-border: #374151; /* Input border */
-    --color-input-text: #f9fafb; /* Input text */
+	--color-primary: #1f2937; /* Dark background */
+	--color-secondary: #f9fafb; /* Light text */
+	--color-accent: #3b82f6; /* Accent color */
+	--color-muted: #6b7280; /* Muted text */
+	--color-border: #d1d5db; /* Border color */
+	--color-background: #111827; /* Background color */
+	--color-link: #3b82f6; /* Link color */
+	--color-link-hover: #2563eb; /* Link hover color */
+	--color-button: #3b82f6; /* Button color */
+	--color-button-hover: #2563eb; /* Button hover color */
+	--color-input-background: #1f2937; /* Input background */
+	--color-input-border: #374151; /* Input border */
+	--color-input-text: #f9fafb; /* Input text */
 }
 
 .giscus .giscus-frame {
-    background-color: var(--color-background);
-    color: var(--color-secondary);
+	background-color: var(--color-background);
+	color: var(--color-secondary);
 }
 
 .giscus .giscus-header {
-    border-bottom: 1px solid var(--color-border);
+	border-bottom: 1px solid var(--color-border);
 }
 
 .giscus .giscus-title {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 .giscus .giscus-link {
-    color: var(--color-link);
+	color: var(--color-link);
 }
 
 .giscus .giscus-link:hover {
-    color: var(--color-link-hover);
+	color: var(--color-link-hover);
 }
 
 .giscus .giscus-button {
-    background-color: var(--color-button);
-    color: var(--color-secondary);
+	background-color: var(--color-button);
+	color: var(--color-secondary);
 }
 
 .giscus .giscus-button:hover {
-    background-color: var(--color-button-hover);
+	background-color: var(--color-button-hover);
 }
 
 .giscus .giscus-input {
-    background-color: var(--color-input-background);
-    border: 1px solid var(--color-input-border);
-    color: var(--color-input-text);
+	background-color: var(--color-input-background);
+	border: 1px solid var(--color-input-border);
+	color: var(--color-input-text);
 }

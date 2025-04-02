@@ -7,13 +7,10 @@ interface Props {
 }
 
 export default function SecondaryPanel(props: Props) {
-
 	const className = cn(
 		"h-36 part bg-dotted flex items-center justify-center border-b border-dot",
-		props.className
-	)
+		props.className,
+	);
 
-	return <div className={className}>
-		{props.children}
-	</div>
+	return <div className={className}>{props.children}</div>;
 }

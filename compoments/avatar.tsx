@@ -13,11 +13,7 @@ interface Props {
 }
 
 export default function Avatar(props: Props) {
-
-	const cln = cn(
-		"rounded-full",
-		props.className
-	)
+	const cln = cn("rounded-full", props.className);
 
 	return (
 		<Image

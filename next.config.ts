@@ -9,8 +9,12 @@ import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 
 const withMDX = createMDX({
 	options: {
-		remarkPlugins: [remarkFrontmatter,remarkMdxFrontmatter,remarkNextImage],
-		rehypePlugins: [rehypeStarryNight,rehypeLineNumbers],
+		remarkPlugins: [
+			remarkFrontmatter,
+			remarkMdxFrontmatter,
+			remarkNextImage,
+		],
+		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
 	},
 });
 
@@ -29,19 +33,20 @@ const config: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "r2.bntw.dev",
-			}
+			},
 		],
 	},
 };
 
 const nextConfigPromise = async () => {
-
 	if (process.env.NODE_ENV === "development") {
-		const { setupDevPlatform } = await import("@cloudflare/next-on-pages/next-dev");
+		const { setupDevPlatform } = await import(
+			"@cloudflare/next-on-pages/next-dev"
+		);
 		await setupDevPlatform();
 	}
 
 	return await withContentCollections(withMDX(config));
-}
+};
 
 export default nextConfigPromise;

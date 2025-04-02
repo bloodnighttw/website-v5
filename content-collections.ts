@@ -43,15 +43,16 @@ const posts = defineCollection({
 		draft: z.boolean().optional(),
 		pin: z.boolean().default(false),
 	}),
-	transform: async (doc ) => {
+	transform: async (doc) => {
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
 		// the same file name in different directory now.
-		const slug = others._meta.path.replace("/","-");
+		const slug = others._meta.path.replace("/", "-");
 
 		// handle mdx file
-		const firstImage = getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
+		const firstImage =
+			getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
 		const previewText = getPreviewMessage(content);
 
 		return {
@@ -77,8 +78,7 @@ const projects = defineCollection({
 			.transform((strs) => strs.map((it) => it.toLowerCase())),
 		demo: z.string().optional(),
 	}),
-	transform: async (doc ) => {
-
+	transform: async (doc) => {
 		return {
 			...doc,
 		};

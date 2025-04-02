@@ -1,36 +1,36 @@
 on: [push]
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    name: Deploy to Cloudflare Pages
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4.1.0
-        with:
-          version: 9.7.0
-      - name: 'Install Node'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-          cache: 'pnpm'
-      - name: Build
-        run: pnpm install && pnpm pages:build
-      - name: Deploy preview to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        if: github.ref != 'refs/heads/main'
-        with:
-          command: pages deploy --branch=preview
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy production to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          command: pages deploy
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+    deploy:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            deployments: write
+        name: Deploy to Cloudflare Pages
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4.1.0
+              with:
+                  version: 9.7.0
+            - name: "Install Node"
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22.x"
+                  cache: "pnpm"
+            - name: Build
+              run: pnpm install && pnpm pages:build
+            - name: Deploy preview to Cloudflare Pages
+              uses: cloudflare/wrangler-action@v3
+              if: github.ref != 'refs/heads/main'
+              with:
+                  command: pages deploy --branch=preview
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+            - name: Deploy production to Cloudflare Pages
+              uses: cloudflare/wrangler-action@v3
+              if: github.ref == 'refs/heads/main'
+              with:
+                  command: pages deploy
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}

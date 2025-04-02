@@ -19,7 +19,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<meta httpEquiv="Delegate-CH" content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"/>
+				<meta
+					httpEquiv="Delegate-CH"
+					content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"
+				/>
 			</head>
 			<body className={`$antialiased`}>
 				<NavPanel>
@@ -35,27 +38,21 @@ export default function RootLayout({
 						<div className="font-bold">bloodnighttw</div>
 					</Link>
 					<div className="mr-auto"></div>
-					<div>
-						wtf
-					</div>
+					<div>wtf</div>
 				</NavPanel>
 
 				{children}
 
 				<Footer>
-
 					<div className="w-full flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
 						<span className="mr-auto">
 							© {new Date().getFullYear()} bloodnighttw. All
 							rights reserved.
 						</span>
 
-						<span>
-							❤️ Made with Tailwind CSS, Next.js.
-						</span>
+						<span>❤️ Made with Tailwind CSS, Next.js.</span>
 					</div>
 				</Footer>
-
 			</body>
 		</html>
 	);

@@ -8,46 +8,58 @@ import { Stacks } from "@/compoments/Project/Stack";
 import { allProjects } from "content-collections";
 
 export async function generateStaticParams() {
-
 	return allProjects.map((post) => {
 		return {
 			name: post.name,
-		}
-	})
-
+		};
+	});
 }
 
 export const dynamicParams = false;
 
-export default async function Page({params}: {params: Promise<{name: string}>}) {
-
+export default async function Page({
+	params,
+}: {
+	params: Promise<{ name: string }>;
+}) {
 	const { name } = await params;
 
 	const projectInfo = allProjects.find((it) => it.name === name)!;
-	const svgs: string[] = projectInfo.stack.filter( st => st in svgUrl).map( st => svgUrl[st]);
-	const {default: C} = await import(`@/contents/projects/${name}.mdx`);
+	const svgs: string[] = projectInfo.stack
+		.filter((st) => st in svgUrl)
+		.map((st) => svgUrl[st]);
+	const { default: C } = await import(`@/contents/projects/${name}.mdx`);
 
-	return <Part>
-		<div className="flex bg-bsecondary/80 rounded items-center gap-4 p-4">
-			<Link href={projectInfo.link}>
-				{Github}
-			</Link>
-			<p className="text-2xl">{projectInfo.name}</p>
+	return (
+		<Part>
+			<div className="flex bg-bsecondary/80 rounded items-center gap-4 p-4">
+				<Link href={projectInfo.link}>{Github}</Link>
+				<p className="text-2xl">{projectInfo.name}</p>
 
-			<div className="ml-auto"></div>
-			<Stacks svgs={svgs}/>
-		</div>
-
-		{ projectInfo.demo && <div className="w-full rounded bg-bsecondary/50">
-			<div className="flex items-center gap-2 p-2">
-				<Image src={linkSvg} alt={"link"} width={24} height={24}/>
-				<p>{projectInfo.demo}</p>
+				<div className="ml-auto"></div>
+				<Stacks svgs={svgs} />
 			</div>
-			<iframe src={projectInfo.demo} className="rounded-b w-full h-[65vh] sm:h-[50vh] bg-bsecondary"/>
-		</div> }
-		<article>
-			<C/>
-		</article>
-	</Part>
 
+			{projectInfo.demo && (
+				<div className="w-full rounded bg-bsecondary/50">
+					<div className="flex items-center gap-2 p-2">
+						<Image
+							src={linkSvg}
+							alt={"link"}
+							width={24}
+							height={24}
+						/>
+						<p>{projectInfo.demo}</p>
+					</div>
+					<iframe
+						src={projectInfo.demo}
+						className="rounded-b w-full h-[65vh] sm:h-[50vh] bg-bsecondary"
+					/>
+				</div>
+			)}
+			<article>
+				<C />
+			</article>
+		</Part>
+	);
 }

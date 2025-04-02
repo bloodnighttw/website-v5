@@ -32,74 +32,88 @@
 	background-position: center;
 }
 
-
 @utility introduction {
-    @apply text-xl;
+	@apply text-xl;
 }
 
 @utility line {
-    &::before {
-        @apply text-primary/50 inline-block select-none w-8 text-right pr-4;
-        content: attr(data-line-number);
-    }
+	&::before {
+		@apply text-primary/50 inline-block select-none w-8 text-right pr-4;
+		content: attr(data-line-number);
+	}
 }
 
 @utility hashtag {
+	@apply font-mono relative cursor-pointer;
 
-    @apply font-mono relative cursor-pointer;
+	&::before {
+		@apply decoration-dashed;
+		content: "#";
+	}
 
-    &::before {
-        @apply decoration-dashed;
-        content: "#";
-    }
+	&::after {
+		@apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
+		content: "";
+		background-color: var(--color-primary);
+	}
 
-    &::after {
-        @apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
-        content: "";
-        background-color: var(--color-primary);
-    }
-
-    &:hover::after {
-        width: 100%;
-    }
-
+	&:hover::after {
+		width: 100%;
+	}
 }
 
 @keyframes scroll {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
 }
 
 @utility mask-lg {
-    mask-image: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 90%);
+	mask-image: linear-gradient(
+		to right,
+		transparent 0%,
+		rgb(0, 0, 0) 10%,
+		rgb(0, 0, 0) 90%
+	);
 }
 
 @utility animation-scrolling {
-    --scrolling-time: 15s;
-    animation: scroll var(--scrolling-time) linear infinite;
+	--scrolling-time: 15s;
+	animation: scroll var(--scrolling-time) linear infinite;
 }
 
 @keyframes typing {
-    from { width: 0 }
-    to { width: 255px }
+	from {
+		width: 0;
+	}
+	to {
+		width: 255px;
+	}
 }
 
 @keyframes blink {
-    50% { border-color: transparent }
+	50% {
+		border-color: transparent;
+	}
 }
 
 @utility typewriter {
-    @apply inline-block overflow-hidden border-r border-r-primary align-middle;
-    white-space: nowrap;
-    animation: typing 2.5s steps(40, end) forwards,
-            blink 1s step-end infinite;
+	@apply inline-block overflow-hidden border-r border-r-primary align-middle;
+	white-space: nowrap;
+	animation:
+		typing 2.5s steps(40, end) forwards,
+		blink 1s step-end infinite;
 }
 
 .gradient-background {
-    background: linear-gradient(120deg,var(--color-bprimary),var(--color-bsecondary),var(--color-bprimary));
-    background-size: 300% 300%;
+	background: linear-gradient(
+		120deg,
+		var(--color-bprimary),
+		var(--color-bsecondary),
+		var(--color-bprimary)
+	);
+	background-size: 300% 300%;
 }

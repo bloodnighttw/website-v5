@@ -18,7 +18,7 @@ categories:
 2. Tailwindcss
     - 一個css框架，讓我可以直接用現有的design system直接實作就好了。
 3. Markdown
-    - 我使用markdown來寫文章，這邊使用``unified.js``來做到把markdown->html的部分，未來有機會可以改用WHSIWHG的編輯器與呈現方式。
+    - 我使用markdown來寫文章，這邊使用`unified.js`來做到把markdown->html的部分，未來有機會可以改用WHSIWHG的編輯器與呈現方式。
 4. Github
     - 用於版本管理，以及區分production 和 development的分支。
 5. Vercel
@@ -27,6 +27,7 @@ categories:
     - 我的圖片是用Cloudflare的R2來存放的，這樣可以讓我的圖片不用放在github上，這樣可以讓我的repo比較乾淨，同時享受到Cloudflare CDN的優勢。
 
 ## 設計目標
+
 1. 不要太醜
 2. 簡潔
 3. lighthouse 100分
@@ -40,15 +41,17 @@ categories:
 ## Markdown 解析
 
 剛開始我是找到了 [contentlayer](https://contentlayer.dev/) 這個套件，但是這個套件有幾個問題:
+
 1. 我要怎麼獲取markdown的預覽內容？
 2. 我要怎麼從這個套件生成table of content？
 
 想解決這兩個問題，勢必得往更底層去尋找答案了。
 
 那在研究一段時間後，我發現很多系統的markdown支援，都是依賴這幾個套件。
-1. `unified.js`  ast轉換工具，下面這兩個工具部分功能可以依賴這套件。
-2. `remark.js`   用於解析markdown語法的相關套件 {"(ast <--> markdown)"}
-3. `rehype.js `  用於解析html語法的相關套件 {"ast <--> html"}
+
+1. `unified.js` ast轉換工具，下面這兩個工具部分功能可以依賴這套件。
+2. `remark.js` 用於解析markdown語法的相關套件 {"(ast <--> markdown)"}
+3. `rehype.js ` 用於解析html語法的相關套件 {"ast <--> html"}
 
 我的做法是，我先用`remark.js`把markdown轉換成ast，然後透過這個ast去產生預覽內容。
 
@@ -57,10 +60,12 @@ categories:
 最後我在把這個html ast轉換成html，顯示於網頁上。
 
 ## Cloudflare R2 作為圖床
+
 剛開始我自己是打算把圖片放在[imgur](https://imgur.com/)上，但是後來發現imgur有可能刪除圖片，導致圖片失效，剛好想到之前拜讀的
 [這篇文章](https://ivonblog.com/posts/cloudflare-r2-image-hosting/)，最後決定使用Cloudflare R2作為圖片的圖床。
 
 使用Cloudflare R2的好處是:
+
 1. 流量不收費 (這個是其他類似服務最難預測的費用)
 2. 使用量在一定額度內是免費的
 3. 有使用Cloudflare CDN的加速
@@ -74,6 +79,7 @@ categories:
 ![lighthouse score with arc browser](https://r2.bntw.dev/how-i-made-my-blog/lighthouse.png)
 
 # 未來可加入的功能
+
 1. SEO 優化
     - 目前文章是不包含description與其他可以優化SEO的部分，未來會加入這些功能。
 2. WYSIWYG

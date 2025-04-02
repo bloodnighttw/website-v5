@@ -39,35 +39,33 @@ categories:
 //     this.left = (left===undefined ? null : left)
 //     this.right = (right===undefined ? null : right)
 // }
- 
 
 /**
  * @param {number[]} preorder
  * @param {number[]} inorder
  * @return {TreeNode}
  */
-var buildTree = function(preorder, inorder) {
+var buildTree = function (preorder, inorder) {
+	const rec = (pre = preorder, ino = inorder) => {
+		if (pre.length === 0) return null;
 
-    const rec = (pre = preorder, ino = inorder) => {
+		let rootVal = pre[0];
+		let idx = 0;
 
-        if(pre.length === 0)
-            return null
+		while (rootVal != ino[idx]) idx++;
 
-        let rootVal = pre[0]
-        let idx = 0;
+		let lp = pre.slice(1, idx + 1),
+			li = ino.slice(0, idx);
+		let rp = pre.slice(idx + 1),
+			ri = ino.slice(idx + 1);
 
-        while(rootVal != ino[idx]) idx++;
-        
-        let lp = pre.slice(1,idx+1), li = ino.slice(0,idx);
-        let rp = pre.slice(idx+1), ri = ino.slice(idx+1)
+		let left = rec(lp, li),
+			right = rec(rp, ri);
+		let root = new TreeNode(pre[0], left, right);
 
-        let left = rec(lp,li), right = rec(rp,ri);
-        let root = new TreeNode(pre[0],left,right)
+		return root;
+	};
 
-        return root
-    }
-
-    return rec()
+	return rec();
 };
 ```
-

@@ -8,16 +8,15 @@ categories:
     - markdown
 ---
 
-
-在寫了完了[之前](https://github.com/bloodnighttw/website-v4)的那個網站後，也順手在上面發了己篇文章，本身跟這個重寫的部落格一樣，是使用 ``nextjs`` 寫的，然後使用 ``tailwindcss`` 來做裝飾，開發心得可以參考[這篇](https://bntw.dev/blog/cfr2)，但我在開發的過程中發現了幾個問題:
+在寫了完了[之前](https://github.com/bloodnighttw/website-v4)的那個網站後，也順手在上面發了己篇文章，本身跟這個重寫的部落格一樣，是使用 `nextjs` 寫的，然後使用 `tailwindcss` 來做裝飾，開發心得可以參考[這篇](https://bntw.dev/blog/cfr2)，但我在開發的過程中發現了幾個問題:
 
 1. **程式的耦合性超高**
     - 因為我markdown -> html這部份是呼叫unified.js相關的套件處理的，寫的過程中因為還沒有很了解這套件怎麼運作，造成寫出了不少很髒的程式碼。
 2. **style跟v3太過相似了**
-   - 這個網站的 ``tailwindcss`` 是從 ``v3`` 的網站上直接複製過來的，然後 ``v4`` 的網站是從 ``v3`` 的網站上直接複製過來的，所以 ``v4`` 的網站跟 ``v3`` 的網站很像，問題是，我v3的網站根本不是為了部落格寫的，反倒比較像是一個電子名片。
-
+    - 這個網站的 `tailwindcss` 是從 `v3` 的網站上直接複製過來的，然後 `v4` 的網站是從 `v3` 的網站上直接複製過來的，所以 `v4` 的網站跟 `v3` 的網站很像，問題是，我v3的網站根本不是為了部落格寫的，反倒比較像是一個電子名片。
 
 # 我的計畫
+
 1. 把markdown -> html 的功能獨立成一個套件，並這套件具有擴充性，讓我可以隨便增改，而不太需要去動到原本的程式碼。
 2. 直接使用 tailwindcss v4，而不是重之前v3的css轉換過來。
 3. ~~一樣在 vercel 上面部署，這樣可以省去我很多麻煩。~~ 等等會說
@@ -25,6 +24,7 @@ categories:
 5. 支援留言
 
 ## 把markdown -> html 的功能獨立成一個套件
+
 在做這項工作的時候，我給自己設定了除了前面提到的計畫，幾個目標。
 
 1. 擴充性
@@ -35,19 +35,21 @@ categories:
 ### metadate的驗證
 
 其實我在寫前面文章的時候，就已經在我文章的metadata加入了categories這個東西，我原本希望他能夠顯示在網頁上，然而我發現我在引入這部分的時候，真的是超痛苦，痛苦的點有幾個：
+
 1. 沒辦法驗證文章是否忘記加入這個attribute
 2. 沒辦法得知文章的類別，只能強制的as
 
- 為了解決這個問題，我是用了 ``zod`` 這個套件來驗證文章的metadata，這樣我就可以在寫文章的時候，強制要求我必須要有這個屬性。
+為了解決這個問題，我是用了 `zod` 這個套件來驗證文章的metadata，這樣我就可以在寫文章的時候，強制要求我必須要有這個屬性。
 
 ### 生成html的功能
-這部份就算是把之前v4的網站的功能獨立出來，這邊我使用了 ``unified.js`` 這個套件來處理markdown轉html的功能，本身使用到了 remark, rehype地相關套件處理相關程式。
+
+這部份就算是把之前v4的網站的功能獨立出來，這邊我使用了 `unified.js` 這個套件來處理markdown轉html的功能，本身使用到了 remark, rehype地相關套件處理相關程式。
 
 不過為了擴充性，我這部份只有相依了必要的套件，並讓使用這可以自己pass入要使用的plugin，這樣我就可以在不改動原本程式碼的情況下，增加或是修改功能。
 
 ### 擴充性
-講了這模多擴充性，我其實也讓這套件也有plugin可以用,可以用於擴充自己的功能，舉個例子，前面所提到的 table of content 就是使用這個plugin來實現的，這樣我就可以在不改動原本程式碼的情況下，增加或是修改功能。
 
+講了這模多擴充性，我其實也讓這套件也有plugin可以用,可以用於擴充自己的功能，舉個例子，前面所提到的 table of content 就是使用這個plugin來實現的，這樣我就可以在不改動原本程式碼的情況下，增加或是修改功能。
 
 > 這個套件的名稱是 [@mkblog/core](https://www.npmjs.com/package/@mkblog/core)，我暫時還沒寫docs，有要用的話歡迎，有問題的話可以到discord私訊問我。
 
@@ -61,6 +63,7 @@ categories:
 ![dotted background](https://r2.bntw.dev/dot.png)
 
 ## 留言的系統
+
 原本在推特上看到，很想是用 [@fuma-nama](https://github.com/fuma-nama) 寫的 comments套件，主要是真的很好看，不過稍微深入研究後，我決定不使用，因為我不太想讓我這部落格太複雜，還得使用資料庫存資料，最後就決定使用 [giscus](https://giscus.app/) 這個套件，這個套件是使用github的discucssion來存留言的資料，這樣我就不需要再額外去管理資料庫了。
 
 不過原始的樣是跟我的網站風格不太搭，所以我就稍微改了一下樣式，讓他跟我的網站風格比較搭（這部份還得感謝copilot幫我改theme）。
@@ -78,42 +81,44 @@ cloudflare pages提供了幫你build的功能，每個月500次build，這樣我
 ```yml
 on: [push]
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    name: Deploy to Cloudflare Pages
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4.1.0
-        with:
-          version: 9.7.0
-      - name: 'Install Node'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-          cache: 'pnpm'
-      - name: Build
-        run: pnpm install && pnpm pages:build
-      - name: Deploy preview to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        if: github.ref != 'refs/heads/main'
-        with:
-          command: pages deploy --branch=preview
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy production to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          command: pages deploy
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+    deploy:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            deployments: write
+        name: Deploy to Cloudflare Pages
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4.1.0
+              with:
+                  version: 9.7.0
+            - name: "Install Node"
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18.x"
+                  cache: "pnpm"
+            - name: Build
+              run: pnpm install && pnpm pages:build
+            - name: Deploy preview to Cloudflare Pages
+              uses: cloudflare/wrangler-action@v3
+              if: github.ref != 'refs/heads/main'
+              with:
+                  command: pages deploy --branch=preview
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+            - name: Deploy production to Cloudflare Pages
+              uses: cloudflare/wrangler-action@v3
+              if: github.ref == 'refs/heads/main'
+              with:
+                  command: pages deploy
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 # 未來的打算
+
 1. 會寫一個我side project區塊，預計也是使用我自己寫的套件完成。
 2. 增加一個可以給認識的人加 link的區塊，順便開放讓大家加入。
 3. 未來或許會加入collection的功能，讓我可以寫一個系列文章。

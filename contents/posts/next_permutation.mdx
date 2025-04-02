@@ -14,6 +14,7 @@ categories:
 # 思路
 
 ## 暴力解
+
 首先先生成所有的排列組合，然後找到下一個排列，這樣的時間複雜度是`O(n!)`，這樣的解法時間複雜度是很恐怖的。
 
 ## 觀察
@@ -46,44 +47,43 @@ categories:
 可以發現，在遞減數列中，這個方法不會奏效，所以當我們知道這個數列是遞減的時候，我們就直接reverse整個數列。
 
 # 解答 (javascript)
+
 ```javascript
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var nextPermutation = function(nums) {
+var nextPermutation = function (nums) {
+	const lastIdx = nums.length - 1;
 
-    const lastIdx = nums.length-1;
+	function swap(i, j) {
+		[nums[i], nums[j]] = [nums[j], nums[i]];
+	}
 
-    function swap(i,j){
-        [nums[i], nums[j]] = [nums[j], nums[i]]
-    }
+	for (let i = lastIdx; i >= 0; i--) {
+		if (nums[i] < nums[i + 1]) {
+			// console.log(i)
+			// swap
+			let o = lastIdx;
+			// find the last item that is large than nums[i]
+			while (nums[o] <= nums[i]) {
+				o--;
+			}
 
-    for(let i = lastIdx;i >= 0; i--){
-        if(nums[i] < nums[i+1]){
-            // console.log(i)
-            // swap
-            let o = lastIdx;
-            // find the last item that is large than nums[i]
-            while(nums[o] <= nums[i]) {
-                o--;
-            };
+			swap(i, o);
 
-            swap(i,o) 
+			// reverse
+			let end = lastIdx,
+				start = i + 1;
+			while (start < end) {
+				swap(start, end);
+				start++;
+				end--;
+			}
 
-            // reverse
-            let end = lastIdx, start = i+1;
-            while(start < end){
-                swap(start,end)
-                start++;
-                end--;
-            }
-
-            return;
-        }
-    }
-    nums.reverse()
+			return;
+		}
+	}
+	nums.reverse();
 };
-
 ```
-
