@@ -6,7 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
+		"lint": "eslint . &&",
+		"next:lint": "next lint",
 		"pages:build": "pnpm dlx @cloudflare/next-on-pages",
 		"preview": "pnpm run pages:build && wrangler pages dev",
 		"deploy": "pnpm run pages:build && wrangler pages deploy"
