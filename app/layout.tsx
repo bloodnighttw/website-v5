@@ -38,7 +38,6 @@ export default function RootLayout({
 						<div className="font-bold">bloodnighttw</div>
 					</Link>
 					<div className="mr-auto"></div>
-					<div>wtf</div>
 				</NavPanel>
 
 				{children}
