@@ -1,0 +1,33 @@
+---
+title: 嘗試使用 React Reducer來建構一個TODO List
+date: 2025-04-04
+categories:
+    - react
+---
+
+import PlayGround from "../../compoments/MDX/PlayGround";
+import Code from "@/compoments/MDX/Code";
+import Reducer from "../codes/react/reducer";
+
+平常很少用Reducer，都是用useState hook，想說藉由撰寫一個TODO LIST APP來練習一下。
+
+# Reducer
+
+## 缺點
+1. 跟useState相比，Reducer的寫法較為繁瑣。
+2. 需要額外撰寫action的type，這會讓程式碼較冗長。
+
+## 優點
+1. Reducer 是一個純函數，接收當前的 state 和 action，並返回新的 state。
+2. 統一管理 state 的變更，讓程式碼更具可讀性和可維護性。
+3. dispatch可作為參數傳下去，避免傳一次傳一堆setState的狀況。
+
+# Demo
+
+<PlayGround>
+	<Reducer/>
+</PlayGround>
+
+# 程式碼
+
+<Code filepath={"./react/reducer.tsx"}/>
