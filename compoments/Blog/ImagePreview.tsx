@@ -33,7 +33,7 @@ export default function ImagePreview(props: Props) {
 	const handleImageClick = useCallback((e: React.MouseEvent) => {
 		e.stopPropagation();
 		setScale(scale === 1 ? 2 : 1);
-	}, [scale]);
+	}, [scale, setScale]);
 
 	return <>
 		{open && (
