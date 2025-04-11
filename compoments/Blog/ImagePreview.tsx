@@ -17,12 +17,16 @@ type Action = |
 	{ type: "zoomIn/Out", x: number, y: number } |
 	// scale is the scale of the image we have to change.
 	{ type: "updatePosition", payload: { x: number, y: number } } |
+	// dragging related actions
+	{ type: "draggingOn" } |
+	{ type: "draggingOff" } |
 	// reset the state
 	{ type: "reset" };
 
 interface State {
+	dragging: boolean; // default false
 	open: boolean; // default false
-	scale: number; // default 1
+	scale: number; // default 2. This is the scale of the image we have to change.
 	currentScale: number; // default 1
 	x: number; // default 0
 	y: number; // default 0
@@ -59,12 +63,24 @@ function reducer(state: State, action: Action): State {
 				x: 0,
 				y: 0,
 			};
+		case "draggingOn":
+			return {
+				...state,
+				dragging: true,
+			};
+		case "draggingOff":
+			return {
+				...state,
+				dragging: false,
+			};
 		default:
 			return state;
 	}
 }
 
 const defaultState: State = {
+
+	dragging: false,
 	// open is used to show or hide the image preview.
 	open: false,
 	// scale is the scale of the image we have to change.
@@ -78,9 +94,8 @@ const defaultState: State = {
 export default function ImagePreview(props: Props) {
 
 	const [state, dispatch] = React.useReducer(reducer, defaultState);
-	const [dragging, setDragging] = React.useState(false);
 	const imageDivRef = React.useRef<HTMLDivElement>(null);
-	// This is used to store the mouse position when dragging
+	// This is used to store the mouse position when dragging, and we don't want it to trigger a re-render.
 	const mousePositionRef = React.useRef({ x: 0, y: 0 });
 
 	// Disable scrolling when open
@@ -122,15 +137,15 @@ export default function ImagePreview(props: Props) {
 	);
 
 	const handleDragStart = useCallback((e: React.DragEvent<HTMLImageElement>) => {
-		setDragging(true);
+		dispatch({ type: "draggingOn" });
 		mousePositionRef.current = {
 			x: e.clientX,
 			y: e.clientY
 		};
-	},[setDragging, mousePositionRef]);
+	},[mousePositionRef]);
 
 	const handleDrag = useCallback((e: React.DragEvent<HTMLImageElement>) => {
-		if (dragging && e.clientX && e.clientY) {
+		if (state.dragging && e.clientX && e.clientY) {
 			const dx = e.clientX - mousePositionRef.current.x;
 			const dy = e.clientY - mousePositionRef.current.y;
 			dispatch({ 
@@ -142,21 +157,21 @@ export default function ImagePreview(props: Props) {
 			});
 			mousePositionRef.current = { x: e.clientX, y: e.clientY };
 		}
-	}, [dragging, state.x, state.y, dispatch]);
+	}, [state.dragging, state.x, state.y]);
 
-	const handleDragEnd = () => setDragging(false);
+	const handleDragEnd = () => dispatch({ type: "draggingOff" });
 
 	const handleTouchStart = useCallback((e: React.TouchEvent<HTMLImageElement>) => {
-		setDragging(true);
+		dispatch({ type: "draggingOff" });
 		const touch = e.touches[0];
 		mousePositionRef.current = {
 			x: touch.clientX,
 			y: touch.clientY
 		};
-	},[setDragging, mousePositionRef]);
+	},[]);
 
 	const handleTouchMove = useCallback((e: React.TouchEvent<HTMLImageElement>) => {
-		if (dragging) {
+		if (state.dragging) {
 			const touch = e.touches[0];
 			const dx = touch.clientX - mousePositionRef.current.x;
 			const dy = touch.clientY - mousePositionRef.current.y;
@@ -169,9 +184,9 @@ export default function ImagePreview(props: Props) {
 			});
 			mousePositionRef.current = { x: touch.clientX, y: touch.clientY };
 		}
-	}, [dragging, state.x, state.y, dispatch]);
+	}, [state.dragging, state.x, state.y]);
 
-	const handleTouchEnd = () => setDragging(false);
+	const handleTouchEnd = () => dispatch({ type: "draggingOff" });
 
 	return (
 		<>
@@ -188,7 +203,7 @@ export default function ImagePreview(props: Props) {
 							className={cn(
 								"shadow cursor-zoom-in my-auto z-100 max-w-[90vw] max-h-[90vh] object-contain",
 								state.currentScale === state.scale && "cursor-move",
-								!dragging && "duration-200"
+								!state.dragging && "duration-200"
 							)}
 							loading="lazy"
 							style={{
