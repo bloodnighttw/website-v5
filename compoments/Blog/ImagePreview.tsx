@@ -94,7 +94,7 @@ const defaultState: State = {
 export default function ImagePreview(props: Props) {
 
 	const [state, dispatch] = React.useReducer(reducer, defaultState);
-	const imageDivRef = React.useRef<HTMLDivElement>(null);
+	const imageDivRef = React.useRef<HTMLImageElement>(null);
 	// This is used to store the mouse position when dragging, and we don't want it to trigger a re-render.
 	const mousePositionRef = React.useRef({ x: 0, y: 0 });
 
@@ -195,29 +195,34 @@ export default function ImagePreview(props: Props) {
 					className="fixed inset-0 bg-bsecondary/50 backdrop-blur-md flex flex-col items-center z-50"
 					onClick={handleOverlayClick}
 				>
-					<div className="rounded-lg flex overflow-hidden my-auto relative bg-bsecondary p-2" ref={imageDivRef}>
-						<img
-							{...props}
-							src={props.src}
-							alt={props.alt}
-							className={cn(
-								"shadow cursor-zoom-in my-auto z-100 max-w-[90vw] max-h-[90vh] object-contain",
-								state.currentScale === state.scale && "cursor-move",
-								!state.dragging && "duration-200"
-							)}
-							loading="lazy"
-							style={{
-								transform: `translate(${state.x}px, ${state.y}px) scale(${state.currentScale})`,
-								transformOrigin: 'center',
-							}}
-							onClick={handleImageClick}
-							onDragStart={handleDragStart}
-							onDrag={handleDrag}
-							onDragEnd={handleDragEnd}
-							onTouchStart={handleTouchStart}
-							onTouchMove={handleTouchMove}
-							onTouchEnd={handleTouchEnd}
-						/>
+					<img
+						ref={imageDivRef}
+						{...props}
+						src={props.src}
+						alt={props.alt}
+						className={cn(
+							"shadow cursor-zoom-in my-auto z-100 max-w-[90vw] max-h-[90vh] object-contain mx-2",
+							state.currentScale === state.scale && "cursor-move",
+							!state.dragging && "duration-200"
+						)}
+						loading="lazy"
+						style={{
+							transform: `translate(${state.x}px, ${state.y}px) scale(${state.currentScale})`,
+							transformOrigin: 'center',
+						}}
+						onClick={handleImageClick}
+						onDragStart={handleDragStart}
+						onDrag={handleDrag}
+						onDragEnd={handleDragEnd}
+						onTouchStart={handleTouchStart}
+						onTouchMove={handleTouchMove}
+						onTouchEnd={handleTouchEnd}
+					/>
+					<div className={cn(
+						"fixed w-96 h-16 bg-bsecondary/60 backdrop-blur-md bottom-0 m-12 z-150 px-8 py-4",
+						"rounded-full border border-secondary shadow-amber-50"
+					)}>
+						123
 					</div>
 
 				</div>
