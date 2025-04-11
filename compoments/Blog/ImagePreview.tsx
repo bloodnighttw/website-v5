@@ -14,9 +14,8 @@ interface Props {
 type Action = |
 	{ type: "open/close" } |
 	// x and y are the translation of the image we have to move.
-	{ type: "zoomIn/Out" } |
+	{ type: "zoomIn/Out", x: number, y: number } |
 	// scale is the scale of the image we have to change.
-	{ type: "changeScale", payload: { scale: number, mouseX: number, mouseY: number } } |
 	{ type: "updatePosition", payload: { x: number, y: number } } |
 	// reset the state
 	{ type: "reset" };
@@ -25,10 +24,8 @@ interface State {
 	open: boolean; // default false
 	scale: number; // default 1
 	currentScale: number; // default 1
-	x: number; // new
-	y: number; // new
-	mouseX: number; // new
-	mouseY: number; // new
+	x: number; // default 0
+	y: number; // default 0
 }
 
 function reducer(state: State, action: Action): State {
@@ -41,22 +38,13 @@ function reducer(state: State, action: Action): State {
 				currentScale: 1,
 				x: 0,
 				y: 0,
-				mouseX: 0,
-				mouseY: 0,
 			};
 		case "zoomIn/Out":
 			return {
 				...state,
 				currentScale: state.currentScale === 1 ? state.scale : 1,
-				x: state.currentScale === 1 ? state.mouseX : 0,
-				y: state.currentScale === 1 ? state.mouseY : 0,
-			};
-		case "changeScale":
-			return {
-				...state,
-				scale: action.payload.scale,
-				mouseX: action.payload.mouseX,
-				mouseY: action.payload.mouseY,
+				x: state.currentScale === 1 ? action.x : 0,
+				y: state.currentScale === 1 ? action.y : 0,
 			};
 		case "updatePosition":
 			return {
@@ -85,9 +73,6 @@ const defaultState: State = {
 	// x and y are the translation of the image we have to move.
 	x: 0,
 	y: 0,
-	// mouseX and mouseY are the position of the mouse when we click on the image.
-	mouseX: 0,
-	mouseY: 0,
 }
 
 export default function ImagePreview(props: Props) {
@@ -118,23 +103,16 @@ export default function ImagePreview(props: Props) {
 		(e: React.MouseEvent<HTMLImageElement>) => {
 			e.stopPropagation();
 
-			if (imageDivRef.current) {
-				const rect = imageDivRef.current.getBoundingClientRect();
+			if (state.currentScale !== state.scale) {
+				const rect = imageDivRef.current!.getBoundingClientRect();
 				const mouseX = e.clientX - rect.left;
 				const mouseY = e.clientY - rect.top;
-				
-				dispatch({ 
-					type: "changeScale", 
-					payload: { 
-						scale: state.scale,
-						mouseX: -(mouseX - rect.width / 2),
-						mouseY: -(mouseY - rect.height / 2)
-					} 
-				});
-			}
 
-			if (state.currentScale !== state.scale) {
-				dispatch({ type: "zoomIn/Out" });
+				dispatch({
+					type: "zoomIn/Out",
+					x: -(mouseX - rect.width / 2),
+					y: -(mouseY - rect.height / 2)
+				});
 			} else {
 				dispatch({ type: "reset" });
 			}
