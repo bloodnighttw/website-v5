@@ -18,6 +18,7 @@ export default function Panel({ content }: Props) {
 				fill={true}
 				alt="preview image"
 				priority={true}
+				quality={0}
 			/>
 
 			<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
