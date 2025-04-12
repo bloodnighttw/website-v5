@@ -192,12 +192,12 @@ export default function ImagePreview(props: Props) {
 	return (
 		<>
 			{state.open && (
-				<div
+				<span
 					className="fixed inset-0 bg-bsecondary/50 backdrop-blur-md flex flex-col items-center z-50"
 					onClick={handleOverlayClick}
 				>
-					<div className="fixed top-0 left-0 right-0 py-2 px-4 bg-bsecondary/90 backdrop-blur-md flex justify-between items-center z-30">
-						<div className="text-secondary flex items-center gap-4">
+					<span className="fixed top-0 left-0 right-0 py-2 px-4 bg-bsecondary/90 backdrop-blur-md flex justify-between items-center z-30">
+						<span className="text-secondary flex items-center gap-4">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
 								 className="my-auto" viewBox="0 0 16 16">
 								<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
@@ -208,7 +208,7 @@ export default function ImagePreview(props: Props) {
 							<span className="text-secondary/70">
 								{Math.round(state.currentScale * 100)}%
 							</span>
-						</div>
+						</span>
 						<button
 							onClick={() => dispatch({ type: "open/close" })}
 							className="text-secondary hover:text-secondary/70 transition-colors p-2 cursor-pointer"
@@ -228,12 +228,14 @@ export default function ImagePreview(props: Props) {
 								/>
 							</svg>
 						</button>
-					</div>
+					</span>
 					<img
 						ref={imageDivRef}
 						{...props}
 						src={props.src}
 						alt={props.alt}
+						height={undefined} // this might change when the space is not enough
+						width={undefined} // this might change when the space is not enough
 						className={cn(
 							"shadow cursor-zoom-in my-auto z-20 max-w-[90vw] max-h-[90vh] object-contain mx-2",
 							state.currentScale === state.scale && "cursor-move",
@@ -253,22 +255,22 @@ export default function ImagePreview(props: Props) {
 						onTouchEnd={handleTouchEnd}
 					/>
 
-				</div>
+				</span>
 			)}
-			<div className="group relative cursor-pointer rounded hover:scale-101 duration-200"
+			<span className="group relative cursor-pointer rounded hover:scale-101 duration-200"
 				 onClick={() => dispatch({ type: "open/close" })}
 			>
 				<Image
 					{...props}
-					// @ts-expect-error we haven't defined the type for this yet
-					auto={true}
+					src={props.src}
+					alt={props.alt}
 					quality={"0"}
 					className="rounded mx-auto"
 				/>
-				<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+				<span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
 					<span className="text-lg text-secondary/70 bg-bsecondary/70 p-2 rounded-full px-4">Click to view full size</span>
-				</div>
-			</div>
+				</span>
+			</span>
 			<span className="text-lg text-secondary/70 text-center flex justify-center mt-1">
         		{props.alt}
       		</span>
