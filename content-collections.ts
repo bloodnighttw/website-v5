@@ -5,13 +5,15 @@ import remarkGfm from "remark-gfm";
 import { Image } from "mdast";
 
 import remarkMdx from "remark-mdx";
-import { select } from "unist-util-select";
+import { select, selectAll } from "unist-util-select";
 import remarkParse from "remark-parse";
 
-const getFirstImage = (content: string, mdx: boolean = true): string | null => {
+import { Text } from "hast";
+
+const getFirstImage = (content: string): string | null => {
 	const tree = unified()
 		.use(remarkParse)
-		.use(mdx ? [remarkMdx] : [])
+		.use(remarkMdx)
 		.parse(content);
 
 	const imageNode = select("image", tree) as Image;
@@ -21,15 +23,18 @@ const getFirstImage = (content: string, mdx: boolean = true): string | null => {
 
 // TODO: fetch the preview content from the texts
 const getPreviewMessage = (content: string): string => {
-	const tree = unified().use(remarkParse).use(remarkGfm).parse(content);
+	const tree = unified()
+		.use(remarkParse)
+		.use(remarkMdx)
+		.use(remarkGfm)
+		.parse(content);
 
-	return tree.children
-		.filter((node) => node.type === "text")
-		.map((node) => node.value)
+	const textNode = selectAll("text", tree) as Text[];
+
+	return textNode
+		.map((it) => it.value)
 		.join(" ")
-		.replace(/(\r\n|\n|\r)/gm, " ")
-		.replace(/ +(?= )/g, "")
-		.slice(0, 200);
+		.slice(0, 400);
 };
 
 const posts = defineCollection({
