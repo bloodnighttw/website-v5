@@ -162,7 +162,7 @@ export default function ImagePreview(props: Props) {
 	const handleDragEnd = () => dispatch({ type: "draggingOff" });
 
 	const handleTouchStart = useCallback((e: React.TouchEvent<HTMLImageElement>) => {
-		dispatch({ type: "draggingOff" });
+		dispatch({ type: "draggingOn" });
 		const touch = e.touches[0];
 		mousePositionRef.current = {
 			x: touch.clientX,
