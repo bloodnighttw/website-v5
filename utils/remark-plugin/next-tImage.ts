@@ -1,4 +1,4 @@
-/* This file is originally from fumadocs, an docs framework written by
+/* This file is originally from fumadocs, a docs framework written by
  * @fuma-nama, The original license is MIT.
  */
 
@@ -137,9 +137,6 @@ export function remarkNextImage({
 				const task = getImageSize(url, publicDir)
 					.then((size) => {
 						if (!size.width || !size.height) return;
-						const cfImage = `/cdn-cgi/image/width=auto,format=auto/${url}`;
-
-						const inDev = process.env.NODE_ENV === "development";
 
 						Object.assign(node, {
 							type: "mdxJsxFlowElement",
@@ -153,7 +150,7 @@ export function remarkNextImage({
 								{
 									type: "mdxJsxAttribute",
 									name: "src",
-									value: inDev ? url : cfImage,
+									value: url,
 								},
 								{
 									type: "mdxJsxAttribute",
