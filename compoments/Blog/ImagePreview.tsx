@@ -260,8 +260,9 @@ export default function ImagePreview(props: Props) {
 			>
 				<Image
 					{...props}
-					src={props.src}
-					alt={props.alt+" - preview"}
+					// @ts-expect-error we haven't defined the type for this yet
+					auto={true}
+					quality={"0"}
 					className="rounded mx-auto"
 				/>
 				<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">

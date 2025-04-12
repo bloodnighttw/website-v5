@@ -19,16 +19,14 @@ export default function cloudflareLoader({
 		return src;
 	}
 
-	// set
-
 	if (svgLink.has(src)) {
 		return src;
 	}
 
-	const widthArgs = width ?? "auto";
+	const widthArgs = quality === 0 ? "auto" : width ? `${width}` : "auto";
 
 	const params = [`width=${widthArgs}`, "format=auto"];
-	if (quality) {
+	if (quality && quality > 0) {
 		params.push(`quality=${quality}`);
 	}
 	const paramsString = params.join(",");
