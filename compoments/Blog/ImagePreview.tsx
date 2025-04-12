@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
+import Image from "next/image";
 
 interface Props {
 	src: string;
@@ -195,13 +196,46 @@ export default function ImagePreview(props: Props) {
 					className="fixed inset-0 bg-bsecondary/50 backdrop-blur-md flex flex-col items-center z-50"
 					onClick={handleOverlayClick}
 				>
+					<div className="fixed top-0 left-0 right-0 py-2 px-4 bg-bsecondary/90 backdrop-blur-md flex justify-between items-center z-30">
+						<div className="text-secondary flex items-center gap-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+								 className="my-auto" viewBox="0 0 16 16">
+								<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+								<path
+									d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
+							</svg>
+							<span>{props.alt}</span>
+							<span className="text-secondary/70">
+								{Math.round(state.currentScale * 100)}%
+							</span>
+						</div>
+						<button
+							onClick={() => dispatch({ type: "open/close" })}
+							className="text-secondary hover:text-secondary/70 transition-colors p-2 cursor-pointer"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
 					<img
 						ref={imageDivRef}
 						{...props}
 						src={props.src}
 						alt={props.alt}
 						className={cn(
-							"shadow cursor-zoom-in my-auto z-100 max-w-[90vw] max-h-[90vh] object-contain mx-2",
+							"shadow cursor-zoom-in my-auto z-20 max-w-[90vw] max-h-[90vh] object-contain mx-2",
 							state.currentScale === state.scale && "cursor-move",
 							!state.dragging && "duration-200"
 						)}
@@ -218,19 +252,13 @@ export default function ImagePreview(props: Props) {
 						onTouchMove={handleTouchMove}
 						onTouchEnd={handleTouchEnd}
 					/>
-					<div className={cn(
-						"fixed w-96 h-16 bg-bsecondary/60 backdrop-blur-md bottom-0 m-12 z-150 px-8 py-4",
-						"rounded-full border border-secondary shadow-amber-50"
-					)}>
-						123
-					</div>
 
 				</div>
 			)}
 			<div className="group relative cursor-pointer rounded hover:scale-101 duration-200"
 				 onClick={() => dispatch({ type: "open/close" })}
 			>
-				<img
+				<Image
 					{...props}
 					src={props.src}
 					alt={props.alt+" - preview"}
