@@ -1,6 +1,6 @@
 import "server-only";
 
-import "@/app/markdown.css";
+import "@/app/content.css";
 import Comments from "@/compoments/comments";
 import { Metadata } from "next";
 import Part from "@/compoments/Part";

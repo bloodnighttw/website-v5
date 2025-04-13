@@ -7,6 +7,8 @@ import Part from "@/compoments/Part";
 import { Stacks } from "@/compoments/Project/Stack";
 import { allProjects } from "content-collections";
 
+import "@/app/content.css"
+
 export async function generateStaticParams() {
 	return allProjects.map((post) => {
 		return {
