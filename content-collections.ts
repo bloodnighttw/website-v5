@@ -9,6 +9,7 @@ import { select, selectAll } from "unist-util-select";
 import remarkParse from "remark-parse";
 
 import { Text } from "hast";
+import { generateToc } from "@/utils/remark-plugin/remarkHeadingId";
 
 const getFirstImage = (content: string): string | null => {
 	const tree = unified()
@@ -37,6 +38,16 @@ const getPreviewMessage = (content: string): string => {
 		.slice(0, 400);
 };
 
+const handleToc = (content: string) => {
+
+	const ast = unified()
+		.use(remarkParse)
+		.use(remarkMdx)
+		.parse(content);
+
+	return generateToc(ast)
+}
+
 const posts = defineCollection({
 	name: "posts",
 	directory: "contents/posts",
@@ -60,11 +71,14 @@ const posts = defineCollection({
 			getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
 		const previewText = getPreviewMessage(content);
 
+		const toc = handleToc(content);
+
 		return {
 			slug,
 			...others,
 			description: previewText,
 			preview: firstImage,
+			toc,
 		};
 	},
 });
