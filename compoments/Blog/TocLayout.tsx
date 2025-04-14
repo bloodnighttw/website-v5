@@ -71,24 +71,30 @@ export default function Page(prop:Props) {
 			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-4"
 		)}
 		>
-			<Link
+			<div
 				className={cn(
+					"cursor-pointer",
 					// to prevent the animation is triggered when first load
 					progress === -1 && "hidden",
 					progress === 0 && "fade-out",
 					progress > 0 && "fade-in",
 				)}
-				href={"#"}
+				// bring the element to the top
+				onClick={(e)=> {
+					e.preventDefault();
+					if (!ref.current) return;
+					document.body.scrollIntoView({ behavior: "smooth" });
+				}}
 			>
 				{ToTop}
-			</Link>
+			</div>
 		</div>
 	},[progress]);
 
 
 	return <div ref={ref}>
 		{childrenMemo}
-		<div className="relative border-b border-dot">
+		<div className="relative border-b border-dot bg-bsecondary/60">
 			<Part>
 				<div>publish at</div>
 			</Part>
