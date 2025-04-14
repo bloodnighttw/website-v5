@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
-import { ListSvg, ToTop } from "@/app/assets/svg";
+import { ToTop } from "@/app/assets/svg";
 import Part from "@/compoments/Part";
 
 interface LayoutProps {
@@ -11,6 +11,43 @@ interface LayoutProps {
 
 interface TocProp {
 	progressRef: React.RefObject<number>;
+}
+
+function CircleArc(props: { progress: number }) {
+
+	const progressHandled = props.progress >= 0 ? props.progress : 0;
+
+	const radius = 7.5;
+	const circumference = 2 * Math.PI * radius;
+	const length = circumference * (progressHandled / 100);
+
+	return (
+		<svg
+			width="32"
+			height="32"
+			viewBox="0 0 16 16"
+		>
+			<circle
+				cx="8"
+				cy="8"
+				r={radius}
+				strokeWidth="1"
+				strokeDasharray={`${length} 1000`}
+				className="stroke-primary"
+				transform="rotate(-90 8 8)"
+			/>
+			<path
+				fillRule="evenodd"
+				d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+				className={cn(
+					"stroke-primary origin-center duration-200",
+					length === 0 ? "scale-60" : "scale-50" ,
+
+				)}
+			/>
+		</svg>
+	);
+
 }
 
 function Toc(prop: TocProp) {
@@ -31,10 +68,12 @@ function Toc(prop: TocProp) {
 	},[prop.progressRef]);
 
 	useEffect(() => {
-		handleScroll();
+		handleScroll()
 		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("scrollend", handleScroll);
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("scrollend", handleScroll);
 		};
 	}, [handleScroll]);
 
@@ -62,7 +101,6 @@ function Toc(prop: TocProp) {
 
 		if (!divRef.current.contains(e.target as Node)) {
 			setOpen(false);
-			console.log("click outside");
 		}
 	},[]);
 
@@ -79,11 +117,11 @@ function Toc(prop: TocProp) {
 			<div
 				className={cn(
 					"bg-bprimary h-8 w-8 rounded-full *:m-auto flex items-center justify-center",
-					"border border-dot cursor-pointer active:scale-90 duration-200 relative",
+					"cursor-pointer active:scale-90 duration-200 relative",
 				)}
 				onClick={handleClick}
 			>
-				{ListSvg}
+				<CircleArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
 				"absolute w-96 h-96 border border-dot rounded right-0 bottom-9 bg-bprimary/80",
@@ -185,7 +223,7 @@ export default function Page(prop:LayoutProps) {
 		const diff = Math.floor(( (windowHeight-rectTop-translation)));
 
 		// the percentage of the div that is visible
-		progressRef.current = Math.floor((diff / (rectBottom - rectTop - translation)) * 100);
+		progressRef.current = (diff / (rectBottom - rectTop - translation)) * 100;
 	},[]);
 
 	const handleScroll = useCallback(() => {
