@@ -2,16 +2,79 @@
 
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
-import { ToTop } from "@/app/assets/svg";
-import Link from "next/link";
+import { ListSvg, ToTop } from "@/app/assets/svg";
 import Part from "@/compoments/Part";
 
-interface Props {
+interface LayoutProps {
 	children: React.ReactNode;
 }
 
+interface TocProp {
+	overBottom: boolean;
+}
 
-export default function Page(prop:Props) {
+function Toc(prop: TocProp) {
+
+	console.log(prop);
+	const [open, setOpen] = React.useState(false);
+	const divRef = React.useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (prop.overBottom) {
+			setOpen(false);
+		}
+	}, [prop.overBottom]);
+
+	const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+		if(open && prop.overBottom){
+			// scroll this div to the bottom
+			e.currentTarget.scrollIntoView({
+				behavior: "smooth",
+				block: "end",
+			})
+		}
+		setOpen(!open);
+	},[open, prop.overBottom])
+
+	const clickOutside = useCallback((e: MouseEvent) => {
+		if (!divRef.current) return;
+		if (!divRef.current.contains(e.target as Node)) {
+			setOpen(false);
+		}
+	},[]);
+
+	useEffect(() => {
+		document.addEventListener("click", clickOutside);
+		return () => {
+			document.removeEventListener("click", clickOutside);
+		};
+	}, [clickOutside]);
+
+
+	return (
+		<div ref={divRef}>
+			<div
+				className={cn(
+					"bg-bprimary h-8 w-8 rounded-full *:m-auto flex items-center justify-center scroll-mb-2",
+					"border border-dot cursor-pointer active:scale-90 duration-200 relative",
+				)}
+				onClick={handleClick}
+			>
+				{ListSvg}
+			</div>
+			<div className={cn(
+				"absolute w-96 h-96 border border-dot rounded right-0 bottom-9 bg-bprimary/80",
+				"backdrop-blur p-2 duration-200 origin-bottom-right",
+				open ? "scale-100" : "scale-0",
+			)}>
+				223
+			</div>
+		</div>
+	)
+}
+
+
+export default function Page(prop:LayoutProps) {
 
 	const [progress, setProgress] = React.useState(-1); //-1 means first load
 	const ref = React.useRef<HTMLDivElement>(null);
@@ -64,16 +127,23 @@ export default function Page(prop:Props) {
 		return prop.children
 	},[prop.children])
 
-	const progressMemo = React.useMemo(() => {
+
+	const tocDep = progress >= 99;
+
+	const TocMemo = React.useMemo(() => (
+		<Toc overBottom={tocDep}/>
+	),[tocDep]);
+
+	const bottomPanelMemo = React.useMemo(() => {
 		return <div className={cn(
 			progress === 100 && "absolute",
 			progress < 100 && "fixed z-100",
-			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-4"
+			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2"
 		)}
 		>
 			<div
 				className={cn(
-					"cursor-pointer",
+					"cursor-pointer active:scale-90 duration-200",
 					// to prevent the animation is triggered when first load
 					progress === -1 && "hidden",
 					progress === 0 && "fade-out",
@@ -88,8 +158,9 @@ export default function Page(prop:Props) {
 			>
 				{ToTop}
 			</div>
+			{TocMemo}
 		</div>
-	},[progress]);
+	},[progress, TocMemo]);
 
 
 	return <div ref={ref}>
@@ -98,7 +169,7 @@ export default function Page(prop:Props) {
 			<Part>
 				<div>publish at</div>
 			</Part>
-			{progressMemo}
+			{bottomPanelMemo}
 		</div>
 	</div>
 }
