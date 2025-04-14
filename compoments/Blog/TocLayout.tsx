@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect} from "react";
 import cn from "@/utils/cn";
 import { ListSvg, ToTop } from "@/app/assets/svg";
 import Part from "@/compoments/Part";
@@ -10,7 +10,6 @@ interface LayoutProps {
 }
 
 interface TocProp {
-	overBottom: boolean;
 	progressRef: React.RefObject<number>;
 }
 
@@ -40,16 +39,15 @@ function Toc(prop: TocProp) {
 	}, [handleScroll]);
 
 
+
 	useEffect(() => {
-		if (prop.overBottom) {
+		if (progress === 100) {
 			setOpen(false);
 		}
-	}, [prop.overBottom]);
+	}, [progress]);
 
 	const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-		console.log(open, prop.overBottom);
-		if(!open && prop.overBottom){
-			console.log(prop.overBottom);
+		if(!open && progress === 100){
 			// scroll this div to the bottom
 			e.currentTarget.scrollIntoView({
 				behavior: "smooth",
@@ -57,7 +55,7 @@ function Toc(prop: TocProp) {
 			})
 		}
 		setOpen(!open);
-	},[open, prop.overBottom])
+	},[open, progress])
 
 	const clickOutside = useCallback((e: MouseEvent) => {
 		if (!divRef.current) return;
@@ -169,12 +167,9 @@ export default function Page(prop:LayoutProps) {
 		return prop.children
 	},[prop.children])
 
-
-	const tocDep = styleStatus === 2;
-
 	const TocMemo = React.useMemo(() => (
-		<Toc overBottom={tocDep} progressRef={progressRef}/>
-	),[tocDep]);
+		<Toc progressRef={progressRef}/>
+	),[]);
 
 	const bottomPanelMemo = React.useMemo(() => {
 		return <div className={cn(
