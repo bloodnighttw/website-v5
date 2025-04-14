@@ -117,3 +117,32 @@
 	);
 	background-size: 300% 300%;
 }
+
+
+@keyframes fadeOut{
+    0% {
+        display: block;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@utility fade-out {
+    animation: fadeOut .4s ease-in-out forwards;
+}
+
+@keyframes fadeIn{
+    0% {
+        display: block;
+        opacity: 0;
+    }
+    100% {
+        display: block;
+    }
+}
+
+@utility fade-in {
+    animation: fadeIn .4s ease-in-out forwards;
+}
