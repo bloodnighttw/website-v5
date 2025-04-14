@@ -47,7 +47,9 @@ function Toc(prop: TocProp) {
 	}, [prop.overBottom]);
 
 	const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-		if(open && prop.overBottom){
+		console.log(open, prop.overBottom);
+		if(!open && prop.overBottom){
+			console.log(prop.overBottom);
 			// scroll this div to the bottom
 			e.currentTarget.scrollIntoView({
 				behavior: "smooth",
@@ -168,7 +170,7 @@ export default function Page(prop:LayoutProps) {
 	},[prop.children])
 
 
-	const tocDep = styleStatus <= 1;
+	const tocDep = styleStatus === 2;
 
 	const TocMemo = React.useMemo(() => (
 		<Toc overBottom={tocDep} progressRef={progressRef}/>
