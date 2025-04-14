@@ -11,13 +11,34 @@ interface LayoutProps {
 
 interface TocProp {
 	overBottom: boolean;
+	progressRef: React.RefObject<number>;
 }
 
 function Toc(prop: TocProp) {
 
-	console.log(prop);
 	const [open, setOpen] = React.useState(false);
+	const [progress, setProgress] = React.useState(0);
+
 	const divRef = React.useRef<HTMLDivElement>(null);
+
+	const handleScroll = useCallback(() => {
+
+		if(!divRef.current) return;
+
+		const progressValue = prop.progressRef.current;
+
+		setProgress(progressValue);
+
+	},[prop.progressRef]);
+
+	useEffect(() => {
+		handleScroll();
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, [handleScroll]);
+
 
 	useEffect(() => {
 		if (prop.overBottom) {
@@ -73,15 +94,17 @@ function Toc(prop: TocProp) {
 	)
 }
 
+type styleState = -1 | 0 | 1 | 2 ;
 
 export default function Page(prop:LayoutProps) {
 
-	const [progress, setProgress] = React.useState(-1); //-1 means first load
 	const ref = React.useRef<HTMLDivElement>(null);
+	const [styleStatus, setStyleStatus] = React.useState<styleState>(-1);
+	const progressRef = React.useRef(-1);
 
-	const handleScroll = useCallback(() => {
+	const handleProgress = useCallback(() => {
 
-		if (!ref.current) return;
+		if(!ref.current) return;
 
 		const rect = ref.current.getBoundingClientRect();
 
@@ -105,39 +128,56 @@ export default function Page(prop:LayoutProps) {
 		const diff = Math.floor(( (windowHeight-rectTop-translation)));
 
 		// the percentage of the div that is visible
-		const percent = Math.floor((diff / (rectBottom - rectTop-translation)) * 100);
+		progressRef.current = Math.floor((diff / (rectBottom - rectTop - translation)) * 100);
+	},[]);
 
-		if(percent === 0 && progress === -1) {
-			// this is the first load, and we don't need to update the progress since it is at 0%
-			return;
+	const handleScroll = useCallback(() => {
+
+		if(progressRef.current === -1) return;
+
+		const progressValue = progressRef.current;
+
+		if( progressValue === 0){
+			if( styleStatus === -1)
+				return;
+			setStyleStatus(0)
+		} else if (progressValue > 0 && progressValue < 100) {
+			setStyleStatus(1);
+		} else if (progressValue >= 100) {
+			setStyleStatus(2);
 		}
 
-		setProgress(percent > 100 ? 100 : percent);
-	},[progress]);
+	},[styleStatus])
 
 	useEffect(() => {
+
+		handleProgress();
 		handleScroll();
+
+		window.addEventListener("scroll", handleProgress);
 		window.addEventListener("scroll", handleScroll);
 		return () => {
+			window.removeEventListener("scroll", handleProgress);
 			window.removeEventListener("scroll", handleScroll);
 		};
-	}, [handleScroll]);
+	}, [handleProgress, handleScroll]);
+
 
 	const childrenMemo = React.useMemo(() => {
 		return prop.children
 	},[prop.children])
 
 
-	const tocDep = progress >= 99;
+	const tocDep = styleStatus <= 1;
 
 	const TocMemo = React.useMemo(() => (
-		<Toc overBottom={tocDep}/>
+		<Toc overBottom={tocDep} progressRef={progressRef}/>
 	),[tocDep]);
 
 	const bottomPanelMemo = React.useMemo(() => {
 		return <div className={cn(
-			progress === 100 && "absolute",
-			progress < 100 && "fixed z-100",
+			styleStatus === 2 && "absolute",
+			styleStatus <= 1 && "fixed z-100",
 			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2"
 		)}
 		>
@@ -145,9 +185,9 @@ export default function Page(prop:LayoutProps) {
 				className={cn(
 					"cursor-pointer active:scale-90 duration-200",
 					// to prevent the animation is triggered when first load
-					progress === -1 && "hidden",
-					progress === 0 && "fade-out",
-					progress > 0 && "fade-in",
+					styleStatus === -1 && "hidden",
+					styleStatus === 0 && "fade-out",
+					styleStatus >= 1 && "fade-in",
 				)}
 				// bring the element to the top
 				onClick={(e)=> {
@@ -160,7 +200,7 @@ export default function Page(prop:LayoutProps) {
 			</div>
 			{TocMemo}
 		</div>
-	},[progress, TocMemo]);
+	},[TocMemo, styleStatus]);
 
 
 	return <div ref={ref}>
