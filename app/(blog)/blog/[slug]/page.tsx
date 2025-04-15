@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import Part from "@/compoments/Part";
 import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
 import { allPosts } from "content-collections";
-import TocLayout from "@/compoments/Blog/TocLayout";
+import Layout from "@/compoments/Blog/Addon/Layout";
 
 export async function generateStaticParams() {
 	return allPosts.map((post) => {
@@ -76,13 +76,13 @@ export default async function Blog({
 	return (
 		<>
 			<ArticleSecondaryPanel content={content} />
-			<TocLayout>
+			<Layout>
 				<Part className="bg-bprimary">
 					<article>
 						<Content />
 					</article>
 				</Part>
-			</TocLayout>
+			</Layout>
 
 			<Part className="bg-dotted">
 				<Comments />
