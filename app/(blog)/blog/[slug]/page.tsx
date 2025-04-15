@@ -73,10 +73,17 @@ export default async function Blog({
 		`@/contents/posts/${content.slug}.mdx`
 	);
 
+	const timeWithFormat = new Intl.DateTimeFormat("zh", {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+
+	}).format(content.date);
+
 	return (
 		<>
 			<ArticleSecondaryPanel content={content} />
-			<Layout tocArray={content.toc}>
+			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
 				<Part className="bg-bprimary">
 					<article>
 						<Content />
