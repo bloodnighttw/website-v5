@@ -193,7 +193,7 @@ export default function ImagePreview(props: Props) {
 		<>
 			{state.open && (
 				<span
-					className="fixed inset-0 bg-bsecondary/50 backdrop-blur-md flex flex-col items-center z-50"
+					className="fixed inset-0 bg-bsecondary/50 backdrop-blur-md flex flex-col items-center z-500"
 					onClick={handleOverlayClick}
 				>
 					<span className="fixed top-0 left-0 right-0 py-2 px-4 bg-bsecondary/90 backdrop-blur-md flex justify-between items-center z-30">
