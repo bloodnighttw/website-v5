@@ -8,9 +8,12 @@ import Toc from "@/compoments/Blog/Addon/Toc";
 
 interface LayoutProps {
 	children: React.ReactNode;
+	tocArray: {
+		depth: number;
+		text: string;
+		id: string;
+	}[]
 }
-
-
 
 export default function Page(prop:LayoutProps) {
 
@@ -79,8 +82,8 @@ export default function Page(prop:LayoutProps) {
 	},[prop.children])
 
 	const TocMemo = React.useMemo(() => (
-		<Toc progressRef={progressRef}/>
-	),[]);
+		<Toc progressRef={progressRef} tocArray={prop.tocArray}/>
+	),[prop.tocArray]);
 
 	const goToTopMemo = React.useMemo(() => (
 		<GoToTop progressRef={progressRef}/>

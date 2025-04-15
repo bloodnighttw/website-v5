@@ -76,7 +76,7 @@ export default async function Blog({
 	return (
 		<>
 			<ArticleSecondaryPanel content={content} />
-			<Layout>
+			<Layout tocArray={content.toc}>
 				<Part className="bg-bprimary">
 					<article>
 						<Content />

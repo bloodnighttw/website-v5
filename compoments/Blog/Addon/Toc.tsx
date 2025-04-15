@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import cn from "@/utils/cn";
 
 function CircleArc(props: { progress: number }) {
@@ -37,8 +37,29 @@ function CircleArc(props: { progress: number }) {
 	);
 }
 
+interface TocTree{
+	depth: 1 | 2 | 3 | 4 | 5 | 6;
+	text: string;
+	id: string;
+}
+
+function TocElement(toc: TocTree){
+
+	return <a href={`#${toc.id}`} className={cn(
+		"w-60 border-l border-dot hover:border-primary hover:bg-bsecondary/40 rounded-r",
+		toc.depth === 1 && "pl-4",
+		toc.depth === 2 && "pl-8",
+		toc.depth > 2 && "pl-12",
+		toc.depth > 3 && "text-primary/90",
+	)}>
+		{toc.text}
+	</a>
+
+}
+
 interface TocProp {
 	progressRef: React.RefObject<number>;
+	tocArray: TocTree[]
 }
 
 export default function Toc(prop: TocProp) {
@@ -102,6 +123,12 @@ export default function Toc(prop: TocProp) {
 		};
 	}, [clickOutside]);
 
+	const tocElementsMemo = useMemo(()=> {
+		return prop.tocArray.map((toc)=> {
+			return <TocElement {...toc} key={toc.id}/>
+		})
+	},[prop.tocArray])
+
 
 	return (
 		<div className="scroll-mb-2" ref={divRef}>
@@ -115,11 +142,13 @@ export default function Toc(prop: TocProp) {
 				<CircleArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
-				"absolute w-96 h-96 border border-dot rounded right-0 bottom-9 bg-bprimary/80",
-				"backdrop-blur p-2 duration-200 origin-bottom-right",
+				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/80",
+				"backdrop-blur p-2 duration-200 origin-bottom-right flex flex-col *:not-first:py-0.5",
+				"overflow-y-auto",
 				open ? "scale-100" : "scale-0",
 			)}>
-				223
+				<div className="mb-1">Table of content</div>
+				{tocElementsMemo}
 			</div>
 		</div>
 	)

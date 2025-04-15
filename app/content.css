@@ -168,12 +168,13 @@
 }
 
 @layer components {
-	article {
-		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
 
-		& {
-			scroll-margin-top: 5rem;
-		}
+	* {
+		@apply scroll-smooth;
+	}
+
+	article {
+		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4 prose-headings:scroll-mt-20;
 
 		code {
 			@apply bg-zinc-800 p-1 rounded mx-1;

@@ -29,7 +29,7 @@ export default function GoToTop({progressRef}: GoToTopProps) {
 	},[styleState, progressRef])
 
 	useEffect(() => {
-		// don't touch it, it's a hack to make the animation work
+		// don't touch it, it just work.
 		const task = setTimeout(()=>{
 			handleScroll();
 		}, 0);
