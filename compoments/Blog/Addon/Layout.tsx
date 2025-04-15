@@ -9,7 +9,7 @@ import Toc from "@/compoments/Blog/Addon/Toc";
 interface LayoutProps {
 	children: React.ReactNode;
 	tocArray: {
-		depth: number;
+		depth: 1 | 2 | 3 | 4 | 5 | 6;
 		text: string;
 		id: string;
 	}[]
