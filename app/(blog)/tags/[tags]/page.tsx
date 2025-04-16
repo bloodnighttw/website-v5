@@ -4,6 +4,7 @@ import HashTag from "@/compoments/HashTag";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
 	const posts = allPosts.slice();
@@ -26,6 +27,29 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+
+export async function generateMetadata(
+	{ params,}: { params: Promise<{ tags: string }>;
+}): Promise<Metadata> {
+
+	const { tags } = await params;
+
+	return {
+		title: "Tags: "+tags,
+		openGraph: {
+			title: "Tags: "+tags,
+			type: "website",
+			images: [],
+		},
+		twitter: {
+			title: "Tags: "+tags,
+			site: "@bloodnighttw",
+			card: "summary_large_image",
+			images: [],
+		},
+	}
+}
 
 export default async function Tags({
 	params,
