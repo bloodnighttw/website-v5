@@ -36,9 +36,9 @@ export async function generateMetadata(
 	const { tags } = await params;
 
 	return {
-		title: "Tags: "+tags,
+		title: "Tags: "+tags + " | Bloodnighttw",
 		openGraph: {
-			title: "Tags: "+tags,
+			title: "Tags: "+tags+ " | Bloodnighttw",
 			type: "website",
 			images: [],
 		},
