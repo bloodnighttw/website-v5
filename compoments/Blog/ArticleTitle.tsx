@@ -1,4 +1,5 @@
 import Link from "next/link";
+import cn from "@/utils/cn";
 
 export default function ArticleTitle({
 	title,
@@ -9,7 +10,10 @@ export default function ArticleTitle({
 }) {
 	return (
 		<div className="flex items-end">
-			<p className="text-secondary mr-auto text-2xl group-hover/tag:ml-2 duration-200">{title}</p>
+			<p className={cn(
+				"text-secondary mr-auto text-2xl duration-200",
+				"resize-underline-none group-hover/tag:resize-underline"
+			)}>{title}</p>
 			{url && (
 				<Link
 					className="text-secondary hover:underline"

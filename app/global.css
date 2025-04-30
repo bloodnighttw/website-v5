@@ -43,22 +43,29 @@
 	}
 }
 
+@utility resize-underline-none {
+
+    @apply relative;
+
+    &::after {
+        @apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
+        content: "";
+        background-color: var(--color-primary);
+    }
+}
+
+@utility resize-underline {
+    &::after {
+        width: 100%;
+    }
+}
+
 @utility hashtag {
-	@apply font-mono relative cursor-pointer;
+	@apply font-mono relative cursor-pointer resize-underline-none hover:resize-underline;
 
 	&::before {
 		@apply decoration-dashed;
 		content: "#";
-	}
-
-	&::after {
-		@apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
-		content: "";
-		background-color: var(--color-primary);
-	}
-
-	&:hover::after {
-		width: 100%;
 	}
 }
 
