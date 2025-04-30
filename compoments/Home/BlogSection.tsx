@@ -4,6 +4,7 @@ import CardTitle from "@/compoments/Blog/ArticleTitle";
 import Part from "@/compoments/Part";
 import Chapter from "@/compoments/Text/Chapter";
 import { allPosts } from "content-collections";
+import ArticleContainer from "@/compoments/Blog/ArticleContainer";
 
 export default async function BlogSection() {
 	const sortedByTime = allPosts
@@ -16,26 +17,30 @@ export default async function BlogSection() {
 			<Chapter>My blog</Chapter>
 
 			{sortedByPin.length > 0 && (
-				<>
+				<ArticleContainer>
 					<CardTitle title="Pinned Posts" />
 					<CardCollection>
 						<ArticleCards infos={sortedByPin} />
 					</CardCollection>
-				</>
+				</ArticleContainer>
 			)}
 
-			<CardTitle title="Recent Posts" url={"/blog"} />
-			<CardCollection>
-				<ArticleCards infos={sortedByTime.slice(0, 4)} />
-			</CardCollection>
-			<CardTitle title="About linux" url={"/tags/linux"} />
-			<CardCollection>
-				<ArticleCards
-					infos={sortedByTime.filter((it) =>
-						it.categories.includes("linux"),
-					)}
-				/>
-			</CardCollection>
+			<ArticleContainer>
+				<CardTitle title="Recent Posts" url={"/blog"} />
+				<CardCollection>
+					<ArticleCards infos={sortedByTime.slice(0, 4)} />
+				</CardCollection>
+			</ArticleContainer>
+			<ArticleContainer>
+				<CardTitle title="About linux" url={"/tags/linux"} />
+				<CardCollection>
+					<ArticleCards
+						infos={sortedByTime.filter((it) =>
+							it.categories.includes("linux"),
+						)}
+					/>
+				</CardCollection>
+			</ArticleContainer>
 		</Part>
 	);
 }

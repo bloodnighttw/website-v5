@@ -9,7 +9,7 @@ export default function ArticleTitle({
 }) {
 	return (
 		<div className="flex items-end">
-			<p className="text-secondary mr-auto text-2xl">{title}</p>
+			<p className="text-secondary mr-auto text-2xl group-hover/tag:ml-2 duration-200">{title}</p>
 			{url && (
 				<Link
 					className="text-secondary hover:underline"
