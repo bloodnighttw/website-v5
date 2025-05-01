@@ -2,15 +2,33 @@ import { defineCollection, defineConfig } from "@content-collections/core";
 
 import { unified } from "unified";
 import remarkGfm from "remark-gfm";
-import { Image } from "mdast";
+import { Heading, Image, Root } from "mdast";
 
 import remarkMdx from "remark-mdx";
 import { select, selectAll } from "unist-util-select";
 import remarkParse from "remark-parse";
 
 import { Text } from "hast";
+import { generateId } from "@/utils/rehype-plugin/section";
 
-import { generateToc } from "@/utils/remark-plugin/remarkSection";
+export function generateToc(ast: Root) {
+
+	const headings = selectAll("heading", ast) as Heading[];
+	const idMap = new Map<string, number>();
+
+	return headings.map((heading) => {
+
+		const text = selectAll("text", heading) as Text[];
+		const id = generateId(idMap, text);
+
+		return {
+			depth: heading.depth,
+			id,
+			text: text.map((it) => it.value).join()
+		};
+	});
+}
+
 
 const getFirstImage = (content: string): string | null => {
 	const tree = unified()

@@ -38,7 +38,7 @@
 
 @utility line {
 	&::before {
-		@apply text-primary/50 inline-block select-none w-8 text-right pr-4;
+		@apply text-primary/50 inline-block select-none w-10 text-right pr-4;
 		content: attr(data-line-number);
 	}
 }

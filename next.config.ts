@@ -6,7 +6,7 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import rehypeStarryNight from "rehype-starry-night";
 import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkImageSize from "@/utils/remark-plugin/remarkImageSize";
-import remarkSection from "@/utils/remark-plugin/remarkSection";
+import section from "@/utils/rehype-plugin/section";
 
 const withMDX = createMDX({
 	options: {
@@ -14,9 +14,8 @@ const withMDX = createMDX({
 			remarkFrontmatter,
 			remarkMdxFrontmatter,
 			remarkImageSize,
-			remarkSection
 		],
-		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers],
+		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers, section],
 	},
 });
 
