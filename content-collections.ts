@@ -9,7 +9,8 @@ import { select, selectAll } from "unist-util-select";
 import remarkParse from "remark-parse";
 
 import { Text } from "hast";
-import { generateToc } from "@/utils/remark-plugin/remarkHeadingId";
+
+import { generateToc } from "@/utils/remark-plugin/remarkSection";
 
 const getFirstImage = (content: string): string | null => {
 	const tree = unified()
