@@ -201,7 +201,7 @@ export default function Toc(prop: TocProp) {
 				<div className="relative">
 
 					<div
-						className="absolute top-0 left-0 w-0.5 ml-[7px] bg-secondary/80 duration-200 z-2"
+						className="absolute top-0.5 left-0 w-0.5 ml-[7px] bg-primary/80 duration-200 z-2"
 						style={{
 							"marginTop": `${tocSideLine.mt}px`,
 							"height": `${tocSideLine.height}px`,
