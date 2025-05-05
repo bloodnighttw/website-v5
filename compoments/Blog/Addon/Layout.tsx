@@ -4,7 +4,8 @@ import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
 import Part from "@/compoments/Part";
 import GoToTop from "@/compoments/Blog/Addon/GoToTop";
-import Toc, { TocTree } from "@/compoments/Blog/Addon/Toc";
+import Toc from "@/compoments/Blog/Addon/Toc";
+import { TocTree } from "@/compoments/Blog/Addon/TocElement";
 
 interface LayoutProps {
 	children: React.ReactNode;
