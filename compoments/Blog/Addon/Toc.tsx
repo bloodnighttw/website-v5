@@ -138,10 +138,7 @@ export default function Toc(prop: TocProp) {
 					/>
 
 					<div
-						className="absolute top-0 left-0 w-0.5 ml-[7px] mt-1 h-full bg-secondary/20 z-1"
-						 style={{
-							 "height": `${(prop.tocArray.length) * 1.5 - 0.125}rem`,
-						 }}
+						className="absolute top-0 left-0 w-0.5 ml-[7px] mt-[0.125rem] h-[calc(100%-0.25rem)] bg-secondary/20 z-1"
 					/>
 					<div className="flex flex-col">
 						{tocElementsMemo}
