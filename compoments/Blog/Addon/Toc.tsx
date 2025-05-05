@@ -42,13 +42,13 @@ interface TocTree{
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
+	onScreen: ()=> void;
+	leftScreen: ()=> void;
 }
 
 function TocElement(toc: TocTree){
 
-	const [onScreen, setOnScreen] = React.useState(false);
 	const ref = React.useRef<HTMLAnchorElement>(null);
-
 
 
 	const onViewportChange = useCallback(() => {
@@ -67,8 +67,16 @@ function TocElement(toc: TocTree){
 			rect.top > viewportHeight // Below the bottom edge
 		);
 
-		setOnScreen(onViewport);
-	},[toc.id]);
+		if(onViewport){
+			toc.onScreen();
+		}
+		else{
+			toc.leftScreen();
+		}
+
+
+	},[toc]);
+
 
 	useEffect(() => {
 
@@ -83,15 +91,19 @@ function TocElement(toc: TocTree){
 
 		onViewportChange();
 
+		return () => {
+			window.removeEventListener("scroll", onViewportChange);
+			window.removeEventListener("resize", onViewportChange);
+		};
+
 	}, [onViewportChange, toc.id]);
 
 	return <a href={`#${toc.id}`} className={cn(
-		"w-60 border-l border-dot hover:bg-bsecondary/40 rounded-r",
-		toc.depth === 1 && "pl-4",
-		toc.depth === 2 && "pl-8",
-		toc.depth > 2 && "pl-12",
+		"w-60 hover:bg-bsecondary/40 rounded",
+		toc.depth === 1 && "pl-6",
+		toc.depth === 2 && "pl-10",
+		toc.depth > 2 && "pl-14",
 		toc.depth > 3 && "text-primary/90",
-		onScreen ? "border-primary/95" : "hover:border-primary/50",
 	)}>
 		{toc.text}
 	</a>
@@ -164,11 +176,34 @@ export default function Toc(prop: TocProp) {
 		};
 	}, [clickOutside]);
 
+	const [browseList, setBrowseList] = React.useState<number[]>([]);
+
 	const tocElementsMemo = useMemo(()=> {
-		return prop.tocArray.map((toc)=> {
-			return <TocElement {...toc} key={toc.id}/>
+		return prop.tocArray.map((toc, index)=> {
+
+			const add2List = () => {
+				if(!browseList.includes(index)){
+					const newList = [...browseList, index];
+					setBrowseList(newList);
+				}
+			}
+
+			const removeFromList = () => {
+				if(browseList.includes(index)){
+					const newList = [...browseList];
+					newList.splice(newList.indexOf(index), 1);
+					setBrowseList(newList);
+				}
+			}
+
+			return <TocElement {...toc} key={toc.id} onScreen={add2List} leftScreen={removeFromList}/>
 		})
-	},[prop.tocArray])
+	},[browseList, prop.tocArray])
+
+	const smallestIndex = useMemo(() => {
+		if(browseList.length === 0) return 0;
+		return Math.min(...browseList);
+	},[browseList]);
 
 
 	return (
@@ -184,7 +219,7 @@ export default function Toc(prop: TocProp) {
 			</div>
 			<div className={cn(
 				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30",
-				"backdrop-blur p-2 duration-200 origin-bottom-right flex flex-col *:not-first:py-0.5",
+				"backdrop-blur p-2 duration-200 origin-bottom-right *:not-first:py-0.5",
 				"overflow-y-auto",
 				open ? "scale-100" : "scale-0",
 			)}>
@@ -196,7 +231,27 @@ export default function Toc(prop: TocProp) {
 					</svg>
 					<p>Table of Contents</p>
 				</div>
-					{tocElementsMemo}
+
+				<div className="relative">
+
+					<div
+						className="absolute top-0 left-0 w-0.5 ml-[7px] bg-secondary/80 duration-200 z-2"
+						style={{
+							"marginTop": `${smallestIndex * 1.5 + 0.125}rem`,
+							"height": `${(browseList.length) * 1.5}rem`,
+						}}
+					/>
+
+					<div
+						className="absolute top-0 left-0 w-0.5 ml-[7px] mt-1 h-full bg-secondary/20 z-1"
+						 style={{
+							 "height": `${(prop.tocArray.length) * 1.5 - 0.125}rem`,
+						 }}
+					/>
+					<div className="flex flex-col">
+						{tocElementsMemo}
+					</div>
+				</div>
 			</div>
 		</div>
 	)
