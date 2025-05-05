@@ -6,7 +6,7 @@ export interface TocTree {
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
-	index: number;
+	index?: number;
 	dispatch?: React.Dispatch<TocSideLineAction>;
 }
 
@@ -18,11 +18,11 @@ export function TocElement(toc: TocTree) {
 
 
 	const add2list = useCallback(() => {
-		dispatch?.({type: "add", payload: index});
+		dispatch?.({type: "add", payload: index!});
 	}, [dispatch, index]);
 
 	const removeFromList = useCallback(() => {
-		dispatch?.({type: "remove", payload: index});
+		dispatch?.({type: "remove", payload: index!});
 	},[dispatch, index]);
 
 	const onViewportChange = useCallback(() => {
