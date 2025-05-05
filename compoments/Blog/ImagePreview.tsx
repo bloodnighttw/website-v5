@@ -257,7 +257,7 @@ export default function ImagePreview(props: Props) {
 
 				</span>
 			)}
-			<span className="group relative cursor-pointer rounded hover:scale-101 duration-200"
+			<span className="group relative cursor-pointer rounded hover:scale-101 duration-200 bg-amber-50"
 				 onClick={() => dispatch({ type: "open/close" })}
 			>
 				<Image
@@ -271,10 +271,6 @@ export default function ImagePreview(props: Props) {
 					<span className="text-lg text-secondary/70 bg-bsecondary/70 p-2 rounded-full px-4">Click to view full size</span>
 				</span>
 			</span>
-			<span className="text-lg text-secondary/70 text-center flex justify-center mt-1">
-        		{props.alt}
-      		</span>
 		</>
 	);
 }
-
