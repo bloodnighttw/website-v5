@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer } from "react";
 import cn from "@/utils/cn";
 import { CircleArc } from "@/compoments/Blog/Addon/Radius";
 import { TocElement, TocTree } from "@/compoments/Blog/Addon/TocElement";
@@ -10,10 +10,94 @@ interface TocProp {
 	tocArray: TocTree[]
 }
 
+interface TocSideLineState{
+	heightDP: number[],
+	browseList: number[]
+	height: number
+	mt: number
+}
+
+export type TocSideLineAction =
+	{ type: "initNew", payload: number } | // init new line
+	{ type: "add", payload: number } | // index of the element to add
+	{ type: "remove", payload: number }; // index of the element to remove
+
+
+function update(newBrowseList: number[], heightDP: number[]) {
+
+	// TODO: can be optimized
+	const newBrowseListSorted = newBrowseList.sort((a, b) => a - b);
+
+	const maxIdx = Math.max(...newBrowseListSorted);
+	const minIdx = Math.min(...newBrowseListSorted);
+
+	const newmt = heightDP[minIdx-1];
+	const newHeight = heightDP[maxIdx] - newmt;
+
+	return {
+		newBrowseListSorted,
+		newmt,
+		newHeight
+	}
+}
+
+
+function reducer(state: TocSideLineState, action: TocSideLineAction): TocSideLineState {
+	switch (action.type) {
+		case "initNew":{
+			const lastHeight = state.heightDP[state.heightDP.length - 1];
+			const newHeight = lastHeight + action.payload;
+			return {
+				...state,
+				heightDP: [...state.heightDP, newHeight],
+			}
+		}
+		case "add":
+		{
+			const idx = action.payload + 1;
+			if(state.browseList.includes(idx)) return state;
+
+			const newState = update([...state.browseList, idx], state.heightDP);
+
+			return {
+				...state,
+				browseList: newState.newBrowseListSorted,
+				height: newState.newHeight,
+				mt: newState.newmt
+			}
+		}
+		case "remove":
+			{
+				const idx = action.payload + 1;
+				if(!state.browseList.includes(idx)) return state;
+
+				const newBrowseList = state.browseList.filter((item) => item !== idx);
+
+				const newState = update(newBrowseList, state.heightDP);
+
+				return {
+					...state,
+					browseList: newState.newBrowseListSorted,
+					height: newState.newHeight,
+					mt: newState.newmt
+				}
+			}
+		default:
+			return state;
+	}
+}
+
+
 export default function Toc(prop: TocProp) {
 
 	const [open, setOpen] = React.useState(false);
 	const [progress, setProgress] = React.useState(0);
+	const [tocSideLine, dispatch] = useReducer(reducer, {
+		heightDP: [0],
+		browseList: [],
+		height: 0,
+		mt: 0
+	})
 
 	const divRef = React.useRef<HTMLDivElement>(null);
 
@@ -71,34 +155,21 @@ export default function Toc(prop: TocProp) {
 		};
 	}, [clickOutside]);
 
-	const [browseList, setBrowseList] = React.useState<number[]>([]);
 
 	const tocElementsMemo = useMemo(()=> {
 		return prop.tocArray.map((toc, index)=> {
 
 			const add2List = () => {
-				if(!browseList.includes(index)){
-					const newList = [...browseList, index];
-					setBrowseList(newList);
-				}
+				dispatch({type: "add", payload: index});
 			}
 
 			const removeFromList = () => {
-				if(browseList.includes(index)){
-					const newList = [...browseList];
-					newList.splice(newList.indexOf(index), 1);
-					setBrowseList(newList);
-				}
+				dispatch({type: "remove", payload: index});
 			}
 
-			return <TocElement {...toc} key={toc.id} onScreen={add2List} leftScreen={removeFromList}/>
+			return <TocElement {...toc} key={toc.id} onScreen={add2List} leftScreen={removeFromList} dispatch={dispatch}/>
 		})
-	},[browseList, prop.tocArray])
-
-	const smallestIndex = useMemo(() => {
-		if(browseList.length === 0) return 0;
-		return Math.min(...browseList);
-	},[browseList]);
+	},[prop.tocArray])
 
 
 	return (
@@ -132,8 +203,8 @@ export default function Toc(prop: TocProp) {
 					<div
 						className="absolute top-0 left-0 w-0.5 ml-[7px] bg-secondary/80 duration-200 z-2"
 						style={{
-							"marginTop": `${smallestIndex * 1.5 + 0.125}rem`,
-							"height": `${(browseList.length) * 1.5}rem`,
+							"marginTop": `${tocSideLine.mt}px`,
+							"height": `${tocSideLine.height}px`,
 						}}
 					/>
 
