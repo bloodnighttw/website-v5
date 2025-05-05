@@ -49,7 +49,7 @@ export interface TocTree{
 function TocElement(toc: TocTree){
 
 	const ref = React.useRef<HTMLAnchorElement>(null);
-
+	const [onScreen, setOnScreen] = React.useState(false);
 
 	const onViewportChange = useCallback(() => {
 		if(!ref.current) return;
@@ -68,9 +68,11 @@ function TocElement(toc: TocTree){
 		);
 
 		if(onViewport){
+			setOnScreen(true);
 			toc.onScreen?.();
 		}
 		else{
+			setOnScreen(false);
 			toc.leftScreen?.();
 		}
 
@@ -99,11 +101,12 @@ function TocElement(toc: TocTree){
 	}, [onViewportChange, toc.id]);
 
 	return <a href={`#${toc.id}`} className={cn(
-		"w-60 hover:bg-bsecondary/40 rounded",
+		"w-60 hover:bg-bsecondary/40 rounded text-secondary/90",
 		toc.depth === 1 && "pl-6",
 		toc.depth === 2 && "pl-10",
 		toc.depth > 2 && "pl-14",
-		toc.depth > 3 && "text-primary/90",
+		toc.depth > 3 && "text-secondary/80",
+		onScreen && "text-primary/100",
 	)}>
 		{toc.text}
 	</a>
