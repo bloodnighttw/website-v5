@@ -6,8 +6,7 @@ export interface TocTree {
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
-	onScreen?: () => void;
-	leftScreen?: () => void;
+	index: number;
 	dispatch?: React.Dispatch<TocSideLineAction>;
 }
 
@@ -15,7 +14,16 @@ export function TocElement(toc: TocTree) {
 
 	const ref = React.useRef<HTMLElement>(null);
 	const [onScreen, setOnScreen] = React.useState(false);
-	const { dispatch } = toc;
+	const { dispatch, index } = toc;
+
+
+	const add2list = useCallback(() => {
+		dispatch?.({type: "add", payload: index});
+	}, [dispatch, index]);
+
+	const removeFromList = useCallback(() => {
+		dispatch?.({type: "remove", payload: index});
+	},[dispatch, index]);
 
 	const onViewportChange = useCallback(() => {
 		if (!ref.current) return;
@@ -33,12 +41,12 @@ export function TocElement(toc: TocTree) {
 
 		if (onViewport) {
 			setOnScreen(true);
-			toc.onScreen?.();
+			add2list();
 		} else {
 			setOnScreen(false);
-			toc.leftScreen?.();
+			removeFromList();
 		}
-	}, [toc]);
+	}, [add2list, removeFromList]);
 
 	const tocRef = React.useRef<HTMLAnchorElement>(null);
 

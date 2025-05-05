@@ -26,18 +26,18 @@ export type TocSideLineAction =
 function update(newBrowseList: number[], heightDP: number[]) {
 
 	// TODO: can be optimized
-	const newBrowseListSorted = newBrowseList.sort((a, b) => a - b);
+	const list = newBrowseList.sort((a, b) => a - b);
 
-	const maxIdx = Math.max(...newBrowseListSorted);
-	const minIdx = Math.min(...newBrowseListSorted);
+	const maxIdx = Math.max(...list);
+	const minIdx = Math.min(...list);
 
-	const newmt = heightDP[minIdx-1];
-	const newHeight = heightDP[maxIdx] - newmt;
+	const mt = heightDP[minIdx-1];
+	const height = heightDP[maxIdx] - mt;
 
 	return {
-		newBrowseListSorted,
-		newmt,
-		newHeight
+		list,
+		mt,
+		height
 	}
 }
 
@@ -61,9 +61,9 @@ function reducer(state: TocSideLineState, action: TocSideLineAction): TocSideLin
 
 			return {
 				...state,
-				browseList: newState.newBrowseListSorted,
-				height: newState.newHeight,
-				mt: newState.newmt
+				browseList: newState.list,
+				height: newState.height,
+				mt: newState.mt
 			}
 		}
 		case "remove":
@@ -77,9 +77,9 @@ function reducer(state: TocSideLineState, action: TocSideLineAction): TocSideLin
 
 				return {
 					...state,
-					browseList: newState.newBrowseListSorted,
-					height: newState.newHeight,
-					mt: newState.newmt
+					browseList: newState.list,
+					height: newState.height,
+					mt: newState.mt
 				}
 			}
 		default:
@@ -159,15 +159,8 @@ export default function Toc(prop: TocProp) {
 	const tocElementsMemo = useMemo(()=> {
 		return prop.tocArray.map((toc, index)=> {
 
-			const add2List = () => {
-				dispatch({type: "add", payload: index});
-			}
 
-			const removeFromList = () => {
-				dispatch({type: "remove", payload: index});
-			}
-
-			return <TocElement {...toc} key={toc.id} onScreen={add2List} leftScreen={removeFromList} dispatch={dispatch}/>
+			return <TocElement {...toc} key={toc.id} index={index} dispatch={dispatch}/>
 		})
 	},[prop.tocArray])
 
