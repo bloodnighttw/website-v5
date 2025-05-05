@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useEffect, useMemo } from "react";
 import cn from "@/utils/cn";
 
@@ -30,7 +32,6 @@ function CircleArc(props: { progress: number }) {
 				className={cn(
 					"stroke-primary origin-center duration-200",
 					length === 0 ? "scale-60" : "scale-50" ,
-
 				)}
 			/>
 		</svg>
@@ -45,12 +46,52 @@ interface TocTree{
 
 function TocElement(toc: TocTree){
 
+	const [onScreen, setOnScreen] = React.useState(false);
+	const ref = React.useRef<HTMLAnchorElement>(null);
+
+
+
+	const onViewportChange = useCallback(() => {
+		if(!ref.current) return;
+
+		const rect = ref.current.getBoundingClientRect();
+
+		console.log(toc.id, rect.top, rect.bottom, window.innerHeight);
+
+		// Get viewport dimensions
+		const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+		// Element is out of screen if any of these conditions are true:
+		const onViewport = !(
+			rect.bottom < 64 || // Above the top edge (also includes the navbar)
+			rect.top > viewportHeight // Below the bottom edge
+		);
+
+		setOnScreen(onViewport);
+	},[toc.id]);
+
+	useEffect(() => {
+
+		if(!ref.current) {
+			ref.current = document.querySelector(`#${toc.id}`) as HTMLAnchorElement;
+		}
+
+		window.addEventListener("scroll", onViewportChange);
+
+		// when page size is changed
+		window.addEventListener("resize", onViewportChange);
+
+		onViewportChange();
+
+	}, [onViewportChange, toc.id]);
+
 	return <a href={`#${toc.id}`} className={cn(
-		"w-60 border-l border-dot hover:border-primary hover:bg-bsecondary/40 rounded-r",
+		"w-60 border-l border-dot hover:bg-bsecondary/40 rounded-r",
 		toc.depth === 1 && "pl-4",
 		toc.depth === 2 && "pl-8",
 		toc.depth > 2 && "pl-12",
 		toc.depth > 3 && "text-primary/90",
+		onScreen ? "border-primary/95" : "hover:border-primary/50",
 	)}>
 		{toc.text}
 	</a>
@@ -142,13 +183,20 @@ export default function Toc(prop: TocProp) {
 				<CircleArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
-				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/80",
+				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30",
 				"backdrop-blur p-2 duration-200 origin-bottom-right flex flex-col *:not-first:py-0.5",
 				"overflow-y-auto",
 				open ? "scale-100" : "scale-0",
 			)}>
-				<div className="mb-1">Table of content</div>
-				{tocElementsMemo}
+				<div className="flex mb-1 gap-2 items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						 className="bi bi-justify-left" viewBox="0 0 16 16">
+						<path fillRule="evenodd"
+							  d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
+					</svg>
+					<p>Table of Contents</p>
+				</div>
+					{tocElementsMemo}
 			</div>
 		</div>
 	)
