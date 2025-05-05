@@ -42,8 +42,8 @@ export interface TocTree{
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
-	onScreen: ()=> void;
-	leftScreen: ()=> void;
+	onScreen?: ()=> void;
+	leftScreen?: ()=> void;
 }
 
 function TocElement(toc: TocTree){
@@ -68,10 +68,10 @@ function TocElement(toc: TocTree){
 		);
 
 		if(onViewport){
-			toc.onScreen();
+			toc.onScreen?.();
 		}
 		else{
-			toc.leftScreen();
+			toc.leftScreen?.();
 		}
 
 
