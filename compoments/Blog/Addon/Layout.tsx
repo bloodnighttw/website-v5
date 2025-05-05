@@ -4,17 +4,12 @@ import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
 import Part from "@/compoments/Part";
 import GoToTop from "@/compoments/Blog/Addon/GoToTop";
-import Toc from "@/compoments/Blog/Addon/Toc";
+import Toc, { TocTree } from "@/compoments/Blog/Addon/Toc";
 
 interface LayoutProps {
 	children: React.ReactNode;
-	tocArray: {
-		depth: 1 | 2 | 3 | 4 | 5 | 6;
-		text: string;
-		id: string;
-	}[],
+	tocArray: TocTree[];
 	publishAt: string;
-
 }
 
 export default function Page(prop:LayoutProps) {
