@@ -8,8 +8,12 @@ export default function Comments() {
 
 	const pathname = usePathname();
 
-	const lastSlashIndex = pathname.lastIndexOf("/");
-	const term = pathname.substring(lastSlashIndex + 1);
+	const pathnameSegments = pathname.split("/");
+
+	const lang = pathnameSegments[1];
+
+	// get the last segment of the pathname
+	const term = pathnameSegments[pathnameSegments.length - 1];
 
 	return (
 		<div>
@@ -22,6 +26,9 @@ export default function Comments() {
 				theme={`${BASE_URL}/giscus.css`}
 				reactionsEnabled="0"
 				inputPosition="top"
+				lang={
+					lang === "zh" ? "zh-TW" : lang === "en" ? "en" : "zh-TW"
+				}
 			/>
 		</div>
 	);
