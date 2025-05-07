@@ -4,6 +4,7 @@ import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
+import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
 	title: "All Blog Post | Bloodnighttw",
@@ -18,6 +19,10 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		images: [],
 	},
+}
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({locale}));
 }
 
 export default async function BlogPosts() {
