@@ -2,6 +2,8 @@
     "Panel": {
         "madeWith": "❤️ 使用 Tailwind CSS 和 Next.js 制作",
         "all rights reserved": "版權所有",
+        "Blog": "文章",
+        "friends": "友情連結",
         "change language": "En"
     },
     "Blog": {

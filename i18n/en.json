@@ -2,6 +2,8 @@
     "Panel": {
         "madeWith": "❤️ Made with Tailwind CSS, Next.js.",
         "all rights reserved": "All rights reserved",
+        "Blog": "Blog",
+        "friends": "Friends",
         "change language": "中"
     },
     "Blog": {
