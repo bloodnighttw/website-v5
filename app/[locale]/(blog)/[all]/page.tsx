@@ -27,6 +27,8 @@ export function generateStaticParams() {
 	}]
 }
 
+export const dynamicParams = false;
+
 export default async function BlogPosts() {
 	const metadataWithPreview = allPosts.sort(
 		(a, b) => b.date.getTime() - a.date.getTime(),

@@ -10,6 +10,10 @@
         "My blog": "我的文章",
         "Recent Posts": "最新文章",
         "about": "關於 {name}",
-        "published": "發佈於 {date}"
+        "published": "發佈於 {date}",
+        "pinned": "置頂文章"
+    },
+    "Project": {
+        "My Projects": "我的專案"
     }
 }

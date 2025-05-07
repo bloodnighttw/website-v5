@@ -10,6 +10,10 @@
         "My blog": "My blog",
         "Recent Posts": "Recent Posts",
         "about": "About {name}",
-        "published": "Published on {date}"
+        "published": "Published on {date}",
+        "pinned": "Pinned Posts"
+    },
+    "Project" : {
+        "My Projects": "My Projects"
     }
 }

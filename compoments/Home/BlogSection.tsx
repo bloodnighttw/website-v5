@@ -20,7 +20,7 @@ export default async function BlogSection() {
 
 			{sortedByPin.length > 0 && (
 				<ArticleContainer>
-					<CardTitle title="Pinned Posts" />
+					<CardTitle title={t("pinned")} />
 					<CardCollection>
 						<ArticleCards infos={sortedByPin} />
 					</CardCollection>
