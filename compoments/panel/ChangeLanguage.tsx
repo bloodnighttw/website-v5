@@ -18,7 +18,12 @@ export default function ChangeLanguage(){
 		const otherPathnameSegments = pathSegments.slice(2);
 		const newPathname = `/${locale === "en" ? "zh" : "en"}/${otherPathnameSegments.join("/")}`;
 
+		// get current scroll position
+		const scrollPosition = window.scrollY;
+		sessionStorage.setItem("scrollPosition", scrollPosition.toString());
+
 		router.push(newPathname);
+		// scroll to the previous position
 	}
 
 	return (
