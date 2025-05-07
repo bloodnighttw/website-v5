@@ -2,6 +2,14 @@
     "Panel": {
         "madeWith": "❤️ Made with Tailwind CSS, Next.js.",
         "all rights reserved": "All rights reserved",
-        "change language": "中文"
+        "change language": "中"
+    },
+    "Blog": {
+        "Click to view full size": "Click to view full size",
+        "Table of Contents": "Table of Contents",
+        "My blog": "My blog",
+        "Recent Posts": "Recent Posts",
+        "about": "About {name}",
+        "published": "Published on {date}"
     }
 }

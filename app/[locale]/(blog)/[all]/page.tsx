@@ -4,6 +4,7 @@ import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
 	title: "All Blog Post | Bloodnighttw",
@@ -31,10 +32,12 @@ export default async function BlogPosts() {
 		(a, b) => b.date.getTime() - a.date.getTime(),
 	);
 
+	const t = await getTranslations("Blog");
+
 	return (
 		<>
 			<SecondaryPanel>
-				<p className="text-4xl">Recent Posts</p>
+				<p className="text-4xl">{t("Recent Posts")}</p>
 			</SecondaryPanel>
 			<Part className="gradient-background">
 				<CardCollection>

@@ -2,6 +2,14 @@
     "Panel": {
         "madeWith": "❤️ 使用 Tailwind CSS 和 Next.js 制作",
         "all rights reserved": "版權所有",
-        "change language": "English"
+        "change language": "En"
+    },
+    "Blog": {
+        "Click to view full size": "點擊查看完整圖片",
+        "Table of Contents": "目錄",
+        "My blog": "我的文章",
+        "Recent Posts": "最新文章",
+        "about": "關於 {name}",
+        "published": "發佈於 {date}"
     }
 }

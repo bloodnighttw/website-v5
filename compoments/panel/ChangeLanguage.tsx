@@ -23,7 +23,7 @@ export default function ChangeLanguage(){
 
 	return (
 
-		<div className="flex items-center justify-center gap-2 cursor-pointer active:scale-90 duration-200" onClick={() => changeLanguage()}>
+		<div className="flex items-center justify-center gap-1 cursor-pointer active:scale-90 duration-200" onClick={() => changeLanguage()}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 				className="bi bi-globe2" viewBox="0 0 16 16">
 				<path
