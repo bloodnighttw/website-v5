@@ -1,10 +1,14 @@
+/* This file will be refactored soon.
+ * This is a temporary simulation to handle some error in CF page.
+ * */
+
 import CardCollection from "@/compoments/Blog/ArticleCollection";
 import { ArticleCards } from "@/compoments/Blog/ArticleCard";
 import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import Text from "@/app/[locale]/(blog)/[blog]/Text";
 
 export const metadata: Metadata = {
 	title: "All Blog Post | Bloodnighttw",
@@ -23,21 +27,20 @@ export const metadata: Metadata = {
 
 export function generateStaticParams() {
 	return [{
-		"all": "blog",
+		"blog": "blog"
 	}]
 }
+
 
 export default async function BlogPosts() {
 	const metadataWithPreview = allPosts.sort(
 		(a, b) => b.date.getTime() - a.date.getTime(),
 	);
 
-	const t = await getTranslations("Blog");
-
 	return (
 		<>
 			<SecondaryPanel>
-				<p className="text-4xl">{t("Recent Posts")}</p>
+				<Text/>
 			</SecondaryPanel>
 			<Part className="gradient-background">
 				<CardCollection>
