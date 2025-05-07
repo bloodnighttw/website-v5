@@ -15,8 +15,8 @@ export default function ChangeLanguage(){
 	const changeLanguage = () => {
 		const pathSegments= pathname.split("/");
 		const locale = pathSegments[1];
-		const otherPathnames = pathSegments.slice(2);
-		const newPathname = `/${locale === "en" ? "zh" : "en"}/${otherPathnames.join("/")}`;
+		const otherPathnameSegments = pathSegments.slice(2);
+		const newPathname = `/${locale === "en" ? "zh" : "en"}/${otherPathnameSegments.join("/")}`;
 
 		router.push(newPathname);
 	}
