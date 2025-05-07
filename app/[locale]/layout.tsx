@@ -9,12 +9,17 @@ import PanelButton from "@/compoments/panel/PanelButton";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import ChangeLanguage from "@/compoments/panel/ChangeLanguage";
 
 export const metadata: Metadata = {
 	title: "Welcome to bloodnighttw's blog",
 	description: "A blog about programming, web development, linux, and more.",
 };
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({locale}));
+}
 
 export default async function RootLayout({
 	children,
@@ -31,6 +36,7 @@ export default async function RootLayout({
 	}
 
 	setRequestLocale(locale);
+	const t = await getTranslations("Panel");
 
 	return (
 		<html lang="en">
@@ -82,6 +88,9 @@ export default async function RootLayout({
 						</svg>
 					</PanelButton>
 
+					<ChangeLanguage />
+
+
 				</NavPanel>
 
 				{children}
@@ -89,11 +98,10 @@ export default async function RootLayout({
 				<Footer>
 					<div className="w-full flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
 						<span className="mr-auto">
-							© {new Date().getFullYear()} bloodnighttw. All
-							rights reserved.
+							© {new Date().getFullYear()} bloodnighttw {t("all rights reserved")}
 						</span>
 
-						<span>❤️ Made with Tailwind CSS, Next.js.</span>
+						<span>{t("madeWith")}</span>
 					</div>
 				</Footer>
 			</NextIntlClientProvider>

@@ -1,3 +1,7 @@
 {
-
+    "Panel": {
+        "madeWith": "❤️ 使用 Tailwind CSS 和 Next.js 制作",
+        "all rights reserved": "版權所有",
+        "change language": "English"
+    }
 }
