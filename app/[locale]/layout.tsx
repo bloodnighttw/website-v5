@@ -9,6 +9,7 @@ import PanelButton from "@/compoments/panel/PanelButton";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
 	title: "Welcome to bloodnighttw's blog",
@@ -28,6 +29,8 @@ export default async function RootLayout({
 	if (!hasLocale(routing.locales, locale)) {
 		notFound();
 	}
+
+	setRequestLocale(locale);
 
 	return (
 		<html lang="en">
