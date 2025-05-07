@@ -17,5 +17,12 @@
     },
     "Project" : {
         "My Projects": "My Projects"
+    },
+    "Introducing": {
+        "hi": "👋 hi！",
+        "I'm": "I'm",
+        "name": "bloodnighttw",
+        "age": "y/o",
+        "introducing":"I'm a developer who loves to create things. Familiar with #ts# TypeScript, #react# React, and #java# Java,and also a #linux# linux enthusiast."
     }
 }
