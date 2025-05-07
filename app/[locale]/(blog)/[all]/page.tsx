@@ -4,7 +4,6 @@ import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
-import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
 	title: "All Blog Post | Bloodnighttw",
@@ -22,7 +21,9 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-	return routing.locales.map((locale) => ({locale}));
+	return [{
+		"all": "blog",
+	}]
 }
 
 export default async function BlogPosts() {
