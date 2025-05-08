@@ -12,6 +12,7 @@ import Avatar from "@/compoments/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
 import TranslationWithIcon from "@/compoments/TranslationWithIcon";
+import TypeWriter from "@/compoments/Home/TypeWriter";
 
 export default async function Introducing() {
 
@@ -26,9 +27,11 @@ export default async function Introducing() {
 				<p className="text-4xl lg:text-6xl font-bold my-1.5">
 					{t("I'm")}	{t("name")}
 				</p>
-				<span className="font-mono typewriter">
-					21 {t("age")} • Developer • Gamer{" "}
-				</span>
+
+				<TypeWriter>
+					{`21 ${t("age")} • developer • gamer`}
+				</TypeWriter>
+
 				<TranslationWithIcon text={t("introducing")}
 					icon={{
 						"java" : <Image
