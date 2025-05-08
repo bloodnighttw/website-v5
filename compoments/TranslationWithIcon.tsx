@@ -22,10 +22,8 @@ export default async function TranslationWithIcon(props: Props) {
 		}
 	});
 
-
-
 	return (
-		<p className="text-xl mt-2">
+		<p className="text-xl mt-2 text-balance lg:text-wrap">
 			{result}
 		</p>
 	);
