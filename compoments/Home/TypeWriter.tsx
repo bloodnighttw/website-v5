@@ -35,7 +35,7 @@ export default function TypeWriter({children}: Props) {
 
 
 
-	return <div className="font-mono overflow-x-hidden text-nowrap pr-1 h-6 flex items-center justify-center lg:justify-start text-center">
+	return <div className="font-mono overflow-x-hidden text-nowrap pr-1 h-6 flex justify-center lg:justify-start">
 		{	state !== 0 &&
 			<span className="text-[16px] text-center">
 				{children.slice(0, state)}
