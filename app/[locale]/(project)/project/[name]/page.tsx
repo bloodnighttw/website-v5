@@ -1,7 +1,7 @@
 import { svgUrl } from "@/utils/constant";
 import Image from "next/image";
 import { Github } from "@/app/assets/svg";
-import Link from "next/link";
+import Link from "@/i18n/navigation";
 import linkSvg from "@/app/assets/link.svg";
 import Part from "@/compoments/Part";
 import { Stacks } from "@/compoments/Project/Stack";

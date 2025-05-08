@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../global.css";
 import Avatar from "@/compoments/avatar";
 import React from "react";
-import Link from "next/link";
+import Link from "@/i18n/navigation";
 import NavPanel from "@/compoments/panel/NavPanel";
 import Footer from "@/compoments/panel/Footer";
 import PanelButton from "@/compoments/panel/PanelButton";
