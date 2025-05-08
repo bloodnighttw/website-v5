@@ -29,7 +29,7 @@ export default async function Introducing() {
 				</p>
 
 				<TypeWriter>
-					{`21 ${t("age")} • developer • gamer`}
+					{`21 ${t("age")} • developer • gamer `}
 				</TypeWriter>
 
 				<TranslationWithIcon text={t("introducing")}
@@ -37,24 +37,24 @@ export default async function Introducing() {
 						"java" : <Image
 							src={svgUrl.java}
 							alt="Java"
-							width={24}
-							height={24}
+							width={28}
+							height={28}
 						/>,
 						"linux" : <Image
 							src={svgUrl.linux}
 							alt="Linux"
-							width={24}
-							height={24}/>,
+							width={28}
+							height={28}/>,
 						"react" : <Image
 							src={svgUrl["react"]}
 							alt="React"
-							width={24}
-							height={24}/>,
+							width={28}
+							height={28}/>,
 						"ts": <Image
 							src={svgUrl.typescript}
 							alt="TS"
-							width={24}
-							height={24}/>,
+							width={28}
+							height={28}/>,
 					}}
 				/>
 

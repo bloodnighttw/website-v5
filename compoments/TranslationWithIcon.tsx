@@ -16,14 +16,14 @@ export default async function TranslationWithIcon(props: Props) {
 		const key = part;
 		const value = icon[key];
 		if (value) {
-			return <span key={index} className="*:inline">{value}</span>;
+			return <span key={index} className="flex items-center mx-1">{value}</span>;
 		} else {
-			return <span key={index}>{key}</span>;
+			return <span key={index} className="text-xl">{key}</span>;
 		}
 	});
 
 	return (
-		<p className="text-xl mt-2 text-balance lg:text-wrap">
+		<p className="mt-2 text-balance lg:text-wrap flex flex-wrap">
 			{result}
 		</p>
 	);
