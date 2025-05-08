@@ -1,0 +1,39 @@
+{
+    "lang": "zh",
+    "Meta": {
+        "title": "紅危的部落格",
+        "description": "關於我的生活和專案的部落格。",
+        "All Blog Posts": "所有文章 | 紅危的部落格"
+    },
+    "Panel": {
+        "madeWith": "❤️ 使用 Tailwind CSS 和 Next.js 制作",
+        "all rights reserved": "版權所有",
+        "Blog": "文章",
+        "friends": "友情連結",
+        "change language": "En",
+        "name": "紅危的部落格"
+    },
+    "Blog": {
+        "Warning": "警告",
+        "warningMessage": "這篇文章是尚未翻譯成中文的文章，目前顯示的是英文的版本。",
+        "Click to view full size": "點擊查看完整圖片",
+        "Table of Contents": "目錄",
+        "My blog": "我的文章",
+        "Recent Posts": "最新文章",
+        "about": "關於 {name}",
+        "published": "發佈於 {date}",
+        "pinned": "置頂文章"
+    },
+    "Project": {
+        "My Projects": "我的專案"
+    },
+    "Introducing": {
+        "hi": "👋 哈嘍！",
+        "I'm": "我是",
+        "name": "紅危",
+        "age": "歲",
+        "introducing":"一名喜歡創造東西的平凡人。擅長 #ts# TypeScript，#react# React, 和 #java# Java，同時是一名 #linux# linux 愛好者。",
+        "developer": "開發者",
+        "gamer": "遊戲玩家"
+    }
+}

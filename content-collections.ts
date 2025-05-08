@@ -41,8 +41,7 @@ const getFirstImage = (content: string): string | null => {
 	return imageNode ? imageNode.url : null;
 };
 
-// TODO: fetch the preview content from the texts
-const getPreviewMessage = (content: string): string => {
+const getFullText= (content: string): string => {
 	const tree = unified()
 		.use(remarkParse)
 		.use(remarkMdx)
@@ -54,8 +53,38 @@ const getPreviewMessage = (content: string): string => {
 	return textNode
 		.map((it) => it.value)
 		.join(" ")
-		.slice(0, 400);
 };
+
+const documentLanguage = (content: string): string => {
+
+	const tree = unified()
+		.use(remarkParse)
+		.use(remarkMdx)
+		.use(remarkGfm)
+		.parse(content);
+
+	const langNode = selectAll("text", tree) as Text[];
+	let weight = 0;
+
+	for(const node of langNode) {
+
+		for(const char of node.value) {
+			// if it's a chinese character
+			if (char >= "\u4E00" && char <= "\u9FFF") {
+				weight += 4;
+			} else {
+				weight -= 1;
+			}
+		}
+	}
+
+	if(weight > 0) {
+		return "zh";
+	} else {
+		return "en";
+	}
+
+}
 
 const handleToc = (content: string) => {
 
@@ -88,7 +117,9 @@ const posts = defineCollection({
 		// handle mdx file
 		const firstImage =
 			getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
-		const previewText = getPreviewMessage(content);
+		const fullText = getFullText(content);
+		const lang = documentLanguage(content);
+		const previewText = fullText.slice(0, 400);
 
 		const toc = handleToc(content);
 
@@ -98,6 +129,7 @@ const posts = defineCollection({
 			description: previewText,
 			preview: firstImage,
 			toc,
+			lang
 		};
 	},
 });
@@ -117,8 +149,13 @@ const projects = defineCollection({
 		demo: z.string().optional(),
 	}),
 	transform: async (doc) => {
+
+		const path = doc._meta.path;
+		const lang = path.startsWith("en/") ? "en" : "zh";
+
 		return {
 			...doc,
+			lang,
 		};
 	},
 });

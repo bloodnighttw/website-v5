@@ -7,6 +7,8 @@ import Part from "@/compoments/Part";
 import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
 import { allPosts } from "content-collections";
 import Layout from "@/compoments/Blog/Addon/Layout";
+import Warning from "@/compoments/Blog/Warning";
+import { getTranslations } from "next-intl/server";
 
 export async function generateStaticParams() {
 	return allPosts.map((post) => {
@@ -63,15 +65,17 @@ export async function generateMetadata({
 export default async function Blog({
 	params,
 }: {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ slug: string, locale: string }>;
 }) {
-	const { slug } = await params;
+	const { slug, locale } = await params;
 
 	const content = allPosts.find((it) => it.slug === slug);
 	if (!content) return <div>404</div>;
 	const { default: Content } = await import(
 		`@/contents/posts/${content.slug}.mdx`
 	);
+
+	const t = await getTranslations("Blog");
 
 	const timeWithFormat = new Intl.DateTimeFormat("zh", {
 		year: "numeric",
@@ -85,6 +89,7 @@ export default async function Blog({
 			<ArticleSecondaryPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
 				<Part className="bg-bprimary">
+					{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
 					<article>
 						<Content />
 					</article>

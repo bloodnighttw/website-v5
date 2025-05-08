@@ -7,6 +7,9 @@ import rehypeStarryNight from "rehype-starry-night";
 import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkImageSize from "@/utils/remark-plugin/remarkImageSize";
 import section from "@/utils/rehype-plugin/section";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin();
 
 const withMDX = createMDX({
 	options: {
@@ -47,7 +50,7 @@ const nextConfigPromise = async () => {
 		await setupDevPlatform();
 	}
 
-	return await withContentCollections(withMDX(config));
+	return await withContentCollections(withNextIntl(withMDX(config)));
 };
 
 export default nextConfigPromise;

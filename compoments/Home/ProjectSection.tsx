@@ -6,24 +6,33 @@ import ProjectChapter from "@/compoments/Project/ProjectChapter";
 import ProjectCollection from "@/compoments/Project/ProjectCollection";
 import Scrolling from "@/compoments/Project/Scrolling";
 import { allProjects } from "content-collections";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProjectSection() {
-	const projectsCards = allProjects.map((project) => {
-		return (
-			<ProjectCard
-				key={project.name}
-				name={project.name}
-				description={project.description}
-				link={project.link}
-				stack={project.stack}
-			/>
-		);
-	});
+
+	const t = await getTranslations("Project");
+	const lang = (await getTranslations())("lang");
+
+	const projectsCards = allProjects
+		.filter((project) => {
+			return project.lang === lang
+		})
+		.map((project) => {
+			return (
+				<ProjectCard
+					key={project.name}
+					name={project.name}
+					description={project.description}
+					link={project.link}
+					stack={project.stack}
+				/>
+			);
+		});
 
 	return (
 		<Part>
 			<ProjectChapter>
-				<Chapter>My Project</Chapter>
+				<Chapter>{t("My Projects")}</Chapter>
 				<Scrolling>
 					<Stacks />
 				</Scrolling>

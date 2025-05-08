@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	src: string;
@@ -95,6 +96,7 @@ const defaultState: State = {
 export default function ImagePreview(props: Props) {
 
 	const [state, dispatch] = React.useReducer(reducer, defaultState);
+	const t = useTranslations("Blog");
 	const imageDivRef = React.useRef<HTMLImageElement>(null);
 	// This is used to store the mouse position when dragging, and we don't want it to trigger a re-render.
 	const mousePositionRef = React.useRef({ x: 0, y: 0 });
@@ -268,7 +270,7 @@ export default function ImagePreview(props: Props) {
 					className="rounded mx-auto"
 				/>
 				<span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-					<span className="text-lg text-secondary/70 bg-bsecondary/70 p-2 rounded-full px-4">Click to view full size</span>
+					<span className="text-lg text-secondary/70 bg-bsecondary/70 p-2 rounded-full px-4">{t("Click to view full size")}</span>
 				</span>
 			</span>
 		</>

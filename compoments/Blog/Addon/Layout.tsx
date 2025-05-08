@@ -6,6 +6,7 @@ import Part from "@/compoments/Part";
 import GoToTop from "@/compoments/Blog/Addon/GoToTop";
 import Toc from "@/compoments/Blog/Addon/Toc";
 import { TocTree } from "@/compoments/Blog/Addon/TocElement";
+import { useTranslations } from "next-intl";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -98,6 +99,8 @@ export default function Page(prop:LayoutProps) {
 		</div>
 	},[TocMemo, absolute, goToTopMemo]);
 
+	const t = useTranslations("Blog");
+
 	return <div ref={ref}>
 		{childrenMemo}
 		<div className="relative border-b border-dot bg-bsecondary/60 h-14">
@@ -108,7 +111,7 @@ export default function Page(prop:LayoutProps) {
 						<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
 						<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
 					</svg>
-					publish at {prop.publishAt}
+					{t("published",  {date:prop.publishAt})}
 				</div>
 			</Part>
 			{bottomPanelMemo}

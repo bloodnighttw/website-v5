@@ -92,15 +92,6 @@
 	animation: scroll var(--scrolling-time) linear infinite;
 }
 
-@keyframes typing {
-	from {
-		width: 0;
-	}
-	to {
-		width: 255px;
-	}
-}
-
 @keyframes blink {
 	50% {
 		border-color: transparent;
@@ -110,9 +101,7 @@
 @utility typewriter {
 	@apply inline-block overflow-hidden border-r border-r-primary align-middle;
 	white-space: nowrap;
-	animation:
-		typing 2.5s steps(40, end) forwards,
-		blink 1s step-end infinite;
+	animation: blink 1s step-end infinite;
 }
 
 .gradient-background {
