@@ -8,6 +8,7 @@ import { Stacks } from "@/compoments/Project/Stack";
 import { allProjects } from "content-collections";
 
 import "@/app/content.css"
+import { getTranslations } from "next-intl/server";
 
 export async function generateStaticParams() {
 	return allProjects.map((post) => {

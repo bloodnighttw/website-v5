@@ -8,6 +8,8 @@
         "change language": "中"
     },
     "Blog": {
+        "Warning": "Warning",
+        "warningMessage": "This article hasn't been translated into English yet. It's currently only available in Chinese.",
         "Click to view full size": "Click to view full size",
         "Table of Contents": "Table of Contents",
         "My blog": "My blog",

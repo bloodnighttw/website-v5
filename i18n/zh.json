@@ -8,6 +8,8 @@
         "change language": "En"
     },
     "Blog": {
+        "Warning": "警告",
+        "warningMessage": "這篇文章是尚未翻譯成中文的文章，目前顯示的是英文的版本。",
         "Click to view full size": "點擊查看完整圖片",
         "Table of Contents": "目錄",
         "My blog": "我的文章",
