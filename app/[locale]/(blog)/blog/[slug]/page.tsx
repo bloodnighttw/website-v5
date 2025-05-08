@@ -65,7 +65,7 @@ export async function generateMetadata({
 export default async function Blog({
 	params,
 }: {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ slug: string, locale: string }>;
 }) {
 	const { slug, locale } = await params;
 
