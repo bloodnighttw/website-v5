@@ -5,6 +5,7 @@ import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
 import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export async function generateStaticParams() {
 	const posts = allPosts.slice();
@@ -34,9 +35,10 @@ export async function generateMetadata(
 }): Promise<Metadata> {
 
 	const { tags } = await params;
+	const t = await getTranslations("Meta");
 
 	return {
-		title: "Tags: "+tags + " | Bloodnighttw",
+		title: "Tags: "+tags + " | " + t("title"),
 		openGraph: {
 			title: "Tags: "+tags+ " | Bloodnighttw",
 			type: "website",
