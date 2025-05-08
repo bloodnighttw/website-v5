@@ -54,7 +54,7 @@ export default async function Introducing() {
 							src={svgUrl.typescript}
 							alt="TS"
 							width={28}
-							height={28}/>,
+							height={28} />,
 					}}
 				/>
 
