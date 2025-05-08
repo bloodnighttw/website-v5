@@ -26,6 +26,8 @@
         "I'm": "我是",
         "name": "紅危",
         "age": "歲",
-        "introducing":"一名喜歡創造東西的平凡人。擅長 #ts# TypeScript，#react# React, 和 #java# Java，同時是一名 #linux# linux 愛好者。"
+        "introducing":"一名喜歡創造東西的平凡人。擅長 #ts# TypeScript，#react# React, 和 #java# Java，同時是一名 #linux# linux 愛好者。",
+        "developer": "開發者",
+        "gamer": "遊戲玩家"
     }
 }

@@ -21,7 +21,7 @@ export default async function Introducing() {
 	return (
 		<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center items-center lg:items-stretch">
 			<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
-				<div className="text-center text-xl lg:text-start">
+				<div className="text-center lg:text-start">
 					{t("hi")}
 				</div>
 				<p className="text-4xl lg:text-6xl font-bold my-1.5">
@@ -29,7 +29,7 @@ export default async function Introducing() {
 				</p>
 
 				<TypeWriter>
-					{`21 ${t("age")} • developer • gamer `}
+					{`21 ${t("age")} • ${t("developer")} • ${t("gamer")} `}
 				</TypeWriter>
 
 				<TranslationWithIcon text={t("introducing")}
