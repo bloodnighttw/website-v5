@@ -22,15 +22,17 @@ export const dynamicParams = false;
 export default async function Page({
 	params,
 }: {
-	params: Promise<{ name: string }>;
+	params: Promise<{ name: string, locale: string }>;
 }) {
-	const { name } = await params;
+	const { name, locale } = await params;
 
-	const projectInfo = allProjects.find((it) => it.name === name)!;
+	const projectInfo = allProjects
+		.find((it) => it.name === name)!;
 	const svgs: string[] = projectInfo.stack
 		.filter((st) => st in svgUrl)
 		.map((st) => svgUrl[st]);
-	const { default: C } = await import(`@/contents/projects/${name}.mdx`);
+
+	const { default: C } = locale === "en" ? await import(`@/contents/projects/en/${name}.mdx`) : await import(`@/contents/projects/${name}.mdx`);
 
 	return (
 		<Part>

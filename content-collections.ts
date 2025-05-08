@@ -117,8 +117,13 @@ const projects = defineCollection({
 		demo: z.string().optional(),
 	}),
 	transform: async (doc) => {
+
+		const path = doc._meta.path;
+		const lang = path.startsWith("en/") ? "en" : "zh";
+
 		return {
 			...doc,
+			lang,
 		};
 	},
 });
