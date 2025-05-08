@@ -9,21 +9,28 @@ import Part from "@/compoments/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import Text from "@/app/[locale]/(blog)/[blog]/Text";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-	title: "All Blog Post | Bloodnighttw",
-	openGraph: {
-		title: "Blog | Bloodnighttw",
-		type: "website",
-		images: [],
-	},
-	twitter: {
-		title: "Blog | Bloodnighttw",
-		site: "@bloodnighttw",
-		card: "summary_large_image",
-		images: [],
-	},
+export async function generateMetadata(): Promise<Metadata>{
+
+	const t = await getTranslations("Meta");
+
+	return {
+		title: t("All Blog Posts"),
+		openGraph: {
+			title: "Blog | Bloodnighttw",
+			type: "website",
+			images: [],
+		},
+		twitter: {
+			title: "Blog | Bloodnighttw",
+			site: "@bloodnighttw",
+			card: "summary_large_image",
+			images: [],
+		},
+	}
 }
+
 
 export function generateStaticParams() {
 	return [{

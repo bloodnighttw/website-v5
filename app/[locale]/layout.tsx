@@ -12,10 +12,16 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ChangeLanguage from "@/compoments/panel/ChangeLanguage";
 
-export const metadata: Metadata = {
-	title: "Welcome to bloodnighttw's blog",
-	description: "A blog about programming, web development, linux, and more.",
-};
+// generates metadata for each locale
+export async function generateMetadata() {
+	const t = await getTranslations("Meta");
+	return {
+		title: t("title"),
+		description: t("description"),
+	} as Metadata;
+}
+
+
 
 export function generateStaticParams() {
 	return routing.locales.map((locale) => ({locale}));
@@ -58,7 +64,7 @@ export default async function RootLayout({
 					</Link>
 
 					<Link href="/">
-						<div className="font-bold">bloodnighttw</div>
+						<div className="font-bold">{t("name")}</div>
 					</Link>
 					<div className="mr-auto"></div>
 					<PanelButton href={"/"} text={t("friends")}>

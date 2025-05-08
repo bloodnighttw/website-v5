@@ -1,11 +1,17 @@
 {
     "lang": "en",
+    "Meta": {
+        "title": "bloodnighttw's blog",
+        "description": "A blog about my life and projects.",
+        "All Blog Posts": "All Posts | bloodnighttw's blog"
+    },
     "Panel": {
         "madeWith": "❤️ Made with Tailwind CSS, Next.js.",
         "all rights reserved": "All rights reserved",
         "Blog": "Blog",
         "friends": "Friends",
-        "change language": "中"
+        "change language": "中",
+        "name": "bloodnighttw"
     },
     "Blog": {
         "Warning": "Warning",
