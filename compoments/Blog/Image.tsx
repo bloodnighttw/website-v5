@@ -198,7 +198,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 	const handleBackgroundClick = useCallback((e: React.MouseEvent): void => {
 
 		if(dragging) {
-			handleMouseUp();
+			handleDragEnd();
 			return;
 		}
 
@@ -207,7 +207,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 			// enable scroll
 			document.body.style.overflow = "auto";
 		}
-	},[dragging, handleMouseUp]);
+	},[dragging, handleDragEnd]);
 
 	// Handle zoom in
 	const handleZoomIn = useCallback((e: React.MouseEvent): void => {
@@ -317,7 +317,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 				<div
 					ref={containerRef}
 					className="fixed inset-0 bg-bprimary/20 backdrop-blur bg-opacity-80 z-101 flex items-center justify-center"
-					onClick={handleBackgroundClick}
+					onMouseDown={handleBackgroundClick}
 				>
 					<div className="absolute top-0 w-full bg-bsecondary z-102 h-16 flex items-center justify-center">
 						<div className="flex items-center space-x-4">
@@ -366,6 +366,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 						onTouchEnd={handleTouchEnd}
 						onTouchCancel={handleTouchEnd}
 						onWheel={handleWheel}
+						onMouseLeave={handleMouseUp}
 					>
 						{/* eslint-disable-next-line */}
 						<img
