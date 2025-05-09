@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import ImagePreview from "@/compoments/Blog/ImagePreview";
+import ImagePreview from "@/compoments/Blog/Image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {

@@ -16,13 +16,17 @@
     "Blog": {
         "Warning": "警告",
         "warningMessage": "這篇文章是尚未翻譯成中文的文章，目前顯示的是英文的版本。",
-        "Click to view full size": "點擊查看完整圖片",
+        "Click to view full image": "點擊查看完整圖片",
         "Table of Contents": "目錄",
         "My blog": "我的文章",
         "Recent Posts": "最新文章",
         "about": "關於 {name}",
         "published": "發佈於 {date}",
-        "pinned": "置頂文章"
+        "pinned": "置頂文章",
+        "Zoom In": "放大",
+        "Zoom Out": "縮小",
+        "Reset": "重置",
+        "Reset Zoom": "重置縮放"
     },
     "Project": {
         "My Projects": "我的專案"
