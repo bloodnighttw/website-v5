@@ -177,7 +177,6 @@ export default function ImageViewer(props: ImageViewerProps) {
 	};
 
 	const handleTouchMove = (e: React.TouchEvent): void => {
-		e.preventDefault(); // Prevent scrolling while dragging
 		const touch = e.touches[0];
 		handleDragMove(touch.clientX, touch.clientY);
 	};
@@ -319,36 +318,84 @@ export default function ImageViewer(props: ImageViewerProps) {
 					className="fixed inset-0 bg-bprimary/20 backdrop-blur bg-opacity-80 z-101 flex items-center justify-center"
 					onMouseDown={handleBackgroundClick}
 				>
-					<div className="absolute top-0 w-full bg-bsecondary z-102 h-16 flex items-center justify-center">
-						<div className="flex items-center space-x-4">
+					<div className="fixed top-0 w-full bg-bsecondary/90 z-102 h-16 grid grid-cols-2 lg:grid-cols-3 items-center px-8 mx-auto">
+						<div className="flex items-center space-x-2 flex-nowrap text-xl">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+								 className="size-6" viewBox="0 0 16 16">
+								<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+								<path
+									d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
+							</svg>
+							<span>
+								{props.alt}
+							</span>
+						</div>
+						<div className="hidden lg:flex items-center space-x-4 mx-auto">
 							<button
-								className="bg-bprimary text-btext px-4 py-2 rounded hover:bg-opacity-80 transition-all"
+								className="bg-bprimary/70 px-4 py-2 rounded transition-all cursor-pointer border border-bprimary/0 hover:border-primary/70"
 								onClick={handleZoomOut}
 								aria-label={t("Zoom Out")}
 							>
 								<span className="text-xl">-</span>
 							</button>
-							<div className="text-btext">
+							<div>
 								{Math.round(zoomLevel * 100)}%
 							</div>
 							<button
-								className="bg-bprimary text-btext px-4 py-2 rounded hover:bg-opacity-80 transition-all"
+								className="bg-bprimary/70 px-4 py-2 rounded transition-all cursor-pointer border border-bprimary/0 hover:border-primary/70"
 								onClick={handleZoomIn}
 								aria-label={t("Zoom In")}
 							>
 								<span className="text-xl">+</span>
 							</button>
 							<button
-								className="bg-bprimary text-btext px-4 py-2 rounded hover:bg-opacity-80 transition-all ml-4"
+								className="bg-bprimary/70 px-4 py-2 rounded ml-4 cursor-pointer border border-bprimary/0 hover:border-primary/70"
 								onClick={handleResetZoom}
 								aria-label={t("Reset Zoom")}
 							>
 								{t("Reset")}
 							</button>
 						</div>
+						<div className="fixed bottom-2 right-0 left-0 lg:hidden flex justify-center items-center space-x-4">
+
+							<button
+								className="bg-bprimary/70 px-4 py-2 rounded transition-all cursor-pointer border border-bprimary/0 hover:border-primary/70"
+								onClick={handleZoomOut}
+								aria-label={t("Zoom Out")}
+							>
+								<span className="text-xl">-</span>
+							</button>
+							<div>
+								{Math.round(zoomLevel * 100)}%
+							</div>
+							<button
+								className="bg-bprimary/70 px-4 py-2 rounded transition-all cursor-pointer border border-bprimary/0 hover:border-primary/70"
+								onClick={handleZoomIn}
+								aria-label={t("Zoom In")}
+							>
+								<span className="text-xl">+</span>
+							</button>
+							<button
+								className="bg-bprimary/70 px-4 py-2 rounded ml-4 cursor-pointer border border-bprimary/0 hover:border-primary/70"
+								onClick={handleResetZoom}
+								aria-label={t("Reset Zoom")}
+							>
+								{t("Reset")}
+							</button>
+						</div>
+
+						<button onClick={()=>dispatch({ type: "TOGGLE_FULLSCREEN", payload: false })}
+							className="ml-auto cursor-pointer"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+								 className="h-6" viewBox="0 0 16 16">
+								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+								<path
+									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+							</svg>
+						</button>
 					</div>
 					<div
-						className="overflow-hidden"
 						style={{
 							transform: `translate(${position.x}px, ${position.y}px) scale(${zoomLevel})`,
 							transformOrigin: `${transformOrigin.x * 100}% ${transformOrigin.y * 100}%`,
@@ -372,7 +419,6 @@ export default function ImageViewer(props: ImageViewerProps) {
 						<img
 							src={props.src}
 							alt={props.src}
-							className="select-none"
 							draggable="false"
 						/>
 					</div>
