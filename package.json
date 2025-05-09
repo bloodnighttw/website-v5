@@ -34,7 +34,8 @@
 		"remark-mdx-frontmatter": "^5.1.0",
 		"tailwind-merge": "^3.0.2",
 		"unist-util-inspect": "^8.1.0",
-		"unist-util-select": "^5.1.0"
+		"unist-util-select": "^5.1.0",
+		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.10",

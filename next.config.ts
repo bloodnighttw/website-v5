@@ -8,6 +8,7 @@ import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkImageSize from "@/utils/remark-plugin/remarkImageSize";
 import section from "@/utils/rehype-plugin/section";
 import createNextIntlPlugin from 'next-intl/plugin';
+import moveImageToRoot from "@/utils/remark-plugin/moveImageToRoot";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -16,7 +17,8 @@ const withMDX = createMDX({
 		remarkPlugins: [
 			remarkFrontmatter,
 			remarkMdxFrontmatter,
-			remarkImageSize,
+			moveImageToRoot,
+			remarkImageSize
 		],
 		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers, section],
 	},
