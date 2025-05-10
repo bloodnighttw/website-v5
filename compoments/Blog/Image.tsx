@@ -111,6 +111,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 
 	const t = useTranslations("Blog");
 
+	const [mounted, setMounted] = React.useState(false);
 	const [state, dispatch] = useReducer(imageViewerReducer, initialState);
 	const { fullScreen, position, dragging, dragStart, zoomLevel, transformOrigin } = state;
 
@@ -119,10 +120,15 @@ export default function ImageViewer(props: ImageViewerProps) {
 
 	// Reset position when toggling fullscreen mode
 	useEffect(() => {
-		if (!fullScreen) {
-			dispatch({ type: "RESET_POSITION" });
-		}
-	}, [fullScreen]);
+		dispatch({ type: "RESET_POSITION" });
+		setMounted(true);
+
+		// re-enable scroll when unmounting
+		return () => {
+			document.body.style.overflow = "auto";
+		};
+
+	}, []);
 
 	// Handle mouse/touch down events to start dragging
 	const handleDragStart = useCallback((clientX: number, clientY: number): void => {
@@ -313,10 +319,13 @@ export default function ImageViewer(props: ImageViewerProps) {
 		<>
 			{imagePreviewMemo}
 			{/* Full screen overlay */}
-			{fullScreen && createPortal((
+			{mounted && createPortal((
 				<span
 					ref={containerRef}
-					className="fixed top-0 bg-bprimary/20 backdrop-blur z-1000 w-full h-full"
+					className={cn(
+						fullScreen ? "show" : "hide",
+						"fixed top-0 bg-bprimary/20 backdrop-blur z-1000 w-full h-full items-center justify-center"
+					)}
 					onMouseDown={handleBackgroundClick}
 				>
 					<span className="fixed top-0 w-full bg-bsecondary/90 z-102 h-16 grid grid-cols-2 lg:grid-cols-3 items-center px-8 mx-auto">
@@ -424,7 +433,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 						/>
 					</div>
 				</span>
-			), document?.body)}
+			), document?.body ?? document?.documentElement)}
 
 		</>
 	);
