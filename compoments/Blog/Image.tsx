@@ -116,19 +116,11 @@ export default function ImageViewer(props: ImageViewerProps) {
 	const imageRef = useRef<HTMLImageElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	// enable scroll when leave
-	useEffect(() => {
-		return ()=>{
-			document.body.style.overflow = "auto";
-		}
-	}, []);
-
 	// Reset position when toggling fullscreen mode
 	useEffect(() => {
 		if (!fullScreen) {
 			dispatch({ type: "RESET_POSITION" });
 		}
-
 	}, [fullScreen]);
 
 	// Handle mouse/touch down events to start dragging
