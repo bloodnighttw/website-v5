@@ -4,6 +4,7 @@ import React, { useReducer, useRef, useEffect, useCallback, useMemo } from "reac
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import cn from "@/utils/cn";
+import { createPortal } from "react-dom";
 
 // Define types
 type Position = {
@@ -312,13 +313,13 @@ export default function ImageViewer(props: ImageViewerProps) {
 		<>
 			{imagePreviewMemo}
 			{/* Full screen overlay */}
-			{fullScreen && (
+			{fullScreen && createPortal((
 				<span
 					ref={containerRef}
-					className="fixed inset-0 bg-bprimary/20 backdrop-blur bg-opacity-80 z-101 flex items-center justify-center"
+					className="fixed top-0 bg-bprimary/20 backdrop-blur z-1000 w-full h-full"
 					onMouseDown={handleBackgroundClick}
 				>
-					<div className="fixed top-0 w-full bg-bsecondary/90 z-102 h-16 grid grid-cols-2 lg:grid-cols-3 items-center px-8 mx-auto">
+					<span className="fixed top-0 w-full bg-bsecondary/90 z-102 h-16 grid grid-cols-2 lg:grid-cols-3 items-center px-8 mx-auto">
 						<div className="flex items-center space-x-2 flex-nowrap text-xl">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
 								 className="size-6" viewBox="0 0 16 16">
@@ -394,7 +395,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
 							</svg>
 						</button>
-					</div>
+					</span>
 					<div
 						style={{
 							transform: `translate(${position.x}px, ${position.y}px) scale(${zoomLevel})`,
@@ -423,7 +424,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 						/>
 					</div>
 				</span>
-			)}
+			), document?.body)}
 
 		</>
 	);

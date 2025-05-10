@@ -131,11 +131,10 @@
 
 @keyframes fadeIn{
     0% {
-        display: block;
         opacity: 0;
     }
     100% {
-        display: block;
+        opacity: 1;
     }
 }
 
@@ -143,6 +142,17 @@
     animation: fadeIn .4s ease-in-out forwards;
 }
 
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @utility page-enter {
-    animation: fadeIn .6s ease-in-out forwards;
+    animation: fadeInUp .4s ease-in-out forwards;
 }
