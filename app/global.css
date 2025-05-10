@@ -6,6 +6,7 @@
 	--color-bprimary: theme("colors.zinc.950");
 	--color-bsecondary: theme("colors.zinc.800");
 	--color-dot: theme("colors.zinc.700");
+	--stagger-delay: 0s;
 
 	--size-width-max: 96rem;
 }
@@ -131,14 +132,104 @@
 
 @keyframes fadeIn{
     0% {
-        display: block;
         opacity: 0;
     }
     100% {
-        display: block;
+        opacity: 1;
     }
 }
 
 @utility fade-in {
     animation: fadeIn .4s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@utility page-enter {
+    animation: fadeInUp .4s ease-in-out forwards;
+}
+
+@utility fade-in-up {
+    animation: fadeInUp .2s ease-in-out forwards;
+}
+
+@keyframes showAnimation {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    100% {
+        display: inline-flex;
+        opacity: 1;
+    }
+}
+
+@keyframes hideAnimation {
+    0% {
+        display: inline-flex;
+        opacity: 0;
+    }
+
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@utility show {
+    animation: showAnimation .2s ease-in-out forwards;
+}
+
+@utility hide {
+    animation: hideAnimation .2s ease-in-out forwards;
+}
+
+@keyframes cardAnimation {
+
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@utility card-start {
+    @apply opacity-0;
+}
+
+@utility card {
+    animation: cardAnimation .5s ease-in-out forwards;
+}
+
+@utility stagger {
+    --stagger-delay: 0s; /* Default value */
+    animation-delay: var(--stagger-delay);
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+}
+
+@utility scale-in {
+    animation: scaleIn 0.3s ease-in-out forwards;
 }

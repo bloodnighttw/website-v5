@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect } from "react";
 import cn from "@/utils/cn";
 import { TocSideLineAction } from "@/compoments/Blog/Addon/Toc";
+import Link from "next/link";
 
 export interface TocTree {
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
@@ -90,7 +91,7 @@ export function TocElement(toc: TocTree) {
 		}
 	},[dispatch, tocRef]);
 
-	return <a
+	return <Link
 		href={`#${toc.id}`} className={cn(
 			"w-60 hover:bg-bsecondary/40 rounded text-secondary/90",
 			toc.depth === 1 && "pl-6",
@@ -100,8 +101,9 @@ export function TocElement(toc: TocTree) {
 			onScreen && "text-primary/100"
 		)}
 		ref={tocRef}
+		data-disable-progress={true}
 	>
 		{toc.text}
-	</a>;
+	</Link>;
 
 }

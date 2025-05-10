@@ -11,32 +11,28 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ChangeLanguage from "@/compoments/panel/ChangeLanguage";
+import Providers from "@/app/[locale]/providers";
 
 // generates metadata for each locale
 export async function generateMetadata() {
 	const t = await getTranslations("Meta");
 	return {
 		title: t("title"),
-		description: t("description"),
+		description: t("description")
 	} as Metadata;
 }
 
 
-
 export function generateStaticParams() {
-	return routing.locales.map((locale) => ({locale}));
+	return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-	children,
-	params
-}: Readonly<{
-	children: React.ReactNode;
-	params: Promise<{locale: string}>;
-}>) {
+export default async function LocaleLayout(
+	{ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }>}>
+) {
 
 	// Ensure that the incoming `locale` is valid
-	const {locale} = await params;
+	const { locale } = await params;
 	if (!hasLocale(routing.locales, locale)) {
 		notFound();
 	}
@@ -45,15 +41,16 @@ export default async function RootLayout({
 	const t = await getTranslations("Panel");
 
 	return (
-		<html lang="en">
-			<head>
-				<meta
-					httpEquiv="Delegate-CH"
-					content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"
-				/>
-			</head>
-			<body className={`$antialiased`}>
+		<html>
+		<head>
+			<meta
+				httpEquiv="Delegate-CH"
+				content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"
+			/>
+		</head>
+		<body className={`$antialiased`}>
 			<NextIntlClientProvider>
+				<Providers>
 				<NavPanel>
 					<Link href="/">
 						<Avatar
@@ -99,8 +96,9 @@ export default async function RootLayout({
 						<span>{t("madeWith")}</span>
 					</div>
 				</Footer>
+				</Providers>
 			</NextIntlClientProvider>
-			</body>
+		</body>
 		</html>
 	);
 }

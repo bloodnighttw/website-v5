@@ -13,17 +13,19 @@ interface Props {
 }
 
 export default function Avatar(props: Props) {
-	const cln = cn("rounded-full", props.className);
+	const cln = cn("rounded-full scale-in", props.className);
 
 	return (
-		<Image
-			src={props.src}
-			alt={props.alt ?? "avatar image"}
-			className={cln}
-			width={props.size}
-			height={props.size}
-			loading="eager"
-			priority={props.priority}
-		/>
+		<div className="overflow-hidden">
+			<Image
+				src={props.src}
+				alt={props.alt ?? "avatar image"}
+				className={cln}
+				width={props.size}
+				height={props.size}
+				loading="eager"
+				priority={props.priority}
+			/>
+		</div>
 	);
 }

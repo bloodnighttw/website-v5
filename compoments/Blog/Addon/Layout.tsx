@@ -7,6 +7,7 @@ import GoToTop from "@/compoments/Blog/Addon/GoToTop";
 import Toc from "@/compoments/Blog/Addon/Toc";
 import { TocTree } from "@/compoments/Blog/Addon/TocElement";
 import { useTranslations } from "next-intl";
+import { createPortal } from "react-dom";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -88,16 +89,15 @@ export default function Page(prop:LayoutProps) {
 		<GoToTop progressRef={progressRef}/>
 	),[]);
 
-	const bottomPanelMemo = React.useMemo(() => {
-		return <div className={cn(
-			absolute ? "absolute" : "fixed z-100",
+	const BottomPanel= ({className}: {className: string}) => {
+
+		return <div className={cn(className,
 			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2"
-		)}
-		>
+		)}>
 			{goToTopMemo}
 			{TocMemo}
 		</div>
-	},[TocMemo, absolute, goToTopMemo]);
+	};
 
 	const t = useTranslations("Blog");
 
@@ -114,7 +114,7 @@ export default function Page(prop:LayoutProps) {
 					{t("published",  {date:prop.publishAt})}
 				</div>
 			</Part>
-			{bottomPanelMemo}
+			{absolute ? <BottomPanel className="absolute"/> : createPortal(<BottomPanel className={cn("fixed")}/>, document.body)}
 		</div>
 	</div>
 }

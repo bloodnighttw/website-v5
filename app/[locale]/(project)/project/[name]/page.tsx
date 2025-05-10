@@ -35,7 +35,7 @@ export default async function Page({
 	const { default: C } = locale === "en" ? await import(`@/contents/projects/en/${name}.mdx`) : await import(`@/contents/projects/${name}.mdx`);
 
 	return (
-		<Part>
+		<Part className="page-enter">
 			<div className="flex bg-bsecondary/80 rounded items-center gap-4 p-4">
 				<Link href={projectInfo.link}>{Github}</Link>
 				<p className="text-2xl">{projectInfo.name}</p>
