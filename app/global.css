@@ -142,3 +142,7 @@
 @utility fade-in {
     animation: fadeIn .4s ease-in-out forwards;
 }
+
+@utility page-enter {
+    animation: fadeIn .6s ease-in-out forwards;
+}
