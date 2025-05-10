@@ -31,9 +31,7 @@ export default function TypeWriter({children}: Props) {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [children.length, state]);
-
-
+	}, [children.length]);
 
 	return <div className="font-mono overflow-x-hidden text-nowrap pr-1 h-6 flex justify-center lg:justify-start">
 		{	state !== 0 &&
