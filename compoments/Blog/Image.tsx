@@ -286,7 +286,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 	},[zoomLevel]);
 
 	const imagePreviewMemo = useMemo(() => {
-		return <div
+		return <span
 			className="relative overflow-hidden cursor-pointer hover:-translate-y-2 duration-200 group/image *:m-0 flex justify-center mt-8"
 			onClick={toggleFullScreen}
 		>
@@ -298,14 +298,14 @@ export default function ImageViewer(props: ImageViewerProps) {
 				quality={0}
 			/>
 
-			<div className={cn(
+			<span className={cn(
 				"absolute top-1/2 duration-200 inline-flex items-center justify-center rounded-full",
 				"opacity-0 group-hover/image:opacity-100 bg-bsecondary text-2xl py-4 px-12"
 			)}
 			>
 				{t("Click to view full image")}
-			</div>
-		</div>
+			</span>
+		</span>
 	},[props, t, toggleFullScreen])
 
 	return (
@@ -313,7 +313,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 			{imagePreviewMemo}
 			{/* Full screen overlay */}
 			{fullScreen && (
-				<div
+				<span
 					ref={containerRef}
 					className="fixed inset-0 bg-bprimary/20 backdrop-blur bg-opacity-80 z-101 flex items-center justify-center"
 					onMouseDown={handleBackgroundClick}
@@ -422,7 +422,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 							draggable="false"
 						/>
 					</div>
-				</div>
+				</span>
 			)}
 
 		</>
