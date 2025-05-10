@@ -63,7 +63,7 @@ export default async function Tags({
 	const tagsContent = allPosts.filter((it) => it.categories.includes(tags));
 
 	return (
-		<>
+		<div className="page-enter">
 			<SecondaryPanel>
 				<HashTag
 					className="text-center text-5xl text-bold"
@@ -76,6 +76,6 @@ export default async function Tags({
 					<ArticleCards infos={tagsContent} />
 				</CardCollection>
 			</Part>
-		</>
+		</div>
 	);
 }
