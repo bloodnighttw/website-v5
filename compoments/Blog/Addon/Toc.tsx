@@ -180,8 +180,8 @@ export default function Toc(prop: TocProp) {
 				<CircleArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
-				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30",
-				"backdrop-blur p-2 duration-200 origin-bottom-right *:not-first:py-0.5",
+				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30 backdrop-blur",
+				"p-2 duration-200 origin-bottom-right *:not-first:py-0.5",
 				"overflow-y-auto",
 				open ? "scale-100" : "scale-0",
 			)}>
