@@ -3,13 +3,14 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import { useProgress } from "@bprogress/next";
 
 export default function ChangeLanguage(){
 
 	const t = useTranslations("Panel");
 	const pathname = usePathname();
 	const router = useRouter();
-
+	const { start } = useProgress();
 
 	// function to change the language
 	const changeLanguage = () => {
@@ -21,6 +22,8 @@ export default function ChangeLanguage(){
 		// get current scroll position
 		const scrollPosition = window.scrollY;
 		sessionStorage.setItem("scrollPosition", scrollPosition.toString());
+
+		start()
 
 		router.push(newPathname);
 	}
