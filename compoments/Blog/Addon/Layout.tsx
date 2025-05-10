@@ -50,8 +50,6 @@ export default function Page(prop:LayoutProps) {
 		progressRef.current = (diff / (rectBottom - rectTop - translation)) * 100;
 	},[]);
 
-	const [animation, setAnimation] = React.useState(true);
-
 	const handleScroll = useCallback(() => {
 
 		if(progressRef.current === -1) return;
@@ -61,7 +59,6 @@ export default function Page(prop:LayoutProps) {
 		if( progressValue < 100) {
 			setAbsolute(false);
 		} else {
-			setAnimation(false);
 			setAbsolute(true);
 		}
 	},[])
@@ -117,7 +114,7 @@ export default function Page(prop:LayoutProps) {
 					{t("published",  {date:prop.publishAt})}
 				</div>
 			</Part>
-			{absolute ? <BottomPanel className="absolute"/> : createPortal(<BottomPanel className={cn("fixed", animation && "fade-in")}/>, document.body)}
+			{absolute ? <BottomPanel className="absolute"/> : createPortal(<BottomPanel className={cn("fixed")}/>, document.body)}
 		</div>
 	</div>
 }
