@@ -219,3 +219,19 @@
     --stagger-delay: 0s; /* Default value */
     animation-delay: var(--stagger-delay);
 }
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+}
+
+@utility scale-in {
+    animation: scaleIn 0.3s ease-in-out forwards;
+}
