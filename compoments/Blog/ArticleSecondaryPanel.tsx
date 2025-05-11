@@ -22,11 +22,11 @@ export default function Panel({ content }: Props) {
 			/>
 
 			<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
-				<p className="text-6xl w-full m-4">{content.title}</p>
-				<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto">
+				<p className="text-6xl w-full m-4 fade-in-up">{content.title}</p>
+				<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto overflow-y-hidden">
 					{content.categories.map(
 						(category: string, index: number) => (
-							<HashTag key={index} tags={category} />
+							<HashTag key={index} tags={category} className="fade-in-up" style={{ animationDelay: `${index * 0.075}s` }}/>
 						),
 					)}
 				</div>
