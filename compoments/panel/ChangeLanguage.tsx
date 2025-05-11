@@ -30,7 +30,7 @@ export default function ChangeLanguage(){
 
 	return (
 
-		<button className="flex items-center justify-center gap-1 cursor-pointer active:scale-90 hover:bg-bsecondary/60 duration-200 py-1.5 px-2  rounded"
+		<button className="flex items-center justify-center gap-1 cursor-pointer active:scale-90 hover:bg-bsecondary/60 duration-200 py-1.5 px-2  rounded fade-in"
 				onClick={() => changeLanguage()}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 				className="bi bi-globe2" viewBox="0 0 16 16">
