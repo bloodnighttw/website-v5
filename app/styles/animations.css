@@ -63,7 +63,7 @@
 }
 
 @utility page-enter {
-    animation: fadeIn .4s ease-in-out forwards;
+    animation: fadeIn .2s ease-in-out forwards;
 }
 
 @utility fade-in-up {
