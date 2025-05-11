@@ -26,6 +26,7 @@ jobs:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+              continue-on-error: true
             - name: Deploy production to Cloudflare Pages
               uses: cloudflare/wrangler-action@v3
               if: github.ref == 'refs/heads/main'
