@@ -41,7 +41,7 @@ export default async function LocaleLayout(
 	const t = await getTranslations("Panel");
 
 	return (
-		<html>
+		<html lang={locale}>
 		<head>
 			<meta
 				httpEquiv="Delegate-CH"
