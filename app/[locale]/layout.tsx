@@ -61,7 +61,7 @@ export default async function LocaleLayout(
 					</Link>
 
 					<Link href="/">
-						<div className="font-bold">{t("name")}</div>
+						<div className="font-bold fade-in">{t("name")}</div>
 					</Link>
 					<div className="mr-auto"></div>
 					<PanelButton href={"/"} text={t("friends")}>
