@@ -10,6 +10,7 @@ import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import Text from "@/app/[locale]/(blog)/[blog]/Text";
 import { getTranslations } from "next-intl/server";
+import { BASE_URL } from "@/utils/constant";
 
 export async function generateMetadata(): Promise<Metadata>{
 
@@ -28,6 +29,12 @@ export async function generateMetadata(): Promise<Metadata>{
 			card: "summary_large_image",
 			images: [],
 		},
+		alternates: {
+			languages: {
+				zh: `${BASE_URL}/zh/blog`,
+				en: `${BASE_URL}/en/blog`,
+			}
+		}
 	}
 }
 

@@ -24,24 +24,20 @@ export const dynamicParams = false;
 export async function generateMetadata({
 	params,
 }: {
-	params: Promise<{ slug: string, locale: string }>;
+	params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-	const { slug, locale } = await params;
+	const { slug } = await params;
 	const post = allPosts.find((it) => it.slug === slug)!;
 	const description = post.description;
-
-	const notTranslated = post.lang !== locale;
-	const anotherLang = post.lang === "zh" ? "en" : "zh";
-	let canonical = undefined;
-	if (notTranslated) {
-		canonical = `${BASE_URL}/${anotherLang}/blog/${post.slug}`;
-	}
 
 	return {
 		title: post.title,
 		description,
 		alternates: {
-			canonical,
+			languages: {
+				zh: `${BASE_URL}/zh/blog/${post.slug}`,
+				en: `${BASE_URL}/en/blog/${post.slug}`,
+			}
 		},
 		openGraph: {
 			title: post.title,

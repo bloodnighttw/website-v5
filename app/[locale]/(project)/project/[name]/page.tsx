@@ -1,4 +1,4 @@
-import { svgUrl } from "@/utils/constant";
+import { BASE_URL, svgUrl } from "@/utils/constant";
 import Image from "next/image";
 import { Github } from "@/app/assets/svg";
 import Link from "@/i18n/navigation";
@@ -8,6 +8,7 @@ import { Stacks } from "@/compoments/Project/Stack";
 import { allProjects } from "content-collections";
 
 import "@/app/content.css"
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
 	return allProjects.map((post) => {
@@ -18,6 +19,18 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+export async function generateMetadata({params}: { params: Promise<{ name: string }> }): Promise<Metadata>{
+	const { name } = await params;
+	return {
+		alternates: {
+			languages: {
+				zh: `${BASE_URL}/zh/project/${name}`,
+				en: `${BASE_URL}/en/project/${name}`,
+			}
+		}
+	};
+}
 
 export default async function Page({
 	params,

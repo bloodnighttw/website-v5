@@ -7,14 +7,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		{
 			url: `${BASE_URL}/`,
 			lastModified: new Date(),
-			changeFrequency: "daily",
+			changeFrequency: "weekly",
 			priority: 1.0,
+			alternates: {
+				languages: {
+					zh: `${BASE_URL}/zh`,
+					en: `${BASE_URL}/en`
+				}
+			}
 		},
 		{
 			url: `${BASE_URL}/blog`,
 			lastModified: new Date(),
 			changeFrequency: "daily",
 			priority: 0.95,
+			alternates: {
+				languages: {
+					zh: `${BASE_URL}/zh/blog`,
+					en: `${BASE_URL}/en/blog`
+				}
+			}
 		},
 	];
 
@@ -23,7 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			url: `${BASE_URL}/blog/${post.slug}`,
 			lastModified: post.date,
 			changeFrequency: "daily",
-			priority: 0.9,
+			priority: 1,
+			alternates: {
+				languages: {
+					zh: `${BASE_URL}/zh/blog/${post.slug}`,
+					en: `${BASE_URL}/en/blog/${post.slug}`
+				}
+			},
 		};
 	});
 
