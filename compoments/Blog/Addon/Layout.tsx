@@ -7,7 +7,6 @@ import GoToTop from "@/compoments/Blog/Addon/GoToTop";
 import Toc from "@/compoments/Blog/Addon/Toc";
 import { TocTree } from "@/compoments/Blog/Addon/TocElement";
 import { useTranslations } from "next-intl";
-import { createPortal } from "react-dom";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -81,23 +80,17 @@ export default function Page(prop:LayoutProps) {
 		return prop.children
 	},[prop.children])
 
-	const TocMemo = React.useMemo(() => (
-		<Toc progressRef={progressRef} tocArray={prop.tocArray}/>
-	),[prop.tocArray]);
 
-	const goToTopMemo = React.useMemo(() => (
-		<GoToTop progressRef={progressRef}/>
-	),[]);
-
-	const BottomPanel= ({className}: {className: string}) => {
-
-		return <div className={cn(className,
+	const bottomPanelMemo = React.useMemo(() => {
+		return <div className={cn(
+			absolute ? "absolute" : "fixed z-100",
 			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2"
-		)}>
-			{goToTopMemo}
-			{TocMemo}
+		)}
+		>
+			<GoToTop progressRef={progressRef}/>
+			<Toc progressRef={progressRef} tocArray={prop.tocArray}/>
 		</div>
-	};
+	},[absolute, prop.tocArray]);
 
 	const t = useTranslations("Blog");
 
@@ -114,7 +107,7 @@ export default function Page(prop:LayoutProps) {
 					{t("published",  {date:prop.publishAt})}
 				</div>
 			</Part>
-			{absolute ? <BottomPanel className="absolute"/> : createPortal(<BottomPanel className={cn("fixed")}/>, document.body)}
+			{bottomPanelMemo}
 		</div>
 	</div>
 }

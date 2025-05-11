@@ -169,7 +169,7 @@ export default function Toc(prop: TocProp) {
 
 
 	return (
-		<div className="scroll-mb-2" ref={divRef}>
+		<div ref={divRef}>
 			<div
 				className={cn(
 					"bg-bprimary h-8 w-8 rounded-full *:m-auto flex items-center justify-center",
