@@ -309,11 +309,11 @@ export default function ImageViewer(props: ImageViewerProps) {
 			/>
 
 			<span className={cn(
-				"absolute top-1/2 duration-200 inline-flex items-center justify-center rounded-full",
-				"opacity-0 group-hover/image:opacity-100 bg-bsecondary text-2xl py-4 px-12"
-			)}
-			>
-				{t("Click to view full image")}
+				"absolute insect-0 inline-flex items-center justify-center h-full",
+			)}>
+				<span className="opacity-0 group-hover/image:opacity-100 bg-bsecondary text-2xl py-4 px-12 rounded-full duration-200">
+					{t("Click to view full image")}
+				</span>
 			</span>
 		</span>
 	},[props, t, toggleFullScreen])
