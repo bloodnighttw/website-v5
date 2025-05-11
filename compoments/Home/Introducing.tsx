@@ -21,10 +21,10 @@ export default async function Introducing() {
 	return (
 		<div className="flex flex-col-reverse lg:flex-row lg:flex-none gap-4 w-full my-auto lg:text-start text-center items-center lg:items-stretch">
 			<div className="lg:ml-0 lg:mr-auto my-auto lg:w-[calc(100%-240px)] max-w-[48rem] mx-auto">
-				<div className="text-center lg:text-start">
+				<div className="text-center lg:text-start fade-in-up">
 					{t("hi")}
 				</div>
-				<p className="text-4xl lg:text-6xl font-bold my-1.5">
+				<p className="text-4xl lg:text-6xl font-bold my-1.5 fade-in-up">
 					{t("I'm")}	{t("name")}
 				</p>
 

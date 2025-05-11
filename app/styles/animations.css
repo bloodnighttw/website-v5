@@ -53,18 +53,21 @@
 
 @keyframes fadeInUp {
     0% {
+        transform: translateY(20px);
         opacity: 0;
     }
     100% {
+        transform: translateY(0);
         opacity: 1;
     }
 }
 
 @utility page-enter {
-    animation: fadeInUp .4s ease-in-out forwards;
+    animation: fadeIn .4s ease-in-out forwards;
 }
 
 @utility fade-in-up {
+    @apply opacity-1;
     animation: fadeInUp .2s ease-in-out forwards;
 }
 
