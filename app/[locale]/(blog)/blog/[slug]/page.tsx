@@ -9,6 +9,7 @@ import { allPosts } from "content-collections";
 import Layout from "@/compoments/Blog/Addon/Layout";
 import Warning from "@/compoments/Blog/Warning";
 import { getTranslations } from "next-intl/server";
+import { BASE_URL } from "@/utils/constant";
 
 export async function generateStaticParams() {
 	return allPosts.map((post) => {
@@ -23,15 +24,25 @@ export const dynamicParams = false;
 export async function generateMetadata({
 	params,
 }: {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ slug: string, locale: string }>;
 }): Promise<Metadata> {
-	const { slug } = await params;
+	const { slug, locale } = await params;
 	const post = allPosts.find((it) => it.slug === slug)!;
 	const description = post.description;
+
+	const notTranslated = post.lang !== locale;
+	const anotherLang = post.lang === "zh" ? "en" : "zh";
+	let canonical = undefined;
+	if (notTranslated) {
+		canonical = `${BASE_URL}/${anotherLang}/blog/${post.slug}`;
+	}
 
 	return {
 		title: post.title,
 		description,
+		alternates: {
+			canonical,
+		},
 		openGraph: {
 			title: post.title,
 			description: "",
