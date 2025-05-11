@@ -1,0 +1,76 @@
+@utility part {
+	& > * {
+		@apply mx-auto max-w-[var(--size-width-max)];
+	}
+}
+
+@utility bg-dotted {
+	background-image: radial-gradient(
+		circle,
+		var(--color-dot) 0.075rem,
+		transparent 0
+	);
+	background-size: 20px 20px;
+	background-position: center;
+}
+
+@utility introduction {
+	@apply text-xl;
+}
+
+@utility line {
+	&::before {
+		@apply text-primary/50 inline-block select-none w-10 text-right pr-4;
+		content: attr(data-line-number);
+	}
+}
+
+@utility resize-underline-none {
+    @apply relative;
+
+    &::after {
+        @apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
+        content: "";
+        background-color: var(--color-primary);
+    }
+}
+
+@utility resize-underline {
+    &::after {
+        width: 100%;
+    }
+}
+
+@utility hashtag {
+	@apply font-mono relative cursor-pointer resize-underline-none hover:resize-underline;
+
+	&::before {
+		@apply decoration-dashed;
+		content: "#";
+	}
+}
+
+@utility mask-lg {
+	mask-image: linear-gradient(
+		to right,
+		transparent 0%,
+		rgb(0, 0, 0) 10%,
+		rgb(0, 0, 0) 90%
+	);
+}
+
+/* Convert traditional class to @utility */
+@utility gradient-background {
+	background: linear-gradient(
+		120deg,
+		var(--color-bprimary),
+		var(--color-bsecondary),
+		var(--color-bprimary)
+	);
+	background-size: 300% 300%;
+}
+
+/* Add missing duration utility */
+@utility duration-400 {
+	transition-duration: 400ms;
+}
