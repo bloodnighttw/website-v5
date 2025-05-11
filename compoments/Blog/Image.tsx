@@ -13,6 +13,7 @@ type Position = {
 };
 
 type ViewerState = {
+	firstLoad: boolean;
 	fullScreen: boolean;
 	position: Position;
 	dragging: boolean;
@@ -35,6 +36,7 @@ type ViewerAction =
 
 // Initial state
 const initialState: ViewerState = {
+	firstLoad: true,
 	fullScreen: false,
 	position: { x: 0, y: 0 },
 	dragging: false,
@@ -49,7 +51,8 @@ function imageViewerReducer(state: ViewerState, action: ViewerAction): ViewerSta
 		case "TOGGLE_FULLSCREEN":
 			return {
 				...state,
-				fullScreen: action.payload
+				fullScreen: action.payload,
+				firstLoad: false
 			};
 		case "SET_DRAGGING":
 			return {
@@ -113,7 +116,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 
 	const [mounted, setMounted] = React.useState(false);
 	const [state, dispatch] = useReducer(imageViewerReducer, initialState);
-	const { fullScreen, position, dragging, dragStart, zoomLevel, transformOrigin } = state;
+	const { fullScreen, firstLoad, position, dragging, dragStart, zoomLevel, transformOrigin } = state;
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -323,8 +326,8 @@ export default function ImageViewer(props: ImageViewerProps) {
 				<span
 					ref={containerRef}
 					className={cn(
-						fullScreen ? "show" : "hide",
-						"fixed top-0 bg-bprimary/20 backdrop-blur z-1000 w-full h-full items-center justify-center"
+						"fixed top-0 bg-bprimary/20 backdrop-blur z-1000 w-full h-full items-center justify-center",
+						fullScreen ? "show" : firstLoad ? "hidden" : "hide",
 					)}
 					onMouseDown={handleBackgroundClick}
 				>

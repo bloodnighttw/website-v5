@@ -83,7 +83,7 @@
 @keyframes hideAnimation {
     0% {
         display: inline-flex;
-        opacity: 0;
+        opacity: 1;
     }
 
     100% {
