@@ -177,7 +177,7 @@
 		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
 
         section {
-            /*@apply scroll-mt-20;*/
+            @apply scroll-mt-20;
         }
 
 		code {
