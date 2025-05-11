@@ -1,4 +1,4 @@
-import { svgUrl } from "@/utils/constant";
+import { BASE_URL, svgUrl } from "@/utils/constant";
 
 const normalizeSrc = (src: string) => {
 	return src.startsWith("/") ? src.slice(1) : src;
@@ -30,5 +30,5 @@ export default function cloudflareLoader({
 		params.push(`quality=${quality}`);
 	}
 	const paramsString = params.join(",");
-	return `/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
+	return `${BASE_URL}/cdn-cgi/image/${paramsString}/${normalizeSrc(src)}`;
 }
