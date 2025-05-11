@@ -7,7 +7,7 @@ export default function Chapter({
 	children: string;
 	className?: string;
 }) {
-	const cln = cn("text-4xl font-bold", className);
+	const cln = cn("text-4xl font-bold fade-in", className);
 
 	return <p className={cln}>{children}</p>;
 }
