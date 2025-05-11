@@ -80,13 +80,6 @@ export default function Page(prop:LayoutProps) {
 		return prop.children
 	},[prop.children])
 
-	const TocMemo = React.useMemo(() => (
-		<Toc progressRef={progressRef} tocArray={prop.tocArray}/>
-	),[prop.tocArray]);
-
-	const goToTopMemo = React.useMemo(() => (
-		<GoToTop progressRef={progressRef}/>
-	),[]);
 
 	const bottomPanelMemo = React.useMemo(() => {
 		return <div className={cn(
@@ -94,10 +87,10 @@ export default function Page(prop:LayoutProps) {
 			"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2"
 		)}
 		>
-			{goToTopMemo}
-			{TocMemo}
+			<GoToTop progressRef={progressRef}/>
+			<Toc progressRef={progressRef} tocArray={prop.tocArray}/>
 		</div>
-	},[TocMemo, absolute, goToTopMemo]);
+	},[absolute, prop.tocArray]);
 
 	const t = useTranslations("Blog");
 

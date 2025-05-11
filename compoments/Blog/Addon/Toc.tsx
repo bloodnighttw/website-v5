@@ -169,19 +169,19 @@ export default function Toc(prop: TocProp) {
 
 
 	return (
-		<div className="scroll-mb-2" ref={divRef}>
+		<div ref={divRef}>
 			<div
 				className={cn(
 					"bg-bprimary h-8 w-8 rounded-full *:m-auto flex items-center justify-center",
-					"cursor-pointer active:scale-90 duration-200 relative",
+					"cursor-pointer active:scale-90 duration-200 relative fade-in",
 				)}
 				onClick={handleClick}
 			>
 				<CircleArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
-				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30",
-				"backdrop-blur p-2 duration-200 origin-bottom-right *:not-first:py-0.5",
+				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30 backdrop-blur",
+				"p-2 duration-200 origin-bottom-right *:not-first:py-0.5",
 				"overflow-y-auto",
 				open ? "scale-100" : "scale-0",
 			)}>

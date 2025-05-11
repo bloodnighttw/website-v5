@@ -85,10 +85,10 @@ export default async function Blog({
 	}).format(content.date);
 
 	return (
-		<>
+		<div className="page-enter">
 			<ArticleSecondaryPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
-				<Part className="bg-bprimary">
+				<Part className="bg-bprimary page-enter">
 					{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
 					<article>
 						<Content />
@@ -99,6 +99,6 @@ export default async function Blog({
 			<Part className="bg-dotted">
 				<Comments />
 			</Part>
-		</>
+		</div>
 	);
 }

@@ -3,13 +3,14 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import { useProgress } from "@bprogress/next";
 
 export default function ChangeLanguage(){
 
 	const t = useTranslations("Panel");
 	const pathname = usePathname();
 	const router = useRouter();
-
+	const { start } = useProgress();
 
 	// function to change the language
 	const changeLanguage = () => {
@@ -22,12 +23,14 @@ export default function ChangeLanguage(){
 		const scrollPosition = window.scrollY;
 		sessionStorage.setItem("scrollPosition", scrollPosition.toString());
 
+		start()
+
 		router.push(newPathname);
 	}
 
 	return (
 
-		<button className="flex items-center justify-center gap-1 cursor-pointer active:scale-90 hover:bg-bsecondary/60 duration-200 py-1.5 px-2  rounded"
+		<button className="flex items-center justify-center gap-1 cursor-pointer active:scale-90 hover:bg-bsecondary/60 duration-200 py-1.5 px-2  rounded fade-in"
 				onClick={() => changeLanguage()}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 				className="bi bi-globe2" viewBox="0 0 16 16">

@@ -174,7 +174,11 @@
 	}
 
 	article {
-		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4 *:scroll-mt-20;
+		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
+
+        section {
+            @apply scroll-mt-20;
+        }
 
 		code {
 			@apply bg-zinc-800 p-1 rounded mx-1;

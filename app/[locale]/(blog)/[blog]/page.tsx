@@ -45,7 +45,7 @@ export default async function BlogPosts() {
 	);
 
 	return (
-		<>
+		<div className="page-enter">
 			<SecondaryPanel>
 				<Text/>
 			</SecondaryPanel>
@@ -54,6 +54,6 @@ export default async function BlogPosts() {
 					<ArticleCards infos={metadataWithPreview} />
 				</CardCollection>
 			</Part>
-		</>
+		</div>
 	);
 }

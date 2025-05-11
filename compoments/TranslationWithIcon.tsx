@@ -23,7 +23,7 @@ export default async function TranslationWithIcon(props: Props) {
 	});
 
 	return (
-		<p className="mt-2 text-balance lg:text-wrap text-xl *:inline *:align-text-bottom">
+		<p className="mt-2 text-balance lg:text-wrap text-xl *:inline *:align-text-bottom fade-in-up">
 			{result}
 		</p>
 	);
