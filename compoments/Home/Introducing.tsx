@@ -40,22 +40,29 @@ export default async function Introducing() {
 							alt="Java"
 							width={28}
 							height={28}
+							priority={true}
 						/>,
 						"linux" : <Image
 							src={svgUrl.linux}
 							alt="Linux"
 							width={28}
-							height={28}/>,
+							height={28}
+							priority={true}
+						/>,
 						"react" : <Image
 							src={svgUrl["react"]}
 							alt="React"
 							width={28}
-							height={28}/>,
+							height={28}
+							priority={true}
+						/>,
 						"ts": <Image
 							src={svgUrl.typescript}
 							alt="TS"
 							width={28}
-							height={28} />,
+							height={28}
+							priority={true}
+						/>,
 					}}
 				/>
 
