@@ -39,7 +39,7 @@
 		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
-		"@cloudflare/next-on-pages": "^1.13.10",
+		"@cloudflare/next-on-pages": "^1.13.12",
 		"@content-collections/core": "^0.8.2",
 		"@content-collections/next": "^0.2.6",
 		"@eslint/eslintrc": "^3",
