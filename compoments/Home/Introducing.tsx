@@ -1,13 +1,4 @@
 import Image from "next/image";
-import Link from "@/i18n/navigation";
-import {
-	Discord,
-	Github,
-	Mail,
-	Telegram,
-	Threads,
-	Twitter,
-} from "@/app/assets/svg";
 import Avatar from "@/compoments/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
