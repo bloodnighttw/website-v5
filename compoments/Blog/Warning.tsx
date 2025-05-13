@@ -3,9 +3,11 @@ interface Props {
 	message: string;
 }
 
+// a warning component with glare effect on background
 export default function Warning(props: Props) {
+
 	return (
-		<div className="rounded bg-red-600/50 p-4 sticky">
+		<div className="rounded p-4 bg-gradient-to-br from-red-500/60 to-red-900/60 relative shadow-lg shadow-bsecondary">
 			<span className="font-bold flex items-center gap-2 *:h-4 text-[16px]">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
 					 className="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">

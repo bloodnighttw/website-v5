@@ -297,7 +297,7 @@ export default function ImageViewer(props: ImageViewerProps) {
 
 	const imagePreviewMemo = useMemo(() => {
 		return <span
-			className="relative overflow-hidden cursor-pointer hover:-translate-y-2 duration-200 group/image *:m-0 flex justify-center mt-8"
+			className="relative overflow-hidden cursor-pointer hover:-translate-y-2 duration-200 group/image *:m-0 flex justify-center mt-8 shadow-lg shadow-bsecondary"
 			onClick={toggleFullScreen}
 		>
 			<Image
