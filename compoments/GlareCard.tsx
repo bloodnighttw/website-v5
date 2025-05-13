@@ -50,6 +50,7 @@ export default function GlareCard(props: Props) {
 				"relative overflow-hidden",
 				props.className
 			)}
+			style={props.style}
 		>
 			{/* Glare effect */}
 			<div
