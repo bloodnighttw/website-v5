@@ -3,10 +3,11 @@ import Image from "next/image";
 import { Post } from "content-collections";
 import React from "react";
 import cn from "@/utils/cn";
+import GlareCard from "@/compoments/GlareCard";
 
 interface Props {
 	info: Post;
-	index: number
+	index: number;
 }
 
 export default function ArticleCard(props: Props) {
@@ -16,28 +17,30 @@ export default function ArticleCard(props: Props) {
 	return (
 		<Link
 			href={"/blog/" + props.info.slug}
-			className={cn(
-				"rounded group border border-bsecondary w-full duration-200 hover:delay-0 bg-bprimary hover:bg-bsecondary/20 hover:z-1 hover:-translate-y-1",
-				"card-start card stagger",
-			)}
-			style={{ '--stagger-delay': `${delay}s` } as React.CSSProperties}
+			style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}
 		>
-			<Image
-				src={props.info.preview ?? ""}
-				alt="preview"
-				width={2000} // for debug build use
-				height={1600} // for debug build use
-				quality={0} // for production use
-				className="object-cover w-full h-40 border-b border-dot rounded-t" //
-				loading="eager"
-			/>
-			<p className="text-2xl font-bold py-4 px-2 group-hover:pl-3 duration-200">{props.info.title}</p>
+			<GlareCard strength={0.1} className={cn(
+				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
+				"card-start card stagger flex flex-col rounded border border-primary/10",
+				"bg-gradient-to-bl bg-bsecondary/20 shadow"
+			)}>
+				<Image
+					src={props.info.preview ?? ""}
+					alt="preview"
+					width={2000} // for debug build use
+					height={1600} // for debug build use
+					quality={0} // for production use
+					className="object-cover w-full h-40 border-b border-dot rounded-t z-10" //
+					loading="eager"
+				/>
+				<p className="text-2xl font-bold py-4 px-2 group-hover:pl-3 duration-200">{props.info.title}</p>
+			</GlareCard>
 		</Link>
 	);
 }
 
 export function ArticleCards(props: { infos: Post[] }) {
-	return props.infos.map((info,index) => (
-		<ArticleCard info={info} key={info.slug} index={index}/>
+	return props.infos.map((info, index) => (
+		<ArticleCard info={info} key={info.slug} index={index} />
 	));
 }
