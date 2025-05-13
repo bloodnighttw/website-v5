@@ -22,7 +22,7 @@ export default function ArticleCard(props: Props) {
 			<GlareCard strength={0.3} childrenClassName="*:bg-bprimary/40" className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
 				"card-start card stagger flex flex-col rounded",
-				"bg-gradient-to-bl bg-bsecondary/40 shadow-lg"
+				"bg-gradient-to-bl bg-bsecondary/40",
 			)}>
 				<Image
 					src={props.info.preview ?? ""}
