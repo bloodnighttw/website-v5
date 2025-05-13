@@ -53,7 +53,7 @@ export default function GlareCard(props: Props) {
 		>
 			{/* Glare effect */}
 			<div
-				className="absolute w-full h-full pointer-events-none"
+				className="absolute w-full h-full pointer-events-none -z-1"
 				style={{
 					background: `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255, 255, 255, ${strength}) 0%, rgba(255, 255, 255, 0) 50%)`,
 					mixBlendMode: "soft-light"
@@ -61,7 +61,7 @@ export default function GlareCard(props: Props) {
 			/>
 
 			{/* Content */}
-			<div className={cn("m-0.75 rounded h-full",props.childrenClassName)}>
+			<div className={cn("m-0.75 rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)}>
 				{props.children}
 			</div>
 		</div>
