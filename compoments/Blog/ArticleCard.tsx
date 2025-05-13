@@ -19,7 +19,7 @@ export default function ArticleCard(props: Props) {
 			href={"/blog/" + props.info.slug}
 			style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}
 		>
-			<GlareCard strength={0.2} className={cn(
+			<GlareCard strength={0.2} childrenClassName="bg-bprimary/40" className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
 				"card-start card stagger flex flex-col rounded",
 				"bg-gradient-to-bl bg-bsecondary/40 shadow-lg"
