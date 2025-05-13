@@ -16,8 +16,8 @@ export default async function Introducing() {
 				<div className="text-center lg:text-start fade-in-up">
 					{t("hi")}
 				</div>
-				<p className="text-4xl lg:text-6xl font-bold my-1.5 fade-in-up">
-					{t("I'm")}	{t("name")}
+				<p className="text-4xl lg:text-6xl font-bold my-1.5 fade-in-up ">
+					{t("I'm")}	<span className="red-gradient-text">{t("name")}</span>
 				</p>
 
 				<TypeWriter>
