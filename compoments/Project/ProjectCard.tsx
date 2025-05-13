@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Github } from "@/app/assets/svg";
 import { svgUrl } from "@/utils/constant";
 import Link from "@/i18n/navigation";
+import GlareCard from "@/compoments/GlareCard";
 
 interface Props {
 	name: string;
@@ -16,10 +17,10 @@ export default function ProjectCard(props: Props) {
 	return (
 		<Link
 			href={"/project/" + props.name}
-			className="rounded bg-dot/40 hover:bg-dot/60 p-4 duration-200 border border-dot/50 hover:border-dot"
 		>
+			<GlareCard strength={1} className="rounded bg-secondary/20" childrenClassName="p-4 bg-gradient-to-br from-bprimary/90 to-bsecondary/90 gap-2" >
 			<div className="flex gap-2 items-start text-center align-baseline">
-				<div>
+				<span>
 					{isGithub ? (
 						Github
 					) : (
@@ -30,8 +31,8 @@ export default function ProjectCard(props: Props) {
 							height={24}
 						/>
 					)}
-				</div>
-				<p className="text-xl font-mono">{props.name}</p>
+				</span>
+				<p className="text-xl font-mono align-text-bottom">{props.name}</p>
 				<div className="ml-auto"></div>
 
 				{props.stack
@@ -49,7 +50,7 @@ export default function ProjectCard(props: Props) {
 					})}
 			</div>
 			<div className="flex mt-2 gap-2 rounded"></div>
-			<p className="text-secondary mt-2">{props.description}</p>
+			<p className="text-secondary mt-2">{props.description}</p></GlareCard>
 		</Link>
 	);
 }
