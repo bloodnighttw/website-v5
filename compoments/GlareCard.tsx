@@ -6,6 +6,7 @@ import cn from "@/utils/cn";
 interface Props {
 	children: React.ReactNode;
 	className?: string;
+	childrenClassName?: string;
 	style?: React.CSSProperties;
 	strength?: number;
 }
@@ -60,7 +61,9 @@ export default function GlareCard(props: Props) {
 			/>
 
 			{/* Content */}
-			{props.children}
+			<div className={cn("m-0.75 rounded h-full",props.childrenClassName)}>
+				{props.children}
+			</div>
 		</div>
 	);
 }

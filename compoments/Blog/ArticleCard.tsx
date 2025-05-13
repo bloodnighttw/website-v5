@@ -19,10 +19,10 @@ export default function ArticleCard(props: Props) {
 			href={"/blog/" + props.info.slug}
 			style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}
 		>
-			<GlareCard strength={0.1} className={cn(
+			<GlareCard strength={0.2} className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
-				"card-start card stagger flex flex-col rounded border border-primary/10",
-				"bg-gradient-to-bl bg-bsecondary/20 shadow"
+				"card-start card stagger flex flex-col rounded",
+				"bg-gradient-to-bl bg-bsecondary/40 shadow-lg"
 			)}>
 				<Image
 					src={props.info.preview ?? ""}
@@ -30,7 +30,7 @@ export default function ArticleCard(props: Props) {
 					width={2000} // for debug build use
 					height={1600} // for debug build use
 					quality={0} // for production use
-					className="object-cover w-full h-40 border-b border-dot rounded-t z-10" //
+					className="object-cover w-full h-40 rounded" //
 					loading="eager"
 				/>
 				<p className="text-2xl font-bold py-4 px-2 group-hover:pl-3 duration-200">{props.info.title}</p>
