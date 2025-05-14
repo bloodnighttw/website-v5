@@ -19,8 +19,9 @@ export default function ProjectCard(props: Props) {
 			href={"/project/" + props.name}
 			className="w-full h-full"
 		>
-			<GlareCard strength={1} className="rounded bg-secondary/20 h-full shadow" childrenClassName="p-4 bg-gradient-to-br from-bprimary/90 to-bsecondary/90 gap-2" >
-			<div className="flex gap-2 items-start text-center align-baseline">
+			<GlareCard strength={1} className="rounded bg-secondary/20 h-full shadow"
+					   childrenClassName="p-4 bg-gradient-to-br from-bprimary/90 to-bsecondary/90 gap-2">
+				<div className="flex gap-2 items-start text-center align-baseline">
 				<span>
 					{isGithub ? (
 						Github
@@ -33,25 +34,25 @@ export default function ProjectCard(props: Props) {
 						/>
 					)}
 				</span>
-				<p className="text-xl font-mono align-text-bottom">{props.name}</p>
-				<div className="ml-auto"></div>
+					<p className="text-xl font-mono align-text-bottom">{props.name}</p>
+					<div className="ml-auto"></div>
 
-				{props.stack
-					.filter((it) => it in svgUrl)
-					.map((stack) => {
-						return (
-							<Image
-								key={stack}
-								src={svgUrl[stack]}
-								alt={stack}
-								width={24}
-								height={24}
-							/>
-						);
-					})}
-			</div>
-			<div className="flex mt-2 gap-2 rounded"></div>
-			<p className="text-secondary mt-2">{props.description}</p></GlareCard>
+					{props.stack
+						.filter((it) => it in svgUrl)
+						.map((stack) => {
+							return (
+								<Image
+									key={stack}
+									src={svgUrl[stack]}
+									alt={stack}
+									width={24}
+									height={24}
+								/>
+							);
+						})}
+				</div>
+				<div className="flex mt-2 gap-2 rounded"></div>
+				<p className="text-secondary mt-2">{props.description}</p></GlareCard>
 		</Link>
 	);
 }
