@@ -1,14 +1,13 @@
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
-import { Node, Parent} from "mdast";
-import { RootContent } from "hast";
+import { Node, Parent, RootContent } from "mdast";
 
 const WIKI_LINK_REGEX = /^\[\[(.*?)]]$/;
 
 function remarkWikiLinks() {
 
-	return (tree: Node) => {
-		visit(tree, "text", (node: Text, index: number, parent: Parent) => {
+	return (root: Node) => {
+		visit(root, "text", (node: Text, index: number, parent: Parent) => {
 			const content = toString(node);
 			const match = content.match(WIKI_LINK_REGEX);
 
@@ -26,7 +25,7 @@ function remarkWikiLinks() {
 			};
 
 			// add component to parent
-			parent.children.splice(index, 1, linkNode);
+			parent.children.splice(index, 1, linkNode as RootContent);
 
 
 			// Replace the original text node with the Link component

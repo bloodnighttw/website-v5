@@ -29,6 +29,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				className="link"
 				data-disable-progress={true}
 			/>
+		},
+		p: (props) => {
+
+			// if children is WikiLink, just return it
+			if(props.children &&typeof props.children["type"] === "function")
+				return <>{props.children}</>
+
+			return <p {...props}/>
 		}
 	};
 }

@@ -51,6 +51,7 @@ export default function GlareCard(props: Props) {
 				props.className
 			)}
 			style={props.style}
+			suppressHydrationWarning={true}
 		>
 			{/* Glare effect */}
 			<div
@@ -59,10 +60,11 @@ export default function GlareCard(props: Props) {
 					background: `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255, 255, 255, ${strength}) 0%, rgba(255, 255, 255, 0) 50%)`,
 					mixBlendMode: "soft-light"
 				}}
+				suppressHydrationWarning={true}
 			/>
 
 			{/* Content */}
-			<div className={cn("rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)}>
+			<div className={cn("rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)} suppressHydrationWarning={true}>
 				{props.children}
 			</div>
 		</div>
