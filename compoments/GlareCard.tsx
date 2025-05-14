@@ -47,7 +47,7 @@ export default function GlareCard(props: Props) {
 		<div
 			ref={containerRef}
 			className={cn(
-				"relative overflow-hidden",
+				"relative overflow-hidden p-0.75",
 				props.className
 			)}
 			style={props.style}
@@ -62,7 +62,7 @@ export default function GlareCard(props: Props) {
 			/>
 
 			{/* Content */}
-			<div className={cn("m-0.75 rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)}>
+			<div className={cn("rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)}>
 				{props.children}
 			</div>
 		</div>
