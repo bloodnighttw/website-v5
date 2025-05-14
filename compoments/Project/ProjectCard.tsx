@@ -17,8 +17,9 @@ export default function ProjectCard(props: Props) {
 	return (
 		<Link
 			href={"/project/" + props.name}
+			className="w-full h-full"
 		>
-			<GlareCard strength={1} className="rounded bg-secondary/20" childrenClassName="p-4 bg-gradient-to-br from-bprimary/90 to-bsecondary/90 gap-2" >
+			<GlareCard strength={1} className="rounded bg-secondary/20 h-full shadow" childrenClassName="p-4 bg-gradient-to-br from-bprimary/90 to-bsecondary/90 gap-2" >
 			<div className="flex gap-2 items-start text-center align-baseline">
 				<span>
 					{isGithub ? (
