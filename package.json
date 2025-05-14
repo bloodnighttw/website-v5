@@ -23,6 +23,7 @@
 		"@wooorm/starry-night": "^3.6.0",
 		"clsx": "^2.1.1",
 		"mdast-util-mdxjs-esm": "^2.0.1",
+		"mdast-util-to-string": "^4.0.0",
 		"next": "15.2.4",
 		"next-intl": "^4.1.0",
 		"next-mdx-remote": "^5.0.0",

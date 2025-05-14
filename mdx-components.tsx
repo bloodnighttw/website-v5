@@ -1,10 +1,12 @@
 import type { MDXComponents } from "mdx/types";
 import ImagePreview from "@/compoments/Blog/Image";
+import WikiLink from "@/compoments/Blog/Addon/WikiLink";
 import Link from "next/link";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
 		...components,
+		WikiLink,
 		img: (props) => {
 			return <ImagePreview {...props} />;
 		},
@@ -17,12 +19,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				return <Link
 					{...props}
 					href={href}
+					className="link"
 					data-disable-progress={true}
 				/>
 			}
 
 			return <Link
 				{...props}
+				className="link"
 				data-disable-progress={true}
 			/>
 		}
