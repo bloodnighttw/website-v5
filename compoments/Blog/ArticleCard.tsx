@@ -20,10 +20,10 @@ export default function ArticleCard(props: Props) {
 		>
 			<GlareCard strength={0.3} className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
-				"card-start card stagger flex flex-col rounded-[0.5rem]",
+				"card-start card stagger flex flex-col rounded-[0.375rem]",
 				"bg-gradient-to-bl bg-bsecondary/40",
 			)} style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}>
-				<GlareCardBorder className="*:bg-bprimary/40 rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-1">
+				<GlareCardBorder className="*:bg-bprimary/40 rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-0.5">
 					<Image
 						src={props.info.preview ?? ""}
 						alt="preview"
@@ -33,7 +33,7 @@ export default function ArticleCard(props: Props) {
 						className="object-cover w-full h-40" //
 						loading="eager"
 					/>
-					<p className="text-2xl font-bold p-2 group-hover:pl-3 duration-200 flex-1">{props.info.title}</p>
+					<p className="text-2xl font-bold p-2 duration-200 flex-1">{props.info.title}</p>
 				</GlareCardBorder>
 			</GlareCard>
 		</Link>

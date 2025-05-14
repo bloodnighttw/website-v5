@@ -19,7 +19,7 @@ export default function ProjectCard(props: Props) {
 			href={"/project/" + props.name}
 			className="w-full h-full"
 		>
-			<GlareCard strength={1} className="bg-secondary/10 rounded-[0.5rem]">
+			<GlareCard strength={1} className="bg-secondary/10 rounded-[0.375rem]">
 				<GlareCardBorder className="rounded *:first:rounded-t *:last:rounded-b">
 					<div className="p-2 from-bsecondary/90 to-bprimary/90 bg-gradient-to-br">
 
