@@ -1,13 +1,13 @@
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
-import { Node, Parent, RootContent } from "mdast";
+import { Node, Parent, RootContent, Paragraph } from "mdast";
 
 const WIKI_LINK_REGEX = /^\[\[(.*?)]]$/;
 
 function remarkWikiLinks() {
 
 	return (root: Node) => {
-		visit(root, "text", (node: Text, index: number, parent: Parent) => {
+		visit(root, "paragraph", (node: Paragraph, index: number, parent: Parent) => {
 			const content = toString(node);
 			const match = content.match(WIKI_LINK_REGEX);
 
@@ -22,6 +22,13 @@ function remarkWikiLinks() {
 				type: "mdxJsxFlowElement",
 				name: "WikiLink",
 				children: [],
+				attributes: [
+					{
+						type: "mdxJsxAttribute",
+						name: "link",
+						value: url,
+					},
+				]
 			};
 
 			// add component to parent
