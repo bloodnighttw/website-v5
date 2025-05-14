@@ -4,7 +4,7 @@ This is the 5th version of my personal website. The project is built with Next.j
 
 ## The project Goal
 
-1. New Design, with RadixUI, TailwindCSS and Next.js.
+1. New Design, with ~~RadixUI~~, TailwindCSS and Next.js.
 2. Automate Testing with Vitest and Cypress.
 3. The i18n support.
 4. The project should be easy to maintain and extend.
