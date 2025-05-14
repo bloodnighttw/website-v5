@@ -21,9 +21,9 @@ export default function ArticleCard(props: Props) {
 			<GlareCard strength={0.3} className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
 				"card-start card stagger flex flex-col rounded-[0.375rem]",
-				"bg-gradient-to-bl bg-bsecondary/40",
+				"bg-gradient-to-bl bg-bsecondary/50",
 			)} style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}>
-				<GlareCardBorder className="*:bg-bprimary/40 rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-0.5">
+				<GlareCardBorder className="*:from-bprimary/50 *:to-bprimary/20 *:bg-gradient-to-br rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-0.5">
 					<Image
 						src={props.info.preview ?? ""}
 						alt="preview"
