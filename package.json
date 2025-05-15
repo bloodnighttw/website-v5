@@ -58,6 +58,6 @@
 		"typescript": "^5",
 		"unified": "^11.0.5",
 		"unist-util-inspect": "^8.1.0",
-		"wrangler": "^4.3.0"
+		"wrangler": "^4.15.1"
 	}
 }
