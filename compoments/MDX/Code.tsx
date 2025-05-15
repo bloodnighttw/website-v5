@@ -2,6 +2,8 @@ import "server-only";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { cwd } from "process";
+import { codeToHtml } from "shiki";
+import { Fragment } from "react";
 
 interface Props {
 	// file path from the root of the content folder
@@ -11,24 +13,25 @@ interface Props {
 
 // show file code under the code block
 export default async function Code(props: Props) {
+
 	const { filepath, language } = props;
 
-	// Read the file content
-	const content = await readFile(join(cwd(), filepath), "utf-8");
+	console.log("yo", filepath);
 
-	// Split the content into lines
-	const lines = content.split("\n");
+	const totalPath = join(cwd(), "contents", "codes", filepath);
+	const fileExt = filepath.split(".").pop();
 
-	return (
-		<pre className="relative">
-			<code className={language ? `language-${language}` : ""}>
-				{lines.map((line, index) => (
-					<span key={index} className="line">
-						<span className="line-number">{index + 1}</span>
-						{line}
-					</span>
-				))}
-			</code>
-		</pre>
-	);
+
+	const content = await readFile(totalPath, "utf-8");
+
+	const out = await (codeToHtml(content, {
+		lang: language ?? fileExt ?? "plaintext",
+		theme: "catppuccin-mocha",
+		colorReplacements: {
+			"#1e1e2e": "#18181B",
+		}
+	}))
+
+
+	return <div dangerouslySetInnerHTML={{__html:out}} /> ;
 }
