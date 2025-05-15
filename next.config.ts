@@ -22,7 +22,10 @@ const withMDX = createMDX({
 			remarkImageSize,
 		],
 		rehypePlugins: [section, [rehypeShiki, { 
-			theme: "dark-plus",
+			theme: "catppuccin-mocha",
+			colorReplacements: {
+				"#1e1e2e": "#18181B",
+			}
 		}]],
 	},
 });

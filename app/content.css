@@ -174,7 +174,7 @@
 	}
 
 	article {
-		@apply prose prose-zinc prose-invert first:mt-4;
+		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
 
         section {
             @apply scroll-mt-20;
@@ -188,10 +188,6 @@
 		code::after {
 			content: none;
 		}
-
-        pre {
-            @apply bg-[#1E1E1E]
-        }
 
 		pre > code {
 			@apply bg-zinc-900/0 mx-0 p-0;
@@ -211,7 +207,7 @@
             width: 1rem;
             display: inline-block;
             text-align: right;
-            color: inherit;
+            color: theme("colors.zinc.400");
             opacity: 0.5;
         }
 
