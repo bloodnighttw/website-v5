@@ -10,7 +10,6 @@ interface Props {
 export default async function WikiLink(props: Props) {
 
 	const { link } = props;
-	console.log(link);
 	const post = allPosts.find((it) => it.slug === link);
 
 	if (!post) return null;

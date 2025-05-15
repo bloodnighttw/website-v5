@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import { Link, Node, Parent, RootContent, Text } from "mdast";
+import { Node, Parent, RootContent, Text } from "mdast";
 
 const WIKI_LINK_REGEX = /^\[\[(.+?)]]$/;
 const INLINE_WIKI_LINK_REGEX = /^(.*?)\[\[(.+?)]](.*?)$/;
