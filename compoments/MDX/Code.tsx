@@ -1,11 +1,7 @@
 import "server-only";
-
-import { readFileSync } from "fs";
-import path from "node:path";
-import { all, createStarryNight } from "@wooorm/starry-night";
-import { starryNightGutter } from "@/utils/rehype-plugin/line-numbers";
-import { unified } from "unified";
-import rehypeStringify from "rehype-stringify";
+import { readFile } from "fs/promises";
+import { join } from "path";
+import { cwd } from "process";
 
 interface Props {
 	// file path from the root of the content folder
@@ -15,30 +11,24 @@ interface Props {
 
 // show file code under the code block
 export default async function Code(props: Props) {
-	const actualPath = path.join(
-		process.cwd(),
-		"contents",
-		"codes",
-		props.filepath,
-	);
-	const rawText = readFileSync(actualPath, "utf8");
+	const { filepath, language } = props;
 
-	const ext = props.filepath.split(".").pop()!;
+	// Read the file content
+	const content = await readFile(join(cwd(), filepath), "utf-8");
 
-	const starryNight = await createStarryNight(all);
-
-	const scope = starryNight.flagToScope(props.language ?? ext);
-	const tree = starryNight.highlight(rawText, scope!);
-
-	// apply line number
-	// @ts-expect-error it works
-	starryNightGutter(tree);
-
-	const html = unified().use(rehypeStringify).stringify(tree);
+	// Split the content into lines
+	const lines = content.split("\n");
 
 	return (
-		<pre>
-			<code dangerouslySetInnerHTML={{ __html: html }} />
+		<pre className="relative">
+			<code className={language ? `language-${language}` : ""}>
+				{lines.map((line, index) => (
+					<span key={index} className="line">
+						<span className="line-number">{index + 1}</span>
+						{line}
+					</span>
+				))}
+			</code>
 		</pre>
 	);
 }

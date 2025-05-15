@@ -3,13 +3,12 @@ import { withContentCollections } from "@content-collections/next";
 import createMDX from "@next/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import rehypeStarryNight from "rehype-starry-night";
-import rehypeLineNumbers from "@/utils/rehype-plugin/line-numbers";
 import remarkImageSize from "@/utils/remark-plugin/remarkImageSize";
 import section from "@/utils/rehype-plugin/section";
 import createNextIntlPlugin from 'next-intl/plugin';
 import moveImageToRoot from "@/utils/remark-plugin/moveImageToRoot";
 import remarkWikiLinks from "@/utils/remark-plugin/wikiLink";
+import rehypeShiki from "@shikijs/rehype";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -22,7 +21,9 @@ const withMDX = createMDX({
 			moveImageToRoot,
 			remarkImageSize,
 		],
-		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers, section],
+		rehypePlugins: [section, [rehypeShiki, { 
+			theme: "dark-plus",
+		}]],
 	},
 });
 
