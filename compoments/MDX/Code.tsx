@@ -1,11 +1,9 @@
 import "server-only";
-
-import { readFileSync } from "fs";
-import path from "node:path";
-import { all, createStarryNight } from "@wooorm/starry-night";
-import { starryNightGutter } from "@/utils/rehype-plugin/line-numbers";
-import { unified } from "unified";
-import rehypeStringify from "rehype-stringify";
+import { readFile } from "fs/promises";
+import { join } from "path";
+import { cwd } from "process";
+import { codeToHtml } from "shiki";
+import { Fragment } from "react";
 
 interface Props {
 	// file path from the root of the content folder
@@ -15,30 +13,25 @@ interface Props {
 
 // show file code under the code block
 export default async function Code(props: Props) {
-	const actualPath = path.join(
-		process.cwd(),
-		"contents",
-		"codes",
-		props.filepath,
-	);
-	const rawText = readFileSync(actualPath, "utf8");
 
-	const ext = props.filepath.split(".").pop()!;
+	const { filepath, language } = props;
 
-	const starryNight = await createStarryNight(all);
+	console.log("yo", filepath);
 
-	const scope = starryNight.flagToScope(props.language ?? ext);
-	const tree = starryNight.highlight(rawText, scope!);
+	const totalPath = join(cwd(), "contents", "codes", filepath);
+	const fileExt = filepath.split(".").pop();
 
-	// apply line number
-	// @ts-expect-error it works
-	starryNightGutter(tree);
 
-	const html = unified().use(rehypeStringify).stringify(tree);
+	const content = await readFile(totalPath, "utf-8");
 
-	return (
-		<pre>
-			<code dangerouslySetInnerHTML={{ __html: html }} />
-		</pre>
-	);
+	const out = await (codeToHtml(content, {
+		lang: language ?? fileExt ?? "plaintext",
+		theme: "catppuccin-mocha",
+		colorReplacements: {
+			"#1e1e2e": "#18181B",
+		}
+	}))
+
+
+	return <div dangerouslySetInnerHTML={{__html:out}} /> ;
 }

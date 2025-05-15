@@ -193,6 +193,24 @@
 			@apply bg-zinc-900/0 mx-0 p-0;
 		}
 
+        code {
+            counter-reset: step;
+            counter-increment: step 0;
+        }
+
+        code .line::before {
+
+            @apply mr-4;
+
+            content: counter(step);
+            counter-increment: step;
+            width: 1rem;
+            display: inline-block;
+            text-align: right;
+            color: theme("colors.zinc.400");
+            opacity: 0.5;
+        }
+
 		.link {
 			@apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;
 
