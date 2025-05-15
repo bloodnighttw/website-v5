@@ -19,9 +19,9 @@ export default function ProjectCard(props: Props) {
 			href={"/project/" + props.name}
 			className="w-full h-full"
 		>
-			<GlareCard strength={1} className="bg-secondary/10 rounded-[calc(0.25rem+3px)]">
+			<GlareCard strength={1} className="bg-secondary/10 rounded-[calc(0.25rem+3px)] h-full">
 				<GlareCardBorder className="rounded *:first:rounded-t *:last:rounded-b">
-					<div className="p-4 from-bsecondary/90 to-bprimary/90 bg-gradient-to-br">
+					<div className="p-4 from-bsecondary/90 to-bprimary/90 bg-gradient-to-br h-full">
 
 						<div className="flex gap-2 items-start text-center">
 							<span>
