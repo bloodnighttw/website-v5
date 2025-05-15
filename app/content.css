@@ -193,7 +193,7 @@
 			@apply bg-zinc-900/0 mx-0 p-0;
 		}
 
-		a {
+		.link {
 			@apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;
 
 			&::before {

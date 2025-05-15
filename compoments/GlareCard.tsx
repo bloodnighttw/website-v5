@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactNode } from "react";
 import cn from "@/utils/cn";
 
 interface Props {
 	children: React.ReactNode;
 	className?: string;
-	childrenClassName?: string;
 	style?: React.CSSProperties;
 	strength?: number;
 }
@@ -26,8 +25,10 @@ export default function GlareCard(props: Props) {
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
 
+			const max = Math.max(rect.width, rect.height);
+
 			// stop tracking if the mouse position is too far away
-			if(x < -rect.width || x > rect.width*2 || y > rect.height*2 || y < -rect.height) return;
+			if(x < -max || x > max*2 || y > max*2 || y < -max) return;
 
 			// Convert to percentage
 			const xPercent = (x / rect.width) * 100;
@@ -51,6 +52,7 @@ export default function GlareCard(props: Props) {
 				props.className
 			)}
 			style={props.style}
+			suppressHydrationWarning={true}
 		>
 			{/* Glare effect */}
 			<div
@@ -59,12 +61,25 @@ export default function GlareCard(props: Props) {
 					background: `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255, 255, 255, ${strength}) 0%, rgba(255, 255, 255, 0) 50%)`,
 					mixBlendMode: "soft-light"
 				}}
+				suppressHydrationWarning={true}
 			/>
 
 			{/* Content */}
-			<div className={cn("m-0.75 rounded h-full *:first:rounded-t *:not-first:mt-1 *:last:rounded-b *:last:flex-1 flex flex-col",props.childrenClassName)}>
-				{props.children}
-			</div>
+			{props.children}
+		</div>
+	);
+}
+
+interface BorderProps {
+	children: ReactNode;
+	className?: string;
+	style?: React.CSSProperties;
+}
+
+export function GlareCardBorder(props: BorderProps) {
+	return (
+		<div className={cn("w-full h-full p-0.75 flex flex-col",props.className)} style={props.style}>
+			{props.children}
 		</div>
 	);
 }

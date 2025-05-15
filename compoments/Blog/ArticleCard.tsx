@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Post } from "content-collections";
 import React from "react";
 import cn from "@/utils/cn";
-import GlareCard from "@/compoments/GlareCard";
+import GlareCard, { GlareCardBorder } from "@/compoments/GlareCard";
 
 interface Props {
 	info: Post;
@@ -18,21 +18,23 @@ export default function ArticleCard(props: Props) {
 		<Link
 			href={"/blog/" + props.info.slug}
 		>
-			<GlareCard strength={0.3} childrenClassName="*:bg-bprimary/40" className={cn(
+			<GlareCard strength={0.3} className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
-				"card-start card stagger flex flex-col rounded",
-				"bg-gradient-to-bl bg-bsecondary/40",
+				"card-start card stagger flex flex-col rounded-[calc(0.25rem+3px)]",
+				"bg-gradient-to-bl bg-bsecondary/50",
 			)} style={{ "--stagger-delay": `${delay}s` } as React.CSSProperties}>
-				<Image
-					src={props.info.preview ?? ""}
-					alt="preview"
-					width={2000} // for debug build use
-					height={1600} // for debug build use
-					quality={0} // for production use
-					className="object-cover w-full h-40" //
-					loading="eager"
-				/>
-				<p className="text-2xl font-bold p-2 group-hover:pl-3 duration-200">{props.info.title}</p>
+				<GlareCardBorder className="*:from-bprimary/50 *:to-bprimary/20 *:bg-gradient-to-br rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-0.75">
+					<Image
+						src={props.info.preview ?? ""}
+						alt="preview"
+						width={2000} // for debug build use
+						height={1600} // for debug build use
+						quality={0} // for production use
+						className="object-cover w-full h-40" //
+						loading="eager"
+					/>
+					<p className="text-2xl font-bold p-2 duration-200 flex-1">{props.info.title}</p>
+				</GlareCardBorder>
 			</GlareCard>
 		</Link>
 	);

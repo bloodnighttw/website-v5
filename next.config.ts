@@ -9,6 +9,7 @@ import remarkImageSize from "@/utils/remark-plugin/remarkImageSize";
 import section from "@/utils/rehype-plugin/section";
 import createNextIntlPlugin from 'next-intl/plugin';
 import moveImageToRoot from "@/utils/remark-plugin/moveImageToRoot";
+import remarkWikiLinks from "@/utils/remark-plugin/wikiLink";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -17,8 +18,9 @@ const withMDX = createMDX({
 		remarkPlugins: [
 			remarkFrontmatter,
 			remarkMdxFrontmatter,
+			remarkWikiLinks,
 			moveImageToRoot,
-			remarkImageSize
+			remarkImageSize,
 		],
 		rehypePlugins: [rehypeStarryNight, rehypeLineNumbers, section],
 	},
