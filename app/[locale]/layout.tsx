@@ -64,7 +64,7 @@ export default async function LocaleLayout(
 						<div className="font-bold fade-in">{t("name")}</div>
 					</Link>
 					<div className="mr-auto"></div>
-					<PanelButton href={"/"} text={t("friends")}>
+					<PanelButton href={"/friends"} text={t("friends")}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 							 className="bi bi-people" viewBox="0 0 16 16">
 							<path
