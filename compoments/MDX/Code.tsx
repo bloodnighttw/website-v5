@@ -3,7 +3,6 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import { cwd } from "process";
 import { codeToHtml } from "shiki";
-import { Fragment } from "react";
 
 interface Props {
 	// file path from the root of the content folder
@@ -15,8 +14,6 @@ interface Props {
 export default async function Code(props: Props) {
 
 	const { filepath, language } = props;
-
-	console.log("yo", filepath);
 
 	const totalPath = join(cwd(), "contents", "codes", filepath);
 	const fileExt = filepath.split(".").pop();
