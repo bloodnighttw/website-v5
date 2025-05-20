@@ -21,9 +21,9 @@ interface Friend {
 const friends: Friend[] = [
 	{
 		github: "bloodnighttw",
-		website: "https://bloodnighttw.github.io",
+		website: "https://bntw.dev",
 		descriptionEN: "I am a developer, I like to write code and play games.",
-		descriptionZH: "我是一名開發者，我喜歡寫代碼和玩遊戲。",
+		descriptionZH: "我是一名開發者，我喜歡寫程式和玩遊戲。",
 	}
 ]
 
@@ -84,7 +84,7 @@ export default async function Friends(){
 				))}
 			</div>
 			<TranslationWithIcon text={t("exchange friends here")} icon={{
-				here: <Link className="underline link" href={"https://github.com/bloodnighttw/website-v5"}>{t("here")}</Link>
+				here: <Link className="underline link" href={"https://github.com/bloodnighttw/website-v5/issues/40"}>{t("here")}</Link>
 			}}/>
 		</Part>
 
