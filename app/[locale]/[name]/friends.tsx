@@ -3,6 +3,7 @@ import Part from "@/compoments/Part";
 import { getTranslations } from "next-intl/server";
 import GlareCard from "@/compoments/GlareCard";
 import Link from "next/link";
+import TranslationWithIcon from "@/compoments/TranslationWithIcon";
 
 
 
@@ -38,7 +39,15 @@ interface FriendDetails extends Friend{
 	avatar: string;
 }
 
-export default async function Page(){
+export const dynamicParams = false;
+
+export async function generateStaticParams(){
+	return [{
+		name: "friends"
+	}]
+}
+
+export default async function Friends(){
 
 	const t = await getTranslations();
 	const lang = t("lang");
@@ -79,8 +88,10 @@ export default async function Page(){
 					</GlareCard>
 					</Link>
 				))}
-
 			</div>
+			<TranslationWithIcon text={t("exchange friends here")} icon={{
+				here: <Link href={"https://github.com/bloodnighttw/website-v5"}>{t("here")}</Link>
+			}}/>
 		</Part>
 
 	)

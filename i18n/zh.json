@@ -1,9 +1,12 @@
 {
     "lang": "zh",
+    "exchange friends here": "交換連結請到 #here#",
+    "here": "這裡",
     "Meta": {
         "title": "紅危的部落格",
         "description": "關於我的生活和專案的部落格。",
-        "All Blog Posts": "所有文章 | 紅危的部落格"
+        "All Blog Posts": "所有文章 | 紅危的部落格",
+        "friends": "友情連結 | 紅危的部落格"
     },
     "Panel": {
         "madeWith": "❤️ 使用 Tailwind CSS 和 Next.js 制作",

@@ -1,9 +1,11 @@
 {
     "lang": "en",
+    "exchange friends here": "Exchange Friends #here#",
     "Meta": {
         "title": "bloodnighttw's blog",
         "description": "A blog about my life and projects.",
-        "All Blog Posts": "All Posts | bloodnighttw's blog"
+        "All Blog Posts": "All Posts | bloodnighttw's blog",
+        "friends": "Friends | bloodnighttw's blog"
     },
     "Panel": {
         "madeWith": "❤️ Made with Tailwind CSS, Next.js.",
