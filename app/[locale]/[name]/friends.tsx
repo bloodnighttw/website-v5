@@ -24,12 +24,6 @@ const friends: Friend[] = [
 		website: "https://bloodnighttw.github.io",
 		descriptionEN: "I am a developer, I like to write code and play games.",
 		descriptionZH: "我是一名開發者，我喜歡寫代碼和玩遊戲。",
-	},
-	{
-		github: "github",
-		website: "https://github.com",
-		descriptionEN: "GitHub is a code hosting platform for version control and collaboration.",
-		descriptionZH: "GitHub是一個用於版本控制和協作的代碼託管平台。",
 	}
 ]
 
@@ -90,7 +84,7 @@ export default async function Friends(){
 				))}
 			</div>
 			<TranslationWithIcon text={t("exchange friends here")} icon={{
-				here: <Link href={"https://github.com/bloodnighttw/website-v5"}>{t("here")}</Link>
+				here: <Link className="underline link" href={"https://github.com/bloodnighttw/website-v5"}>{t("here")}</Link>
 			}}/>
 		</Part>
 
