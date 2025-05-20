@@ -28,6 +28,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 				}
 			}
 		},
+		{
+			url: `${BASE_URL}/friends`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 1.0,
+			alternates: {
+				languages: {
+					zh: `${BASE_URL}/zh/friends`,
+					en: `${BASE_URL}/en/friends`
+				}
+			}
+
+		}
 	];
 
 	const postsSitemap: MetadataRoute.Sitemap = allPosts.map((post) => {
