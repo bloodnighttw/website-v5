@@ -3,7 +3,7 @@ import "../global.css";
 import Avatar from "@/components/modules/avatar";
 import React from "react";
 import Link from "@/i18n/navigation";
-import NavBar from "@/components/modules/panel/nav/NavBar";
+import NavBar from "@/components/modules/panel/nav";
 import Footer from "@/components/modules/panel/Footer";
 import PanelButton from "@/components/modules/panel/nav/Anchor";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
