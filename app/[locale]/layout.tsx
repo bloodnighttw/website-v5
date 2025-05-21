@@ -43,6 +43,8 @@ export default async function LocaleLayout(
 	return (
 		<html lang={locale}>
 		<head>
+			{/* eslint-disable-next-line @next/next/no-sync-scripts */}
+			<script src="https://unpkg.com/react-scan/dist/auto.global.js" />
 			<meta
 				httpEquiv="Delegate-CH"
 				content="sec-ch-dpr https://bntw.dev; sec-ch-viewport-width https://bntw.dev"
