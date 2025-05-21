@@ -2,7 +2,7 @@ import Image from "next/image";
 import Avatar from "@/components/modules/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
-import TranslationWithIcon from "@/components/TranslationWithIcon";
+import TranslationWithIcon from "@/components/shared/TranslationWithJSX";
 import Typewriter from "@/components/modules/home/introducing/typewriter";
 import SocialLink from "@/components/modules/home/introducing/link";
 

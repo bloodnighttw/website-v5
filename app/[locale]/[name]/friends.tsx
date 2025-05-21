@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import GlareCard from "@/components/shared/card/glare-card";
 import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
 import Link from "next/link";
-import TranslationWithIcon from "@/components/TranslationWithIcon";
+import TranslationWithIcon from "@/components/shared/TranslationWithJSX";
 
 
 

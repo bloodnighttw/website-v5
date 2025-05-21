@@ -1,6 +1,6 @@
 import CardCollection from "@/components/modules/posts/section/collection";
 import { PostCards } from "@/components/modules/posts/section/card";
-import HashTag from "@/components/HashTag";
+import HashTag from "@/components/modules/posts/hashtag";
 import DotBackground from "@/components/shared/dot-background";
 import Part from "@/components/shared/part";
 import { allPosts } from "content-collections";
