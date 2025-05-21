@@ -1,7 +1,7 @@
 import { ArticleCards } from "@/components/Blog/ArticleCard";
 import CardCollection from "@/components/Blog/ArticleCollection";
 import CardTitle from "@/components/Blog/ArticleTitle";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import Chapter from "@/components/Text/Chapter";
 import { allPosts } from "content-collections";
 import ArticleContainer from "@/components/Blog/ArticleContainer";

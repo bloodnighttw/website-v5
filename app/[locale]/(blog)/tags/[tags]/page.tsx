@@ -2,7 +2,7 @@ import CardCollection from "@/components/Blog/ArticleCollection";
 import { ArticleCards } from "@/components/Blog/ArticleCard";
 import HashTag from "@/components/HashTag";
 import SecondaryPanel from "@/components/panel/SecondaryPanel";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";

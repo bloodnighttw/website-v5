@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 
 interface Props {
 	children: ReactNode;

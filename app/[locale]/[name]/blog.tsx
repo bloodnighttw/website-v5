@@ -1,6 +1,6 @@
 import { allPosts } from "content-collections";
 import SecondaryPanel from "@/components/panel/SecondaryPanel";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import CardCollection from "@/components/Blog/ArticleCollection";
 import { ArticleCards } from "@/components/Blog/ArticleCard";
 import Text from "./Text"

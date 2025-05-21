@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import { getTranslations } from "next-intl/server";
 import GlareCard from "@/components/GlareCard";
 import Link from "next/link";

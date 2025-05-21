@@ -1,6 +1,6 @@
 import SecondaryPanel from "@/components/panel/SecondaryPanel";
 import Image from "next/image";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import HashTag from "@/components/HashTag";
 import { Post } from "content-collections";
 

@@ -1,5 +1,5 @@
 import ProjectCard from "@/components/Project/ProjectCard";
-import Part from "@/components/Part";
+import Part from "@/components/shared/Part";
 import { Stacks } from "@/components/Project/Stack";
 import Chapter from "@/components/Text/Chapter";
 import ProjectChapter from "@/components/Project/ProjectChapter";
