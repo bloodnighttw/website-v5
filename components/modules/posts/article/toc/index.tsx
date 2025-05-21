@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useReducer } from "react";
 import cn from "@/utils/cn";
-import { CircleArc } from "@/components/modules/posts/article/toc/progress";
+import { ProgressArc } from "@/components/modules/posts/article/toc/progress";
 import { TocElement, TocTree } from "@/components/modules/posts/article/toc/toc-element";
 import { useTranslations } from "next-intl";
 
@@ -177,7 +177,7 @@ export default function Toc(prop: TocProp) {
 				)}
 				onClick={handleClick}
 			>
-				<CircleArc progress={prop.progressRef.current} />
+				<ProgressArc progress={prop.progressRef.current} />
 			</div>
 			<div className={cn(
 				"absolute max-h-[70vh] border border-dot rounded right-0 bottom-9 bg-bprimary/30 backdrop-blur",

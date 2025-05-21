@@ -1,7 +1,7 @@
 import cn from "@/utils/cn";
 import React from "react";
 
-export function CircleArc(props: { progress: number }) {
+export function ProgressArc(props: { progress: number }) {
 
 	const progressHandled = props.progress >= 0 ? props.progress : 0;
 
