@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Part from "@/components/shared/Part";
+import Part from "@/components/shared/part";
 
 interface Props {
 	className?: string;

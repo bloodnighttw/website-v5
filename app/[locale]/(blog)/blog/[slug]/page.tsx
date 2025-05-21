@@ -3,7 +3,7 @@ import "server-only";
 import "@/app/content.css";
 import Comments from "@/components/modules/comments";
 import { Metadata } from "next";
-import Part from "@/components/shared/Part";
+import Part from "@/components/shared/part";
 import ArticleInfoPanel from "@/components/modules/posts/article/article-info-panel";
 import { allPosts } from "content-collections";
 import Layout from "@/components/modules/posts/article/layout";

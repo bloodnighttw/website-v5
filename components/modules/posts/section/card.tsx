@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Post } from "content-collections";
 import React from "react";
 import cn from "@/utils/cn";
-import GlareCard, { GlareCardBorder } from "@/components/shared/GlareCard";
+import GlareCard from "@/components/shared/card/glare-card";
+import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
 
 interface Props {
 	info: Post;

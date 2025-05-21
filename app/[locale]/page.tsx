@@ -1,7 +1,7 @@
-import DotBackground from "@/components/shared/DotBackground";
+import DotBackground from "@/components/shared/dot-background";
 import Introducing from "@/components/Home/Introducing";
-import BlogSection from "@/components/Home/BlogSection";
-import ProjectSection from "@/components/Home/ProjectSection";
+import BlogSection from "@/components/modules/home/blog";
+import ProjectSection from "@/components/modules/home/project";
 import { BASE_URL } from "@/utils/constant";
 
 export async function generateMetadata() {

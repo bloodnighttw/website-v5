@@ -1,8 +1,8 @@
 import { PostCards } from "@/components/modules/posts/section/card";
 import PostCardGrid from "@/components/modules/posts/section/collection";
 import PostSectionTitle from "@/components/modules/posts/section/title";
-import Part from "@/components/shared/Part";
-import Chapter from "@/components/Text/Chapter";
+import Part from "@/components/shared/part";
+import Chapter from "@/components/modules/home/chapter";
 import { allPosts } from "content-collections";
 import PostSectionContainer from "@/components/modules/posts/section/container";
 import { getTranslations } from "next-intl/server";

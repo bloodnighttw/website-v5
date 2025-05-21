@@ -1,5 +1,6 @@
 import Link from "next/link";
-import GlareCard, { GlareCardBorder } from "@/components/shared/GlareCard";
+import GlareCard from "@/components/shared/card/glare-card";
+import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
 import { allPosts } from "content-collections";
 import Image from "next/image";
 

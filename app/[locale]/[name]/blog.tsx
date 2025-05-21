@@ -1,6 +1,6 @@
 import { allPosts } from "content-collections";
-import DotBackground from "@/components/shared/DotBackground";
-import Part from "@/components/shared/Part";
+import DotBackground from "@/components/shared/dot-background";
+import Part from "@/components/shared/part";
 import CardCollection from "@/components/modules/posts/section/collection";
 import { PostCards } from "@/components/modules/posts/section/card";
 import Text from "./Text"

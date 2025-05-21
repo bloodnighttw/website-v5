@@ -1,10 +1,10 @@
-import ProjectCard from "@/components/Project/ProjectCard";
-import Part from "@/components/shared/Part";
-import { Stacks } from "@/components/Project/Stack";
-import Chapter from "@/components/Text/Chapter";
-import ProjectChapter from "@/components/Project/ProjectChapter";
-import ProjectCollection from "@/components/Project/ProjectCollection";
-import Scrolling from "@/components/Project/Scrolling";
+import ProjectCard from "@/components/modules/home/project/card";
+import Part from "@/components/shared/part";
+import { Stacks } from "@/components/modules/home/project/stack";
+import Chapter from "@/components/modules/home/chapter";
+import ProjectContainer from "@/components/modules/home/project/container";
+import ProjectCollection from "@/components/modules/home/project/collection";
+import Scrolling from "@/components/modules/home/project/scrolling";
 import { allProjects } from "content-collections";
 import { getTranslations } from "next-intl/server";
 
@@ -31,12 +31,12 @@ export default async function ProjectSection() {
 
 	return (
 		<Part>
-			<ProjectChapter>
+			<ProjectContainer>
 				<Chapter>{t("My Projects")}</Chapter>
 				<Scrolling>
 					<Stacks />
 				</Scrolling>
-			</ProjectChapter>
+			</ProjectContainer>
 			<ProjectCollection>{projectsCards}</ProjectCollection>
 		</Part>
 	);

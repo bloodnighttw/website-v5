@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
-import Part from "@/components/shared/Part";
+import Part from "@/components/shared/part";
 import GoToTop from "@/components/modules/posts/article/go-top";
 import Toc from "@/components/modules/posts/article/toc";
 import { TocTree } from "@/components/modules/posts/article/toc/toc-element";

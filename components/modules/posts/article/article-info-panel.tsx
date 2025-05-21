@@ -1,6 +1,6 @@
-import DotBackground from "@/components/shared/DotBackground";
+import DotBackground from "@/components/shared/dot-background";
 import Image from "next/image";
-import Part from "@/components/shared/Part";
+import Part from "@/components/shared/part";
 import HashTag from "@/components/HashTag";
 import { Post } from "content-collections";
 
