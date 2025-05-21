@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export default function ArticleCollection({
+export default function PostCardGrid({
 	children,
 }: {
 	children: ReactNode;

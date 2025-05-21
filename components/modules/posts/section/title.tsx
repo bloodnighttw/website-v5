@@ -1,7 +1,7 @@
 import Link from "@/i18n/navigation";
 import cn from "@/utils/cn";
 
-export default function ArticleTitle({
+export default function PostSectionTitle({
 	title,
 	url,
 }: {

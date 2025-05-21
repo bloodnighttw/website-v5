@@ -2,8 +2,8 @@
 
 import React, { useCallback, useEffect, useMemo, useReducer } from "react";
 import cn from "@/utils/cn";
-import { CircleArc } from "@/components/Blog/Addon/Radius";
-import { TocElement, TocTree } from "@/components/Blog/Addon/TocElement";
+import { CircleArc } from "@/components/modules/posts/article/toc/progress";
+import { TocElement, TocTree } from "@/components/modules/posts/article/toc/toc-element";
 import { useTranslations } from "next-intl";
 
 interface TocProp {

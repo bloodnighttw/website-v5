@@ -1,10 +1,10 @@
-import { PostCards } from "@/components/Blog/PostCard";
-import CardCollection from "@/components/Blog/PostCollection";
-import CardTitle from "@/components/Blog/ArticleTitle";
+import { PostCards } from "@/components/modules/posts/section/card";
+import PostCardGrid from "@/components/modules/posts/section/collection";
+import PostSectionTitle from "@/components/modules/posts/section/title";
 import Part from "@/components/shared/Part";
 import Chapter from "@/components/Text/Chapter";
 import { allPosts } from "content-collections";
-import ArticleContainer from "@/components/Blog/ArticleContainer";
+import PostSectionContainer from "@/components/modules/posts/section/container";
 import { getTranslations } from "next-intl/server";
 
 export default async function BlogSection() {
@@ -19,30 +19,30 @@ export default async function BlogSection() {
 			<Chapter>{t("My blog")}</Chapter>
 
 			{sortedByPin.length > 0 && (
-				<ArticleContainer>
-					<CardTitle title={t("pinned")} />
-					<CardCollection>
+				<PostSectionContainer>
+					<PostSectionTitle title={t("pinned")} />
+					<PostCardGrid>
 						<PostCards infos={sortedByPin} />
-					</CardCollection>
-				</ArticleContainer>
+					</PostCardGrid>
+				</PostSectionContainer>
 			)}
 
-			<ArticleContainer>
-				<CardTitle title={t("Recent Posts")} url={"/blog"} />
-				<CardCollection>
+			<PostSectionContainer>
+				<PostSectionTitle title={t("Recent Posts")} url={"/blog"} />
+				<PostCardGrid>
 					<PostCards infos={sortedByTime.slice(0, 4)} />
-				</CardCollection>
-			</ArticleContainer>
-			<ArticleContainer>
-				<CardTitle title={t("about",{name:"linux"})} url={"/tags/linux"} />
-				<CardCollection>
+				</PostCardGrid>
+			</PostSectionContainer>
+			<PostSectionContainer>
+				<PostSectionTitle title={t("about",{name:"linux"})} url={"/tags/linux"} />
+				<PostCardGrid>
 					<PostCards
 						infos={sortedByTime.filter((it) =>
 							it.categories.includes("linux"),
 						)}
 					/>
-				</CardCollection>
-			</ArticleContainer>
+				</PostCardGrid>
+			</PostSectionContainer>
 		</Part>
 	);
 }

@@ -1,8 +1,8 @@
 import { allPosts } from "content-collections";
 import DotBackground from "@/components/shared/DotBackground";
 import Part from "@/components/shared/Part";
-import CardCollection from "@/components/Blog/PostCollection";
-import { PostCards } from "@/components/Blog/PostCard";
+import CardCollection from "@/components/modules/posts/section/collection";
+import { PostCards } from "@/components/modules/posts/section/card";
 import Text from "./Text"
 
 export default async function BlogPosts() {

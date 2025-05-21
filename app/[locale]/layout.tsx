@@ -4,13 +4,13 @@ import Avatar from "@/components/modules/avatar";
 import React from "react";
 import Link from "@/i18n/navigation";
 import NavBar from "@/components/modules/panel/nav";
-import Footer from "@/components/modules/panel/Footer";
-import PanelButton from "@/components/modules/panel/nav/Anchor";
+import Footer from "@/components/modules/panel/footer";
+import PanelButton from "@/components/modules/panel/nav/anchor";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import ChangeLanguage from "@/components/modules/panel/nav/ChangeLanguage";
+import ChangeLanguage from "@/components/modules/panel/nav/change-language";
 import Providers from "@/app/[locale]/providers";
 
 // generates metadata for each locale

@@ -3,9 +3,9 @@
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
 import Part from "@/components/shared/Part";
-import GoToTop from "@/components/Blog/Addon/GoToTop";
-import Toc from "@/components/Blog/Addon/Toc";
-import { TocTree } from "@/components/Blog/Addon/TocElement";
+import GoToTop from "@/components/modules/posts/article/go-top";
+import Toc from "@/components/modules/posts/article/toc";
+import { TocTree } from "@/components/modules/posts/article/toc/toc-element";
 import { useTranslations } from "next-intl";
 
 interface LayoutProps {

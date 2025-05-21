@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
-import ImagePreview from "@/components/Blog/Image";
-import WikiLink from "@/components/Blog/Addon/WikiLink";
-import InlineWikiLink from "@/components/Blog/Addon/InlineWikiLink";
+import ImagePreview from "@/components/modules/posts/article/image";
+import WikiLink from "@/components/modules/posts/article/wiki-link";
+import InlineWikiLink from "@/components/modules/posts/article/inline-wiki-link";
 import Link from "next/link";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

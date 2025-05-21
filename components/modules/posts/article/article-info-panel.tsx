@@ -8,7 +8,7 @@ interface Props {
 	content: Post;
 }
 
-export default function Panel({ content }: Props) {
+export default function ArticleInfoPanel({ content }: Props) {
 	return (
 		<div className="relative border-b border-dot">
 			<DotBackground className="h-full w-full absolute inset-0 -z-1" />
