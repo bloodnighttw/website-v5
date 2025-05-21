@@ -1,10 +1,10 @@
-import { ArticleCards } from "@/compoments/Blog/ArticleCard";
-import CardCollection from "@/compoments/Blog/ArticleCollection";
-import CardTitle from "@/compoments/Blog/ArticleTitle";
-import Part from "@/compoments/Part";
-import Chapter from "@/compoments/Text/Chapter";
+import { ArticleCards } from "@/components/Blog/ArticleCard";
+import CardCollection from "@/components/Blog/ArticleCollection";
+import CardTitle from "@/components/Blog/ArticleTitle";
+import Part from "@/components/Part";
+import Chapter from "@/components/Text/Chapter";
 import { allPosts } from "content-collections";
-import ArticleContainer from "@/compoments/Blog/ArticleContainer";
+import ArticleContainer from "@/components/Blog/ArticleContainer";
 import { getTranslations } from "next-intl/server";
 
 export default async function BlogSection() {

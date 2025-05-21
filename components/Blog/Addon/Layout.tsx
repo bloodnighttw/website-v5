@@ -2,10 +2,10 @@
 
 import React, { useCallback, useEffect } from "react";
 import cn from "@/utils/cn";
-import Part from "@/compoments/Part";
-import GoToTop from "@/compoments/Blog/Addon/GoToTop";
-import Toc from "@/compoments/Blog/Addon/Toc";
-import { TocTree } from "@/compoments/Blog/Addon/TocElement";
+import Part from "@/components/Part";
+import GoToTop from "@/components/Blog/Addon/GoToTop";
+import Toc from "@/components/Blog/Addon/Toc";
+import { TocTree } from "@/components/Blog/Addon/TocElement";
 import { useTranslations } from "next-intl";
 
 interface LayoutProps {

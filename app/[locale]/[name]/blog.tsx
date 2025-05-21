@@ -1,8 +1,8 @@
 import { allPosts } from "content-collections";
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Part from "@/compoments/Part";
-import CardCollection from "@/compoments/Blog/ArticleCollection";
-import { ArticleCards } from "@/compoments/Blog/ArticleCard";
+import SecondaryPanel from "@/components/panel/SecondaryPanel";
+import Part from "@/components/Part";
+import CardCollection from "@/components/Blog/ArticleCollection";
+import { ArticleCards } from "@/components/Blog/ArticleCard";
 import Text from "./Text"
 
 export default async function BlogPosts() {

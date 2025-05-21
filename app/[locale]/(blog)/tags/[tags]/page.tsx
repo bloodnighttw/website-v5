@@ -1,8 +1,8 @@
-import CardCollection from "@/compoments/Blog/ArticleCollection";
-import { ArticleCards } from "@/compoments/Blog/ArticleCard";
-import HashTag from "@/compoments/HashTag";
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Part from "@/compoments/Part";
+import CardCollection from "@/components/Blog/ArticleCollection";
+import { ArticleCards } from "@/components/Blog/ArticleCard";
+import HashTag from "@/components/HashTag";
+import SecondaryPanel from "@/components/panel/SecondaryPanel";
+import Part from "@/components/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";

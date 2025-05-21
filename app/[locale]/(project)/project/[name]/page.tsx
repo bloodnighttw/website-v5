@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Github } from "@/app/assets/svg";
 import Link from "@/i18n/navigation";
 import linkSvg from "@/app/assets/link.svg";
-import Part from "@/compoments/Part";
-import { Stacks } from "@/compoments/Project/Stack";
+import Part from "@/components/Part";
+import { Stacks } from "@/components/Project/Stack";
 import { allProjects } from "content-collections";
 
 import "@/app/content.css"

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect } from "react";
 import cn from "@/utils/cn";
-import { TocSideLineAction } from "@/compoments/Blog/Addon/Toc";
+import { TocSideLineAction } from "@/components/Blog/Addon/Toc";
 import Link from "next/link";
 
 export interface TocTree {

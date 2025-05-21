@@ -1,7 +1,7 @@
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import SecondaryPanel from "@/components/panel/SecondaryPanel";
 import Image from "next/image";
-import Part from "@/compoments/Part";
-import HashTag from "@/compoments/HashTag";
+import Part from "@/components/Part";
+import HashTag from "@/components/HashTag";
 import { Post } from "content-collections";
 
 interface Props {

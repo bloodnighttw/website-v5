@@ -1,13 +1,13 @@
 import "server-only";
 
 import "@/app/content.css";
-import Comments from "@/compoments/comments";
+import Comments from "@/components/comments";
 import { Metadata } from "next";
-import Part from "@/compoments/Part";
-import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
+import Part from "@/components/Part";
+import ArticleSecondaryPanel from "@/components/Blog/ArticleSecondaryPanel";
 import { allPosts } from "content-collections";
-import Layout from "@/compoments/Blog/Addon/Layout";
-import Warning from "@/compoments/Blog/Warning";
+import Layout from "@/components/Blog/Addon/Layout";
+import Warning from "@/components/Blog/Warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
 
