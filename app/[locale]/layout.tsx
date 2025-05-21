@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../global.css";
-import Avatar from "@/components/avatar";
+import Avatar from "@/components/modules/avatar";
 import React from "react";
 import Link from "@/i18n/navigation";
 import NavPanel from "@/components/panel/NavPanel";

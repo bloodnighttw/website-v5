@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Avatar from "@/components/avatar";
+import Avatar from "@/components/modules/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
 import TranslationWithIcon from "@/components/TranslationWithIcon";
