@@ -1,5 +1,5 @@
 import { allPosts } from "content-collections";
-import SecondaryPanel from "@/components/panel/SecondaryPanel";
+import DotBackground from "@/components/shared/DotBackground";
 import Part from "@/components/shared/Part";
 import CardCollection from "@/components/Blog/PostCollection";
 import { PostCards } from "@/components/Blog/PostCard";
@@ -12,9 +12,9 @@ export default async function BlogPosts() {
 
 	return (
 		<div className="page-enter">
-			<SecondaryPanel>
+			<DotBackground>
 				<Text/>
-			</SecondaryPanel>
+			</DotBackground>
 			<Part className="gradient-background">
 				<CardCollection>
 					<PostCards infos={metadataWithPreview} />

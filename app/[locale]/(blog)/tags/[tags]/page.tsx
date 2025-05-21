@@ -1,7 +1,7 @@
 import CardCollection from "@/components/Blog/PostCollection";
 import { PostCards } from "@/components/Blog/PostCard";
 import HashTag from "@/components/HashTag";
-import SecondaryPanel from "@/components/panel/SecondaryPanel";
+import DotBackground from "@/components/shared/DotBackground";
 import Part from "@/components/shared/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
@@ -64,12 +64,12 @@ export default async function Tags({
 
 	return (
 		<div className="page-enter">
-			<SecondaryPanel>
+			<DotBackground>
 				<HashTag
 					className="text-center text-5xl text-bold"
 					tags={tags}
 				/>
-			</SecondaryPanel>
+			</DotBackground>
 
 			<Part>
 				<CardCollection>

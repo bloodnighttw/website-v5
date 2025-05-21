@@ -1,4 +1,4 @@
-import SecondaryPanel from "@/components/panel/SecondaryPanel";
+import DotBackground from "@/components/shared/DotBackground";
 import Introducing from "@/components/Home/Introducing";
 import BlogSection from "@/components/Home/BlogSection";
 import ProjectSection from "@/components/Home/ProjectSection";
@@ -18,9 +18,9 @@ export async function generateMetadata() {
 export default async function Home() {
 	return (
 		<>
-			<SecondaryPanel className="min-h-[75vh] lg:min-h-[50vh] h-auto p-4">
+			<DotBackground className="min-h-[75vh] lg:min-h-[50vh] h-auto p-4">
 				<Introducing />
-			</SecondaryPanel>
+			</DotBackground>
 
 			<BlogSection />
 			<ProjectSection />
