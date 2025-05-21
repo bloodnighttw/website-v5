@@ -1,5 +1,5 @@
-import { ArticleCards } from "@/components/Blog/ArticleCard";
-import CardCollection from "@/components/Blog/ArticleCollection";
+import { PostCards } from "@/components/Blog/PostCard";
+import CardCollection from "@/components/Blog/PostCollection";
 import CardTitle from "@/components/Blog/ArticleTitle";
 import Part from "@/components/shared/Part";
 import Chapter from "@/components/Text/Chapter";
@@ -22,7 +22,7 @@ export default async function BlogSection() {
 				<ArticleContainer>
 					<CardTitle title={t("pinned")} />
 					<CardCollection>
-						<ArticleCards infos={sortedByPin} />
+						<PostCards infos={sortedByPin} />
 					</CardCollection>
 				</ArticleContainer>
 			)}
@@ -30,13 +30,13 @@ export default async function BlogSection() {
 			<ArticleContainer>
 				<CardTitle title={t("Recent Posts")} url={"/blog"} />
 				<CardCollection>
-					<ArticleCards infos={sortedByTime.slice(0, 4)} />
+					<PostCards infos={sortedByTime.slice(0, 4)} />
 				</CardCollection>
 			</ArticleContainer>
 			<ArticleContainer>
 				<CardTitle title={t("about",{name:"linux"})} url={"/tags/linux"} />
 				<CardCollection>
-					<ArticleCards
+					<PostCards
 						infos={sortedByTime.filter((it) =>
 							it.categories.includes("linux"),
 						)}

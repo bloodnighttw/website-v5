@@ -1,8 +1,8 @@
 import { allPosts } from "content-collections";
 import SecondaryPanel from "@/components/panel/SecondaryPanel";
 import Part from "@/components/shared/Part";
-import CardCollection from "@/components/Blog/ArticleCollection";
-import { ArticleCards } from "@/components/Blog/ArticleCard";
+import CardCollection from "@/components/Blog/PostCollection";
+import { PostCards } from "@/components/Blog/PostCard";
 import Text from "./Text"
 
 export default async function BlogPosts() {
@@ -17,7 +17,7 @@ export default async function BlogPosts() {
 			</SecondaryPanel>
 			<Part className="gradient-background">
 				<CardCollection>
-					<ArticleCards infos={metadataWithPreview} />
+					<PostCards infos={metadataWithPreview} />
 				</CardCollection>
 			</Part>
 		</div>

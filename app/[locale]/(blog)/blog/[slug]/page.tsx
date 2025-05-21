@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import Part from "@/components/shared/Part";
 import ArticleSecondaryPanel from "@/components/Blog/ArticleSecondaryPanel";
 import { allPosts } from "content-collections";
-import Layout from "@/components/Blog/Addon/Layout";
+import Layout from "@/components/modules/article/layout";
 import Warning from "@/components/Blog/Warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";

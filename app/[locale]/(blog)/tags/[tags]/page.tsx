@@ -1,5 +1,5 @@
-import CardCollection from "@/components/Blog/ArticleCollection";
-import { ArticleCards } from "@/components/Blog/ArticleCard";
+import CardCollection from "@/components/Blog/PostCollection";
+import { PostCards } from "@/components/Blog/PostCard";
 import HashTag from "@/components/HashTag";
 import SecondaryPanel from "@/components/panel/SecondaryPanel";
 import Part from "@/components/shared/Part";
@@ -73,7 +73,7 @@ export default async function Tags({
 
 			<Part>
 				<CardCollection>
-					<ArticleCards infos={tagsContent} />
+					<PostCards infos={tagsContent} />
 				</CardCollection>
 			</Part>
 		</div>
