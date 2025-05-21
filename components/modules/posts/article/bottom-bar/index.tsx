@@ -1,8 +1,8 @@
 import cn from "@/utils/cn";
 import { useCallback, useDeferredValue, useEffect, useState } from "react";
-import GoToTop from "./go-top";
+import GoToTop from "../go-top";
 import Toc from "./toc";
-import { TocTree } from "./toc/toc-element";
+import { TocTree } from "./toc-element";
 
 interface Props {
 	ref?: React.RefObject<HTMLDivElement|null>;

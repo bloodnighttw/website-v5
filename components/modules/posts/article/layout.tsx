@@ -3,9 +3,9 @@
 import React from "react";
 import Part from "@/components/shared/part";
 
-import { TocTree } from "@/components/modules/posts/article/toc/toc-element";
+import { TocTree } from "@/components/modules/posts/article/bottom-bar/toc-element";
 import { useTranslations } from "next-intl";
-import ButtomBar from "./buttom-bar";
+import ButtomBar from "./bottom-bar";
 
 interface LayoutProps {
 	children: React.ReactNode;

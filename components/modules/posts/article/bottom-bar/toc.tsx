@@ -2,11 +2,11 @@
 
 import React, { useCallback, useEffect, useMemo, useReducer } from "react";
 import cn from "@/utils/cn";
-import { ProgressArc } from "@/components/modules/posts/article/toc/progress";
+import { ProgressArc } from "@/components/modules/posts/article/bottom-bar/progress";
 import {
 	TocElement,
 	TocTree,
-} from "@/components/modules/posts/article/toc/toc-element";
+} from "@/components/modules/posts/article/bottom-bar/toc-element";
 import { useTranslations } from "next-intl";
 
 interface TocProp {
