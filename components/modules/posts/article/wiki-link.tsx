@@ -8,7 +8,7 @@ interface Props {
 	link: string;
 }
 
-export default async function WikiLink(props: Props) {
+export default function WikiLink(props: Props) {
 
 	const { link } = props;
 	const post = allPosts.find((it) => it.slug === link);
