@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Part from "@/components/shared/Part";
 import { getTranslations } from "next-intl/server";
-import GlareCard from "@/components/shared/GlareCard";
+import GlareCard, {GlareCardBorder} from "@/components/shared/GlareCard";
 import Link from "next/link";
 import TranslationWithIcon from "@/components/TranslationWithIcon";
 
