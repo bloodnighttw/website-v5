@@ -1,5 +1,5 @@
 import DotBackground from "@/components/shared/dot-background";
-import Introducing from "@/components/Home/Introducing";
+import Introducing from "@/components/modules/home/introducing";
 import BlogSection from "@/components/modules/home/blog";
 import ProjectSection from "@/components/modules/home/project";
 import { BASE_URL } from "@/utils/constant";
