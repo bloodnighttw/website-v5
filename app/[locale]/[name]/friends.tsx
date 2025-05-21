@@ -84,7 +84,7 @@ export default async function Friends(){
 							</div>
 							<div className="flex flex-col gap-2 flex-1">
 								<p className="text-3xl font-extrabold">{friend.github}</p>
-								<p className="overflow-y-scroll">{lang === "zh" ? friend.descriptionZH : friend.descriptionEN}</p>
+								<p>{lang === "zh" ? friend.descriptionZH : friend.descriptionEN}</p>
 							</div>
 						</GlareCardBorder>
 					</GlareCard>

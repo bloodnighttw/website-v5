@@ -44,5 +44,6 @@ yarn-error.log*
 next-env.d.ts
 
 .idea
+.vscode
 
 .content-collections
