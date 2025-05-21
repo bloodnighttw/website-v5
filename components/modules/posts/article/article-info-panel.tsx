@@ -1,17 +1,17 @@
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
+import DotBackground from "@/components/shared/DotBackground";
 import Image from "next/image";
-import Part from "@/compoments/Part";
-import HashTag from "@/compoments/HashTag";
+import Part from "@/components/shared/Part";
+import HashTag from "@/components/HashTag";
 import { Post } from "content-collections";
 
 interface Props {
 	content: Post;
 }
 
-export default function Panel({ content }: Props) {
+export default function ArticleInfoPanel({ content }: Props) {
 	return (
 		<div className="relative border-b border-dot">
-			<SecondaryPanel className="h-full w-full absolute inset-0 -z-1" />
+			<DotBackground className="h-full w-full absolute inset-0 -z-1" />
 			<Image
 				className="absolute w-full h-full object-cover blur-sm opacity-0 lg:opacity-100 bg-image duration-200 -z-1"
 				src={content.preview ?? ""}

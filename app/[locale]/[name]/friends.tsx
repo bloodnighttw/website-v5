@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Part from "@/compoments/Part";
+import Part from "@/components/shared/Part";
 import { getTranslations } from "next-intl/server";
-import GlareCard, { GlareCardBorder } from "@/compoments/GlareCard";
+import GlareCard from "@/components/shared/GlareCard";
 import Link from "next/link";
-import TranslationWithIcon from "@/compoments/TranslationWithIcon";
+import TranslationWithIcon from "@/components/TranslationWithIcon";
 
 
 

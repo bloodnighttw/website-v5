@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import Part from "@/compoments/Part";
+import Part from "@/components/shared/Part";
 
 interface Props {
 	className?: string;
 	children: ReactNode;
 }
 
-export default function NavPanel(props: Props) {
+export default function NavBar(props: Props) {
 	return (
 		<nav className="bg-bprimary/50 backdrop-blur border-b border-dot sticky top-0 z-1">
 			<Part>

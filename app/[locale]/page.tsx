@@ -1,7 +1,7 @@
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Introducing from "@/compoments/Home/Introducing";
-import BlogSection from "@/compoments/Home/BlogSection";
-import ProjectSection from "@/compoments/Home/ProjectSection";
+import DotBackground from "@/components/shared/DotBackground";
+import Introducing from "@/components/Home/Introducing";
+import BlogSection from "@/components/Home/BlogSection";
+import ProjectSection from "@/components/Home/ProjectSection";
 import { BASE_URL } from "@/utils/constant";
 
 export async function generateMetadata() {
@@ -18,9 +18,9 @@ export async function generateMetadata() {
 export default async function Home() {
 	return (
 		<>
-			<SecondaryPanel className="min-h-[75vh] lg:min-h-[50vh] h-auto p-4">
+			<DotBackground className="min-h-[75vh] lg:min-h-[50vh] h-auto p-4">
 				<Introducing />
-			</SecondaryPanel>
+			</DotBackground>
 
 			<BlogSection />
 			<ProjectSection />

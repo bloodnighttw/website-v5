@@ -1,8 +1,8 @@
-import CardCollection from "@/compoments/Blog/ArticleCollection";
-import { ArticleCards } from "@/compoments/Blog/ArticleCard";
-import HashTag from "@/compoments/HashTag";
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Part from "@/compoments/Part";
+import CardCollection from "@/components/modules/posts/section/collection";
+import { PostCards } from "@/components/modules/posts/section/card";
+import HashTag from "@/components/HashTag";
+import DotBackground from "@/components/shared/DotBackground";
+import Part from "@/components/shared/Part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -64,16 +64,16 @@ export default async function Tags({
 
 	return (
 		<div className="page-enter">
-			<SecondaryPanel>
+			<DotBackground>
 				<HashTag
 					className="text-center text-5xl text-bold"
 					tags={tags}
 				/>
-			</SecondaryPanel>
+			</DotBackground>
 
 			<Part>
 				<CardCollection>
-					<ArticleCards infos={tagsContent} />
+					<PostCards infos={tagsContent} />
 				</CardCollection>
 			</Part>
 		</div>

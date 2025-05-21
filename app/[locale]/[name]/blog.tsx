@@ -1,8 +1,8 @@
 import { allPosts } from "content-collections";
-import SecondaryPanel from "@/compoments/panel/SecondaryPanel";
-import Part from "@/compoments/Part";
-import CardCollection from "@/compoments/Blog/ArticleCollection";
-import { ArticleCards } from "@/compoments/Blog/ArticleCard";
+import DotBackground from "@/components/shared/DotBackground";
+import Part from "@/components/shared/Part";
+import CardCollection from "@/components/modules/posts/section/collection";
+import { PostCards } from "@/components/modules/posts/section/card";
 import Text from "./Text"
 
 export default async function BlogPosts() {
@@ -12,12 +12,12 @@ export default async function BlogPosts() {
 
 	return (
 		<div className="page-enter">
-			<SecondaryPanel>
+			<DotBackground>
 				<Text/>
-			</SecondaryPanel>
+			</DotBackground>
 			<Part className="gradient-background">
 				<CardCollection>
-					<ArticleCards infos={metadataWithPreview} />
+					<PostCards infos={metadataWithPreview} />
 				</CardCollection>
 			</Part>
 		</div>

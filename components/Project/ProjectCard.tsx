@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Github } from "@/app/assets/svg";
 import { svgUrl } from "@/utils/constant";
 import Link from "@/i18n/navigation";
-import GlareCard, { GlareCardBorder } from "@/compoments/GlareCard";
+import GlareCard, { GlareCardBorder } from "@/components/shared/GlareCard";
 
 interface Props {
 	name: string;

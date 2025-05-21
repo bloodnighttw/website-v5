@@ -6,7 +6,7 @@ interface Props {
 	className?: string;
 }
 
-export default function SecondaryPanel(props: Props) {
+export default function DotBackground(props: Props) {
 	const className = cn(
 		"h-36 part bg-dotted flex items-center justify-center border-b border-dot",
 		props.className,

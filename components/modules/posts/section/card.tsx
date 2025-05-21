@@ -3,14 +3,14 @@ import Image from "next/image";
 import { Post } from "content-collections";
 import React from "react";
 import cn from "@/utils/cn";
-import GlareCard, { GlareCardBorder } from "@/compoments/GlareCard";
+import GlareCard, { GlareCardBorder } from "@/components/shared/GlareCard";
 
 interface Props {
 	info: Post;
 	index: number;
 }
 
-export default function ArticleCard(props: Props) {
+export default function PostCard(props: Props) {
 	// Calculate delay with a maximum cap of 2 seconds
 	const delay = Math.min(props.index * 0.075, 1.5);
 
@@ -40,8 +40,8 @@ export default function ArticleCard(props: Props) {
 	);
 }
 
-export function ArticleCards(props: { infos: Post[] }) {
+export function PostCards(props: { infos: Post[] }) {
 	return props.infos.map((info, index) => (
-		<ArticleCard info={info} key={info.slug} index={index} />
+		<PostCard info={info} key={info.slug} index={index} />
 	));
 }

@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import "../global.css";
-import Avatar from "@/compoments/avatar";
+import Avatar from "@/components/modules/avatar";
 import React from "react";
 import Link from "@/i18n/navigation";
-import NavPanel from "@/compoments/panel/NavPanel";
-import Footer from "@/compoments/panel/Footer";
-import PanelButton from "@/compoments/panel/PanelButton";
+import NavBar from "@/components/modules/panel/nav";
+import Footer from "@/components/modules/panel/footer";
+import PanelButton from "@/components/modules/panel/nav/anchor";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import ChangeLanguage from "@/compoments/panel/ChangeLanguage";
+import ChangeLanguage from "@/components/modules/panel/nav/change-language";
 import Providers from "@/app/[locale]/providers";
 
 // generates metadata for each locale
@@ -51,7 +51,7 @@ export default async function LocaleLayout(
 		<body className={`$antialiased`}>
 			<NextIntlClientProvider>
 				<Providers>
-				<NavPanel>
+				<NavBar>
 					<Link href="/">
 						<Avatar
 							src="https://avatars.githubusercontent.com/u/44264182"
@@ -83,7 +83,7 @@ export default async function LocaleLayout(
 
 					<ChangeLanguage />
 
-				</NavPanel>
+				</NavBar>
 
 				{children}
 

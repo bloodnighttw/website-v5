@@ -1,10 +1,10 @@
-import ProjectCard from "@/compoments/Project/ProjectCard";
-import Part from "@/compoments/Part";
-import { Stacks } from "@/compoments/Project/Stack";
-import Chapter from "@/compoments/Text/Chapter";
-import ProjectChapter from "@/compoments/Project/ProjectChapter";
-import ProjectCollection from "@/compoments/Project/ProjectCollection";
-import Scrolling from "@/compoments/Project/Scrolling";
+import ProjectCard from "@/components/Project/ProjectCard";
+import Part from "@/components/shared/Part";
+import { Stacks } from "@/components/Project/Stack";
+import Chapter from "@/components/Text/Chapter";
+import ProjectChapter from "@/components/Project/ProjectChapter";
+import ProjectCollection from "@/components/Project/ProjectCollection";
+import Scrolling from "@/components/Project/Scrolling";
 import { allProjects } from "content-collections";
 import { getTranslations } from "next-intl/server";
 

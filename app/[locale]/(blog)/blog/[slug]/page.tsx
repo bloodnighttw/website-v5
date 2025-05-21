@@ -1,13 +1,13 @@
 import "server-only";
 
 import "@/app/content.css";
-import Comments from "@/compoments/comments";
+import Comments from "@/components/modules/comments";
 import { Metadata } from "next";
-import Part from "@/compoments/Part";
-import ArticleSecondaryPanel from "@/compoments/Blog/ArticleSecondaryPanel";
+import Part from "@/components/shared/Part";
+import ArticleInfoPanel from "@/components/modules/posts/article/article-info-panel";
 import { allPosts } from "content-collections";
-import Layout from "@/compoments/Blog/Addon/Layout";
-import Warning from "@/compoments/Blog/Warning";
+import Layout from "@/components/modules/posts/article/layout";
+import Warning from "@/components/modules/posts/article/warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
 
@@ -93,7 +93,7 @@ export default async function Blog({
 
 	return (
 		<div className="page-enter">
-			<ArticleSecondaryPanel content={content} />
+			<ArticleInfoPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
 				<Part className="bg-bprimary page-enter">
 					{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}

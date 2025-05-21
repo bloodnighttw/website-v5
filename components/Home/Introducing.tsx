@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Avatar from "@/compoments/avatar";
+import Avatar from "@/components/modules/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
-import TranslationWithIcon from "@/compoments/TranslationWithIcon";
-import TypeWriter from "@/compoments/Home/TypeWriter";
-import SocialLink from "@/compoments/Home/SocialLink";
+import TranslationWithIcon from "@/components/TranslationWithIcon";
+import TypeWriter from "@/components/Home/TypeWriter";
+import SocialLink from "@/components/Home/SocialLink";
 
 export default async function Introducing() {
 
