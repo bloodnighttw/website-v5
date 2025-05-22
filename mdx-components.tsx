@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import ImagePreview from "@/components/modules/posts/article/image";
+import ImagePreview from "@/components/modules/posts/article/image/image";
 import WikiLink from "@/components/modules/posts/article/wiki-link";
 import InlineWikiLink from "@/components/modules/posts/article/inline-wiki-link";
 import Link from "next/link";
