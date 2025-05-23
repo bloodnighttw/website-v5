@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import GlareCard from "@/components/shared/card/glare-card";
+import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
 import cn from "@/utils/cn";
 import { useCallback, useReducer, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -35,8 +37,8 @@ type Action =
 	| { type: "SET_DRAGGING_START"; payload: { x: number; y: number } }
 	| { type: "SET_DRAGGING_END" }
 	| { type: "SET_DRAGGING"; payload: { x: number; y: number } }
-	| { type: "ZOOM_IN"; payload: Origin }
-	| { type: "ZOOM_OUT"; payload: Origin }
+	| { type: "ZOOM_IN"; payload?: Origin }
+	| { type: "ZOOM_OUT"; payload?: Origin }
 	| { type: "SET_SIZE"; payload: { size: number; origin: Origin } }
 	| { type: "RESET" };
 
@@ -70,24 +72,36 @@ function reducer(state: State, action: Action): State {
 		case "ZOOM_IN":
 			if (state.size >= 3) return state;
 			const sizeWithMax = Math.min(state.size + 0.25, 3);
+
+			if (!action.payload) {
+				return {
+					...state,
+					size: sizeWithMax,
+					origin: { x: "50%", y: "50%" },
+				};
+			}
+
 			return {
 				...state,
 				size: sizeWithMax,
-				origin: {
-					x: action.payload.x,
-					y: action.payload.y,
-				},
+				origin: action.payload,
 			};
 		case "ZOOM_OUT":
 			if (state.size <= 0.5) return state;
 			const sizeWithMin = Math.max(state.size - 0.25, 0.5);
+
+			if (!action.payload) {
+				return {
+					...state,
+					size: sizeWithMin,
+					origin: { x: "50%", y: "50%" },
+				};
+			}
+
 			return {
 				...state,
 				size: sizeWithMin,
-				origin: {
-					x: action.payload.x,
-					y: action.payload.y,
-				},
+				origin: action.payload,
 			};
 		case "RESET":
 			return initialState;
@@ -217,10 +231,73 @@ export default function Viewer(props: ImageViewerProps) {
 				onMouseOut={handleMouseUp}
 				onMouseMove={handleMouseMove}
 				onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
-                onTouchCancel={onTouchEnd}
+				onTouchMove={onTouchMove}
+				onTouchEnd={onTouchEnd}
+				onTouchCancel={onTouchEnd}
 			/>
+			<GlareCard className="fixed bottom-8 bg-bsecondary/100 rounded-[calc(0.25rem+3px)]">
+				<GlareCardBorder className="*:bg-bprimary/60 grid grid-cols-4 gap-0.75  *:flex *:justify-center *:items-center *:button:cursor-pointer">
+					<p className="rounded-t col-span-4 text-xl w-96 p-1 font-mono line-clamp-1 h-12 select-none">
+						{props.alt}
+					</p>
+					<button
+						className="rounded-bl cursor-pointer"
+						onClick={() => dispatch({ type: "ZOOM_OUT" })}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							viewBox="0 0 16 16"
+						>
+							<path
+								fillRule="evenodd"
+								d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"
+							/>
+							<path d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z" />
+							<path
+								fillRule="evenodd"
+								d="M3 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"
+							/>
+						</svg>
+					</button>
+					<div>{state.size * 100}%</div>
+					<button
+						onClick={() => dispatch({ type: "ZOOM_IN" })}
+						className="cursor-pointer"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							viewBox="0 0 16 16"
+						>
+							<path
+								fillRule="evenodd"
+								d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"
+							/>
+							<path d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z" />
+							<path
+								fillRule="evenodd"
+								d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5"
+							/>
+						</svg>
+					</button>
+					<button onClick={props.close} className="rounded-br cursor-pointer">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							viewBox="0 0 16 16"
+						>
+							<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+						</svg>
+					</button>
+				</GlareCardBorder>
+			</GlareCard>
 		</div>
 	);
 
