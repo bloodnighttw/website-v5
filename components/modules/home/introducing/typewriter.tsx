@@ -17,7 +17,7 @@ function reducer(state: number, action: { length: number, id: NodeJS.Timeout }) 
 	return state + 1;
 }
 
-export default function TypeWriter({children}: Props) {
+export default function Typewriter({children}: Props) {
 
 	const [state, dispatch] = useReducer(reducer, 0);
 

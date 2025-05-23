@@ -2,9 +2,9 @@ import Image from "next/image";
 import Avatar from "@/components/modules/avatar";
 import { svgUrl } from "@/utils/constant";
 import { getTranslations } from "next-intl/server";
-import TranslationWithIcon from "@/components/TranslationWithIcon";
-import TypeWriter from "@/components/Home/TypeWriter";
-import SocialLink from "@/components/Home/SocialLink";
+import TranslationWithIcon from "@/components/shared/TranslationWithJSX";
+import Typewriter from "@/components/modules/home/introducing/typewriter";
+import SocialLink from "@/components/modules/home/introducing/link";
 
 export default async function Introducing() {
 
@@ -20,9 +20,9 @@ export default async function Introducing() {
 					{t("I'm")}	<span className="red-gradient-text">{t("name")}</span>
 				</p>
 
-				<TypeWriter>
+				<Typewriter>
 					{`21 ${t("age")} • ${t("developer")} • ${t("gamer")} `}
-				</TypeWriter>
+				</Typewriter>
 
 				<TranslationWithIcon text={t("introducing")}
 					icon={{

@@ -1,8 +1,8 @@
 import CardCollection from "@/components/modules/posts/section/collection";
 import { PostCards } from "@/components/modules/posts/section/card";
-import HashTag from "@/components/HashTag";
-import DotBackground from "@/components/shared/DotBackground";
-import Part from "@/components/shared/Part";
+import HashTag from "@/components/modules/posts/hashtag";
+import DotBackground from "@/components/shared/dot-background";
+import Part from "@/components/shared/part";
 import { allPosts } from "content-collections";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";

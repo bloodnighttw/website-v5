@@ -16,9 +16,7 @@ export default function PanelButton(props: Props) {
 		"hidden sm:flex items-center justify-center text-sm gap-2 font-mono",
 		"*:fill-secondary *:text-secondary hover:*:fill-primary hover:*:text-primary *:h-4",
 	)}>
-		<div className="flex gap-1.5">
-			{props.children}
-			<p>{props.text}</p>
-		</div>
+		{props.children}
+		<p>{props.text}</p>
 	</Link>
 }
