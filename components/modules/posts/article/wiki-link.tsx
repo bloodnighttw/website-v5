@@ -1,16 +1,19 @@
 import Link from "next/link";
 import GlareCard from "@/components/shared/card/glare-card";
 import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
-import { allPosts } from "content-collections";
 import Image from "next/image";
+import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
 	link: string;
 }
 
-export default function WikiLink(props: Props) {
+export default async function WikiLink(props: Props) {
 
 	const { link } = props;
+	const t = await getTranslations();
+	const allPosts = t("lang") == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
 	const post = allPosts.find((it) => it.slug === link);
 
 	if (!post) return null;
@@ -20,7 +23,7 @@ export default function WikiLink(props: Props) {
 
 	return (
 		<div className="max-w-4xl">
-			<Link href="/wiki" className="!no-underline">
+			<Link href={`/blog/${post.slug}`} className="!no-underline">
 				<GlareCard className="from-primary/40 to-primary/20 bg-gradient-to-br rounded-[calc(0.25rem+3px)] p-0">
 					<GlareCardBorder>
 						<div className="flex gap-1 justify-center items-center h-20 *:last:rounded-r *:bg-bprimary/70 *:h-20">

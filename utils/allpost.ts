@@ -68,7 +68,6 @@ export const allPostWithEnPriority: PostWithTranslaete[] = allPosts
     }
 
     if (hasTranslate) {
-        console.debug("Translate post found:", translate.slug);
         postModified = {
             ...postModified,
             title: translate.title,
@@ -80,7 +79,3 @@ export const allPostWithEnPriority: PostWithTranslaete[] = allPosts
     
     return postModified;
 })
-
-
-console.debug("allPostWithZhPriority", allPostWithZhPriority.length, "posts with zh priority");
-console.debug("allPostWithEnPriority", allPostWithEnPriority.length, "posts with en priority");
