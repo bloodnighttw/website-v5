@@ -5,14 +5,14 @@ import Comments from "@/components/modules/comments";
 import { Metadata } from "next";
 import Part from "@/components/shared/part";
 import ArticleInfoPanel from "@/components/modules/posts/article/article-info-panel";
-import { allPosts } from "content-collections";
 import Layout from "@/components/modules/posts/article/layout";
 import Warning from "@/components/modules/posts/article/warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
+import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
 
 export async function generateStaticParams() {
-	return allPosts.map((post) => {
+	return allPostWithZhPriority.map((post) => {
 		return {
 			slug: post.slug,
 		};
@@ -24,9 +24,11 @@ export const dynamicParams = false;
 export async function generateMetadata({
 	params,
 }: {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ slug: string, locale: string }>;
 }): Promise<Metadata> {
-	const { slug } = await params;
+
+	const { slug, locale } = await params;
+	const allPosts = locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
 	const post = allPosts.find((it) => it.slug === slug)!;
 	const description = post.description;
 
@@ -75,12 +77,22 @@ export default async function Blog({
 	params: Promise<{ slug: string, locale: string }>;
 }) {
 	const { slug, locale } = await params;
+	const allPosts = locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
 
 	const content = allPosts.find((it) => it.slug === slug);
+
 	if (!content) return <div>404</div>;
-	const { default: Content } = await import(
-		`@/contents/posts/${content.slug}.mdx`
-	);
+
+	let im;
+
+	if(content.translate) {
+		im = await import(`@/contents/posts/translate/${content.slug}.mdx`);
+	} else {
+		im = await import(`@/contents/posts/${content.slug}.mdx`);
+	}
+
+
+	const { default: Content } = im;
 
 	const t = await getTranslations("Blog");
 

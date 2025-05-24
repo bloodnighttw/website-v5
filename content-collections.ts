@@ -99,7 +99,7 @@ const handleToc = (content: string) => {
 const posts = defineCollection({
 	name: "posts",
 	directory: "contents/posts",
-	include: ["**/*.mdx"],
+	include: ["*.mdx"],
 	schema: (z) => ({
 		title: z.string(),
 		categories: z.array(z.string()).default([]),
@@ -108,6 +108,46 @@ const posts = defineCollection({
 		pin: z.boolean().default(false),
 	}),
 	transform: async (doc) => {
+
+		const { content, ...others } = doc;
+
+		// this is might be changed since we don't need to consider
+		// the same file name in different directory now.
+		const slug = others._meta.path.replace("/", "-");
+
+		// handle mdx file
+		const firstImage =
+			getFirstImage(content) ?? "https://r2.bntw.dev/dot.png";
+		const fullText = getFullText(content);
+		const lang = documentLanguage(content);
+		const previewText = fullText.slice(0, 400);
+
+		const toc = handleToc(content);
+
+		return {
+			slug,
+			...others,
+			description: previewText,
+			preview: firstImage,
+			toc,
+			lang
+		};
+	},
+});
+
+
+// the translate collection is used to store the translated posts
+
+const translate = defineCollection({
+	name: "translate",
+	directory: "contents/posts/translate",
+	include: ["*.mdx"],
+	schema: (z) => ({
+		title: z.string(),
+		draft: z.boolean().optional(),
+	}),
+	transform: async (doc) => {
+		
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
@@ -161,5 +201,5 @@ const projects = defineCollection({
 });
 
 export default defineConfig({
-	collections: [posts, projects],
+	collections: [posts, projects, translate],
 });
