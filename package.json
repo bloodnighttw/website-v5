@@ -34,7 +34,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.10",
-		"@content-collections/core": "^0.8.2",
+		"@content-collections/core": "^0.9.0",
 		"@content-collections/next": "^0.2.6",
 		"@eslint/eslintrc": "^3",
 		"@next/eslint-plugin-next": "^15.3.2",
