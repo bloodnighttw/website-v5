@@ -22,7 +22,7 @@ export default function ArticleInfoPanel({ content }: Props) {
 			/>
 
 			<Part className="min-h-48 flex flex-col items-center justify-center font-sans">
-				<p className="text-6xl w-full m-4 fade-in-up text-belance md:text-wrap">{content.title}</p>
+				<p className="text-4xl w-full fade-in-up text-belance md:text-wrap">{content.title}</p>
 				<div className="w-full text-xl flex gap-4 font-mono overflow-x-auto overflow-y-hidden">
 					{content.categories.map(
 						(category: string, index: number) => (
