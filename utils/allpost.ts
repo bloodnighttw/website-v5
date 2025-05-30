@@ -41,6 +41,7 @@ export const allPostWithZhPriority: PostWithTranslaete[] = allPosts
             description: translate.description,
             translate: true,
             lang: translate.lang,
+            toc: translate.toc,
         };
     }
     
@@ -74,6 +75,7 @@ export const allPostWithEnPriority: PostWithTranslaete[] = allPosts
             description: translate.description,
             translate: true,
             lang: translate.lang,
+            toc: translate.toc,
         };
     }
     
