@@ -149,7 +149,7 @@ const processor = unified()
   .use(remarkParse) // 解析 Markdown (String -> Markdown AST)
   .use(remarkUppercaseHeadings) // 使用自定義的插件
   .use(remarkRehype) // 將 Markdown AST 轉換成 HTML AST
-  .use(rehypeStringify); // 將 HTML AST 轉換成 HTML 字串
+
 const markdown = `
 # Hello World
 \`\`\`js
