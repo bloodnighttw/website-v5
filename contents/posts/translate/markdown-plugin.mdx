@@ -26,7 +26,7 @@ With these tools, we can easily convert Markdown to HTML and use various plugins
 - **rehype-katex**: A plugin that converts mathematical formulas to HTML.
 - **rehype-highlight**: A plugin that converts code blocks to HTML.
 
-# How the unified ecosystem transforms
+# How the unified ecosystem transforms Markdown to HTML
 
 In the unified ecosystem, the process of handling Markdown to HTML conversion is typically like this:
 1. **Parse Markdown**: Use `remark` to parse Markdown text and convert it to AST. We call this process `parse` and refer to plugins with such functionality as parsers.
@@ -155,7 +155,7 @@ console.log('Hello World');
 `;
 const html = await processor.process(markdown);
 
-// 使用 unist-util-inspect 來查看 AST 的結構和內容
+// Use unist-util-inspect to view the structure and content of AST
 console.log(inspect(html));
 ```
 You'll see that all heading nodes have been converted to uppercase in the console.
