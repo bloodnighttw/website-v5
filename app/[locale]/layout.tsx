@@ -18,7 +18,8 @@ export async function generateMetadata() {
 	const t = await getTranslations("Meta");
 	return {
 		title: t("title"),
-		description: t("description")
+		description: t("description"),
+		icons: "/icon"
 	} as Metadata;
 }
 
