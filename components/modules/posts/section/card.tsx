@@ -18,6 +18,7 @@ export default function PostCard(props: Props) {
 	return (
 		<Link
 			href={"/blog/" + props.info.slug}
+			className="group"
 		>
 			<GlareCard strength={0.3} className={cn(
 				"w-full h-full duration-200 hover:delay-0 hover:z-1 hover:-translate-y-1",
@@ -34,7 +35,7 @@ export default function PostCard(props: Props) {
 						className="object-cover w-full h-40" //
 						loading="eager"
 					/>
-					<p className="text-2xl font-bold p-2 duration-200 flex-1">{props.info.title}</p>
+					<p className="text-lg font-bold p-2 duration-200 flex-1 group-hover:underline">{props.info.title}</p>
 				</GlareCardBorder>
 			</GlareCard>
 		</Link>
