@@ -9,6 +9,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 import moveImageToRoot from "@/utils/remark-plugin/moveImageToRoot";
 import remarkWikiLinks from "@/utils/remark-plugin/wikiLink";
 import rehypeShiki from "@shikijs/rehype";
+import remarkGfm from "remark-gfm";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -20,6 +21,7 @@ const withMDX = createMDX({
 			remarkWikiLinks,
 			moveImageToRoot,
 			remarkImageSize,
+			remarkGfm,
 		],
 		rehypePlugins: [section, [rehypeShiki, { 
 			theme: "catppuccin-mocha",
