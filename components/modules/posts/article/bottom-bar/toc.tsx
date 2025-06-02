@@ -148,7 +148,7 @@ export default function Toc({progress, tocArray}: TocProp) {
 		<div ref={divRef}>
 			<div
 				className={cn(
-					"bg-bprimary h-8 w-8 rounded-full *:m-auto flex items-center justify-center",
+					"bg-bsecondary h-8 w-8 rounded-full *:m-auto flex items-center justify-center",
 					"cursor-pointer active:scale-90 duration-200 relative fade-in",
 				)}
 				onClick={handleClick}
