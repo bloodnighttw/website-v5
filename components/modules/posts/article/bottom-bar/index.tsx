@@ -60,7 +60,7 @@ export default function ButtomBar({ ref, tocArray }: Props) {
 		<div
 			className={cn(
 				deferredProgress === 100 ? "absolute" : "fixed z-100",
-				"duration-400 bottom-4 right-0 2xl:mr-[calc((-0.75rem+100svw-var(--size-width-max))/2)] mr-4 flex h-6 items-center gap-2",
+				"duration-400 bottom-4 flex h-6 items-center gap-2 right-[calc(50%-44rem)] shadow-amber-50 shadow-2xl",
 			)}
 		>
 			<GoToTop progress={deferredProgress} key="gototop"/>
