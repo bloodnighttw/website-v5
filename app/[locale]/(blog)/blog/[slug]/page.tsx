@@ -71,6 +71,14 @@ export async function generateMetadata({
 	};
 }
 
+async function getMdx(content: { slug: string, translate?: boolean }) {
+	if (content.translate) {
+		return await import(`@/contents/posts/translate/${content.slug}.mdx`);
+	} else {
+		return await import(`@/contents/posts/${content.slug}.mdx`);
+	}
+}
+
 export default async function Blog({
 	params,
 }: {
@@ -83,16 +91,7 @@ export default async function Blog({
 
 	if (!content) return <div>404</div>;
 
-	let im;
-
-	if(content.translate) {
-		im = await import(`@/contents/posts/translate/${content.slug}.mdx`);
-	} else {
-		im = await import(`@/contents/posts/${content.slug}.mdx`);
-	}
-
-
-	const { default: Content } = im;
+	const { default: Content } = await getMdx(content);
 
 	const t = await getTranslations("Blog");
 
