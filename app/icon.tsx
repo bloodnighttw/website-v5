@@ -6,6 +6,8 @@ export const size = {
   height: 32,
 }
 
+export const dynamic = "force-static"
+
 export const contentType = 'image/png'
  
 // Image generation

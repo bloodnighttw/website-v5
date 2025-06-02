@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { BASE_URL } from "@/utils/constant";
 import { allPosts } from "content-collections";
 
+ export const dynamic = "force-static"
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const staticPages: MetadataRoute.Sitemap = [
 		{
