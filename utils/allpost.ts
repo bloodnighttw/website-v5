@@ -34,7 +34,6 @@ export const allPostWithZhPriority: PostWithTranslaete[] = allPosts
     }
 
     if (hasTranslate) {
-        console.log("Translate post found:", translate.slug);
         postModified = {
             ...postModified,
             title: translate.title,

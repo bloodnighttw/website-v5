@@ -12,7 +12,6 @@ const PopStateHandler = () => {
 
 	useEffect(() => {
 		const handlePopstate = () => {
-			console.log('popstate');
 			start()
 		}
 
