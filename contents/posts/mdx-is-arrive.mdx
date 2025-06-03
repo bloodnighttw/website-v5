@@ -6,7 +6,6 @@ categories:
     - blog
 ---
 
-import Code from "../../components/modules/mdx/Code";
 import PlayGround from "../../components/modules/mdx/PlayGround";
 import OUO from "../codes/ouo";
 
@@ -23,7 +22,29 @@ MDX是一個讓你可以在markdown中使用component的格式，官方提供一
 
 然後程式在這：
 
-<Code filepath="./ouo.tsx" />
+```tsx
+"use client";
+// since my project is using react server component,
+// I need to use this to make it work
+
+import { useState } from "react";
+
+export default function OUO() {
+	const [state, setState] = useState(0);
+
+	return (
+		<>
+			<div className="mx-auto w-16 text-center">count:{state}</div>
+			<div
+				className="mx-auto border rounded w-16 text-center"
+				onClick={() => setState(state + 1)}
+			>
+				count+1
+			</div>
+		</>
+	);
+}
+```
 
 # 我是如何達成的
 

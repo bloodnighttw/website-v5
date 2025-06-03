@@ -6,7 +6,7 @@ interface Props {
 
 export default function PlayGround({ children }: Props) {
 	return (
-		<div className="w-full bg-bsecondary/40 p-4 mb-8 rounded">
+		<div className="w-full bg-bsecondary/40 p-4 mb-8 rounded overflow-x-scroll">
 			{children}
 		</div>
 	);
