@@ -2,7 +2,7 @@ import cn from "@/utils/cn";
 import GoToTop from "../go-top";
 import Toc from "./toc";
 import { TocTree } from "./toc-element";
-import { useProgress } from "@/utils/hooks/toc";
+import { useProgress } from "@/utils/hooks/progress";
 
 interface Props {
 	ref?: React.RefObject<HTMLDivElement|null>;

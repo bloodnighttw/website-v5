@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "@/utils/cn";
 import { ToTop } from "@/app/assets/svg";
-import { useProgress } from "@/utils/hooks/toc";
+import { useProgress } from "@/utils/hooks/progress";
 
 
 export default function GoToTop() {

@@ -1,5 +1,5 @@
 import cn from "@/utils/cn";
-import { useProgress } from "@/utils/hooks/toc";
+import { useProgress } from "@/utils/hooks/progress";
 import React, { useEffect } from "react";
 
 export function ProgressArc() {

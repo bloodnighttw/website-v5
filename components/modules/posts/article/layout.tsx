@@ -4,7 +4,7 @@ import React, { useCallback, useEffect } from "react";
 import Part from "@/components/shared/part";
 
 import { TocTree } from "@/components/modules/posts/article/bottom-bar/toc-element";
-import { useSetProgress } from "@/utils/hooks/toc";
+import { useSetProgress } from "@/utils/hooks/progress";
 import { useTranslations } from "next-intl";
 import ButtomBar from "./bottom-bar";
 
