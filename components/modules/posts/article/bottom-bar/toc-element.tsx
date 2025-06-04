@@ -71,22 +71,9 @@ export function TocElement(toc: TocTree) {
 
 	}, [onViewportChange, toc.id]);
 
-	useLayoutEffect(()=>{ // if we use useEffect, the first load of toc will be wrong
+	useEffect(()=>{ // if we use useEffect, the first load of toc will be wrong
 		if (dispatch && tocRef.current) {
-
-			const clone = tocRef.current.cloneNode(true) as HTMLAnchorElement;
-
-			clone.style.position = "absolute";
-			clone.style.visibility = "hidden";
-			clone.style.scale= "1";
-			clone.style.pointerEvents = "none";
-
-			document.body.appendChild(clone);
-			// Get the height of the element
-			const height = clone.getBoundingClientRect().height;
-			// Remove the clone element from the DOM
-			document.body.removeChild(clone);
-
+			const height = tocRef.current.offsetHeight;
 			dispatch({ type: "initNew", payload: height ?? 0});
 		}
 	},[dispatch, tocRef]);
