@@ -11,6 +11,8 @@ import remarkParse from "remark-parse";
 import { Text } from "hast";
 import { generateId } from "@/utils/rehype-plugin/section";
 
+import {z} from "zod/v4";
+
 export function generateToc(ast: Root) {
 
 	const headings = selectAll("heading", ast) as Heading[];
@@ -100,7 +102,7 @@ const posts = defineCollection({
 	name: "posts",
 	directory: "contents/posts",
 	include: ["*.mdx"],
-	schema: (z) => ({
+	schema: z.object({
 		title: z.string(),
 		categories: z.array(z.string()).default([]),
 		date: z.string().pipe(z.coerce.date()),
@@ -142,7 +144,7 @@ const translate = defineCollection({
 	name: "translate",
 	directory: "contents/posts/translate",
 	include: ["*.mdx"],
-	schema: (z) => ({
+	schema: z.object({
 		title: z.string(),
 		draft: z.boolean().optional(),
 	}),
@@ -178,7 +180,7 @@ const projects = defineCollection({
 	name: "project",
 	directory: "contents/projects",
 	include: ["**/*.md", "**/*.mdx"],
-	schema: (z) => ({
+	schema: z.object({
 		name: z.string(),
 		description: z.string(),
 		link: z.string(),

@@ -10,6 +10,7 @@ import Warning from "@/components/modules/posts/article/warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
 import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
+import { docs } from "@/.source";
 
 export async function generateStaticParams() {
 	return allPostWithZhPriority.map((post) => {
@@ -72,11 +73,16 @@ export async function generateMetadata({
 }
 
 async function getMdx(content: { slug: string, translate?: boolean }) {
-	if (content.translate) {
-		return await import(`@/contents/posts/translate/${content.slug}.mdx`);
-	} else {
-		return await import(`@/contents/posts/${content.slug}.mdx`);
-	}
+
+	const path = content.translate
+		? `translate/${content.slug}.mdx`
+		: `${content.slug}.mdx`;
+
+	const mdxFromDocs = docs.find((doc)=>{
+		return doc._file.path === path;
+	})
+
+	return mdxFromDocs!.body
 }
 
 export default async function Blog({
@@ -91,7 +97,7 @@ export default async function Blog({
 
 	if (!content) return <div>404</div>;
 
-	const { default: Content } = await getMdx(content);
+	const Content = await getMdx(content);
 
 	const t = await getTranslations("Blog");
 
@@ -101,6 +107,7 @@ export default async function Blog({
 		day: "2-digit",
 
 	}).format(content.date);
+
 
 	return (
 		<div className="page-enter">

@@ -1,4 +1,4 @@
-import { defineConfig } from 'fumadocs-mdx/config';
+import { defineCollections } from 'fumadocs-mdx/config';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkWikiLinks from './utils/remark-plugin/wikiLink';
@@ -8,10 +8,12 @@ import remarkGfm from 'remark-gfm';
 import section from './utils/rehype-plugin/section';
 import rehypeShiki from '@shikijs/rehype';
 
-export default defineConfig({
 
+export const docs = defineCollections({
+    type: 'doc',
+    dir: 'contents/posts',
     mdxOptions: {
-        remarkPlugins: () => [
+        remarkPlugins: [
             remarkFrontmatter,
 			remarkMdxFrontmatter,
 			remarkWikiLinks,
@@ -19,7 +21,7 @@ export default defineConfig({
 			remarkImageSize,
 			remarkGfm,
         ],
-        rehypePlugins: () => [
+        rehypePlugins: [
 			section,
 			[
 				rehypeShiki,
@@ -32,5 +34,4 @@ export default defineConfig({
 			],
 		],
     } 
-  // global options
 });
