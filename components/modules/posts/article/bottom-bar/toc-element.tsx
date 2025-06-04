@@ -7,11 +7,14 @@ export interface TocTree {
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
-	index?: number;
 	dispatch?: React.Dispatch<TocSideLineAction>;
 }
 
-export function TocElement(toc: TocTree) {
+export interface TocElementProps extends TocTree{
+	index?: number;
+}
+
+export function TocElement(toc: TocElementProps ) {
 
 	const ref = React.useRef<HTMLElement>(null);
 	const [onScreen, setOnScreen] = React.useState(false);
