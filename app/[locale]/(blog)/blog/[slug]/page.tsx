@@ -106,12 +106,8 @@ export default async function Blog({
 		<div className="page-enter">
 			<ArticleInfoPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
-				<Part className="bg-bprimary page-enter">
-					{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
-					<article>
-						<Content />
-					</article>
-				</Part>
+				{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
+				<Content />
 			</Layout>
 
 			<Part className="bg-dotted">

@@ -1,12 +1,12 @@
 import React from "react";
 import cn from "@/utils/cn";
 import { ToTop } from "@/app/assets/svg";
+import { useProgress } from "@/utils/hooks/toc";
 
-interface GoToTopProps {
-	progress: number;
-}
 
-export default function GoToTop({progress}: GoToTopProps) {
+export default function GoToTop() {
+
+	const progress = useProgress();
 
 	return <div
 		className={cn(

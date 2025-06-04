@@ -15,7 +15,7 @@ export default function Warning(props: Props) {
 				</svg>
 				{props.title}
 			</span>
-			<p className="mt-2">{props.message}</p>
+			<p className="mt-2 mb-0">{props.message}</p>
 		</div>
 	);
 }

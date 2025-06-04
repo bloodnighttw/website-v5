@@ -10,7 +10,6 @@ import {
 import { useTranslations } from "next-intl";
 
 interface TocProp {
-	progress: number;
 	tocArray: TocTree[];
 }
 
@@ -91,7 +90,7 @@ function reducer(
 	}
 }
 
-export default function Toc({progress, tocArray}: TocProp) {
+export default function Toc({tocArray}: TocProp) {
 	const [open, setOpen] = React.useState(false);
 	const [tocSideLine, dispatch] = useReducer(reducer, {
 		heightDP: [0],
@@ -153,7 +152,7 @@ export default function Toc({progress, tocArray}: TocProp) {
 				)}
 				onClick={handleClick}
 			>
-				<ProgressArc progress={progress} />
+				<ProgressArc />
 			</div>
 			<div
 				className={cn(

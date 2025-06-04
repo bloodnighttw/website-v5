@@ -1,8 +1,12 @@
 import cn from "@/utils/cn";
+import { useProgress } from "@/utils/hooks/toc";
 import React, { useEffect } from "react";
 
-export function ProgressArc(props: { progress: number }) {
-	const progressHandled = props.progress >= 0 ? props.progress : 0;
+export function ProgressArc() {
+
+	const progress = useProgress();
+
+	const progressHandled = progress >= 0 ? progress : 0;
 	const [length, setLength] = React.useState(0);
 
 	const [, startTransition] = React.useTransition();
