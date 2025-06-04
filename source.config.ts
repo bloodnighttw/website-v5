@@ -9,7 +9,7 @@ import section from './utils/rehype-plugin/section';
 import rehypeShiki from '@shikijs/rehype';
 
 
-export const docs = defineCollections({
+export const posts = defineCollections({
     type: 'doc',
     dir: 'contents/posts',
     mdxOptions: {
@@ -33,5 +33,32 @@ export const docs = defineCollections({
 				},
 			],
 		],
+    } 
+});
+
+export const projects = defineCollections({
+    type: 'doc',
+    dir: 'contents/projects',
+    mdxOptions: {
+        remarkPlugins: [
+            remarkFrontmatter,
+            remarkMdxFrontmatter,
+            remarkWikiLinks,
+            moveImageToRoot,
+            remarkImageSize,
+            remarkGfm,
+        ],
+        rehypePlugins: [
+            section,
+            [
+                rehypeShiki,
+                {
+                    theme: "catppuccin-mocha",
+                    colorReplacements: {
+                        "#1e1e2e": "#18181B",
+                    },
+                },
+            ],
+        ],
     } 
 });

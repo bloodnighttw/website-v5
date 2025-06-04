@@ -10,7 +10,7 @@ import Warning from "@/components/modules/posts/article/warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
 import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
-import { docs } from "@/.source";
+import { posts } from "@/.source";
 
 export async function generateStaticParams() {
 	return allPostWithZhPriority.map((post) => {
@@ -78,7 +78,7 @@ async function getMdx(content: { slug: string, translate?: boolean }) {
 		? `translate/${content.slug}.mdx`
 		: `${content.slug}.mdx`;
 
-	const mdxFromDocs = docs.find((doc)=>{
+	const mdxFromDocs = posts.find((doc)=>{
 		return doc._file.path === path;
 	})
 

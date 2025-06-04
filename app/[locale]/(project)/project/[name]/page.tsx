@@ -9,6 +9,7 @@ import { allProjects } from "content-collections";
 
 import "@/app/content.css"
 import { Metadata } from "next";
+import { projects } from "@/.source";
 
 export async function generateStaticParams() {
 	return allProjects.map((post) => {
@@ -32,6 +33,20 @@ export async function generateMetadata({params}: { params: Promise<{ name: strin
 	};
 }
 
+
+function getMdx(content: { name: string, translate?: boolean }) {
+
+	const path = content.translate
+		? `en/${content.name}.mdx`
+		: `${content.name}.mdx`;
+
+	const mdxFromDocs = projects.find((doc)=>{
+		return doc._file.path === path;
+	})
+
+	return mdxFromDocs!.body
+}
+
 export default async function Page({
 	params,
 }: {
@@ -45,7 +60,7 @@ export default async function Page({
 		.filter((st) => st in svgUrl)
 		.map((st) => svgUrl[st]);
 
-	const { default: C } = locale === "en" ? await import(`@/contents/projects/en/${name}.mdx`) : await import(`@/contents/projects/${name}.mdx`);
+	const C = getMdx({name, translate: locale === "en"});
 
 	return (
 		<Part className="page-enter">
