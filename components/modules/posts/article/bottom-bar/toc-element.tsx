@@ -1,85 +1,21 @@
-import React, { useCallback, useEffect, useLayoutEffect } from "react";
 import cn from "@/utils/cn";
-import { TocSideLineAction } from "@/components/modules/posts/article/bottom-bar/toc";
+import { TocAction, useTocElement } from "@/utils/hooks/toc";
 import Link from "next/link";
 
 export interface TocTree {
 	depth: 1 | 2 | 3 | 4 | 5 | 6;
 	text: string;
 	id: string;
-	dispatch?: React.Dispatch<TocSideLineAction>;
 }
 
 export interface TocElementProps extends TocTree{
-	index?: number;
+	dispatch: React.Dispatch<TocAction>;
+	index: number;
 }
 
 export function TocElement(toc: TocElementProps ) {
 
-	const ref = React.useRef<HTMLElement>(null);
-	const [onScreen, setOnScreen] = React.useState(false);
-	const { dispatch, index } = toc;
-
-
-	const add2list = useCallback(() => {
-		dispatch?.({type: "add", payload: index!});
-	}, [dispatch, index]);
-
-	const removeFromList = useCallback(() => {
-		dispatch?.({type: "remove", payload: index!});
-	},[dispatch, index]);
-
-	const onViewportChange = useCallback(() => {
-		if (!ref.current) return;
-
-		const rect = ref.current.getBoundingClientRect();
-
-		// Get viewport dimensions
-		const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-		// Element is out of screen if any of these conditions are true:
-		const onViewport = !(
-			rect.bottom < 64 || // Above the top edge (also includes the navbar)
-			rect.top > viewportHeight // Below the bottom edge
-		);
-
-		if (onViewport) {
-			setOnScreen(true);
-			add2list();
-		} else {
-			setOnScreen(false);
-			removeFromList();
-		}
-	}, [add2list, removeFromList]);
-
-	const tocRef = React.useRef<HTMLAnchorElement>(null);
-
-	useEffect(() => {
-
-		if (!ref.current) {
-			ref.current = document.getElementById(toc.id) as HTMLElement;
-		}
-
-		window.addEventListener("scroll", onViewportChange);
-
-		// when page size is changed
-		window.addEventListener("resize", onViewportChange);
-
-		onViewportChange();
-
-		return () => {
-			window.removeEventListener("scroll", onViewportChange);
-			window.removeEventListener("resize", onViewportChange);
-		};
-
-	}, [onViewportChange, toc.id]);
-
-	useLayoutEffect(()=>{ // if we use useEffect, the first load of toc will be wrong
-		if (dispatch && tocRef.current) {
-			const height = tocRef.current.offsetHeight;
-			dispatch({ type: "initNew", payload: height ?? 0});
-		}
-	},[dispatch, tocRef]);
+	const [ref, onScreen] = useTocElement(toc.dispatch, toc.id, toc.index);
 
 	return <Link
 		href={`#${toc.id}`} className={cn(
@@ -90,7 +26,7 @@ export function TocElement(toc: TocElementProps ) {
 			toc.depth > 3 && "text-secondary/80",
 			onScreen && "text-primary/100"
 		)}
-		ref={tocRef}
+		ref={ref}
 		data-disable-progress={true}
 	>
 		{toc.text}

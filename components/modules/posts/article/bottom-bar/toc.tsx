@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import cn from "@/utils/cn";
 import { ProgressArc } from "@/components/modules/posts/article/bottom-bar/progress";
 import {
@@ -8,96 +8,15 @@ import {
 	TocTree,
 } from "@/components/modules/posts/article/bottom-bar/toc-element";
 import { useTranslations } from "next-intl";
+import { useToc } from "@/utils/hooks/toc";
 
 interface TocProp {
 	tocArray: TocTree[];
 }
 
-interface TocSideLineState {
-	heightDP: number[];
-	browseList: number[];
-	height: number;
-	mt: number;
-}
-
-export type TocSideLineAction =
-	| { type: "initNew"; payload: number } // init new line
-	| { type: "add"; payload: number } // index of the element to add
-	| { type: "remove"; payload: number }; // index of the element to remove
-
-function update(newBrowseList: number[], heightDP: number[]) {
-	// TODO: can be optimized
-	const list = newBrowseList.sort((a, b) => a - b);
-
-	const maxIdx = Math.max(...list);
-	const minIdx = Math.min(...list);
-
-	const mt = heightDP[minIdx - 1];
-	const height = heightDP[maxIdx] - mt;
-
-	return {
-		list,
-		mt,
-		height,
-	};
-}
-
-function reducer(
-	state: TocSideLineState,
-	action: TocSideLineAction,
-): TocSideLineState {
-	switch (action.type) {
-		case "initNew": {
-			const lastHeight = state.heightDP[state.heightDP.length - 1];
-			const newHeight = lastHeight + action.payload;
-			return {
-				...state,
-				heightDP: [...state.heightDP, newHeight],
-			};
-		}
-		case "add": {
-			const idx = action.payload + 1;
-			if (state.browseList.includes(idx)) return state;
-
-			const newState = update([...state.browseList, idx], state.heightDP);
-
-			return {
-				...state,
-				browseList: newState.list,
-				height: newState.height,
-				mt: newState.mt,
-			};
-		}
-		case "remove": {
-			const idx = action.payload + 1;
-			if (!state.browseList.includes(idx)) return state;
-
-			const newBrowseList = state.browseList.filter(
-				(item) => item !== idx,
-			);
-
-			const newState = update(newBrowseList, state.heightDP);
-
-			return {
-				...state,
-				browseList: newState.list,
-				height: newState.height,
-				mt: newState.mt,
-			};
-		}
-		default:
-			return state;
-	}
-}
-
 export default function Toc({tocArray}: TocProp) {
 	const [open, setOpen] = React.useState(false);
-	const [tocSideLine, dispatch] = useReducer(reducer, {
-		heightDP: [0],
-		browseList: [],
-		height: 0,
-		mt: 0,
-	});
+	const [mt, height, dispatch] = useToc();
 
 	const divRef = React.useRef<HTMLDivElement>(null);
 
@@ -129,8 +48,7 @@ export default function Toc({tocArray}: TocProp) {
 
 	const tocElementsMemo = useMemo(() => {
 		return tocArray.map((toc, index) => {
-			return (	// TODO: can be optimized
-
+			return (
 				<TocElement
 					{...toc}
 					key={toc.id}
@@ -139,7 +57,7 @@ export default function Toc({tocArray}: TocProp) {
 				/>
 			);
 		});
-	}, [tocArray]);
+	}, [dispatch, tocArray]);
 
 	const t = useTranslations("Blog");
 
@@ -183,8 +101,8 @@ export default function Toc({tocArray}: TocProp) {
 					<div
 						className="absolute top-0.5 left-0 w-0.5 ml-[7px] bg-primary/80 duration-200 z-2"
 						style={{
-							marginTop: `${tocSideLine.mt}px`,
-							height: `${tocSideLine.height}px`,
+							marginTop: `${mt}px`,
+							height: `${height}px`,
 						}}
 					/>
 
