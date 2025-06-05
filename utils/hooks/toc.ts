@@ -128,11 +128,9 @@ export function useTocElement(
 		onViewportChange();
 
 		window.addEventListener("scroll", onViewportChange);
-		window.addEventListener("resize", onViewportChange);
 
 		return () => {
 			window.removeEventListener("scroll", onViewportChange);
-			window.removeEventListener("resize", onViewportChange);
 		};
 	}, [dispatch, id, index]);
 
