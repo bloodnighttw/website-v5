@@ -76,6 +76,10 @@ export function useToc() {
 	const mt = state.heightDP[minIdx - 1];
 	const height = state.heightDP[maxIdx] - mt;
 
+    if(state.onScreen.length === 0) {
+        return [0, 0, dispatch] as const;
+    }
+
 	return [mt, height, dispatch] as const;
 }
 
