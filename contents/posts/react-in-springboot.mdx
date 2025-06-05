@@ -24,7 +24,7 @@ categories:
 
 一般而言，這是springboot專案建立之後的檔案結構這邊com.example.demo其實是com/example/demo，不過因為是java的package所以用`.`表示。
 
-```
+```bash
 .
 ├── build.gradle
 ├── gradle
@@ -50,7 +50,7 @@ categories:
 
 而我們透過vite 創建新的react專案後，檔案路徑會長這樣：
 
-```
+```bash
 my-vue-app/
 ├── eslint.config.js
 ├── index.html
@@ -98,7 +98,7 @@ sourceSets {
 3. 把`src/`底下的所有東西匯入到 `src/main/frontend/`。
 4. 把其餘資料匯入到 project root （包含`package.json`與其他設定檔）。
 5. 進入 `vite.config.ts`修改root，並修改 build的output path
-    ```
+    ```bash
     {
     ...
       root: 'src/main/frontend',

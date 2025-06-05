@@ -174,7 +174,7 @@
 	}
 
 	article {
-		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4;
+		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4 prose-pre:p-0 prose-pre:py-2 prose-pre:leading-5;
 
         section {
             @apply scroll-mt-20;
@@ -200,11 +200,10 @@
 
         code .line::before {
 
-            @apply mr-4;
-
+            @apply border-r pr-2 mr-2;
             content: counter(step);
             counter-increment: step;
-            width: 1.5rem;
+            width: 3em;
             display: inline-block;
             text-align: right;
             color: theme("colors.zinc.400");
