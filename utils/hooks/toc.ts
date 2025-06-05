@@ -32,8 +32,6 @@ export function tocReducer(state: TocState, action: TocAction): TocState {
 			const lastHeight = state.heightDP[state.heightDP.length - 1];
 			const newHeight = lastHeight + action.payload;
 
-			console.debug("initNew", newHeight, state.heightDP);
-			// add new height to heightDP
 			return {
 				...state,
 				heightDP: [...state.heightDP, newHeight],
