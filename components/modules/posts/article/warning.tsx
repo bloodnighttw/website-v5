@@ -6,7 +6,7 @@ interface Props {
 // a warning component with glare effect on background
 export default function Warning(props: Props) {
 	return (
-		<div className="rounded p-4 bg-gradient-to-br from-red-500/60 to-red-900/60 relative shadow-lg shadow-bsecondary">
+		<div className="rounded p-4 bg-gradient-to-br from-red-500/60 to-red-900/60 relative shadow-lg shadow-bsecondary mb-8">
 			<span className="font-bold flex items-center gap-2 *:h-4 text-[16px]">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
