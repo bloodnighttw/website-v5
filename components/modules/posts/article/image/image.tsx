@@ -17,7 +17,7 @@ export default function ArticleImage(props: ImageViewerProps) {
 	const t = useTranslations("Blog");
 	const [fullscreen, setFullscreen] = useState(false);
 
-	const ouo = (() => {
+	const ouo = () => {
 		if (fullscreen) {
 			document.body.classList.remove("overflow-hidden");
 			setFullscreen(false);
@@ -25,7 +25,7 @@ export default function ArticleImage(props: ImageViewerProps) {
 			document.body.classList.add("overflow-hidden");
 			setFullscreen(true);
 		}
-	});
+	};
 
 	// clean up the full screen when the component unmount
 	useEffect(() => {
@@ -35,7 +35,7 @@ export default function ArticleImage(props: ImageViewerProps) {
 				setFullscreen(false);
 			}
 		};
-	})
+	});
 
 	return (
 		<>
@@ -60,7 +60,14 @@ export default function ArticleImage(props: ImageViewerProps) {
 					</span>
 				</span>
 			</span>
-			{fullscreen && <Viewer {...props} alt={props.alt} src={props.src} close={()=>setFullscreen(false)}/>}
+			{fullscreen && (
+				<Viewer
+					{...props}
+					alt={props.alt}
+					src={props.src}
+					close={() => setFullscreen(false)}
+				/>
+			)}
 		</>
 	);
 }

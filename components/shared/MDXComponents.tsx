@@ -20,7 +20,8 @@ const components: MDXComponents = {
 					{...props}
 					href={href}
 					className="link"
-					data-disable-progress={true} />
+					data-disable-progress={true}
+				/>
 			);
 		}
 

@@ -3,7 +3,6 @@ import { useProgress } from "@/utils/hooks/progress";
 import React, { useEffect } from "react";
 
 export function ProgressArc() {
-
 	const progress = useProgress();
 
 	const progressHandled = progress >= 0 ? progress : 0;
@@ -12,14 +11,13 @@ export function ProgressArc() {
 	const [, startTransition] = React.useTransition();
 	const radius = 7.5;
 
-
 	useEffect(() => {
 		startTransition(() => {
 			const circumference = 2 * Math.PI * radius;
 			const length = circumference * (progressHandled / 100);
 			setLength(length);
 		});
-	},[progressHandled]);
+	}, [progressHandled]);
 
 	return (
 		<svg width="32" height="32" viewBox="0 0 16 16">

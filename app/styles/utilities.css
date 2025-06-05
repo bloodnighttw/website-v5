@@ -19,19 +19,19 @@
 }
 
 @utility resize-underline-none {
-    @apply relative;
+	@apply relative;
 
-    &::after {
-        @apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
-        content: "";
-        background-color: var(--color-primary);
-    }
+	&::after {
+		@apply duration-200 left-0 bottom-0 w-0 absolute h-0.5 hover:w-full;
+		content: "";
+		background-color: var(--color-primary);
+	}
 }
 
 @utility resize-underline {
-    &::after {
-        width: 100%;
-    }
+	&::after {
+		width: 100%;
+	}
 }
 
 @utility hashtag {
@@ -69,5 +69,5 @@
 }
 
 @utility red-gradient-text {
-    @apply bg-gradient-to-br from-red-300 to-red-500 text-transparent bg-clip-text;
+	@apply bg-gradient-to-br from-red-300 to-red-500 text-transparent bg-clip-text;
 }

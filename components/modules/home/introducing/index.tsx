@@ -7,7 +7,6 @@ import Typewriter from "@/components/modules/home/introducing/typewriter";
 import SocialLink from "@/components/modules/home/introducing/link";
 
 export default async function Introducing() {
-
 	const t = await getTranslations("Introducing");
 
 	return (
@@ -17,48 +16,57 @@ export default async function Introducing() {
 					{t("hi")}
 				</div>
 				<p className="text-4xl lg:text-6xl font-bold my-1.5 fade-in-up ">
-					{t("I'm")}	<span className="red-gradient-text">{t("name")}</span>
+					{t("I'm")}{" "}
+					<span className="red-gradient-text">{t("name")}</span>
 				</p>
 
 				<Typewriter>
 					{`21 ${t("age")} • ${t("developer")} • ${t("gamer")} `}
 				</Typewriter>
 
-				<TranslationWithIcon text={t("introducing")}
+				<TranslationWithIcon
+					text={t("introducing")}
 					icon={{
-						"java" : <Image
-							src={svgUrl.java}
-							alt="Java"
-							width={28}
-							height={28}
-							priority={true}
-						/>,
-						"linux" : <Image
-							src={svgUrl.linux}
-							alt="Linux"
-							width={28}
-							height={28}
-							priority={true}
-						/>,
-						"react" : <Image
-							src={svgUrl["react"]}
-							alt="React"
-							width={28}
-							height={28}
-							priority={true}
-						/>,
-						"ts": <Image
-							src={svgUrl.typescript}
-							alt="TS"
-							width={28}
-							height={28}
-							priority={true}
-						/>,
+						java: (
+							<Image
+								src={svgUrl.java}
+								alt="Java"
+								width={28}
+								height={28}
+								priority={true}
+							/>
+						),
+						linux: (
+							<Image
+								src={svgUrl.linux}
+								alt="Linux"
+								width={28}
+								height={28}
+								priority={true}
+							/>
+						),
+						react: (
+							<Image
+								src={svgUrl["react"]}
+								alt="React"
+								width={28}
+								height={28}
+								priority={true}
+							/>
+						),
+						ts: (
+							<Image
+								src={svgUrl.typescript}
+								alt="TS"
+								width={28}
+								height={28}
+								priority={true}
+							/>
+						),
 					}}
 				/>
 
 				<SocialLink />
-
 			</div>
 
 			<Avatar

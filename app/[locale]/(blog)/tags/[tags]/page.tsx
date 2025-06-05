@@ -29,28 +29,28 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
-
-export async function generateMetadata(
-	{ params,}: { params: Promise<{ tags: string }>;
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ tags: string }>;
 }): Promise<Metadata> {
-
 	const { tags } = await params;
 	const t = await getTranslations("Meta");
 
 	return {
-		title: "Tags: "+tags + " | " + t("title"),
+		title: "Tags: " + tags + " | " + t("title"),
 		openGraph: {
-			title: "Tags: "+tags+ " | Bloodnighttw",
+			title: "Tags: " + tags + " | Bloodnighttw",
 			type: "website",
 			images: [],
 		},
 		twitter: {
-			title: "Tags: "+tags,
+			title: "Tags: " + tags,
 			site: "@bloodnighttw",
 			card: "summary_large_image",
 			images: [],
 		},
-	}
+	};
 }
 
 export default async function Tags({

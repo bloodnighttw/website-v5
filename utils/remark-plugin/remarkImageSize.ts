@@ -1,7 +1,7 @@
-import {imageSize} from "image-size";
+import { imageSize } from "image-size";
 import { Image, Root } from "mdast";
 import { selectAll } from "unist-util-select";
-import {Transformer} from "unified";
+import { Transformer } from "unified";
 
 // fetch image and get its size
 async function getImageSize(
@@ -14,10 +14,8 @@ async function getImageSize(
 	return { width, height };
 }
 
-export default function remarkPlugin(): Transformer<Root,Root>{
-
-	return async (root)=> {
-
+export default function remarkPlugin(): Transformer<Root, Root> {
+	return async (root) => {
 		const imageNodes = selectAll("image", root) as Image[];
 
 		const promises = imageNodes.map(async (node) => {
@@ -32,6 +30,5 @@ export default function remarkPlugin(): Transformer<Root,Root>{
 		});
 
 		await Promise.all(promises);
-	}
-
+	};
 }

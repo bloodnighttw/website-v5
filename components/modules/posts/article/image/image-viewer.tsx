@@ -285,7 +285,10 @@ export default function Viewer(props: ImageViewerProps) {
 							/>
 						</svg>
 					</button>
-					<button onClick={props.close} className="rounded-br cursor-pointer">
+					<button
+						onClick={props.close}
+						className="rounded-br cursor-pointer"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"

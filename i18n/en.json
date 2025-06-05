@@ -1,46 +1,46 @@
 {
-    "lang": "en",
-    "exchange friends here": "Exchange Friends #here#",
-    "here": "here",
-    "Meta": {
-        "title": "bloodnighttw's blog",
-        "description": "A blog about my life and projects.",
-        "All Blog Posts": "All Posts | bloodnighttw's blog",
-        "friends": "Friends | bloodnighttw's blog"
-    },
-    "Panel": {
-        "madeWith": "❤️ Made with Tailwind CSS, Next.js.",
-        "all rights reserved": "All rights reserved",
-        "Blog": "Blog",
-        "friends": "Friends",
-        "change language": "中",
-        "name": "bloodnighttw"
-    },
-    "Blog": {
-        "Warning": "Warning",
-        "warningMessage": "This article hasn't been translated into English yet. It's currently only available in Chinese.",
-        "Click to view full image": "Click to view full image",
-        "Table of Contents": "Table of Contents",
-        "My blog": "My blog",
-        "Recent Posts": "Recent Posts",
-        "about": "About {name}",
-        "published": "Published on {date}",
-        "pinned": "Pinned Posts",
-        "Zoom In": "Zoom In",
-        "Zoom Out": "Zoom Out",
-        "Reset": "Reset",
-        "Reset Zoom": "Reset Zoom"
-    },
-    "Project" : {
-        "My Projects": "My Projects"
-    },
-    "Introducing": {
-        "hi": "👋 hi！",
-        "I'm": "I'm",
-        "name": "bloodnighttw",
-        "age": "y/o",
-        "introducing":"I'm a developer who loves to create things. Familiar with #ts# TypeScript, #react# React, and #java# Java,and also a #linux# linux enthusiast.",
-        "developer": "Developer",
-        "gamer": "Gamer"
-    }
+	"lang": "en",
+	"exchange friends here": "Exchange Friends #here#",
+	"here": "here",
+	"Meta": {
+		"title": "bloodnighttw's blog",
+		"description": "A blog about my life and projects.",
+		"All Blog Posts": "All Posts | bloodnighttw's blog",
+		"friends": "Friends | bloodnighttw's blog"
+	},
+	"Panel": {
+		"madeWith": "❤️ Made with Tailwind CSS, Next.js.",
+		"all rights reserved": "All rights reserved",
+		"Blog": "Blog",
+		"friends": "Friends",
+		"change language": "中",
+		"name": "bloodnighttw"
+	},
+	"Blog": {
+		"Warning": "Warning",
+		"warningMessage": "This article hasn't been translated into English yet. It's currently only available in Chinese.",
+		"Click to view full image": "Click to view full image",
+		"Table of Contents": "Table of Contents",
+		"My blog": "My blog",
+		"Recent Posts": "Recent Posts",
+		"about": "About {name}",
+		"published": "Published on {date}",
+		"pinned": "Pinned Posts",
+		"Zoom In": "Zoom In",
+		"Zoom Out": "Zoom Out",
+		"Reset": "Reset",
+		"Reset Zoom": "Reset Zoom"
+	},
+	"Project": {
+		"My Projects": "My Projects"
+	},
+	"Introducing": {
+		"hi": "👋 hi！",
+		"I'm": "I'm",
+		"name": "bloodnighttw",
+		"age": "y/o",
+		"introducing": "I'm a developer who loves to create things. Familiar with #ts# TypeScript, #react# React, and #java# Java,and also a #linux# linux enthusiast.",
+		"developer": "Developer",
+		"gamer": "Gamer"
+	}
 }

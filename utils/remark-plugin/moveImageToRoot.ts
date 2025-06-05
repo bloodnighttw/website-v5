@@ -7,18 +7,17 @@ export default function moveImageToRoot() {
 	return (root: Root) => {
 		visit(root, "image", (node: Image, index?: number, parent?: Parent) => {
 			if (parent && parent.type !== "root") {
-
-				if(!parent || !index)
-					return
+				if (!parent || !index) return;
 
 				const imageNode = node;
 				const imageParent = parent;
 
 				// get the index of the parent node from the root
-				const parentIndex = root.children.indexOf(imageParent as RootContent);
+				const parentIndex = root.children.indexOf(
+					imageParent as RootContent,
+				);
 
-				if(parentIndex === -1)
-					return
+				if (parentIndex === -1) return;
 
 				// remove the image node from the parent node
 				imageParent.children.splice(index, 1);
@@ -26,6 +25,6 @@ export default function moveImageToRoot() {
 				// add the image node back to the root node at the index of the parent node
 				root.children.splice(parentIndex, 0, imageNode);
 			}
-		})
+		});
 	};
 }

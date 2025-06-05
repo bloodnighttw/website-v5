@@ -8,11 +8,11 @@ import { getTranslations } from "next-intl/server";
 import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
 
 export default async function BlogSection() {
-
 	const tt = await getTranslations();
 	const lang = tt("lang");
 
-	const allPosts = lang === "en" ? allPostWithEnPriority : allPostWithZhPriority;
+	const allPosts =
+		lang === "en" ? allPostWithEnPriority : allPostWithZhPriority;
 
 	const sortedByPin = allPosts.filter((it) => it.pin);
 	const t = await getTranslations("Blog");
@@ -37,7 +37,10 @@ export default async function BlogSection() {
 				</PostCardGrid>
 			</PostSectionContainer>
 			<PostSectionContainer>
-				<PostSectionTitle title={t("about",{name:"linux"})} url={"/tags/linux"} />
+				<PostSectionTitle
+					title={t("about", { name: "linux" })}
+					url={"/tags/linux"}
+				/>
 				<PostCardGrid>
 					<PostCards
 						infos={allPosts.filter((it) =>

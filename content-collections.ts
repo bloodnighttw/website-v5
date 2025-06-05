@@ -11,39 +11,33 @@ import remarkParse from "remark-parse";
 import { Text } from "hast";
 import { generateId } from "@/utils/rehype-plugin/section";
 
-import {z} from "zod/v4";
+import { z } from "zod/v4";
 
 export function generateToc(ast: Root) {
-
 	const headings = selectAll("heading", ast) as Heading[];
 	const idMap = new Map<string, number>();
 
 	return headings.map((heading) => {
-
 		const text = selectAll("text", heading) as Text[];
 		const id = generateId(idMap, text);
 
 		return {
 			depth: heading.depth,
 			id,
-			text: text.map((it) => it.value).join()
+			text: text.map((it) => it.value).join(),
 		};
 	});
 }
 
-
 const getFirstImage = (content: string): string | null => {
-	const tree = unified()
-		.use(remarkParse)
-		.use(remarkMdx)
-		.parse(content);
+	const tree = unified().use(remarkParse).use(remarkMdx).parse(content);
 
 	const imageNode = select("image", tree) as Image;
 
 	return imageNode ? imageNode.url : null;
 };
 
-const getFullText= (content: string): string => {
+const getFullText = (content: string): string => {
 	const tree = unified()
 		.use(remarkParse)
 		.use(remarkMdx)
@@ -52,13 +46,10 @@ const getFullText= (content: string): string => {
 
 	const textNode = selectAll("text", tree) as Text[];
 
-	return textNode
-		.map((it) => it.value)
-		.join(" ")
+	return textNode.map((it) => it.value).join(" ");
 };
 
 const documentLanguage = (content: string): string => {
-
 	const tree = unified()
 		.use(remarkParse)
 		.use(remarkMdx)
@@ -68,9 +59,8 @@ const documentLanguage = (content: string): string => {
 	const langNode = selectAll("text", tree) as Text[];
 	let weight = 0;
 
-	for(const node of langNode) {
-
-		for(const char of node.value) {
+	for (const node of langNode) {
+		for (const char of node.value) {
 			// if it's a chinese character
 			if (char >= "\u4E00" && char <= "\u9FFF") {
 				weight += 4;
@@ -80,23 +70,18 @@ const documentLanguage = (content: string): string => {
 		}
 	}
 
-	if(weight > 0) {
+	if (weight > 0) {
 		return "zh";
 	} else {
 		return "en";
 	}
-
-}
+};
 
 const handleToc = (content: string) => {
+	const ast = unified().use(remarkParse).use(remarkMdx).parse(content);
 
-	const ast = unified()
-		.use(remarkParse)
-		.use(remarkMdx)
-		.parse(content);
-
-	return generateToc(ast)
-}
+	return generateToc(ast);
+};
 
 const posts = defineCollection({
 	name: "posts",
@@ -110,7 +95,6 @@ const posts = defineCollection({
 		pin: z.boolean().default(false),
 	}),
 	transform: async (doc) => {
-
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
@@ -132,11 +116,10 @@ const posts = defineCollection({
 			description: previewText,
 			preview: firstImage,
 			toc,
-			lang
+			lang,
 		};
 	},
 });
-
 
 // the translate collection is used to store the translated posts
 
@@ -149,7 +132,6 @@ const translate = defineCollection({
 		draft: z.boolean().optional(),
 	}),
 	transform: async (doc) => {
-		
 		const { content, ...others } = doc;
 
 		// this is might be changed since we don't need to consider
@@ -171,7 +153,7 @@ const translate = defineCollection({
 			description: previewText,
 			preview: firstImage,
 			toc,
-			lang
+			lang,
 		};
 	},
 });
@@ -191,7 +173,6 @@ const projects = defineCollection({
 		demo: z.string().optional(),
 	}),
 	transform: async (doc) => {
-
 		const path = doc._meta.path;
 		const lang = path.startsWith("en/") ? "en" : "zh";
 

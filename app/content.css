@@ -168,7 +168,6 @@
 }
 
 @layer components {
-
 	* {
 		@apply scroll-smooth;
 	}
@@ -176,9 +175,9 @@
 	article {
 		@apply prose prose-zinc prose-invert prose-pre:bg-zinc-900 first:mt-4 prose-pre:p-0 prose-pre:py-2 prose-pre:leading-5;
 
-        section {
-            @apply scroll-mt-20;
-        }
+		section {
+			@apply scroll-mt-20;
+		}
 
 		code {
 			@apply bg-zinc-800 p-1 rounded mx-1;
@@ -193,22 +192,21 @@
 			@apply bg-zinc-900/0 mx-0 p-0;
 		}
 
-        code {
-            counter-reset: step;
-            counter-increment: step 0;
-        }
+		code {
+			counter-reset: step;
+			counter-increment: step 0;
+		}
 
-        code .line::before {
-
-            @apply border-r pr-2 mr-2;
-            content: counter(step);
-            counter-increment: step;
-            width: 3em;
-            display: inline-block;
-            text-align: right;
-            color: theme("colors.zinc.400");
-            opacity: 0.5;
-        }
+		code .line::before {
+			@apply border-r pr-2 mr-2;
+			content: counter(step);
+			counter-increment: step;
+			width: 3em;
+			display: inline-block;
+			text-align: right;
+			color: theme("colors.zinc.400");
+			opacity: 0.5;
+		}
 
 		.link {
 			@apply no-underline text-blue-50 relative bg-blue-700/20 hover:bg-blue-700/40 p-1.5 rounded duration-200;

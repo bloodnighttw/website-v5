@@ -7,12 +7,12 @@ categories:
     - rehype
 ---
 
-
 許多的技術文件和部落格文章都使用 Markdown 格式來撰寫，不過你有沒有想過，這些Markdown是如何被轉換成 HTML的，顯示在這些技術文件和部落格上的?
 
 常見的套件有 markdown-it、marked 等等，這些套件都可以將 Markdown 轉換成 HTML，而我打算要紹介的套件是 remark 和 rehype。
 
 # 什麼是 remark 和 rehype?
+
 1. **remark** 是一個用於處理 Markdown 的 JavaScript 庫，他用於定義 Markdown 的 AST（抽象語法樹）。
 
 ![remark](https://r2.bntw.dev/2025-05-30-160303_hyprshot.png)
@@ -24,6 +24,7 @@ categories:
 有了這幾個工具，我們可以輕鬆地將 Markdown 轉換成 HTML，並且在這個過程中使用各種插件來擴展功能。
 
 ## 常見的的插件有
+
 - **remark-frontmatter**: 讓 Markdown 支援 YAML 前置資料的插件。
 - **remark-gfm**: 支援 GitHub Flavored Markdown 的插件。
 - **remark-math**: 支援數學公式的插件。
@@ -33,36 +34,39 @@ categories:
 # unified的生態系統是如何轉換
 
 在 unified 生態系統中，處理 Markdown 到 HTML 的過程通常是這樣的：
-1. **解析 Markdown**: 使用 `remark` 解析 Markdown 文本，將其轉換為 AST，我們稱這個過程為``parse``，並稱這如此功能的plugin為parser。
+
+1. **解析 Markdown**: 使用 `remark` 解析 Markdown 文本，將其轉換為 AST，我們稱這個過程為`parse`，並稱這如此功能的plugin為parser。
 2. **處理 AST**: 使用各種 `remark` 插件來處理 AST，例如添加前置資料、支援 GFM、數學公式等功能。
-3. **轉換 AST**: 透過轉換器將 markdown AST 轉換為 HTML AST，這個過程稱為 ``transform``，並稱這如此功能的plugin為transformer。
+3. **轉換 AST**: 透過轉換器將 markdown AST 轉換為 HTML AST，這個過程稱為 `transform`，並稱這如此功能的plugin為transformer。
 4. **處理 (HTML) AST**: 使用各種 `rehype` 插件來處理 AST。
-4. **輸出 HTML**: 最後，將生成的 HTML 輸出到文件或網頁上，我們可以選擇輸出成 HTML String，或是React JSX。
+5. **輸出 HTML**: 最後，將生成的 HTML 輸出到文件或網頁上，我們可以選擇輸出成 HTML String，或是React JSX。
 
 # 如何使用 remark 和 rehype 插件
 
 ## unified 的使用方式
+
 在 unified 生態系統中，我們可以使用 `unified` 函式來創建一個處理管道，然後使用 `use` 方法來添加插件。
+
 ```ts
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
-import rehypeStringify from 'rehype-stringify';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import remarkFrontmatter from 'remark-frontmatter';
-import remarkRehype from 'remark-rehype'; 
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import rehypeStringify from "rehype-stringify";
+import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkRehype from "remark-rehype";
 
 const processor = unified()
-  .use(remarkParse) // 解析 Markdown (String -> Markdown AST)
-  .use(remarkGfm) // 支援 GFM (GitHub Flavored Markdown)
-  .use(remarkMath) // 支援數學公式 
-  .use(remarkFrontmatter, ['yaml']) // 支援 YAML 前置資料
-  .use(remarkRehype) // 將 Markdown AST 轉換成 HTML AST
-  .use(rehypeKatex) // 將數學公式轉換成 HTML
-  .use(rehypeHighlight) // 將程式碼塊轉換成 HTML
-  .use(rehypeStringify); // 將 HTML AST 轉換成 HTML 字串`
+	.use(remarkParse) // 解析 Markdown (String -> Markdown AST)
+	.use(remarkGfm) // 支援 GFM (GitHub Flavored Markdown)
+	.use(remarkMath) // 支援數學公式
+	.use(remarkFrontmatter, ["yaml"]) // 支援 YAML 前置資料
+	.use(remarkRehype) // 將 Markdown AST 轉換成 HTML AST
+	.use(rehypeKatex) // 將數學公式轉換成 HTML
+	.use(rehypeHighlight) // 將程式碼塊轉換成 HTML
+	.use(rehypeStringify); // 將 HTML AST 轉換成 HTML 字串`
 
 const markdown = `
 # Hello World
@@ -73,21 +77,25 @@ $$
 E = mc^2
 $$
 `;
-const html = await processor.process(markdown); 
+const html = await processor.process(markdown);
 console.log(html);
 ```
+
 這段程式碼展示了如何使用 `unified` 的套件和remark/rehype 的plugin來處理 Markdown 文本，並在最後將生成的 HTML 輸出到控制台。
 
 這是一個最簡單的例子，許多處理Markdown的套件，都會提供remark/rehype 的plugin來擴展功能，讓我們可以輕鬆地處理 Markdown 文本，舉個例子，Next.js的 mdx套件，就提供了remarkPlugins/rehypePlugins 的Options讓使用者填入。
 
-# 深入研究 remark/rehype 
+# 深入研究 remark/rehype
 
 ## 什麼是 AST?
+
 AST（抽象語法樹）是一種樹狀結構，用於表示程式碼的語法結構。它將程式碼分解為更小的部分，並以樹狀結構的形式表示，使得我們可以更容易地分析和處理程式碼。
 在 unified 生態系統中，AST 是一個 JavaScript Object，包含了各種節點，每個節點代表程式碼中的一個元素，例如標題、段落、程式碼塊等。
 
 ### remark AST 節點
+
 以下是一些常見的 `remark` AST 節點：
+
 - **Root**: 樹的根節點，包含所有其他節點。
 - **Heading**: 標題節點，包含標題的層級和內容。
 - **Paragraph**: 段落節點，包含段落的內容。
@@ -100,7 +108,9 @@ AST（抽象語法樹）是一種樹狀結構，用於表示程式碼的語法�
 詳細的節點類型和結構可以參考 [remark 的官方網站](https://remark.js.org/), 以及 [unified 的Github](https://github.com/remarkjs/remark).
 
 ### rehype AST 節點
+
 以下是一些常見的 `rehype` AST 節點：
+
 - **Root**: 樹的根節點，包含所有其他節點。
 - **Element**: 元素節點，代表 HTML 標籤，包含標籤名稱、屬性和子節點。
 - **Text**: 文本節點，包含純文本內容。
@@ -108,16 +118,20 @@ AST（抽象語法樹）是一種樹狀結構，用於表示程式碼的語法�
 詳細的節點類型和結構可以參考 [rehype的Github](https://github.com/rehypejs/rehype), 以及 [unified 的Github](https://unifiedjs.com/)
 
 ## 如何撰寫 remark/rehype 插件
+
 AST 正如前面說的，是一個樹狀結構，我們可以選擇自己寫遞迴來操作合改變這些樹狀結構，但是不方便。
 實際上unified 生態系統提供了一系列的 函式庫 來撰寫插件，讓我們可以輕鬆地操作 AST，這邊簡單介紹幾個我自己寫自己plugin用到的函式庫。
 
 ### 常用的函式庫
+
 - [**unist-util-visit**](https://github.com/syntax-tree/unist-util-visit): 提供了訪問 AST 節點的功能，可以用來遍歷和修改 AST。
 - [**unist-util-inspect**](https://github.com/syntax-tree/unist-util-inspect): 讓我們可以輕鬆的查看 AST 的結構和內容。
 - [**unist-util-select**](https://github.com/syntax-tree/unist-util-select): 提供直接選擇符合條件的AST節點之功能。與unist-util-visit不同的是，這個函式庫可以直接返回符合條件的節點。
 
 ### 使用函式庫撰寫插件
+
 以下是一個簡單的 `remark` 插件範例，這個插件會將所有的標題節點轉換成大寫：
+
 ```js
 import { visit } from 'unist-util-visit';
 import type { Plugin } from 'unified';
@@ -135,20 +149,22 @@ const remarkUppercaseHeadings: Plugin = () => {
 };
 export default remarkUppercaseHeadings;
 ```
+
 這個插件使用了 `unist-util-visit` 函式庫來遍歷 AST，並將所有的標題節點轉換成大寫。
 這個插件可以直接使用在 `unified` 的處理管道中：
+
 ```js
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkUppercaseHeadings from './remark-uppercase-headings';
-import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify'; 
-import { inspect } from 'unist-util-inspect';
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkUppercaseHeadings from "./remark-uppercase-headings";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import { inspect } from "unist-util-inspect";
 
 const processor = unified()
-  .use(remarkParse) // 解析 Markdown (String -> Markdown AST)
-  .use(remarkUppercaseHeadings) // 使用自定義的插件
-  .use(remarkRehype) // 將 Markdown AST 轉換成 HTML AST
+	.use(remarkParse) // 解析 Markdown (String -> Markdown AST)
+	.use(remarkUppercaseHeadings) // 使用自定義的插件
+	.use(remarkRehype); // 將 Markdown AST 轉換成 HTML AST
 
 const markdown = `
 # Hello World
@@ -161,6 +177,7 @@ const html = await processor.process(markdown);
 // 使用 unist-util-inspect 來查看 AST 的結構和內容
 console.log(inspect(html));
 ```
+
 你會在控制台看到所有的標題節點都被轉換成大寫了。
 
 # 總結

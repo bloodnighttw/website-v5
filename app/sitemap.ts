@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { BASE_URL } from "@/utils/constant";
 import { allPosts } from "content-collections";
 
- export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const staticPages: MetadataRoute.Sitemap = [
@@ -14,9 +14,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			alternates: {
 				languages: {
 					zh: `${BASE_URL}/zh`,
-					en: `${BASE_URL}/en`
-				}
-			}
+					en: `${BASE_URL}/en`,
+				},
+			},
 		},
 		{
 			url: `${BASE_URL}/blog`,
@@ -26,9 +26,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			alternates: {
 				languages: {
 					zh: `${BASE_URL}/zh/blog`,
-					en: `${BASE_URL}/en/blog`
-				}
-			}
+					en: `${BASE_URL}/en/blog`,
+				},
+			},
 		},
 		{
 			url: `${BASE_URL}/friends`,
@@ -38,11 +38,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			alternates: {
 				languages: {
 					zh: `${BASE_URL}/zh/friends`,
-					en: `${BASE_URL}/en/friends`
-				}
-			}
-
-		}
+					en: `${BASE_URL}/en/friends`,
+				},
+			},
+		},
 	];
 
 	const postsSitemap: MetadataRoute.Sitemap = allPosts.map((post) => {
@@ -54,8 +53,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			alternates: {
 				languages: {
 					zh: `${BASE_URL}/zh/blog/${post.slug}`,
-					en: `${BASE_URL}/en/blog/${post.slug}`
-				}
+					en: `${BASE_URL}/en/blog/${post.slug}`,
+				},
 			},
 		};
 	});

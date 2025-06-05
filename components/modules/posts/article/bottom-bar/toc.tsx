@@ -14,7 +14,7 @@ interface TocProp {
 	tocArray: TocTree[];
 }
 
-export default function Toc({tocArray}: TocProp) {
+export default function Toc({ tocArray }: TocProp) {
 	const [open, setOpen] = React.useState(false);
 	const [mt, height, dispatch] = useToc();
 

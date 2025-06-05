@@ -4,10 +4,10 @@ import { selectAll } from "unist-util-select";
 
 type Text = HText | MText;
 function sanitizeHtmlId(input?: string) {
-	if (!input) return '';
+	if (!input) return "";
 
 	// First character must be a letter (including Chinese characters)
-	let result = '';
+	let result = "";
 	const firstChar = input.charAt(0);
 
 	// Check if first character is a letter (including unicode letters like Chinese)
@@ -34,10 +34,7 @@ function sanitizeHtmlId(input?: string) {
 }
 
 export function generateId(map: Map<string, number>, text: Text[]): string {
-
-	const combinedText = text
-		.map((it) => it.value)
-		.join()
+	const combinedText = text.map((it) => it.value).join();
 
 	const id = sanitizeHtmlId(combinedText);
 
@@ -50,36 +47,30 @@ export function generateId(map: Map<string, number>, text: Text[]): string {
 	}
 }
 
-function plugin () {
-	return transform
+function plugin() {
+	return transform;
 }
 
 const headingsRegex = /^(h[1-6])$/;
 
-function getAllHeadings (tree:Root): Element[] {
-	return tree
-		.children
-		.filter(
-			(node)=>
-				node.type === 'element'
-				&& headingsRegex.test(node.tagName)
-		) as Element[];
+function getAllHeadings(tree: Root): Element[] {
+	return tree.children.filter(
+		(node) => node.type === "element" && headingsRegex.test(node.tagName),
+	) as Element[];
 }
 
-function transform (tree:Root) {
-
+function transform(tree: Root) {
 	const idMap = new Map<string, number>();
 	const headings = getAllHeadings(tree);
 
-	for(let i = 0; i < headings.length; i++) {
-
+	for (let i = 0; i < headings.length; i++) {
 		const current = headings[i];
 		const currentIndex = tree.children.indexOf(current);
 
 		const next = headings[i + 1];
 		const nextIndex = next ? tree.children.indexOf(next) : undefined;
 
-		const between = tree.children.slice(currentIndex , nextIndex);
+		const between = tree.children.slice(currentIndex, nextIndex);
 
 		const text = selectAll("text", current) as Text[];
 		const id = generateId(idMap, text);
@@ -91,12 +82,14 @@ function transform (tree:Root) {
 				id,
 			},
 			children: between,
-		}
+		};
 
-		tree.children.splice(currentIndex, between.length, section as RootContent);
+		tree.children.splice(
+			currentIndex,
+			between.length,
+			section as RootContent,
+		);
 	}
-
 }
 
-
-export default plugin
+export default plugin;

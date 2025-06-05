@@ -9,9 +9,9 @@ export async function generateMetadata() {
 		alternates: {
 			languages: {
 				zh: `${BASE_URL}/zh`,
-				en: `${BASE_URL}/en`
-			}
-		}
+				en: `${BASE_URL}/en`,
+			},
+		},
 	};
 }
 

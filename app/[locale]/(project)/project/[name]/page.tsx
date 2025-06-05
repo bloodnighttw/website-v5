@@ -92,7 +92,7 @@ export default async function Page({
 				</div>
 			)}
 			<article>
-				<C components={components}/>
+				<C components={components} />
 			</article>
 		</Part>
 	);

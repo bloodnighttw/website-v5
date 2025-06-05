@@ -26,11 +26,11 @@ export const dynamicParams = false;
 export async function generateMetadata({
 	params,
 }: {
-	params: Promise<{ slug: string, locale: string }>;
+	params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-
 	const { slug, locale } = await params;
-	const allPosts = locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
+	const allPosts =
+		locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
 	const post = allPosts.find((it) => it.slug === slug)!;
 	const description = post.description;
 
@@ -41,7 +41,7 @@ export async function generateMetadata({
 			languages: {
 				zh: `${BASE_URL}/zh/blog/${post.slug}`,
 				en: `${BASE_URL}/en/blog/${post.slug}`,
-			}
+			},
 		},
 		openGraph: {
 			title: post.title,
@@ -73,26 +73,26 @@ export async function generateMetadata({
 	};
 }
 
-async function getMdx(content: { slug: string, translate?: boolean }) {
-
+async function getMdx(content: { slug: string; translate?: boolean }) {
 	const path = content.translate
 		? `translate/${content.slug}.mdx`
 		: `${content.slug}.mdx`;
 
-	const mdxFromDocs = posts.find((doc)=>{
+	const mdxFromDocs = posts.find((doc) => {
 		return doc._file.path === path;
-	})
+	});
 
-	return mdxFromDocs!.body
+	return mdxFromDocs!.body;
 }
 
 export default async function Blog({
 	params,
 }: {
-	params: Promise<{ slug: string, locale: string }>;
+	params: Promise<{ slug: string; locale: string }>;
 }) {
 	const { slug, locale } = await params;
-	const allPosts = locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
+	const allPosts =
+		locale == "zh" ? allPostWithZhPriority : allPostWithEnPriority;
 
 	const content = allPosts.find((it) => it.slug === slug);
 
@@ -106,16 +106,19 @@ export default async function Blog({
 		year: "numeric",
 		month: "2-digit",
 		day: "2-digit",
-
 	}).format(content.date);
-
 
 	return (
 		<div className="page-enter">
 			<ArticleInfoPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
-				{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
-				<Content components={components}/>
+				{locale === content.lang || (
+					<Warning
+						title={t("Warning")}
+						message={t("warningMessage")}
+					/>
+				)}
+				<Content components={components} />
 			</Layout>
 
 			<Part className="bg-dotted">

@@ -70,15 +70,15 @@ export function tocReducer(state: TocState, action: TocAction): TocState {
 export function useToc() {
 	const [state, dispatch] = useReducer(tocReducer, TocInitialState);
 
-	const maxIdx = useMemo(()=>Math.max(...state.onScreen),[state.onScreen]);
-	const minIdx = useMemo(()=>Math.min(...state.onScreen),[state.onScreen]);
+	const maxIdx = useMemo(() => Math.max(...state.onScreen), [state.onScreen]);
+	const minIdx = useMemo(() => Math.min(...state.onScreen), [state.onScreen]);
 
 	const mt = state.heightDP[minIdx - 1];
 	const height = state.heightDP[maxIdx] - mt;
 
-    if(state.onScreen.length === 0) {
-        return [0, 0, dispatch] as const;
-    }
+	if (state.onScreen.length === 0) {
+		return [0, 0, dispatch] as const;
+	}
 
 	return [mt, height, dispatch] as const;
 }
@@ -104,9 +104,8 @@ export function useTocElement(
 
 	useEffect(() => {
 		const onViewportChange = () => {
-
-            const sectionElement = document.getElementById(id);
-            if (!sectionElement) return;
+			const sectionElement = document.getElementById(id);
+			if (!sectionElement) return;
 
 			const rect = sectionElement.getBoundingClientRect();
 

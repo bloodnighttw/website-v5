@@ -5,7 +5,6 @@ import { BASE_URL } from "@/utils/constant";
 import { usePathname } from "next/navigation";
 
 export default function Comments() {
-
 	const pathname = usePathname();
 
 	const pathnameSegments = pathname.split("/");
@@ -26,9 +25,7 @@ export default function Comments() {
 				theme={`${BASE_URL}/giscus.css`}
 				reactionsEnabled="0"
 				inputPosition="top"
-				lang={
-					lang === "zh" ? "zh-TW" : lang === "en" ? "en" : "zh-TW"
-				}
+				lang={lang === "zh" ? "zh-TW" : lang === "en" ? "en" : "zh-TW"}
 			/>
 		</div>
 	);

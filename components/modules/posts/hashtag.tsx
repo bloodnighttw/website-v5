@@ -6,7 +6,6 @@ interface Props {
 	className?: string;
 	style?: React.CSSProperties;
 	tags: string;
-
 }
 
 export default function HashTag({ className, tags, style }: Props) {

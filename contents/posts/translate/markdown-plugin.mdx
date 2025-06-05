@@ -3,12 +3,12 @@ title: "Unlocking Markdown's Superpowers: An introduction about remark/rehype li
 date: 2025-05-29
 ---
 
-
 Many technical documentations and blog articles are written in Markdown format, but have you ever wondered how these Markdown files are converted to HTML and displayed on these technical documentation sites and blogs?
 
 Common packages include markdown-it, marked, etc. These packages can all convert Markdown to HTML, and the packages I want to introduce are remark and rehype.
 
 # What are remark and rehype?
+
 1. **remark** is a JavaScript library for processing Markdown, which is used to define Markdown AST (Abstract Syntax Tree).
 
 ![remark](https://r2.bntw.dev/2025-05-30-160303_hyprshot.png)
@@ -20,6 +20,7 @@ Both are part of the [unified](https://unifiedjs.com/) ecosystem, which provides
 With these tools, we can easily convert Markdown to HTML and use various plugins to extend functionality during this process.
 
 ## Common plugins include
+
 - **remark-frontmatter**: A plugin that allows Markdown to support YAML frontmatter.
 - **remark-gfm**: A plugin that supports GitHub Flavored Markdown.
 - **remark-math**: A plugin that supports mathematical formulas.
@@ -29,36 +30,39 @@ With these tools, we can easily convert Markdown to HTML and use various plugins
 # How the unified ecosystem transforms Markdown to HTML
 
 In the unified ecosystem, the process of handling Markdown to HTML conversion is typically like this:
+
 1. **Parse Markdown**: Use `remark` to parse Markdown text and convert it to AST. We call this process `parse` and refer to plugins with such functionality as parsers.
 2. **Process AST**: Use various `remark` plugins to process the AST, such as adding frontmatter, supporting GFM, mathematical formulas, and other features.
 3. **Transform AST**: Transform the markdown AST to HTML AST through transformers. This process is called `transform`, and we refer to plugins with such functionality as transformers.
 4. **Process (HTML) AST**: Use various `rehype` plugins to process the AST.
-4. **Output HTML**: Finally, output the generated HTML to files or web pages. We can choose to output as HTML String or React JSX.
+5. **Output HTML**: Finally, output the generated HTML to files or web pages. We can choose to output as HTML String or React JSX.
 
 # How to use remark and rehype plugins
 
 ## How to use unified
+
 In the unified ecosystem, we can use the `unified` function to create a processing pipeline, then use the `use` method to add plugins.
+
 ```ts
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
-import rehypeStringify from 'rehype-stringify';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import remarkFrontmatter from 'remark-frontmatter';
-import remarkRehype from 'remark-rehype'; 
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import rehypeStringify from "rehype-stringify";
+import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkRehype from "remark-rehype";
 
 const processor = unified()
-  .use(remarkParse) // Parse Markdown (String -> Markdown AST)
-  .use(remarkGfm) // Support GFM (GitHub Flavored Markdown)
-  .use(remarkMath) // Support mathematical formulas
-  .use(remarkFrontmatter, ['yaml']) // Support YAML frontmatter
-  .use(remarkRehype) // Transform Markdown AST to HTML AST
-  .use(rehypeKatex) // Convert mathematical formulas to HTML
-  .use(rehypeHighlight) // Convert code blocks to HTML
-  .use(rehypeStringify); // Convert HTML AST to HTML string
+	.use(remarkParse) // Parse Markdown (String -> Markdown AST)
+	.use(remarkGfm) // Support GFM (GitHub Flavored Markdown)
+	.use(remarkMath) // Support mathematical formulas
+	.use(remarkFrontmatter, ["yaml"]) // Support YAML frontmatter
+	.use(remarkRehype) // Transform Markdown AST to HTML AST
+	.use(rehypeKatex) // Convert mathematical formulas to HTML
+	.use(rehypeHighlight) // Convert code blocks to HTML
+	.use(rehypeStringify); // Convert HTML AST to HTML string
 
 const markdown = `
 # Hello World
@@ -69,21 +73,25 @@ $$
 E = mc^2
 $$
 `;
-const html = await processor.process(markdown); 
+const html = await processor.process(markdown);
 console.log(html);
 ```
+
 This code demonstrates how to use `unified` packages and remark/rehype plugins to process Markdown text, and finally output the generated HTML to the console.
 
 This is a simple example. Many packages that process Markdown provide remark/rehype plugins to extend functionality, allowing us to easily process Markdown text. For example, Next.js's mdx package provides remarkPlugins/rehypePlugins options for users to configure.
 
-# Let's deep dive into remark/rehype 
+# Let's deep dive into remark/rehype
 
 ## What is AST?
+
 AST , a.k.a Abstract Syntax Tree, is a tree-like structure used to represent the syntactic structure of code. It breaks down code into smaller parts and represents them in a tree structure, making it easier for us to analyze and process code.
 In the unified.js ecosystem, AST is a JavaScript Object that contains various nodes, where each node represents an element in the code, such as headings, paragraphs, code blocks, etc.
 
 ### remark AST Nodes
+
 Here are some common `remark` AST nodes:
+
 - **Root**: The root node of the tree, containing all other nodes.
 - **Heading**: Heading node, containing the heading level and content.
 - **Paragraph**: Paragraph node, containing the paragraph content.
@@ -96,7 +104,9 @@ Here are some common `remark` AST nodes:
 For detailed node types and structures, please refer to [remark's official website](https://remark.js.org/) and [unified's GitHub](https://github.com/remarkjs/remark).
 
 ### rehype AST Nodes
+
 Here are some common `rehype` AST nodes:
+
 - **Root**: The root node of the tree, containing all other nodes.
 - **Element**: Element node, representing HTML tags, containing tag name, attributes, and child nodes.
 - **Text**: Text node, containing plain text content.
@@ -104,16 +114,20 @@ Here are some common `rehype` AST nodes:
 For detailed node types and structures, please refer to [rehype's GitHub](https://github.com/rehypejs/rehype) and [unified's GitHub](https://unifiedjs.com/)
 
 ## How to Write remark/rehype Plugins
+
 As mentioned earlier, AST is a tree structure. We can choose to write our own recursion to manipulate and modify these tree structures, but it's not convenient.
 The unified ecosystem actually provides a series of libraries for writing plugins, allowing us to easily manipulate AST. Here I'll briefly introduce a few libraries that I've used when writing my own plugins.
 
 ### Common Libraries
+
 - [**unist-util-visit**](https://github.com/syntax-tree/unist-util-visit): Provides functionality for visiting AST nodes, can be used to traverse and modify AST.
 - [**unist-util-inspect**](https://github.com/syntax-tree/unist-util-inspect): Allows us to easily view the structure and content of AST.
 - [**unist-util-select**](https://github.com/syntax-tree/unist-util-select): Provides functionality to directly select AST nodes that meet conditions. Unlike unist-util-visit, this library can directly return nodes that meet the conditions.
 
 ### Writing Plugins with Libraries
+
 Here's a simple `remark` plugin example that converts all heading nodes to uppercase:
+
 ```js
 import { visit } from 'unist-util-visit';
 import type { Plugin } from 'unified';
@@ -131,21 +145,23 @@ const remarkUppercaseHeadings: Plugin = () => {
 };
 export default remarkUppercaseHeadings;
 ```
+
 This plugin uses the `unist-util-visit` library to traverse the AST and converts all heading nodes to uppercase.
 
 This plugin can be used directly in the `unified` processing pipeline:
+
 ```js
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkUppercaseHeadings from './remark-uppercase-headings';
-import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify'; 
-import { inspect } from 'unist-util-inspect';
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkUppercaseHeadings from "./remark-uppercase-headings";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import { inspect } from "unist-util-inspect";
 
 const processor = unified()
-  .use(remarkParse) // Parse Markdown (String -> Markdown AST)
-  .use(remarkUppercaseHeadings) // Use custom plugin
-  .use(remarkRehype) // Transform Markdown AST to HTML AST
+	.use(remarkParse) // Parse Markdown (String -> Markdown AST)
+	.use(remarkUppercaseHeadings) // Use custom plugin
+	.use(remarkRehype); // Transform Markdown AST to HTML AST
 
 const markdown = `
 # Hello World
@@ -158,6 +174,7 @@ const html = await processor.process(markdown);
 // Use unist-util-inspect to view the structure and content of AST
 console.log(inspect(html));
 ```
+
 You'll see that all heading nodes have been converted to uppercase in the console.
 
 # Summary

@@ -28,7 +28,7 @@ export default function GlareCard(props: Props) {
 			const max = Math.max(rect.width, rect.height);
 
 			// stop tracking if the mouse position is too far away
-			if(x < -max || x > max*2 || y > max*2 || y < -max) return;
+			if (x < -max || x > max * 2 || y > max * 2 || y < -max) return;
 
 			// Convert to percentage
 			const xPercent = (x / rect.width) * 100;
@@ -47,10 +47,7 @@ export default function GlareCard(props: Props) {
 	return (
 		<div
 			ref={containerRef}
-			className={cn(
-				"relative overflow-hidden",
-				props.className
-			)}
+			className={cn("relative overflow-hidden", props.className)}
 			style={props.style}
 			suppressHydrationWarning={true}
 		>
@@ -59,7 +56,7 @@ export default function GlareCard(props: Props) {
 				className="absolute w-full h-full pointer-events-none -z-1"
 				style={{
 					background: `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255, 255, 255, ${strength}) 0%, rgba(255, 255, 255, 0) 50%)`,
-					mixBlendMode: "soft-light"
+					mixBlendMode: "soft-light",
 				}}
 				suppressHydrationWarning={true}
 			/>
@@ -69,6 +66,3 @@ export default function GlareCard(props: Props) {
 		</div>
 	);
 }
-
-
-

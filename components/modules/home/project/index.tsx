@@ -9,13 +9,12 @@ import { allProjects } from "content-collections";
 import { getTranslations } from "next-intl/server";
 
 export default async function ProjectSection() {
-
 	const t = await getTranslations("Project");
 	const lang = (await getTranslations())("lang");
 
 	const projectsCards = allProjects
 		.filter((project) => {
-			return project.lang === lang
+			return project.lang === lang;
 		})
 		.map((project) => {
 			return (
