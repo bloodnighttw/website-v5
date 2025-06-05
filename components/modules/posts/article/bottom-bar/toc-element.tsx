@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useLayoutEffect } from "react";
 import cn from "@/utils/cn";
 import { TocSideLineAction } from "@/components/modules/posts/article/bottom-bar/toc";
 import Link from "next/link";
@@ -74,7 +74,7 @@ export function TocElement(toc: TocElementProps ) {
 
 	}, [onViewportChange, toc.id]);
 
-	useEffect(()=>{ // if we use useEffect, the first load of toc will be wrong
+	useLayoutEffect(()=>{ // if we use useEffect, the first load of toc will be wrong
 		if (dispatch && tocRef.current) {
 			const height = tocRef.current.offsetHeight;
 			dispatch({ type: "initNew", payload: height ?? 0});

@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"postinstall": "fumadocs-mdx",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
@@ -21,6 +22,8 @@
 		"@types/mdast": "^4.0.4",
 		"@types/mdx": "^2.0.13",
 		"clsx": "^2.1.1",
+		"fumadocs-core": "^15.5.0",
+		"fumadocs-mdx": "^11.6.6",
 		"next": "15.3.3",
 		"next-intl": "^4.1.0",
 		"react": "^19.0.0",
@@ -30,11 +33,12 @@
 		"remark-mdx-frontmatter": "^5.1.0",
 		"tailwind-merge": "^3.0.2",
 		"unist-util-select": "^5.1.0",
-		"unist-util-visit": "^5.0.0"
+		"unist-util-visit": "^5.0.0",
+		"zod": "^3.25.51"
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.10",
-		"@content-collections/core": "^0.8.2",
+		"@content-collections/core": "^0.9.0",
 		"@content-collections/next": "^0.2.6",
 		"@eslint/eslintrc": "^3",
 		"@next/eslint-plugin-next": "^15.3.2",
@@ -59,5 +63,6 @@
 		"unified": "^11.0.5",
 		"unist-util-inspect": "^8.1.0",
 		"wrangler": "^4.3.0"
-	}
+	},
+	"type": "module"
 }

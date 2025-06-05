@@ -10,6 +10,8 @@ import Warning from "@/components/modules/posts/article/warning";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/utils/constant";
 import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
+import { posts } from "@/.source";
+import components from "@/components/shared/MDXComponents";
 
 export async function generateStaticParams() {
 	return allPostWithZhPriority.map((post) => {
@@ -72,11 +74,16 @@ export async function generateMetadata({
 }
 
 async function getMdx(content: { slug: string, translate?: boolean }) {
-	if (content.translate) {
-		return await import(`@/contents/posts/translate/${content.slug}.mdx`);
-	} else {
-		return await import(`@/contents/posts/${content.slug}.mdx`);
-	}
+
+	const path = content.translate
+		? `translate/${content.slug}.mdx`
+		: `${content.slug}.mdx`;
+
+	const mdxFromDocs = posts.find((doc)=>{
+		return doc._file.path === path;
+	})
+
+	return mdxFromDocs!.body
 }
 
 export default async function Blog({
@@ -91,7 +98,7 @@ export default async function Blog({
 
 	if (!content) return <div>404</div>;
 
-	const { default: Content } = await getMdx(content);
+	const Content = await getMdx(content);
 
 	const t = await getTranslations("Blog");
 
@@ -102,12 +109,13 @@ export default async function Blog({
 
 	}).format(content.date);
 
+
 	return (
 		<div className="page-enter">
 			<ArticleInfoPanel content={content} />
 			<Layout tocArray={content.toc} publishAt={timeWithFormat}>
 				{ locale === content.lang || <Warning title={t("Warning")} message={t("warningMessage")}/>}
-				<Content />
+				<Content components={components}/>
 			</Layout>
 
 			<Part className="bg-dotted">

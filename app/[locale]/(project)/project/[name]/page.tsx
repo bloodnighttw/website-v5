@@ -7,8 +7,10 @@ import Part from "@/components/shared/part";
 import { Stacks } from "@/components/modules/home/project/stack";
 import { allProjects } from "content-collections";
 
-import "@/app/content.css"
+import "@/app/content.css";
 import { Metadata } from "next";
+import { projects } from "@/.source";
+import components from "@/components/shared/MDXComponents";
 
 export async function generateStaticParams() {
 	return allProjects.map((post) => {
@@ -20,32 +22,47 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({params}: { params: Promise<{ name: string }> }): Promise<Metadata>{
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ name: string }>;
+}): Promise<Metadata> {
 	const { name } = await params;
 	return {
 		alternates: {
 			languages: {
 				zh: `${BASE_URL}/zh/project/${name}`,
 				en: `${BASE_URL}/en/project/${name}`,
-			}
-		}
+			},
+		},
 	};
+}
+
+function getMdx(content: { name: string; translate?: boolean }) {
+	const path = content.translate
+		? `en/${content.name}.mdx`
+		: `${content.name}.mdx`;
+
+	const mdxFromDocs = projects.find((doc) => {
+		return doc._file.path === path;
+	});
+
+	return mdxFromDocs!.body;
 }
 
 export default async function Page({
 	params,
 }: {
-	params: Promise<{ name: string, locale: string }>;
+	params: Promise<{ name: string; locale: string }>;
 }) {
 	const { name, locale } = await params;
 
-	const projectInfo = allProjects
-		.find((it) => it.name === name)!;
+	const projectInfo = allProjects.find((it) => it.name === name)!;
 	const svgs: string[] = projectInfo.stack
 		.filter((st) => st in svgUrl)
 		.map((st) => svgUrl[st]);
 
-	const { default: C } = locale === "en" ? await import(`@/contents/projects/en/${name}.mdx`) : await import(`@/contents/projects/${name}.mdx`);
+	const C = getMdx({ name, translate: locale === "en" });
 
 	return (
 		<Part className="page-enter">
@@ -75,7 +92,7 @@ export default async function Page({
 				</div>
 			)}
 			<article>
-				<C />
+				<C components={components}/>
 			</article>
 		</Part>
 	);
