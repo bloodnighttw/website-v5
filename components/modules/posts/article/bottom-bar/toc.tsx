@@ -20,16 +20,29 @@ export default function Toc({ tocArray }: TocProp) {
 
 	const divRef = React.useRef<HTMLDivElement>(null);
 
-	const handleClick = useCallback(() => {
-		setOpen(!open);
-		if (!open) {
-			divRef.current?.scrollIntoView({
-				behavior: "smooth",
-				block: "end",
-			});
-			return;
-		}
-	}, [open]);
+	const handleClick = useCallback(
+		() =>
+			setOpen((prev) => {
+				if (!prev) {
+					// get div bottom position and scroll the bottom of the div to the bottom of the window
+					if (!divRef.current) return prev;
+
+					const rect = divRef.current.getBoundingClientRect();
+					const windowHeight =
+						window.visualViewport?.height ?? window.innerHeight;
+					const y = window.scrollY + rect.y;
+
+					// scroll the bottom of the div to the bottom of the window
+					window.scrollTo({
+						top: y + rect.height - windowHeight + 14,
+						behavior: "smooth",
+					});
+				}
+
+				return !prev;
+			}),
+		[],
+	);
 
 	useEffect(() => {
 		const clickOutside = (e: MouseEvent) => {
