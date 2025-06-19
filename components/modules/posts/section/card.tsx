@@ -1,10 +1,10 @@
 import Link from "@/i18n/navigation";
-import Image from "next/image";
 import { Post } from "content-collections";
 import React from "react";
 import cn from "@/utils/cn";
 import GlareCard from "@/components/shared/card/glare-card";
 import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
+import SkeletonImage from "@/components/shared/image";
 
 interface Props {
 	info: Post;
@@ -29,7 +29,7 @@ export default function PostCard(props: Props) {
 				}
 			>
 				<GlareCardBorder className="*:from-bprimary/50 *:to-bprimary/20 *:bg-gradient-to-br rounded *:first:rounded-t *:last:rounded-b *:not-first:mt-0.75">
-					<Image
+					<SkeletonImage
 						src={props.info.preview ?? ""}
 						alt="preview"
 						width={2000} // for debug build use
