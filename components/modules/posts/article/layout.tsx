@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import Part from "@/components/shared/part";
 
 import { TocTree } from "@/components/modules/posts/article/bottom-bar/toc-element";
@@ -21,53 +21,64 @@ export default function Page(prop: LayoutProps) {
 	const t = useTranslations("Blog");
 	const setProgress = useSetProgress();
 
-	const handleProgress = useCallback(() => {
-		if (!ref?.current) return;
-
-		const rect = ref.current.getBoundingClientRect();
-
-		// the height of the window
-		const windowHeight = window.innerHeight;
-
-		// this is the top position of the div
-		const y = window.scrollY + rect.y;
-
-		// this is the distance from the top of the window to the bottom of the div
-		const translation = windowHeight - y;
-
-		// the top position of the div
-		const rectTop = rect.top;
-
-		// the bottom position of the div
-		const rectBottom = rect.bottom;
-
-		// the distance from the top of the div to the bottom of the window
-		const diff = Math.floor(windowHeight - rectTop - translation);
-
-		const progressPercent = diff / (rectBottom - rectTop - translation);
-
-		const progressValue =
-			progressPercent > 1 ? 1 : progressPercent < 0 ? 0 : progressPercent;
-
-		// the percentage of the div that is visible
-		setProgress(Math.floor(progressValue * 100));
-	}, [ref, setProgress]);
-
 	useEffect(() => {
-		handleProgress();
+		const handleProgress = () => {
+			if (!ref?.current) return;
+
+			const rect = ref.current.getBoundingClientRect();
+
+			// the height of the window
+			const windowHeight = window.visualViewport?.height ?? window.innerHeight;
+
+			// this is the top position of the div
+			const y = window.scrollY + rect.y;
+
+			// this is the distance from the top of the window to the bottom of the div
+			const translation = windowHeight - y;
+
+			// the top position of the div
+			const rectTop = rect.top;
+
+			// the bottom position of the div
+			const rectBottom = rect.bottom;
+
+			// the distance from the top of the div to the bottom of the window
+			const diff = Math.floor(windowHeight - rectTop - translation);
+
+			const progressPercent = diff / (rectBottom - rectTop - translation);
+
+			const progressValue =
+				progressPercent > 1
+					? 1
+					: progressPercent < 0
+						? 0
+						: progressPercent;
+
+			// the percentage of the div that is visible
+			setProgress(Math.floor(progressValue * 100));
+		};
+
+		handleProgress(); // initial call to set progress
 
 		window.addEventListener("scroll", handleProgress);
+		window.visualViewport?.addEventListener("resize", handleProgress);
+
 		return () => {
 			window.removeEventListener("scroll", handleProgress);
+			window.visualViewport?.removeEventListener("resize", handleProgress);
+			setProgress(0); // reset progress when unmounting
 		};
-	}, [handleProgress]);
+	}, [setProgress]);
 
 	return (
 		<div ref={ref}>
 			<Part className="bg-bprimary page-enter">
 				<article>{prop.children}</article>
 			</Part>
-			<Part className="relative border-b border-dot bg-bsecondary/60 h-14" ref={bottomRef}>
+			<Part
+				className="relative border-b border-dot bg-bsecondary/60 h-14"
+				ref={bottomRef}
+			>
 				<div className="hidden sm:flex justify-start items-center gap-2">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +93,7 @@ export default function Page(prop: LayoutProps) {
 					</svg>
 					{t("published", { date: prop.publishAt })}
 				</div>
-				<ButtomBar tocArray={prop.tocArray} bottomRef={bottomRef}/>
+				<ButtomBar tocArray={prop.tocArray} />
 			</Part>
 		</div>
 	);
