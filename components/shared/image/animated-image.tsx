@@ -35,7 +35,7 @@ export default function AnimatedImage(props: AnimatedImageProps) {
 				alt={alt}
 				className={cn(
 					"relative z-10",
-					"transition-all duration-700 ease-out",
+					"transition-all duration-400 ease-out",
 					isLoaded
 						? "opacity-100 scale-100 blur-0"
 						: "opacity-0 scale-105 blur-sm",
