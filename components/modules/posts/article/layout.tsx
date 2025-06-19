@@ -16,6 +16,7 @@ interface LayoutProps {
 
 export default function Page(prop: LayoutProps) {
 	const ref = React.useRef<HTMLDivElement>(null);
+	const bottomRef = React.useRef<HTMLDivElement>(null);
 
 	const t = useTranslations("Blog");
 	const setProgress = useSetProgress();
@@ -66,7 +67,7 @@ export default function Page(prop: LayoutProps) {
 			<Part className="bg-bprimary page-enter">
 				<article>{prop.children}</article>
 			</Part>
-			<Part className="relative border-b border-dot bg-bsecondary/60 h-14">
+			<Part className="relative border-b border-dot bg-bsecondary/60 h-14" ref={bottomRef}>
 				<div className="hidden sm:flex justify-start items-center gap-2">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +82,7 @@ export default function Page(prop: LayoutProps) {
 					</svg>
 					{t("published", { date: prop.publishAt })}
 				</div>
-				<ButtomBar tocArray={prop.tocArray} />
+				<ButtomBar tocArray={prop.tocArray} bottomRef={bottomRef}/>
 			</Part>
 		</div>
 	);

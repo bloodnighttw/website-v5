@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 interface Props {
 	className?: string;
 	children: ReactNode;
+	ref?: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function Part(props: Props) {
@@ -15,5 +16,5 @@ export default function Part(props: Props) {
 		props.className,
 	);
 
-	return <div className={className}>{props.children}</div>;
+	return <div className={className} ref={props.ref}>{props.children}</div>;
 }
