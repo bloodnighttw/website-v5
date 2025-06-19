@@ -1,7 +1,8 @@
 import "server-only"; // Ensure this file is only used in server-side rendering contexts
 
-import Image, { type ImageProps } from "next/image";
+import { type ImageProps } from "next/image";
 import sharp from "sharp";
+import AnimatedImage from "./animated-image";
 
 async function generateBlurredDataUrl(imageSrc: string): Promise<string> {
 	try {
@@ -46,11 +47,10 @@ export default async function SkeletonImage(props: SkeletonImageProps) {
 	const blurredDataUrl = await generateBlurredDataUrl(src);
 
 	return (
-		<Image
+		<AnimatedImage
 			src={src}
 			alt={alt}
 			className={className}
-			placeholder="blur"
 			blurDataURL={blurredDataUrl}
 			{...rest}
 		/>
