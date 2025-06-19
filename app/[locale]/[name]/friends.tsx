@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Part from "@/components/shared/part";
 import { getTranslations } from "next-intl/server";
 import GlareCard from "@/components/shared/card/glare-card";
 import { GlareCardBorder } from "@/components/shared/card/glare-card/border";
 import Link from "next/link";
 import TranslationWithIcon from "@/components/shared/TranslationWithJSX";
+import Avatar from "@/components/modules/avatar";
 
 // This is the section that is used to define the friends page.
 
@@ -87,12 +87,10 @@ export default async function Friends() {
 						>
 							<GlareCardBorder className="flex flex-row gap-4 p-2">
 								<div className="flex justify-center items-center">
-									<Image
+									<Avatar
 										src={friend.avatar}
 										alt={friend.github}
-										width={128}
-										height={128}
-										className="rounded-full block w-32 h-32"
+										size={128}
 									/>
 								</div>
 								<div className="flex flex-col gap-2 flex-1">
