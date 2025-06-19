@@ -1,11 +1,10 @@
 import "server-only"; // Ensure this file is only used in server-side rendering contexts
 
 import Image, { type ImageProps } from "next/image";
+import sharp from "sharp";
 
 async function generateBlurredDataUrl(imageSrc: string): Promise<string> {
 	try {
-		// Dynamic import for sharp to avoid issues
-		const sharp = (await import("sharp")).default;
 
 		// Fetch the image
 		const response = await fetch(imageSrc);
