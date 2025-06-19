@@ -15,7 +15,6 @@ export default function AnimatedImage(props: AnimatedImageProps) {
 
 	return (
 		<div className="relative overflow-hidden">
-			<div className="absolute inset-0">
 				<Image
 					src={blurDataURL}
 					alt=""
@@ -29,7 +28,6 @@ export default function AnimatedImage(props: AnimatedImageProps) {
 					fill
 					priority
 				/>
-			</div>
 
 			{/* Main image that animates in when loaded */}
 			<Image

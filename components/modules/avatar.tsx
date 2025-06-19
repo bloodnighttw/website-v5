@@ -1,5 +1,5 @@
-import Image from "next/image";
 import cn from "@/utils/cn";
+import SkeletonImage from "../shared/image";
 
 type Size = number | `${number}`;
 
@@ -16,8 +16,8 @@ export default function Avatar(props: Props) {
 	const cln = cn("rounded-full scale-in", props.className);
 
 	return (
-		<div className="overflow-hidden">
-			<Image
+		<div className={cn("overflow-hidden", cln)}>
+			<SkeletonImage
 				src={props.src}
 				alt={props.alt ?? "avatar image"}
 				className={cln}
