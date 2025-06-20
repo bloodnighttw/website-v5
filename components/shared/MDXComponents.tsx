@@ -1,14 +1,14 @@
-import ImagePreview from "@/components/modules/posts/article/image/image";
 import Link from "@/i18n/navigation";
 import { MDXComponents } from "mdx/types";
 import WikiLink from "../modules/posts/article/wiki-link";
 import InlineWikiLink from "../modules/posts/article/inline-wiki-link";
+import SkeletonImage from "../modules/posts/article/image/skelton-image";
 
 const components: MDXComponents = {
 	WikiLink,
 	InlineWikiLink,
 	img: (props) => {
-		return <ImagePreview {...props} />;
+		return <SkeletonImage {...props} />;
 	},
 	a: (props) => {
 		const { href } = props;

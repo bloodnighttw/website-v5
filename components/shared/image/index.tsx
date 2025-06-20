@@ -4,7 +4,7 @@ import { type ImageProps } from "next/image";
 import sharp from "sharp";
 import AnimatedImage from "./animated-image";
 
-async function generateBlurredDataUrl(imageSrc: string): Promise<string> {
+export async function generateBlurredDataUrl(imageSrc: string): Promise<string> {
 	try {
 
 		// Fetch the image
