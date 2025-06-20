@@ -54,11 +54,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 				lastModified: i.date,
 				changeFrequency: "weekly",
 				priority: 0.8,
-				alternates: {
-					languages: {
-						zh: `${BASE_URL}/zh/blog/${i.slug}`,
-					},
-				},
 			});
 		}
 	}
@@ -72,11 +67,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			lastModified: i.date,
 			changeFrequency: "weekly",
 			priority: 0.8,
-			alternates: {
-				languages: {
-					en: `${BASE_URL}/en/blog/${i.slug}`,
-				},
-			},
 		});
 	}
 	
