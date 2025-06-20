@@ -7,41 +7,35 @@ export const dynamic = "force-static";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const staticPages: MetadataRoute.Sitemap = [
 		{
-			url: `${BASE_URL}/`,
+			url: `${BASE_URL}/zh`,
 			lastModified: new Date(),
 			changeFrequency: "weekly",
-			priority: 1.0,
-			alternates: {
-				languages: {
-					zh: `${BASE_URL}/zh`,
-					en: `${BASE_URL}/en`,
-				},
-			},
 		},
 		{
-			url: `${BASE_URL}/blog`,
+			url: `${BASE_URL}/en`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+		},
+		{
+			url: `${BASE_URL}/en/blog`,
 			lastModified: new Date(),
 			changeFrequency: "daily",
-			priority: 0.95,
-			alternates: {
-				languages: {
-					zh: `${BASE_URL}/zh/blog`,
-					en: `${BASE_URL}/en/blog`,
-				},
-			},
 		},
 		{
-			url: `${BASE_URL}/friends`,
+			url: `${BASE_URL}/zh/blog`,
+			lastModified: new Date(),
+			changeFrequency: "daily",
+		},
+		{
+			url: `${BASE_URL}/en/friends`,
 			lastModified: new Date(),
 			changeFrequency: "weekly",
-			priority: 1.0,
-			alternates: {
-				languages: {
-					zh: `${BASE_URL}/zh/friends`,
-					en: `${BASE_URL}/en/friends`,
-				},
-			},
 		},
+		{
+			url: `${BASE_URL}/zh/friends`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+		}
 	];
 
 	const posts = [] as MetadataRoute.Sitemap;
@@ -53,7 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 				url: `${BASE_URL}/en/blog/${i.slug}`,
 				lastModified: i.date,
 				changeFrequency: "weekly",
-				priority: 0.8,
 			});
 		}
 	}
@@ -66,7 +59,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			url: `${BASE_URL}/zh/blog/${i.slug}`,
 			lastModified: i.date,
 			changeFrequency: "weekly",
-			priority: 0.8,
 		});
 	}
 	
