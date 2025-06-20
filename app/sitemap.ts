@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { BASE_URL } from "@/utils/constant";
-import { allPosts } from "content-collections";
+import { allPostWithEnPriority, allPostWithZhPriority } from "@/utils/allpost";
 
 export const dynamic = "force-static";
 
@@ -44,20 +44,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		},
 	];
 
-	const postsSitemap: MetadataRoute.Sitemap = allPosts.map((post) => {
-		return {
-			url: `${BASE_URL}/blog/${post.slug}`,
-			lastModified: post.date,
-			changeFrequency: "daily",
-			priority: 1,
+	const posts = [] as MetadataRoute.Sitemap;
+
+	for(const i of allPostWithEnPriority) {
+
+		if( i.lang === "en"){
+			posts.push({
+				url: `${BASE_URL}/en/blog/${i.slug}`,
+				lastModified: i.date,
+				changeFrequency: "weekly",
+				priority: 0.8,
+				alternates: {
+					languages: {
+						zh: `${BASE_URL}/zh/blog/${i.slug}`,
+					},
+				},
+			});
+		}
+	}
+
+	for(const i of allPostWithZhPriority){
+		if(i.lang === "en")
+			continue;
+
+		posts.push({
+			url: `${BASE_URL}/zh/blog/${i.slug}`,
+			lastModified: i.date,
+			changeFrequency: "weekly",
+			priority: 0.8,
 			alternates: {
 				languages: {
-					zh: `${BASE_URL}/zh/blog/${post.slug}`,
-					en: `${BASE_URL}/en/blog/${post.slug}`,
+					en: `${BASE_URL}/en/blog/${i.slug}`,
 				},
 			},
-		};
-	});
-
-	return [...staticPages, ...postsSitemap];
+		});
+	}
+	
+	return [...staticPages, ...posts];
 }
