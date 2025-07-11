@@ -1,0 +1,437 @@
+---
+title: "如何避免prop drilling"
+date: 2025-07-11
+categories:
+    - react
+    - redux 
+    - zustand
+# draft: true
+---
+
+在我們開發應用程式，常常會需要把父組件的狀態傳遞給子元件，然而，有時候需要傳遞的層級很深，這時候就會出現prop drilling的問題。
+
+# 什麼是prop drilling？
+
+首先，讓我們來看一個簡單的例子：
+
+```tsx
+import React, { useState } from 'react';
+
+const ParentComponent = () => {
+    const [value, setValue] = useState("Hello World");
+
+    return (
+        <ChildComponent value={value} />
+    );
+};
+
+const ChildComponent = ({ value } : {value: string}) => {
+    return (
+        <GrandChildComponent value={value} />
+    );
+};
+
+const GrandChildComponent = ({ value } : {value : string}) => {
+    return <div>{value}</div>;
+};
+```
+
+在這個例子中，我們想把`ParentComponent`中的`value`傳遞給`GrandChildComponent`，但是我們需要先通過`ChildComponent`來傳遞。這樣的傳遞過程就叫做prop drilling。
+
+這段程式碼中，`ParentComponent`需要將`value`傳遞給`ChildComponent`，然後再傳遞給`GrandChildComponent`。
+如果有更多層的元件，這樣的傳遞會變得非常繁瑣，而且，這在typescript中，會變得更麻煩，因為你需要在每一個子元件中，幫他標上他的型態，要是今天這個在父型態變了，你的每個子元件型態都要自己去改。
+
+# 解決方案
+
+這邊會有己只種方法可以解決prop drilling的問題。
+
+在接下來的程式，我們會大量使用這個程式碼，方便觀察 component的更新，請注意，這個component並沒有遵守。
+
+```tsx
+import type React from "react";
+
+export function RandomBackgroundColorBlock({ children }: { children: React.ReactNode; }) {
+    const colors = ["bg-red-900", "bg-green-900", "bg-blue-900", "bg-yellow-900", "bg-purple-900", "bg-pink-900", "bg-indigo-900", "bg-teal-900"];
+    const cn = colors[Math.floor(Math.random() * colors.length)] + " *:my-2 border p-4 *:h1:text-4xl";
+
+    return <div className={cn}>
+        {children}
+    </div>;
+}
+```
+
+另外，這些程式的DEMO在[這裡可以看到](https://bloodnighttw.github.io/prop-drilling/)。
+
+## 1. 使用Context API
+
+Context 是 React 提供的一種機制，可以讓我們在組件樹中傳遞資料，而不需要手動地將 props 一層一層地傳遞下去。
+
+```tsx
+import React from "react";
+import { RandomBackgroundColorBlock } from "./RandomBackgroundColorBlock";
+
+interface SharedContext {
+	themeValue: string;
+	setThemeValue: (value: string) => void;
+}
+
+const Context = React.createContext<SharedContext | undefined>(undefined);
+
+// Custom hook to use the shared context, we do this to ensure that the context is always used within a provider
+export function useSharedContext() {
+	const contextValue = React.useContext(Context);
+	if (!contextValue) {
+		throw new Error(
+			"useSharedContext must be used within a SharedProvider, please wrap your component tree with <SharedProvider>.",
+		);
+	}
+	return contextValue;
+}
+
+export function Parent() {
+	const [themeValue, setThemeValue] = React.useState("light");
+	
+    return (
+		<Context.Provider value={{ themeValue, setThemeValue }}>
+			<RandomBackgroundColorBlock>
+			    <h1>Parent - current value : {themeValue}</h1>
+				<Child />
+			</RandomBackgroundColorBlock>
+		</Context.Provider>
+	);
+}
+
+export function Child() {
+	const [counter, setCounter] = React.useState(0);
+
+	return (
+		<RandomBackgroundColorBlock>
+			<h1>Child Component</h1>
+			<p>Counter: {counter}</p>
+			<button onClick={() => setCounter(counter + 1)}>
+				Increment Counter
+			</button>
+			<GrandChild />
+		</RandomBackgroundColorBlock>
+	);
+}
+
+export function GrandChild() {
+	const { themeValue, setThemeValue } = useSharedContext();
+
+	return (
+		<RandomBackgroundColorBlock>
+			<h1>GrandChild Component</h1>
+			<p>Current Theme: {themeValue}</p>
+			<button
+				onClick={() =>
+					setThemeValue(themeValue === "light" ? "dark" : "light")
+				}
+			>
+				Toggle Theme
+			</button>
+		</RandomBackgroundColorBlock>
+	);
+}
+
+```
+
+在這個例子中，我們使用了 React 的 Context API 來共享狀態。`Parent` component中，包含 了 Provider，這樣就可以讓 `Child` 和 `GrandChild` 直接使用這個 context，而不需要手動傳遞 props。
+
+這樣的好處是，我們可以在任何需要使用這個 context 的地方，直接使用 `useSharedContext` hook (這邊我們包裝成一個 custom hook來避免 Parent中沒有用Provider包裹) 來獲取 context 的值，而不需要手動傳遞 props。
+
+但是，Context 也有一些缺點。當 context 的值改變時，Provider底下的所有component都會重新渲染，這可能會導致性能問題，特別是當 context 的值經常改變時。
+
+## 2. 使用Redux
+
+Redux 是一個流行且歷史悠久的狀態管理lib，可以幫助我們管理應用程式的狀態。它提供了一個套件讓我們可以在應用程式中使用全域狀態，而不需要手動地將 props 一層一層地傳遞下去。
+
+這邊我們使用 `@reduxjs/toolkit` 來簡化 Redux 的使用。
+
+```tsx
+import { configureStore, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { RandomBackgroundColorBlock } from './RandomBackgroundColorBlock';
+
+// theme state
+interface ThemeState {
+    themeValue: "light" | "dark";
+}
+
+const themeSlice = createSlice({
+    name: "theme",
+    initialState: { themeValue: "light" } as ThemeState,
+    reducers: {
+        switchTheme: (state) => {
+            state.themeValue = state.themeValue === "light" ? "dark" : "light";
+        },
+        switchToLight: (state, actions: PayloadAction<number>) => {
+			// an example of using payload, here we just log it
+            console.log("switchToLight action payload:", actions.payload);
+            state.themeValue = "light";
+        },
+        switchToDark: (state) => {
+            state.themeValue = "dark";
+        }
+    }
+})
+
+export const { switchTheme, switchToDark, switchToLight } = themeSlice.actions;
+
+
+const store = configureStore({
+    reducer: {
+        theme: themeSlice.reducer
+    }
+})
+
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+
+
+export default function Parent() {
+    
+    return <Provider store={store}>
+        <RandomBackgroundColorBlock>
+            <h1>a redux example</h1>
+            <Child1 />
+            <Child2 />
+        </RandomBackgroundColorBlock>
+    </Provider>
+}
+
+export function Child1() {
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    return <RandomBackgroundColorBlock>
+        <h1>Child1</h1>
+        <div className="flex gap-2 *:p-2">
+            <button onClick={()=>dispatch(switchToDark())} className="bg-amber-950 rounded">switch dark</button>
+            <button onClick={()=>dispatch(switchToLight(5))} className="bg-amber-200 rounded text-cyan-900">switch light</button>
+            <button onClick={()=>dispatch(switchTheme())} className="bg-amber-500 rounded text-cyan-900">switch theme</button>
+        </div>
+    </RandomBackgroundColorBlock>
+}
+
+export function Child2() {
+    const themeValue = useSelector((state: RootState) => state.theme.themeValue);
+    const dispatch = useDispatch<AppDispatch>();
+
+    const cn = themeValue === "dark" ? "bg-gray-800 text-amber-50 p-4" : "bg-white text-gray-900 p-4";
+
+    // generate a random color hex for the border
+    // this is just for checking that the component is re-rendering or not.
+    // when re-rendering, the border color will change.
+    const randomColorHex = Math.random().toString(16).slice(2, 8);
+
+    return <div className={cn} style={{ borderColor: `#${randomColorHex}`, borderWidth: "8px", borderStyle: "solid" }}>
+        <h1>Child2</h1>
+        <p>Current Theme: {themeValue}</p>
+        <button onClick={()=>dispatch(switchTheme())} className="bg-amber-500 rounded text-cyan-900 w-auto p-2">switch theme</button>
+    </div>
+}
+
+```
+
+
+在這個例子中，我們使用了 Redux 來管理應用程式的狀態。我們創建了一個 `themeSlice`，它包含了 `themeValue` 的狀態和一些操作（action）來修改這個狀態。
+然後，我們使用 `configureStore` 來創建一個 Redux store，並透過 Provider傳進去 React。
+在 `Child1` 中，我們使用 `useDispatch` 來獲取 dispatch 函數，然後使用它來發送 action 來修改狀態。
+在 `Child2` 中，我們使用 `useSelector` 來獲取 Redux store 中的狀態，然後根據這個狀態來渲染 component。
+
+
+## 3. 使用Zustand
+
+在Redux的例子中，相信我們都可以同意，Redux的使用有點繁瑣，有時候我們根本不需想要用 Redux之於 Reducer 的概念，這時候我們可以使用Zustand。
+
+```tsx
+import { configureStore, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { RandomBackgroundColorBlock } from './RandomBackgroundColorBlock';
+
+// theme state
+interface ThemeState {
+    themeValue: "light" | "dark";
+}
+
+const themeSlice = createSlice({
+    name: "theme",
+    initialState: { themeValue: "light" } as ThemeState,
+    reducers: {
+        switchTheme: (state) => {
+            state.themeValue = state.themeValue === "light" ? "dark" : "light";
+        },
+        switchToLight: (state, actions: PayloadAction<number>) => {
+            console.log("switchToLight action payload:", actions.payload);
+            state.themeValue = "light";
+        },
+        switchToDark: (state) => {
+            state.themeValue = "dark";
+        }
+    }
+})
+
+export const { switchTheme, switchToDark, switchToLight } = themeSlice.actions;
+
+
+const store = configureStore({
+    reducer: {
+        theme: themeSlice.reducer
+    }
+})
+
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+
+
+export default function Parent() {
+    
+    return <Provider store={store}>
+        <RandomBackgroundColorBlock>
+            <h1>a redux example</h1>
+            <Child1 />
+            <Child2 />
+        </RandomBackgroundColorBlock>
+    </Provider>
+}
+
+export function Child1() {
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    return <RandomBackgroundColorBlock>
+        <h1>Child1</h1>
+        <div className="flex gap-2 *:p-2">
+            <button onClick={()=>dispatch(switchToDark())} className="bg-amber-950 rounded">switch dark</button>
+            <button onClick={()=>dispatch(switchToLight(5))} className="bg-amber-200 rounded text-cyan-900">switch light</button>
+            <button onClick={()=>dispatch(switchTheme())} className="bg-amber-500 rounded text-cyan-900">switch theme</button>
+        </div>
+    </RandomBackgroundColorBlock>
+}
+
+export function Child2() {
+    const themeValue = useSelector((state: RootState) => state.theme.themeValue);
+    const dispatch = useDispatch<AppDispatch>();
+
+    const cn = themeValue === "dark" ? "bg-gray-800 text-amber-50 p-4" : "bg-white text-gray-900 p-4";
+
+    // generate a random color hex for the border
+    // this is just for checking that the component is re-rendering or not.
+    // when re-rendering, the border color will change.
+    const randomColorHex = Math.random().toString(16).slice(2, 8);
+
+    return <div className={cn} style={{ borderColor: `#${randomColorHex}`, borderWidth: "8px", borderStyle: "solid" }}>
+        <h1>Child2</h1>
+        <p>Current Theme: {themeValue}</p>
+        <button onClick={()=>dispatch(switchTheme())} className="bg-amber-500 rounded text-cyan-900 w-auto p-2">switch theme</button>
+    </div>
+}
+```
+
+## 4. 使用 useSyncExternalStore
+
+如果你什麼第三方狀態管理庫都不想用，React 18 提供了一個新的 hook `useSyncExternalStore`，可以讓我們自己實現一個簡單的狀態管理。
+
+`useSyncExternalStore` 是 React 18 新增的 hook，許多狀態管理庫都會使用這個 hook 來實現狀態的同步。
+我們可以透過這個 hook 來實現一個簡單的狀態管理。
+
+```tsx
+import { useSyncExternalStore } from 'react'
+import { RandomBackgroundColorBlock } from './RandomBackgroundColorBlock'
+
+type Theme = 'light' | 'dark'
+
+interface ThemeState {
+    theme: Theme
+    switchToLight: () => void
+    switchToDark: () => void
+    toggleTheme: () => void
+}
+
+// Create external store
+class ThemeStore {
+    private state: { theme: Theme } = { theme: 'light' }
+    private listeners = new Set<() => void>()
+
+    getState = () => this.state
+
+    setState = (newState: Partial<{ theme: Theme }>) => {
+        this.state = { ...this.state, ...newState }
+        this.listeners.forEach(listener => listener())
+    }
+
+    subscribe = (listener: () => void) => {
+		// we add the listener to the set of listeners
+		// and call it when
+        this.listeners.add(listener)
+        // clean up the listener when it is no longer needed
+        return () => this.listeners.delete(listener)
+    }
+
+    switchToLight = () => this.setState({ theme: 'light' })
+    switchToDark = () => this.setState({ theme: 'dark' })
+    toggleTheme = () => this.setState({ 
+        theme: this.state.theme === 'light' ? 'dark' : 'light' 
+    })
+}
+
+const themeStore = new ThemeStore()
+
+// Custom hook using useSyncExternalStore
+function useThemeStore<T>(selector: (state: ThemeState) => T): T {
+    return useSyncExternalStore(
+        themeStore.subscribe,
+        () => selector({
+            theme: themeStore.getState().theme,
+            switchToLight: themeStore.switchToLight,
+            switchToDark: themeStore.switchToDark,
+            toggleTheme: themeStore.toggleTheme
+        })
+    )
+}
+
+export default function Parent() {
+    return (
+        <RandomBackgroundColorBlock>
+            <h1>useSyncExternalStore Example</h1>
+            <Child1 />
+            <Child2 />
+        </RandomBackgroundColorBlock>
+    )
+}
+
+export function Child1() {
+    const switchToLight = useThemeStore((state) => state.switchToLight)
+    const switchToDark = useThemeStore((state) => state.switchToDark)
+    const toggleTheme = useThemeStore((state) => state.toggleTheme)
+
+    return (
+        <RandomBackgroundColorBlock>
+            <h1>Child1</h1>
+            <div className="flex gap-2 *:p-2">
+                <button onClick={switchToDark} className="bg-amber-950 rounded">Switch to Dark</button>
+                <button onClick={switchToLight} className="bg-amber-200 rounded text-cyan-900">Switch to Light</button>
+                <button onClick={toggleTheme} className="bg-amber-500 rounded text-cyan-900">Toggle Theme</button>
+            </div>
+        </RandomBackgroundColorBlock>
+    )
+}
+
+export function Child2() {
+    const theme = useThemeStore((state) => state.theme)
+    const toggleTheme = useThemeStore((state) => state.toggleTheme)
+
+    const cn = (theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white') + ' p-4'
+    const randomColorHex = Math.random().toString(16).slice(2, 8)
+
+    return (
+        <div className={cn} style={{ borderColor: `#${randomColorHex}`, borderWidth: "8px", borderStyle: "solid" }}>
+            <h1>Child2</h1>
+            <p>Current Theme: {theme}</p>
+            <button onClick={toggleTheme} className="bg-amber-500 rounded text-cyan-900 w-auto p-2">switch theme</button>
+        </div>
+    )
+}
+```
+
