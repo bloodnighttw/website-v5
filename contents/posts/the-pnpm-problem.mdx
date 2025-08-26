@@ -1,0 +1,141 @@
+---
+title: "我遇到了在只會在pnpm上遇到的問題"
+date: 2025-08-26
+categories:
+    - pnpm
+---
+
+# 先說一下背景好了
+
+最近隨著vite對React Server Components的支援，我開始研究[vite-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)，
+並基於官方的example造了一個輪自來用，因為我想要放棄維護原本基於Next.js的部落格，改用這個來造自己的個人網站。
+
+隨著專案程式的加入，我遇到一些需求，例如我會想要讓我的rehype/remark plugin獨立於一個套件底下，這時候就得借助pnpm的workspace功能來達成monorepo的效果了。
+因此，我開始把我的repo轉成repo，使用我套件的放在apps/底下，基於 vite-rsc的專案放在packages/底下，並使用tsdown打包。檔案結構大概長成這個樣子
+
+```fish
+tree .
+
+.
+├── apps
+│   └── ouo
+│       ├── eslint.config.ts
+│       ├── package.json
+│       ├── src/
+│       ├── tsconfig.json
+│       └── vite.config.ts
+├── packages
+│   ├── eslint
+│   │   ├── package.json
+│   │   └── src/
+│   └── rpress
+│       ├── eslint.config.ts
+│       ├── package.json
+│       ├── src/
+│       ├── test/
+│       ├── tsconfig.json
+│       └── tsdown.config.ts
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── package.json
+└── README.md
+```
+他就是一個 monorepo，然後我把用到RSC寫的網頁放到apps/ouo底下，然後在packages/rpress放了依賴於vite-rsc並增加許多實現的地方。
+
+遷移過程都蠻順利的，直到我把放在root的``package.json``中對於vite-rsc的依賴刪除，讓他只放在packages中我寫的套件中。
+
+然後問題就出現了。
+
+```fish
+> @vitejs/plugin-rsc-examples-starter@0.0.0 dev /home/bntw/Programing/website-v6/apps/ouo
+> vite
+
+Failed to resolve dependency: @vitejs/plugin-rsc/vendor/react-server-dom/client.browser, present in client 'optimizeDeps.include'
+Failed to resolve dependency: @vitejs/plugin-rsc/vendor/react-server-dom/client.edge, present in ssr 'optimizeDeps.include'
+Failed to resolve dependency: @vitejs/plugin-rsc/vendor/react-server-dom/server.edge, present in rsc 'optimizeDeps.include'
+Failed to resolve dependency: @vitejs/plugin-rsc/vendor/react-server-dom/client.edge, present in rsc 'optimizeDeps.include'
+
+  VITE v7.1.3  ready in 287 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+## Debug 過程
+
+到這邊其實我一直摸不著頭緒，一來是 `optimizeDeps.include` 這個東西應該會在vite-rsc的plugin裡面被設定好的，怎麼我這邊用就沒辦法過，
+我也是直接用官方的範例，二來是我在packages中也有安裝這個套件，理論上應該不會有問題才對。
+
+
+其實解法有幾個
+1. 把 @vitejs/plugin-rsc 的依賴加進 apps/ouo 的 package.json 中，並把 packages/rpress 的 package.json中加入 peer dependency，就像是我們要對react和 react-dom做的那樣
+2. 把 @vitejs/plugin-rsc 的依賴加進 root 的 package
+
+但這樣作就太low了對吧。
+
+所以我就朝著看能不能讓tsdown把這檔案打包進來的方向去找解答，想當然爾，失敗了。
+
+然後我就在 package中無聊看看有什麼option可以跟dependencies有關，ㄟ不說還被我發現了 ``bundledDependencies``。
+根據我查到的資料，``bundledDependencies`` 可以用來指定哪些依賴會被打包進去，所以我就把 "@vitejs/plugin-rsc" 加進去packages/rpress的 bundledDependencies 了。
+
+然後問題一樣沒解決，我就用關鍵字``pnpm bundledDependencies``去查了一下，發現這個選項似乎並不會被pnpm所支援。
+
+接著我就在 pnpm-workspace.yaml 中加入了 ``nodeLinker: hoisted``， bump，問題被我誤打誤撞的解決了。
+
+之後測試發現，就算我不把 ``@vitejs/plugin-rsc`` 加進 packages/rpress 的 bundledDependencies 中，問題依然可以被解決了，這就讓我不禁好奇，究竟是為什麼問題造成這種狀況呢？
+
+# 造成原因
+
+我們都知道 pnpm 的特性，會將所有的依賴都安裝到一個 store 中，然後在每個專案中使用 symlink 的方式來引用這些依賴。
+這樣一來可以節省空間，二來也可以避免版本衝突的問題。
+
+另外一個特性就是 node_modules是遞回式的，這樣一來可以讓每個專案都可以有自己的 node_modules，這樣就能避免幽靈依賴的問題。
+問題就出在這，有的依賴可能在某個專案中被安裝了，但在另一個專案中卻找不到，這樣就會導致依賴解析失敗。
+
+而 nodeLinker就是把結構扁平化，正如 npm 一樣。
+
+這點我們可以從 指令定 ls -1 node_modules/ | wc -l  中看到，一旦我們這樣設定，如果我們有設定 hoisted，root底下的 node_modules 裡面裝的套件就會非常之多。
+
+我們可以從下面至指令看到相關數據。
+```fish
+$ pnpm install && ls -1 node_modules/ | wc -l # without hoisted
+
+Scope: all 4 workspace projects
+Lockfile is up to date, resolution step is skipped
+Packages: +300
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 300, reused 300, downloaded 0, added 300, done
+
+devDependencies:
++ prettier 3.6.2
++ turbo 2.5.6
+
+╭ Warning ───────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                            │
+│   Ignored build scripts: esbuild.                                                          │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.   │
+│                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Done in 533ms using pnpm v10.11.1
+2
+
+$ rm -rf **/node_modules && echo "nodeLinker: hoisted" >> pnpm-workspace.yaml && pnpm install && ls -1 node_modules/ | wc -l # with hoisted
+
+Scope: all 4 workspace projects
+Lockfile is up to date, resolution step is skipped
+Packages: +301
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 0, reused 300, downloaded 0, added 301, done
+
+╭ Warning ───────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                            │
+│   Ignored build scripts: esbuild.                                                          │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.   │
+│                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Done in 579ms using pnpm v10.11.1
+221
+```
+差別還是挺大的對吧。
